@@ -1,0 +1,35 @@
+<?php
+declare(strict_types=1);
+namespace App\Providers;
+
+use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
+use App\Domain\Repositories\Document\DocumentListRepository;
+use App\Domain\Repositories\Common\LoginUserRepository;
+use App\Domain\Repositories\Interface\Common\LoginUserRepositoryInterface;
+use App\Domain\Repositories\Interface\Sample\UserRepositoryInterface;
+use App\Domain\Repositories\Sample\UserRepository;
+use Illuminate\Support\ServiceProvider;
+
+class RepositoryServiceProvider extends ServiceProvider
+{
+    /**
+     * 抽象クラスと具象クラスの結合
+     * [
+     *   抽象クラス => 具象クラス
+     * ]
+     *
+     * @var array
+     */
+    public array $bindings = [
+        UserRepositoryInterface::class => UserRepository::class,
+        LoginUserRepositoryInterface::class => LoginUserRepository::class,
+        DocumentListRepositoryInterface::class => DocumentListRepository::class,
+    ];
+
+    /**
+     * DIコンテナ内でのシングルトンで解決
+     *　$bindingsの結合をシングルトンパターンで解決する
+     * @var array
+     */
+    public array $singletons = [];
+}

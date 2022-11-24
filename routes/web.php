@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Samples\CheckCsrfTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/**
+ * sample Routes
+ */
+
+/** @var Router $router */
+$router->get('/check-csrf-token', [CheckCsrfTokenController::class, 'index'])->name('checkCsrfToken');
+$router->post('/check-csrf-token', [CheckCsrfTokenController::class, 'update'])->name('checkCsrfToken.update');

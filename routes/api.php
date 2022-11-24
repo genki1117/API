@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Router;
+use App\Http\Controllers\Samples\Api\UseSampleController;
+use App\Http\Controllers\Document\DocumentListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/** @var Router $router */
+$router->get('/sample-get', [UseSampleController::class, 'getSample']);
+$router->post('/sample-login', [UseSampleController::class, 'login']);
+
+$router->get('/token-test', function ($request) {
+    return 'success';
+})->middleware('auth.token');
+
+$router->post('/document/detail', [DocumentListController::class, 'getDetail']);

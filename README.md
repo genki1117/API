@@ -7,3 +7,4 @@
 - [アーキテクチャ構成](./doc/architecture.md)
 - [追加機能](./doc/module.md) 
 - [デバック](./doc/xdebug.md)
+- [コード整形](./doc/phpcsfixer.md)

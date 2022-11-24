@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tokyo',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ja',
 
     /*
     |--------------------------------------------------------------------------
@@ -145,6 +145,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Csrf Token Time Limit
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'csrfTimeLimit' => env('APP_CSRF_TIME_LIMIT', 600),
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -185,6 +194,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\Foundations\CsvServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -195,6 +205,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\RepositoryServiceProvider::class,
     ],
 
     /*
