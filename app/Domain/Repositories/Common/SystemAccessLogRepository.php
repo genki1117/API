@@ -52,13 +52,11 @@ class SystemAccessLogRepository implements SystemAccessLogRepositoryInterface
             $ret = $this->logSystemAccess->insert($companyId, $userId, $fullName, $ipAddress, $accessFuncName, $action);
 
             DB::commit();
-        }
-        catch(\Exception $e) {
+        } catch(\Exception $e) {
             DB::rollBack();
             throw $e;
         }
 
         return $ret;
-
     }
 }

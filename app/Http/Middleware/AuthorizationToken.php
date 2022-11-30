@@ -25,7 +25,8 @@ class AuthorizationToken
      */
     public function __construct(
         LoggedInUserContext $context,
-        LoginUserRepositoryInterface $loginUserRepositoryInterface)
+        LoginUserRepositoryInterface $loginUserRepositoryInterface
+    )
     {
         $this->loggedInUserContext = $context;
         $this->loginUserRepositoryInterface = $loginUserRepositoryInterface;
@@ -59,7 +60,7 @@ class AuthorizationToken
                 Lang::get("common.message.expired"),
                 401
             );
-            // return (new TokenResponse())->faildNoToken();
+        // return (new TokenResponse())->faildNoToken();
         } elseif ($data->getExpiryDate() !== null && $data->getExpiryDate() <= $date) {
             // 期限切れ
             throw new AuthenticateException(
@@ -77,14 +78,14 @@ class AuthorizationToken
                 Lang::get("common.message.permission"),
                 403
             );
-            // return (new TokenResponse())->faildNoToken();
+        // return (new TokenResponse())->faildNoToken();
         } elseif (!$this->checkAuth($request->getPathInfo(), $user)) {
             // 権限チェック
             throw new AuthenticateException(
                 Lang::get("common.message.permission"),
                 403
             );
-            // return (new TokenResponse())->faildNoToken();
+        // return (new TokenResponse())->faildNoToken();
         } else {
             $this->loggedInUserContext->set($user);
             // $request['m_user'] = $user->getUser();
@@ -158,5 +159,4 @@ class AuthorizationToken
         }
         return $ret;
     }
-
 }

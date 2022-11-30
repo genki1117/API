@@ -36,15 +36,12 @@ class AddQueue
         try {
             // Create queue.
             $queueClient->createQueue("myqueue", $createQueueOptions);
-        }
-        catch(ServiceException $e) {
+        } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());
             $ret = -1;
         }
 
         return $ret;
-
     }
-
 }
