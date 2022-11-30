@@ -2,11 +2,9 @@
 declare(strict_types=1);
 namespace App\Domain\Repositories\Document;
 
-use App\Http\Responses\Document\DocumentGetDetailResponse;
 use App\Accessers\DB\Log\System\LogSystemAccess;
 use App\Accessers\DB\Log\System\LogDocAccess;
 use App\Accessers\DB\Log\System\LogDocOperation;
-
 use App\Accessers\DB\Document\DocumentWorkFlow;
 use App\Accessers\DB\Document\DocumentPermissionArchive;
 use App\Accessers\DB\Document\DocumentArchive;
@@ -92,8 +90,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         DocumentStorageTransaction $docStorageTransaction,
         DocumentStorageInternal $docStorageInternal,
         DocumentStorageArchive $docStorageArchive
-    )
-    {
+    ) {
         $this->docDeal = $docDeal;
         $this->docArchive = $docArchive;
         $this->docContract = $docContract;
@@ -124,22 +121,24 @@ class DocumentListRepository implements DocumentListRepositoryInterface
      * @param JsonResponse|null $afterContet
      * @return bool
      */
-    public function getDeleteLog(int $companyId = null,
-                                int $categoryId = null,
-                                int $userId = null,
-                                int $userType = null,
-                                string $ipAddress = null,
-                                int $documentId = null,
-                                string $accessContent = null,
-                                JsonResponse $beforeContent = null,
-                                JsonResponse $afterContet = null): bool
+    public function getDeleteLog(
+        int $companyId = null,
+        int $categoryId = null,
+        int $userId = null,
+        int $userType = null,
+        string $ipAddress = null,
+        int $documentId = null,
+        string $accessContent = null,
+        JsonResponse $beforeContent = null,
+        JsonResponse $afterContet = null
+    ): bool
     {
         // アクセスログを出力する（登録処理）
         $blAccess = $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
         // 操作ログを出力する（登録処理）
         $blOperation = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
 
-        if(!$blAccess || !$blOperation) {
+        if (!$blAccess || !$blOperation) {
             throw new Exception("ログが出力できません。");
         }
 

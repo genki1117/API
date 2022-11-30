@@ -82,5 +82,4 @@ class DocumentListController extends Controller
             return (new DocumentDeleteResponse)->faildDelete($e->getMessage());
         }
     }
-
 }

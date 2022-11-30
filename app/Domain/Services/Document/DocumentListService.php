@@ -73,22 +73,23 @@ class DocumentListService
      * @param JsonResponse|null $afterContet
      * @return bool
      */
-    public function getLog(int $companyId = null,
-                            int $categoryId = null,
-                            int $userId = null,
-                            int $userType = null,
-                            string $ipAddress = null,
-                            int $documentId = null,
-                            string $accessContent = null,
-                            JsonResponse $beforeContent = null,
-                            JsonResponse $afterContet = null): ?bool
+    public function getLog(
+        int $companyId = null,
+        int $categoryId = null,
+        int $userId = null,
+        int $userType = null,
+        string $ipAddress = null,
+        int $documentId = null,
+        string $accessContent = null,
+        JsonResponse $beforeContent = null,
+        JsonResponse $afterContet = null
+    ): ?bool
     {
         DB::beginTransaction();
         try {
             $this->documentRepository->getDeleteLog($companyId, $categoryId, $userId, $userType, $ipAddress, $documentId, $accessContent, $beforeContent, $afterContet);
             DB::commit();
-        }
-        catch(Exception $e) {
+        } catch(Exception $e) {
             DB::rollBack();
             Log::error($e);
             throw $e;

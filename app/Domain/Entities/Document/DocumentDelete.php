@@ -19,8 +19,7 @@ class DocumentDelete
         ?\stdClass $document = null,
         ?\stdClass $docPermission = null,
         ?\stdClass $docStorage = null
-    )
-    {
+    ) {
         $this->document = $document;
         $this->docPermission = $docPermission;
         $this->docStorage = $docStorage;
