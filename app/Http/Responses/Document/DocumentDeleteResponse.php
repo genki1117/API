@@ -10,14 +10,14 @@ class DocumentDeleteResponse
     {
         return new JsonResponse([
             "status" => "200",
-            "message" => "OK"
+            "message" => "各書類削除が完了しました。"
         ], 200);
     }
 
     public function faildDelete(string $exceptionMessage)
     {
         return new JsonResponse([
-            "status" => "200",
+            "status" => "400",
             "message" => $exceptionMessage
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }

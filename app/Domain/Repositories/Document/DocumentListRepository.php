@@ -135,9 +135,14 @@ class DocumentListRepository implements DocumentListRepositoryInterface
                                 JsonResponse $afterContet = null): bool
     {
         // アクセスログを出力する（登録処理）
-        $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
+        $blAccess = $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
         // 操作ログを出力する（登録処理）
-        $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
+        $blOperation = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
+
+        if(!$blAccess || !$blOperation) {
+            throw new Exception("ログが出力できません。");
+        }
+
         return true;
     }
 

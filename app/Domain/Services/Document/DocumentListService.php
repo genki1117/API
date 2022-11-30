@@ -83,8 +83,17 @@ class DocumentListService
                             JsonResponse $beforeContent = null,
                             JsonResponse $afterContet = null): ?bool
     {
-        $blInsLog = $this->documentRepository->getDeleteLog($companyId, $categoryId, $userId, $userType, $ipAddress, $documentId, $accessContent, $beforeContent, $afterContet);
-        return $blInsLog;
+        DB::beginTransaction();
+        try {
+            $this->documentRepository->getDeleteLog($companyId, $categoryId, $userId, $userType, $ipAddress, $documentId, $accessContent, $beforeContent, $afterContet);
+            DB::commit();
+        }
+        catch(Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            throw $e;
+        }
+        return true;
     }
 
     /**
@@ -103,6 +112,7 @@ class DocumentListService
             switch($categoryId) {
                 case self::DOC_CONTRACT_TYPE:
                     // 【１】契約書類テーブルおよび【５】契約書類閲覧権限および【９】契約書類容量を論理削除する
+                    $this->documentRepository->getDeleteContract($userId, $companyId, $documentId, $updateDatetime);
                     $this->documentRepository->getDeleteContract($userId, $companyId, $documentId, $updateDatetime);
                     break;
                 case self::DOC_DEAL_TYPE:

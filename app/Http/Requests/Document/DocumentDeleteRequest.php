@@ -45,7 +45,7 @@ class DocumentDeleteRequest extends FormRequest
             'category_id.numeric' => '書類書類カテゴリは数値のみ入力してください。',
             'update_datetime.required' => "更新日時は必須入力項目です。",
             'update_datetime.date' => '更新日時は付与でエラーが発生しました。?',
-            'update_datetime.exists' => '他のユーザによってデータが更新されました。データを再読込みしてから変更を再度入力してください。'
+            'update_datetime.unique' => '他のユーザによってデータが更新されました。データを再読込みしてから変更を再度入力してください。'
         ];
     }
 

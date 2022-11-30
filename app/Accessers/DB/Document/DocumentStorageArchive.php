@@ -20,7 +20,7 @@ class DocumentStorageArchive extends FluentDatabase
      */
     public function getDelete(int $userId, int $companyId, int $documentId)
     {
-        return $this->builder($this->table)
+        return $this->builder()
             ->whereNull("delete_datetime")
             ->where("company_id", "=", $companyId)
             ->where("document_id", "=", $documentId)
