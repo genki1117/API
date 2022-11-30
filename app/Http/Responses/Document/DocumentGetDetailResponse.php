@@ -21,29 +21,31 @@ class DocumentGetDetailResponse
      * 書類データが正常状態
      * ---------------------------------------------
      * @param int $categoryId
-     * @param array $docDetailList
+     * @param ?DocumentDetail|null $docDetailList
      * @return JsonResponse
      */
-    public function detail(int $categoryId, DocumentDetail $docDetailList): JsonResponse
+    public function detail(int $categoryId, ?DocumentDetail $docDetailList = null): JsonResponse
     {
+        if (empty($docDetailList)) {
+            return (new JsonResponse);
+        }
         $document = $docDetailList->getDocumentList();
         $docPermission = $docDetailList->getDocumentPermissionList();
         $workFlow = $docDetailList->getDocumentWorkFlow();
         $logAccess = $docDetailList->getLogDocAccess();
         $logOperation = $docDetailList->getLogDocOperation();
-        switch($categoryId)
-        {
+        switch($categoryId) {
             case Self::DOC_CONTRACT_TYPE:
-                    return $this->detailContract($document, $docPermission, $workFlow, $logAccess, $logOperation);
+                return $this->detailContract($document, $docPermission, $workFlow, $logAccess, $logOperation);
                 break;
             case Self::DOC_DEAL_TYPE:
-                    return $this->detailDeal($document, $docPermission, $workFlow, $logAccess, $logOperation);
+                return $this->detailDeal($document, $docPermission, $workFlow, $logAccess, $logOperation);
                 break;
             case Self::DOC_INTERNAL_TYPE:
-                    return $this->detailInternal($document, $docPermission, $workFlow, $logAccess, $logOperation);
+                return $this->detailInternal($document, $docPermission, $workFlow, $logAccess, $logOperation);
                 break;
             case Self::DOC_ARCHIVE_TYPE:
-                    return $this->detailArchive($document, $docPermission, $workFlow, $logAccess, $logOperation);
+                return $this->detailArchive($document, $docPermission, $workFlow, $logAccess, $logOperation);
                 break;
         }
     }

@@ -28,15 +28,15 @@ class DocumentWorkFlow extends FluentDatabase
                 "m_user.email",
                 "m_user.group_array"
             ])
-            ->leftjoin("m_user", function($query) {
-                return $query->on("m_user.company_id","t_document_workflow.company_id")
+            ->leftjoin("m_user", function ($query) {
+                return $query->on("m_user.company_id", "t_document_workflow.company_id")
                     ->where("m_user.delete_datetime", null);
             })
             ->where("t_document_workflow.delete_datetime", null)
-            ->where("t_document_workflow.document_id",$documentId)
-            ->where("t_document_workflow.category_id",$categoryId)
-            ->where("t_document_workflow.company_id",$companyId)
-            ->orderBy("t_document_workflow.wf_sort","DESC")
+            ->where("t_document_workflow.document_id", $documentId)
+            ->where("t_document_workflow.category_id", $categoryId)
+            ->where("t_document_workflow.company_id", $companyId)
+            ->orderBy("t_document_workflow.wf_sort", "DESC")
             ->first();
     }
 }
