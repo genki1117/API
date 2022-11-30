@@ -47,53 +47,53 @@ class DocumentDeal extends FluentDatabase
                 "t_doc_storage_transaction.total_pages",
                 "m_company_counter_party.counter_party_name"
             ])
-            ->join("t_doc_storage_transaction", function($query) {
-                return $query->on("t_doc_storage_transaction.document_id","t_document_deal.document_id")
-                    ->where("t_doc_storage_transaction.company_id","t_document_deal.company_id")
-                    ->where("t_doc_storage_transaction.delete_datetime",null);
+            ->join("t_doc_storage_transaction", function ($query) {
+                return $query->on("t_doc_storage_transaction.document_id", "t_document_deal.document_id")
+                    ->where("t_doc_storage_transaction.company_id", "t_document_deal.company_id")
+                    ->where("t_doc_storage_transaction.delete_datetime", null);
             })
-            ->leftjoin("m_company_counter_party", function($query) {
-                return $query->on("t_document_deal.company_id","m_company_counter_party.company_id")
-                    ->where("t_document_deal.counter_party_id","m_company_counter_party.counter_party_id")
-                    ->where("m_company_counter_party.effe_start_date","<=","CURRENT_DATE")
-                    ->where("m_company_counter_party.effe_end_date",">=","CURRENT_DATE")
-                    ->where("m_company_counter_party.delete_datetime",null);
+            ->leftjoin("m_company_counter_party", function ($query) {
+                return $query->on("t_document_deal.company_id", "m_company_counter_party.company_id")
+                    ->where("t_document_deal.counter_party_id", "m_company_counter_party.counter_party_id")
+                    ->where("m_company_counter_party.effe_start_date", "<=", "CURRENT_DATE")
+                    ->where("m_company_counter_party.effe_end_date", ">=", "CURRENT_DATE")
+                    ->where("m_company_counter_party.delete_datetime", null);
             })
-            ->where("t_document_deal.delete_datetime",null)
-            ->where("t_document_deal.document_id",$documentId)
-            ->where("t_document_deal.company_id",$companyId)
-            ->whereExists(function($query) use($userId) {
+            ->where("t_document_deal.delete_datetime", null)
+            ->where("t_document_deal.document_id", $documentId)
+            ->where("t_document_deal.company_id", $companyId)
+            ->whereExists(function ($query) use ($userId) {
                 return $query->from("t_document_workflow as tdw")
                     ->select(DB::raw(1))
-                    ->where("tdw.company_id","=","t_document_deal.company_id")
-                    ->where("tdw.document_id","=","t_document_deal.document_id")
-                    ->where("tdw.category_id","=","t_document_deal.category_id")
-                    ->where("tdw.delete_datetime",null)
-                    ->where("tdw.app_user_id",$userId)
-                    ->where(function($join) {
-                        return $join->where("tdw.wf_sort",0)
-                            ->orWhere("tdw.app_status",6);
+                    ->where("tdw.company_id", "=", "t_document_deal.company_id")
+                    ->where("tdw.document_id", "=", "t_document_deal.document_id")
+                    ->where("tdw.category_id", "=", "t_document_deal.category_id")
+                    ->where("tdw.delete_datetime", null)
+                    ->where("tdw.app_user_id", $userId)
+                    ->where(function ($join) {
+                        return $join->where("tdw.wf_sort", 0)
+                            ->orWhere("tdw.app_status", 6);
                     })
                     ->union(
-                            DB::table("t_doc_permission_transaction as tdpt")
-                            ->select(DB::raw(1))
-                            ->where("tdpt.company_id","=","t_document_deal.company_id")
-                            ->where("tdpt.document_id","=","t_document_deal.document_id")
-                            ->where("tdpt.delete_datetime",null)
-                            ->where("tdpt.user_id",$userId)
+                        DB::table("t_doc_permission_transaction as tdpt")
+                        ->select(DB::raw(1))
+                        ->where("tdpt.company_id", "=", "t_document_deal.company_id")
+                        ->where("tdpt.document_id", "=", "t_document_deal.document_id")
+                        ->where("tdpt.delete_datetime", null)
+                        ->where("tdpt.user_id", $userId)
                     )
                     ->union(
-                            DB::table("m_user as mu")
-                            ->select(DB::raw(1))
-                            ->join("m_user_role as mur", function($join) {
-                                return $join->on("mur.company_id","mu.company_id")
-                                    ->where("mur.user_id","mu.user_id")
-                                    ->where("mur.delete_datetime",null);
-                            })
-                            ->where("mu.company_id","=","t_document_deal.company_id")
-                            ->where("mu.delete_datetime",null)
-                            ->where("mu.user_id",$userId)
-                        );
+                        DB::table("m_user as mu")
+                        ->select(DB::raw(1))
+                        ->join("m_user_role as mur", function ($join) {
+                            return $join->on("mur.company_id", "mu.company_id")
+                                ->where("mur.user_id", "mu.user_id")
+                                ->where("mur.delete_datetime", null);
+                        })
+                        ->where("mu.company_id", "=", "t_document_deal.company_id")
+                        ->where("mu.delete_datetime", null)
+                        ->where("mu.user_id", $userId)
+                    );
             })
             ->first();
     }

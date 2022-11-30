@@ -26,13 +26,13 @@ class DocumentPermissionArchive extends FluentDatabase
                 "m_user.email",
                 "m_user.group_array"
             ])
-            ->leftjoin("m_user", function($query) {
-                return $query->on("m_user.user_id","t_doc_permission_archive.user_id")
-                    ->where("m_user.company_id","t_doc_permission_archive.company_id")
+            ->leftjoin("m_user", function ($query) {
+                return $query->on("m_user.user_id", "t_doc_permission_archive.user_id")
+                    ->where("m_user.company_id", "t_doc_permission_archive.company_id")
                     ->where("m_user.delete_datetime", null);
             })
             ->where("t_doc_permission_archive.delete_datetime", null)
-            ->where("t_doc_permission_archive.document_id",$documentId)
+            ->where("t_doc_permission_archive.document_id", $documentId)
             ->where("t_doc_permission_archive.company_id", $companyId)
             ->orderBy("t_doc_permission_archive.user_id")
             ->first();

@@ -27,10 +27,10 @@ class DocumentListService
     public function getDetail(int $categoryId, int $documentId, int $companyId, int $userId): ?DocumentDetail
     {
         $documentDetail= $this->documentRepository->getDetail($categoryId, $documentId, $companyId, $userId);
-        if (is_null($documentDetail->getDocumentList()) && 
+        if (is_null($documentDetail->getDocumentList()) &&
             is_null($documentDetail->getDocumentPermissionList()) &&
             is_null($documentDetail->getDocumentWorkFlow()) &&
-            is_null($documentDetail->getLogDocAccess()) && 
+            is_null($documentDetail->getLogDocAccess()) &&
             is_null($documentDetail->getLogDocOperation())) {
             return null;
         }
@@ -46,5 +46,4 @@ class DocumentListService
         $blInsLog = $this->documentRepository->getInsLog($importLogData);
         return $blInsLog;
     }
-
 }

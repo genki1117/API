@@ -37,7 +37,5 @@ class DocumentListController extends Controller
 
         // Responseの格納、JSON形式
         return (new DocumentGetDetailResponse)->detail($categoryId, $docDetailList);
-        
     }
-
 }

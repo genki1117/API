@@ -61,18 +61,20 @@ class DocumentListRepository implements DocumentListRepositoryInterface
      * @param LogDocOperation $logDocOperation
      * @param LogSystemAccess $logSystemAccess
      */
-    public function __construct(DocumentDeal $docDeal,
-                                DocumentArchive $docArchive,
-                                DocumentContract $docContract,
-                                DocumentInternal $docInternal,
-                                DocumentPermissionArchive $docPermissionArchive,
-                                DocumentPermissionInternal $docPermissionInternal,
-                                DocumentPermissionContract $docPermissionContract,
-                                DocumentPermissionTransaction $docPermissionTransaction,
-                                DocumentWorkFlow $docWorkFlow,
-                                LogDocAccess $logDocAccess,
-                                LogDocOperation $logDocOperation,
-                                LogSystemAccess $logSystemAccess)
+    public function __construct(
+        DocumentDeal $docDeal,
+        DocumentArchive $docArchive,
+        DocumentContract $docContract,
+        DocumentInternal $docInternal,
+        DocumentPermissionArchive $docPermissionArchive,
+        DocumentPermissionInternal $docPermissionInternal,
+        DocumentPermissionContract $docPermissionContract,
+        DocumentPermissionTransaction $docPermissionTransaction,
+        DocumentWorkFlow $docWorkFlow,
+        LogDocAccess $logDocAccess,
+        LogDocOperation $logDocOperation,
+        LogSystemAccess $logSystemAccess
+    )
     {
         $this->docDeal = $docDeal;
         $this->docArchive = $docArchive;
@@ -100,7 +102,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $docDetailList = $this->getDocumentList($categoryId, $documentId, $companyId, $userId);
         $logList = $this->getLogList($documentId, $categoryId, $companyId);
         $workFlowList = $this->getWorkFlowList($documentId, $categoryId, $companyId);
-        return new DocumentEntity($docDetailList["docList"],$docDetailList["docPermissionList"],$workFlowList,$logList["logAccessList"],$logList["logOperationList"]);
+        return new DocumentEntity($docDetailList["docList"], $docDetailList["docPermissionList"], $workFlowList, $logList["logAccessList"], $logList["logOperationList"]);
     }
 
     /**
@@ -114,24 +116,24 @@ class DocumentListRepository implements DocumentListRepositoryInterface
     {
         switch($categoryId) {
             case Self::DOC_CONTRACT_TYPE:
-                    // 書類カテゴリが契約書類で設定されていた場合、データ抽出
-                    $docList = $this->docContract->getList($documentId, $companyId, $userId);
-                    $docPermissionList = $this->docPermissionContract->getList($documentId, $companyId, $userId);
+                // 書類カテゴリが契約書類で設定されていた場合、データ抽出
+                $docList = $this->docContract->getList($documentId, $companyId, $userId);
+                $docPermissionList = $this->docPermissionContract->getList($documentId, $companyId, $userId);
                 break;
             case Self::DOC_DEAL_TYPE:
-                    // 書類カテゴリが取引書類で設定されていた場合、データ抽出
-                    $docList = $this->docDeal->getList($documentId, $companyId, $userId);
-                    $docPermissionList = $this->docPermissionTransaction->getList($documentId, $companyId, $userId);
+                // 書類カテゴリが取引書類で設定されていた場合、データ抽出
+                $docList = $this->docDeal->getList($documentId, $companyId, $userId);
+                $docPermissionList = $this->docPermissionTransaction->getList($documentId, $companyId, $userId);
                 break;
             case Self::DOC_INTERNAL_TYPE:
-                    // 書類カテゴリが社内書類で設定されていた場合、データ抽出
-                    $docList = $this->docInternal->getList($documentId, $companyId, $userId);
-                    $docPermissionList = $this->docPermissionInternal->getList($documentId, $companyId, $userId);
+                // 書類カテゴリが社内書類で設定されていた場合、データ抽出
+                $docList = $this->docInternal->getList($documentId, $companyId, $userId);
+                $docPermissionList = $this->docPermissionInternal->getList($documentId, $companyId, $userId);
                 break;
             case Self::DOC_ARCHIVE_TYPE:
-                    // 書類カテゴリが登録書類で設定されていた場合、データ抽出
-                    $docList = $this->docArchive->getList($documentId, $companyId, $userId);
-                    $docPermissionList = $this->docPermissionArchive->getList($documentId, $companyId, $userId);
+                // 書類カテゴリが登録書類で設定されていた場合、データ抽出
+                $docList = $this->docArchive->getList($documentId, $companyId, $userId);
+                $docPermissionList = $this->docPermissionArchive->getList($documentId, $companyId, $userId);
                 break;
         }
         return ["docList" => $docList, "docPermissionList" => $docPermissionList];
@@ -193,5 +195,4 @@ class DocumentListRepository implements DocumentListRepositoryInterface
 
         return true;
     }
-
 }

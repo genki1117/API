@@ -46,58 +46,58 @@ class DocumentContract extends FluentDatabase
                 "t_doc_storage_contract.total_pages",
                 "m_company_counter_party.counter_party_name"
             ])
-            ->join("t_doc_storage_contract", function($query) {
-                return $query->on("t_doc_storage_contract.document_id","t_document_contract.document_id")
-                    ->where("t_doc_storage_contract.company_id","t_document_contract.company_id")
-                    ->where("t_doc_storage_contract.delete_datetime",null);
+            ->join("t_doc_storage_contract", function ($query) {
+                return $query->on("t_doc_storage_contract.document_id", "t_document_contract.document_id")
+                    ->where("t_doc_storage_contract.company_id", "t_document_contract.company_id")
+                    ->where("t_doc_storage_contract.delete_datetime", null);
             })
-            ->leftjoin("m_company_counter_party", function($query) {
-                return $query->on("t_document_contract.company_id","m_company_counter_party.company_id")
-                    ->where("t_document_contract.counter_party_id","m_company_counter_party.counter_party_id")
-                    ->where("m_company_counter_party.effe_start_date","<=","CURRENT_DATE")
-                    ->where("m_company_counter_party.effe_end_date",">=","CURRENT_DATE")
-                    ->where("m_company_counter_party.delete_datetime",null);
+            ->leftjoin("m_company_counter_party", function ($query) {
+                return $query->on("t_document_contract.company_id", "m_company_counter_party.company_id")
+                    ->where("t_document_contract.counter_party_id", "m_company_counter_party.counter_party_id")
+                    ->where("m_company_counter_party.effe_start_date", "<=", "CURRENT_DATE")
+                    ->where("m_company_counter_party.effe_end_date", ">=", "CURRENT_DATE")
+                    ->where("m_company_counter_party.delete_datetime", null);
             })
-            ->where("t_document_contract.delete_datetime",null)
-            ->where("t_document_contract.document_id",$documentId)
-            ->where("t_document_contract.company_id",$companyId)
-            ->whereExists(function($query) use($userId) {
+            ->where("t_document_contract.delete_datetime", null)
+            ->where("t_document_contract.document_id", $documentId)
+            ->where("t_document_contract.company_id", $companyId)
+            ->whereExists(function ($query) use ($userId) {
                 return $query->from("t_document_workflow as tdw")
                     ->select(DB::raw(1))
-                    ->join($this->table, function($join) {
-                        return $join->on("tdw.company_id","t_document_contract.company_id")
-                            ->on("tdw.document_id","t_document_contract.document_id")
-                            ->on("tdw.category_id","t_document_contract.category_id");
+                    ->join($this->table, function ($join) {
+                        return $join->on("tdw.company_id", "t_document_contract.company_id")
+                            ->on("tdw.document_id", "t_document_contract.document_id")
+                            ->on("tdw.category_id", "t_document_contract.category_id");
                     })
-                    ->where("tdw.delete_datetime",null)
-                    ->where("tdw.app_user_id",$userId)
-                    ->where(function($jQuery) {
-                        return $jQuery->where("tdw.wf_sort",0)
-                            ->orWhere("tdw.app_status",6);
+                    ->where("tdw.delete_datetime", null)
+                    ->where("tdw.app_user_id", $userId)
+                    ->where(function ($jQuery) {
+                        return $jQuery->where("tdw.wf_sort", 0)
+                            ->orWhere("tdw.app_status", 6);
                     })
                     ->union(
                         DB::table("t_doc_permission_contract as tdpc")
                             ->select(DB::raw(1))
-                            ->join($this->table, function($join) {
-                                return $join->on("tdpc.company_id","t_document_contract.company_id")
-                                    ->on("tdpc.document_id","t_document_contract.document_id");
+                            ->join($this->table, function ($join) {
+                                return $join->on("tdpc.company_id", "t_document_contract.company_id")
+                                    ->on("tdpc.document_id", "t_document_contract.document_id");
                             })
-                            ->where("tdpc.delete_datetime",null)
-                            ->where("tdpc.user_id",$userId)
+                            ->where("tdpc.delete_datetime", null)
+                            ->where("tdpc.user_id", $userId)
                     )
                     ->union(
-                            DB::table("m_user as mu")
-                            ->select(DB::raw(1))
-                            ->join("m_user_role as mur", function($join) {
-                                return $join->on("mur.company_id","mu.company_id")
-                                    ->where("mur.user_id","mu.user_id")
-                                    ->where("mur.delete_datetime",null);
-                            })
-                            ->join($this->table, function($join) {
-                                return $join->on("mu.company_id","t_document_contract.company_id");
-                            })
-                            ->where("mu.delete_datetime",null)
-                            ->where("mu.user_id",$userId)
+                        DB::table("m_user as mu")
+                        ->select(DB::raw(1))
+                        ->join("m_user_role as mur", function ($join) {
+                            return $join->on("mur.company_id", "mu.company_id")
+                                ->where("mur.user_id", "mu.user_id")
+                                ->where("mur.delete_datetime", null);
+                        })
+                        ->join($this->table, function ($join) {
+                            return $join->on("mu.company_id", "t_document_contract.company_id");
+                        })
+                        ->where("mu.delete_datetime", null)
+                        ->where("mu.user_id", $userId)
                     );
             })
             ->first();
