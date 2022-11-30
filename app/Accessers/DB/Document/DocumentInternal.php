@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Accessers\DB\Document;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use App\Accessers\DB\FluentDatabase;
 
@@ -45,54 +46,96 @@ class DocumentInternal extends FluentDatabase
                 "t_doc_storage_internal.total_pages",
                 "m_company_counter_party.counter_party_name"
             ])
-            ->join("t_doc_storage_internal", function($query) {
-                return $query->on("t_doc_storage_internal.document_id","t_document_internal.document_id")
-                    ->where("t_doc_storage_internal.company_id","t_document_internal.company_id")
-                    ->where("t_doc_storage_internal.delete_datetime",null);
+            ->join("t_doc_storage_internal", function ($query) {
+                return $query->on("t_doc_storage_internal.document_id", "t_document_internal.document_id")
+                    ->where("t_doc_storage_internal.company_id", "t_document_internal.company_id")
+                    ->where("t_doc_storage_internal.delete_datetime", null);
             })
-            ->leftjoin("m_company_counter_party", function($query) {
-                return $query->on("t_document_internal.company_id","m_company_counter_party.company_id")
-                    ->where("t_document_internal.counter_party_id","m_company_counter_party.counter_party_id")
-                    ->where("m_company_counter_party.effe_start_date","<=","CURRENT_DATE")
-                    ->where("m_company_counter_party.effe_end_date",">=","CURRENT_DATE")
-                    ->where("m_company_counter_party.delete_datetime",null);
+            ->leftjoin("m_company_counter_party", function ($query) {
+                return $query->on("t_document_internal.company_id", "m_company_counter_party.company_id")
+                    ->where("t_document_internal.counter_party_id", "m_company_counter_party.counter_party_id")
+                    ->where("m_company_counter_party.effe_start_date", "<=", "CURRENT_DATE")
+                    ->where("m_company_counter_party.effe_end_date", ">=", "CURRENT_DATE")
+                    ->where("m_company_counter_party.delete_datetime", null);
             })
-            ->where("t_document_internal.delete_datetime",null)
-            ->where("t_document_internal.document_id",$documentId)
-            ->where("t_document_internal.company_id",$companyId)
-            ->whereExists(function($query) use($userId) {
+            ->where("t_document_internal.delete_datetime", null)
+            ->where("t_document_internal.document_id", $documentId)
+            ->where("t_document_internal.company_id", $companyId)
+            ->whereExists(function ($query) use ($userId) {
                 return $query->from("t_document_workflow as tdw")
                     ->select(DB::raw(1))
-                    ->where("tdw.company_id","=","t_document_internal.company_id")
-                    ->where("tdw.document_id","=","t_document_internal.document_id")
-                    ->where("tdw.category_id","=","t_document_internal.category_id")
-                    ->where("tdw.delete_datetime",null)
-                    ->where("tdw.app_user_id",$userId)
-                    ->where(function($join) {
-                        return $join->where("tdw.wf_sort",0)
-                            ->orWhere("tdw.app_status",6);
+                    ->where("tdw.company_id", "=", "t_document_internal.company_id")
+                    ->where("tdw.document_id", "=", "t_document_internal.document_id")
+                    ->where("tdw.category_id", "=", "t_document_internal.category_id")
+                    ->where("tdw.delete_datetime", null)
+                    ->where("tdw.app_user_id", $userId)
+                    ->where(function ($join) {
+                        return $join->where("tdw.wf_sort", 0)
+                            ->orWhere("tdw.app_status", 6);
                     })
                     ->union(
                         DB::table("t_doc_permission_internal as tdpi")
                             ->select(DB::raw(1))
-                            ->where("tdpi.company_id","=","t_document_internal.company_id")
-                            ->where("tdpi.document_id","=","t_document_internal.document_id")
-                            ->where("tdpi.delete_datetime",null)
-                            ->where("tdpi.user_id",$userId)
+                            ->where("tdpi.company_id", "=", "t_document_internal.company_id")
+                            ->where("tdpi.document_id", "=", "t_document_internal.document_id")
+                            ->where("tdpi.delete_datetime", null)
+                            ->where("tdpi.user_id", $userId)
                     )
                     ->union(
                         DB::table("m_user as mu")
                             ->select(DB::raw(1))
-                            ->join("m_user_role as mur",function($join) {
-                                return $join->on("mur.company_id","=","mu.company_id")
-                                    ->where("mur.user_id","=","mu.user_id")
-                                    ->where("mur.delete_datetime",null);
+                            ->join("m_user_role as mur", function ($join) {
+                                return $join->on("mur.company_id", "=", "mu.company_id")
+                                    ->where("mur.user_id", "=", "mu.user_id")
+                                    ->where("mur.delete_datetime", null);
                             })
-                            ->where("mu.company_id","=","t_document_internal.company_id")
-                            ->where("mu.delete_datetime",null)
-                            ->where("mu.user_id",$userId)
+                            ->where("mu.company_id", "=", "t_document_internal.company_id")
+                            ->where("mu.delete_datetime", null)
+                            ->where("mu.user_id", $userId)
                     );
             })
+            ->first();
+    }
+
+    /**
+     * ---------------------------------------------
+     * 更新項目（社内書類）
+     * ---------------------------------------------
+     * @param int $userId
+     * @param int $companyId
+     * @param int $documentId
+     * @param int $updateDatetime
+     * @return bool
+     */
+    public function getDelete(int $userId, int $companyId, int $documentId, int $updateDatetime)
+    {
+        return $this->builder($this->table)
+            ->whereNull("delete_datetime")
+            ->where("company_id", "=", $companyId)
+            ->where("document_id", "=", $documentId)
+            ->where("update_datetime", "=", date('Y-m-d H:i:s', $updateDatetime))
+            ->where("status_id", "=", 0)
+            ->update([
+                "delete_user" => $userId,
+                "delete_datetime" => CarbonImmutable::now()
+            ]);
+    }
+
+    /**
+     * @param int $companyId
+     * @param int $documentId
+     * @return \stdClass|null
+     */
+    public function getBeforeOrAfterData(int $companyId, int $documentId): ?\stdClass
+    {
+        return $this->builder()
+            ->select([
+                "delete_user",
+                "delete_datetime"
+            ])
+            ->where("company_id", "=", $companyId)
+            ->where("document_id", "=", $documentId)
+            ->where("status_id", "=", 0)
             ->first();
     }
 }

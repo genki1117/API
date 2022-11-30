@@ -1,0 +1,62 @@
+# POST http://localhost/document/delete/?XDEBUG_SESSION_START=session_name HTTP/1.2
+POST http://localhost/document/delete HTTP/1.2
+x-kotsmp-authorization: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+Content-Type: application/json
+
+# OK情報試験
+{
+    "document_id" : 1,
+    "m_user" : {
+        "company_id" : 1,
+        "user_id" : 1,
+        "user_type" : 1
+    },
+    "category_id" : 3,
+    "update_datetime" : 1669669218,
+    "ip" : "192.168.1.0",
+    "access_content" : "閲覧"
+}
+
+# NG情報試験【required】
+# {
+#     "document_id" : null,
+#     "category_id" : null,
+#     "company_id" : 1,
+#     "user_id" : 1,
+#     "update_datetime" : null
+# }
+
+# NG情報試験【numeric】
+# {
+#     "document_id" : "A",
+#     "category_id" : 1,
+#     "company_id" : 1,
+#     "user_id" : 1,
+#     "update_datetime" : 1669354649
+# }
+
+# {
+#     "document_id" : 1,
+#     "category_id" : "A",
+#     "company_id" : 1,
+#     "user_id" : 1,
+#     "update_datetime" : 1669354649
+# }
+
+# NG情報試験【date】
+# {
+#     "document_id" : 1,
+#     "category_id" : 0,
+#     "company_id" : 1,
+#     "user_id" : 1,
+#     "update_datetime" : 123
+# }
+
+# NG情報試験【exists】
+# {
+#     "document_id" : 1,
+#     "category_id" : 0,
+#     "company_id" : 1,
+#     "user_id" : 1,
+#     "update_datetime" : 1669354649
+# }
