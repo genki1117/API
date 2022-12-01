@@ -21,11 +21,14 @@ class DocumentGetDetailResponse
      * 書類データが正常状態
      * ---------------------------------------------
      * @param int $categoryId
-     * @param array $docDetailList
+     * @param ?DocumentDetail|null $docDetailList
      * @return JsonResponse
      */
-    public function detail(int $categoryId, DocumentDetail $docDetailList): JsonResponse
+    public function detail(int $categoryId, ?DocumentDetail $docDetailList = null): JsonResponse
     {
+        if (empty($docDetailList)) {
+            return (new JsonResponse);
+        }
         $document = $docDetailList->getDocumentList();
         $docPermission = $docDetailList->getDocumentPermissionList();
         $workFlow = $docDetailList->getDocumentWorkFlow();

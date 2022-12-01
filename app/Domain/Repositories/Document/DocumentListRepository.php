@@ -2,11 +2,9 @@
 declare(strict_types=1);
 namespace App\Domain\Repositories\Document;
 
-use App\Http\Responses\Document\DocumentGetDetailResponse;
 use App\Accessers\DB\Log\System\LogSystemAccess;
 use App\Accessers\DB\Log\System\LogDocAccess;
 use App\Accessers\DB\Log\System\LogDocOperation;
-
 use App\Accessers\DB\Document\DocumentWorkFlow;
 use App\Accessers\DB\Document\DocumentPermissionArchive;
 use App\Accessers\DB\Document\DocumentArchive;
@@ -16,9 +14,15 @@ use App\Accessers\DB\Document\DocumentPermissionTransaction;
 use App\Accessers\DB\Document\DocumentDeal;
 use App\Accessers\DB\Document\DocumentPermissionContract;
 use App\Accessers\DB\Document\DocumentContract;
-
+use App\Accessers\DB\Document\DocumentStorageContract;
+use App\Accessers\DB\Document\DocumentStorageTransaction;
+use App\Accessers\DB\Document\DocumentStorageInternal;
+use App\Accessers\DB\Document\DocumentStorageArchive;
 use App\Domain\Entities\Document\DocumentDetail as DocumentEntity;
+use App\Domain\Entities\Document\DocumentDelete as DocumentDeleteEntity;
 use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
+use Exception;
+use Illuminate\Http\JsonResponse;
 
 class DocumentListRepository implements DocumentListRepositoryInterface
 {
@@ -46,6 +50,10 @@ class DocumentListRepository implements DocumentListRepositoryInterface
     private LogDocAccess $logDocAccess;
     private LogDocOperation $logDocOperation;
     private LogSystemAccess $logSystemAccess;
+    private DocumentStorageContract $docStorageContract;
+    private DocumentStorageTransaction $docStorageTransaction;
+    private DocumentStorageInternal $docStorageInternal;
+    private DocumentStorageArchive $docStorageArchive;
 
     /**
      * @param DocumentDeal $docDeal
@@ -60,6 +68,10 @@ class DocumentListRepository implements DocumentListRepositoryInterface
      * @param LogDocAccess $logDocAccess
      * @param LogDocOperation $logDocOperation
      * @param LogSystemAccess $logSystemAccess
+     * @param DocumentStorageContract $docStorageContract
+     * @param DocumentStorageTransaction $docStorageTransaction
+     * @param DocumentStorageInternal $docStorageInternal
+     * @param DocumentStorageArchive $docStorageArchive
      */
     public function __construct(
         DocumentDeal $docDeal,
@@ -73,9 +85,12 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         DocumentWorkFlow $docWorkFlow,
         LogDocAccess $logDocAccess,
         LogDocOperation $logDocOperation,
-        LogSystemAccess $logSystemAccess
-    )
-    {
+        LogSystemAccess $logSystemAccess,
+        DocumentStorageContract $docStorageContract,
+        DocumentStorageTransaction $docStorageTransaction,
+        DocumentStorageInternal $docStorageInternal,
+        DocumentStorageArchive $docStorageArchive
+    ) {
         $this->docDeal = $docDeal;
         $this->docArchive = $docArchive;
         $this->docContract = $docContract;
@@ -88,6 +103,198 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $this->logDocAccess = $logDocAccess;
         $this->logDocOperation = $logDocOperation;
         $this->logSystemAccess = $logSystemAccess;
+        $this->docStorageContract = $docStorageContract;
+        $this->docStorageTransaction = $docStorageTransaction;
+        $this->docStorageInternal = $docStorageInternal;
+        $this->docStorageArchive = $docStorageArchive;
+    }
+
+    /**
+     * @param int|null $companyId
+     * @param int|null $categoryId
+     * @param int|null $userId
+     * @param int|null $userType
+     * @param string|null $ipAddress
+     * @param int|null $documentId
+     * @param string|null $accessContent
+     * @param JsonResponse|null $beforeContent
+     * @param JsonResponse|null $afterContet
+     * @return bool
+     */
+    public function getDeleteLog(
+        int $companyId = null,
+        int $categoryId = null,
+        int $userId = null,
+        int $userType = null,
+        string $ipAddress = null,
+        int $documentId = null,
+        string $accessContent = null,
+        JsonResponse $beforeContent = null,
+        JsonResponse $afterContet = null
+    ): bool
+    {
+        // アクセスログを出力する（登録処理）
+        $blAccess = $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
+        // 操作ログを出力する（登録処理）
+        $blOperation = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
+
+        if (!$blAccess || !$blOperation) {
+            throw new Exception("ログが出力できません。");
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $categoryId
+     * @param int $documentId
+     * @return DocumentDeleteEntity
+     */
+    public function getBeforOrAfterDeleteArchive(int $companyId, int $documentId): DocumentDeleteEntity
+    {
+        $archive = $this->docArchive->getBeforeOrAfterData($companyId, $documentId);
+        $perArchive = $this->docPermissionArchive->getBeforeOrAfterData($companyId, $documentId);
+        $stoArchive = $this->docStorageArchive->getBeforeOrAfterData($companyId, $documentId);
+        
+        if (empty($archive) && empty($perArchive) && empty($stoArchive)) {
+            return new DocumentDeleteEntity();
+        }
+
+        return new DocumentDeleteEntity($archive, $perArchive, $stoArchive);
+    }
+
+    /**
+     * @param int $categoryId
+     * @param int $documentId
+     * @return DocumentDeleteEntity
+     */
+    public function getBeforOrAfterDeleteInternal(int $companyId, int $documentId): DocumentDeleteEntity
+    {
+        $internal = $this->docInternal->getBeforeOrAfterData($companyId, $documentId);
+        $perInternal = $this->docPermissionInternal->getBeforeOrAfterData($companyId, $documentId);
+        $stoInternal = $this->docStorageInternal->getBeforeOrAfterData($companyId, $documentId);
+        
+        if (empty($internal) && empty($perInternal) && empty($stoInternal)) {
+            return new DocumentDeleteEntity();
+        }
+
+        return new DocumentDeleteEntity($internal, $perInternal, $stoInternal);
+    }
+
+    /**
+     * @param int $categoryId
+     * @param int $documentId
+     * @return DocumentDeleteEntity
+     */
+    public function getBeforOrAfterDeleteDeal(int $companyId, int $documentId): DocumentDeleteEntity
+    {
+        $deal = $this->docDeal->getBeforeOrAfterData($companyId, $documentId);
+        $perDeal = $this->docPermissionTransaction->getBeforeOrAfterData($companyId, $documentId);
+        $stoDeal = $this->docStorageTransaction->getBeforeOrAfterData($companyId, $documentId);
+        
+        if (empty($deal) && empty($perDeal) && empty($stoDeal)) {
+            return new DocumentDeleteEntity();
+        }
+
+        return new DocumentDeleteEntity($deal, $perDeal, $stoDeal);
+    }
+
+    /**
+     * @param int $categoryId
+     * @param int $documentId
+     * @return DocumentDeleteEntity
+     */
+    public function getBeforOrAfterDeleteContract(int $companyId, int $documentId): DocumentDeleteEntity
+    {
+        $contract = $this->docContract->getBeforeOrAfterData($companyId, $documentId);
+        $perContract = $this->docPermissionContract->getBeforeOrAfterData($companyId, $documentId);
+        $stoContract = $this->docStorageContract->getBeforeOrAfterData($companyId, $documentId);
+        
+        if (empty($contract) && empty($perContract) && empty($stoContract)) {
+            return new DocumentDeleteEntity();
+        }
+
+        return new DocumentDeleteEntity($contract, $perContract, $stoContract);
+    }
+
+    /**
+     * @param int $userId
+     * @param int $companyId
+     * @param int $documentId
+     * @param int $updateDatetime
+     * @return bool
+     */
+    public function getDeleteArchive(int $userId, int $companyId, int $documentId, int $updateDatetime): bool
+    {
+        $blArchive = $this->docArchive->getDelete($userId, $companyId, $documentId, $updateDatetime);
+        $blPerArchive = $this->docPermissionArchive->getDelete($userId, $companyId, $documentId);
+        $blStoArchive = $this->docStorageArchive->getDelete($userId, $companyId, $documentId, $updateDatetime);
+
+        if (!$blArchive || !$blPerArchive || !$blStoArchive) {
+            throw new Exception('登録書類テーブルおよび登録書類閲覧権限および登録書類容量を削除できません。');
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $userId
+     * @param int $companyId
+     * @param int $documentId
+     * @param int $updateDatetime
+     * @return bool
+     */
+    public function getDeleteInternal(int $userId, int $companyId, int $documentId, int $updateDatetime): bool
+    {
+        $blInternal = $this->docInternal->getDelete($userId, $companyId, $documentId, $updateDatetime);
+        $blPerInternal = $this->docPermissionInternal->getDelete($userId, $companyId, $documentId);
+        $blStoInternal = $this->docStorageInternal->getDelete($userId, $companyId, $documentId, $updateDatetime);
+        
+        if (!$blInternal || !$blPerInternal || !$blStoInternal) {
+            throw new Exception('社内書類テーブルおよび社内書類閲覧権限および社内書類容量を削除できません。');
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $userId
+     * @param int $companyId
+     * @param int $documentId
+     * @param int $updateDatetime
+     * @return bool
+     */
+    public function getDeleteDeal(int $userId, int $companyId, int $documentId, int $updateDatetime): bool
+    {
+        $blDeal = $this->docDeal->getDelete($userId, $companyId, $documentId, $updateDatetime);
+        $blPerTransaction = $this->docPermissionTransaction->getDelete($userId, $companyId, $documentId);
+        $blStoTransaction = $this->docStorageTransaction->getDelete($userId, $companyId, $documentId, $updateDatetime);
+        
+        if (!$blDeal || !$blPerTransaction || !$blStoTransaction) {
+            throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を削除できません。');
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $userId
+     * @param int $companyId
+     * @param int $documentId
+     * @param int $updateDatetime
+     * @return bool
+     */
+    public function getDeleteContract(int $userId, int $companyId, int $documentId, int $updateDatetime): bool
+    {
+        $blContract = $this->docContract->getDelete($userId, $companyId, $documentId, $updateDatetime);
+        $blPerContract = $this->docPermissionContract->getDelete($userId, $companyId, $documentId);
+        $blStoContract = $this->docStorageContract->getDelete($userId, $companyId, $documentId, $updateDatetime);
+        
+        if (!$blContract || !$blPerContract || !$blStoContract) {
+            throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を削除できません。');
+        }
+
+        return true;
     }
 
     /**

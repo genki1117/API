@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Accessers\DB\Document;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use App\Accessers\DB\FluentDatabase;
 
@@ -95,6 +96,48 @@ class DocumentDeal extends FluentDatabase
                         ->where("mu.user_id", $userId)
                     );
             })
+            ->first();
+    }
+
+    /**
+     * ---------------------------------------------
+     * 更新項目（取引書類）
+     * ---------------------------------------------
+     * @param int $userId
+     * @param int $companyId
+     * @param int $documentId
+     * @param int $updateDatetime
+     * @return bool
+     */
+    public function getDelete(int $userId, int $companyId, int $documentId, int $updateDatetime)
+    {
+        return $this->builder($this->table)
+            ->whereNull("delete_datetime")
+            ->where("company_id", "=", $companyId)
+            ->where("document_id", "=", $documentId)
+            ->where("update_datetime", "=", date('Y-m-d H:i:s', $updateDatetime))
+            ->where("status_id", "=", 0)
+            ->update([
+                "delete_user" => $userId,
+                "delete_datetime" => CarbonImmutable::now()
+            ]);
+    }
+
+    /**
+     * @param int $companyId
+     * @param int $documentId
+     * @return \stdClass|null
+     */
+    public function getBeforeOrAfterData(int $companyId, int $documentId): ?\stdClass
+    {
+        return $this->builder()
+            ->select([
+                "delete_user",
+                "delete_datetime"
+            ])
+            ->where("company_id", "=", $companyId)
+            ->where("document_id", "=", $documentId)
+            ->where("status_id", "=", 0)
             ->first();
     }
 }

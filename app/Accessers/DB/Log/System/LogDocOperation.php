@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace App\Accessers\DB\Log\System;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Http\JsonResponse;
 use App\Accessers\DB\FluentDatabase;
 
 class LogDocOperation extends FluentDatabase
@@ -50,6 +51,7 @@ class LogDocOperation extends FluentDatabase
      * 操作ログ情報を登録する
      * ---------------------------------------------
      * @param int $companyId
+     * @param int $categoryId
      * @param int $documentId
      * @param int $userId
      * @param array|null $beforeContent
@@ -57,20 +59,18 @@ class LogDocOperation extends FluentDatabase
      * @param string|null @ipAddress
      * @return bool
      */
-    public function insert(int $companyId, int $categoryId, int $documentId, int $userId, array $beforeContent = null, array $afterContet = null, string $ipAddress = Self::STR_EMPTY): bool
+    public function insert(int $companyId, int $categoryId, int $documentId, int $userId, ?JsonResponse $beforeContent, ?JsonResponse $afterContet, string $ipAddress): bool
     {
         $data = [
             "company_id" => $companyId,
             "category_id" => $categoryId,
             "document_id" => $documentId,
             "operation_user_id" => $userId,
-            "before_content" => $beforeContent,
-            "after_contet" => $afterContet,
+            "before_content" => json_encode($beforeContent, JSON_UNESCAPED_UNICODE),
+            "after_contet" => json_encode($afterContet, JSON_UNESCAPED_UNICODE),
             "ip_address" => $ipAddress,
             "create_user" => $userId,
-            "create_datetime" => CarbonImmutable::now(),
-            "delete_user" => null,
-            "delete_datetime" => null,
+            "create_datetime" => CarbonImmutable::now()
         ];
         return $this->builder()->insert($data);
     }
