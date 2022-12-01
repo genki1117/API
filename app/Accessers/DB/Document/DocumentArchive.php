@@ -49,56 +49,56 @@ class DocumentArchive extends FluentDatabase
                 "m_user.family_name",
                 "m_user.first_name"
             ])
-            ->join("t_doc_storage_archive", function($query) {
-                return $query->on("t_doc_storage_archive.document_id","t_document_archive.document_id")
-                    ->where("t_doc_storage_archive.company_id","t_document_archive.company_id")
-                    ->where("t_doc_storage_archive.delete_datetime",null);
+            ->join("t_doc_storage_archive", function ($query) {
+                return $query->on("t_doc_storage_archive.document_id", "t_document_archive.document_id")
+                    ->where("t_doc_storage_archive.company_id", "t_document_archive.company_id")
+                    ->where("t_doc_storage_archive.delete_datetime", null);
             })
-            ->leftjoin("m_company_counter_party", function($query) {
-                return $query->on("t_document_archive.company_id","m_company_counter_party.company_id")
-                    ->where("t_document_archive.counter_party_id","m_company_counter_party.counter_party_id")
-                    ->where("m_company_counter_party.effe_start_date","<=","CURRENT_DATE")
-                    ->where("m_company_counter_party.effe_end_date",">=","CURRENT_DATE")
-                    ->where("m_company_counter_party.delete_datetime",null);
+            ->leftjoin("m_company_counter_party", function ($query) {
+                return $query->on("t_document_archive.company_id", "m_company_counter_party.company_id")
+                    ->where("t_document_archive.counter_party_id", "m_company_counter_party.counter_party_id")
+                    ->where("m_company_counter_party.effe_start_date", "<=", "CURRENT_DATE")
+                    ->where("m_company_counter_party.effe_end_date", ">=", "CURRENT_DATE")
+                    ->where("m_company_counter_party.delete_datetime", null);
             })
-            ->leftjoin("m_user", function($query) {
-                return $query->on("m_user.user_id","t_document_archive.timestamp_user")
-                    ->where("m_user.company_id","t_document_archive.company_id")
-                    ->where("m_user.delete_datetime",null);
+            ->leftjoin("m_user", function ($query) {
+                return $query->on("m_user.user_id", "t_document_archive.timestamp_user")
+                    ->where("m_user.company_id", "t_document_archive.company_id")
+                    ->where("m_user.delete_datetime", null);
             })
-            ->where("t_document_archive.delete_datetime",null)
-            ->where("t_document_archive.document_id",$documentId)
-            ->where("t_document_archive.company_id",$companyId)
-            ->whereExists(function($query) use($userId) {
+            ->where("t_document_archive.delete_datetime", null)
+            ->where("t_document_archive.document_id", $documentId)
+            ->where("t_document_archive.company_id", $companyId)
+            ->whereExists(function ($query) use ($userId) {
                 $query->from("t_document_workflow as tdw")
                     ->select(DB::raw(1))
-                    ->where("tdw.company_id","t_document_archive.company_id")
-                    ->where("tdw.company_id","t_document_archive.document_id")
-                    ->where("tdw.company_id","t_document_archive.category_id")
-                    ->where("tdw.delete_datetime",null)
-                    ->where("tdw.app_user_id",$userId)
-                    ->where(function($join) {
-                        return $join->where("tdw.wf_sort",0)
-                            ->orWhere("tdw.app_status",6);
+                    ->where("tdw.company_id", "t_document_archive.company_id")
+                    ->where("tdw.company_id", "t_document_archive.document_id")
+                    ->where("tdw.company_id", "t_document_archive.category_id")
+                    ->where("tdw.delete_datetime", null)
+                    ->where("tdw.app_user_id", $userId)
+                    ->where(function ($join) {
+                        return $join->where("tdw.wf_sort", 0)
+                            ->orWhere("tdw.app_status", 6);
                     })
                     ->union(
                         DB::table("t_doc_permission_archive as tdpa")
                         ->select(DB::raw(1))
-                        ->where("tdpa.company_id","t_document_archive.company_id")
-                        ->where("tdpa.company_id","t_document_archive.document_id")
-                        ->where("tdpa.company_id","t_document_archive.category_id")
-                        ->where("tdpa.delete_datetime",null)
+                        ->where("tdpa.company_id", "t_document_archive.company_id")
+                        ->where("tdpa.company_id", "t_document_archive.document_id")
+                        ->where("tdpa.company_id", "t_document_archive.category_id")
+                        ->where("tdpa.delete_datetime", null)
                     )
                     ->union(
                         DB::table("m_user as mu")
                         ->select(DB::raw(1))
-                        ->join("m_user_role as mur", function($join) {
-                            return $join->on("mur.company_id","mu.company_id")
-                                ->where("mur.user_id","mu.user_id")
-                                ->where("mur.delete_datetime",null);
+                        ->join("m_user_role as mur", function ($join) {
+                            return $join->on("mur.company_id", "mu.company_id")
+                                ->where("mur.user_id", "mu.user_id")
+                                ->where("mur.delete_datetime", null);
                         })
-                        ->where("mu.company_id","t_document_archive.company_id")
-                        ->where("mu.delete_datetime",null)
+                        ->where("mu.company_id", "t_document_archive.company_id")
+                        ->where("mu.delete_datetime", null)
                     );
             })
             ->first();

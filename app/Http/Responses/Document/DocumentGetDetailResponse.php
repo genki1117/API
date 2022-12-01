@@ -31,19 +31,18 @@ class DocumentGetDetailResponse
         $workFlow = $docDetailList->getDocumentWorkFlow();
         $logAccess = $docDetailList->getLogDocAccess();
         $logOperation = $docDetailList->getLogDocOperation();
-        switch($categoryId)
-        {
+        switch($categoryId) {
             case Self::DOC_CONTRACT_TYPE:
-                    return $this->detailContract($document, $docPermission, $workFlow, $logAccess, $logOperation);
+                return $this->detailContract($document, $docPermission, $workFlow, $logAccess, $logOperation);
                 break;
             case Self::DOC_DEAL_TYPE:
-                    return $this->detailDeal($document, $docPermission, $workFlow, $logAccess, $logOperation);
+                return $this->detailDeal($document, $docPermission, $workFlow, $logAccess, $logOperation);
                 break;
             case Self::DOC_INTERNAL_TYPE:
-                    return $this->detailInternal($document, $docPermission, $workFlow, $logAccess, $logOperation);
+                return $this->detailInternal($document, $docPermission, $workFlow, $logAccess, $logOperation);
                 break;
             case Self::DOC_ARCHIVE_TYPE:
-                    return $this->detailArchive($document, $docPermission, $workFlow, $logAccess, $logOperation);
+                return $this->detailArchive($document, $docPermission, $workFlow, $logAccess, $logOperation);
                 break;
         }
     }

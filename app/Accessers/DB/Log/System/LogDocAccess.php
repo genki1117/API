@@ -31,15 +31,15 @@ class LogDocAccess extends FluentDatabase
                 "m_user.family_name",
                 "m_user.first_name"
             ])
-            ->leftjoin("m_user", function($query) {
-                return $query->on("m_user.company_id","=","t_log_doc_access.company_id")
-                    ->where("m_user.delete_datetime","=",null);
+            ->leftjoin("m_user", function ($query) {
+                return $query->on("m_user.company_id", "=", "t_log_doc_access.company_id")
+                    ->where("m_user.delete_datetime", "=", null);
             })
-            ->where("t_log_doc_access.delete_datetime","=",null)
-            ->where("t_log_doc_access.document_id","=",$documentId)
-            ->where("t_log_doc_access.category_id","=",$categoryId)
-            ->where("t_log_doc_access.company_id","=",$companyId)
-            ->orderBy("t_log_doc_access.log_id","desc")
+            ->where("t_log_doc_access.delete_datetime", "=", null)
+            ->where("t_log_doc_access.document_id", "=", $documentId)
+            ->where("t_log_doc_access.category_id", "=", $categoryId)
+            ->where("t_log_doc_access.company_id", "=", $companyId)
+            ->orderBy("t_log_doc_access.log_id", "desc")
             ->first();
     }
 
