@@ -24,3 +24,4 @@ $router->get('/token-test', function ($request) {
 })->middleware('auth.token');
 
 $router->post('/document/detail', [DocumentListController::class, 'getDetail']);
+$router->post('/document/delete', [DocumentListController::class, 'delete']);

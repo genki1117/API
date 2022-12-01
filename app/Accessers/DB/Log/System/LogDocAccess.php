@@ -56,7 +56,7 @@ class LogDocAccess extends FluentDatabase
      * @param string $accessContent
      * @return bool
      */
-    public function insert(int $companyId, int $categoryId, int $documentId, int $userId, int $userType, string $ipAddress = Self::STR_EMPTY, string $accessContent = Self::STR_EMPTY): bool
+    public function insert(int $companyId, int $categoryId, int $documentId, int $userId, int $userType, string $ipAddress, string $accessContent): bool
     {
         $data = [
             "company_id" => $companyId,
@@ -68,9 +68,7 @@ class LogDocAccess extends FluentDatabase
             "ip_address" => $ipAddress,
             "access_content" => $accessContent,
             "create_user" => $userId,
-            "create_datetime" => CarbonImmutable::now(),
-            "delete_user" => null,
-            "delete_datetime" => null
+            "create_datetime" => CarbonImmutable::now()
         ];
         return $this->builder()->insert($data);
     }
