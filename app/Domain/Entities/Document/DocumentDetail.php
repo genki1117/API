@@ -16,11 +16,13 @@ class DocumentDetail
     /**
      * @param \stdClass|null $documentType
      */
-    public function __construct(?\stdClass $documentList = null, 
-                                ?\stdClass $documentPermissionList = null, 
-                                ?\stdClass $documentWorkFlow = null, 
-                                ?\stdClass $logDocAccess = null, 
-                                ?\stdClass $logDocOperation = null)
+    public function __construct(
+        ?\stdClass $documentList = null,
+        ?\stdClass $documentPermissionList = null,
+        ?\stdClass $documentWorkFlow = null,
+        ?\stdClass $logDocAccess = null,
+        ?\stdClass $logDocOperation = null
+    )
     {
         $this->documentList = $documentList;
         $this->documentPermissionList = $documentPermissionList;
@@ -76,5 +78,4 @@ class DocumentDetail
     {
         return $this->logSystemAccess;
     }
-
 }

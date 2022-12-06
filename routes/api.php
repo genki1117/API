@@ -26,3 +26,4 @@ $router->get('/token-test', function ($request) {
 
 $router->post('/document/detail', [DocumentListController::class, 'getDetail']);
 $router->post('/document/list', [DocumentGetListController::class, 'getList']);
+$router->post('/document/delete', [DocumentListController::class, 'delete']);
