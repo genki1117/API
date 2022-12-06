@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Providers;
 
+use App\Domain\Repositories\Interface\Document\DocumentGetListRepositoryInterface;
+use App\Domain\Repositories\Document\DocumentGetListRepository;
 use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
 use App\Domain\Repositories\Document\DocumentListRepository;
 use App\Domain\Repositories\Common\LoginUserRepository;
@@ -24,6 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider
         UserRepositoryInterface::class => UserRepository::class,
         LoginUserRepositoryInterface::class => LoginUserRepository::class,
         DocumentListRepositoryInterface::class => DocumentListRepository::class,
+        DocumentGetListRepositoryInterface::class => DocumentGetListRepository::class,
     ];
 
     /**
