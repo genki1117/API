@@ -23,6 +23,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
 
         \App\Http\Middleware\AuthorizationToken::class,
+        \App\Http\Middleware\CommonProcess::class,
+
     ];
 
     /**
@@ -67,7 +69,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        // 'auth.token' => \App\Http\Middleware\AuthorizationToken::class,
+        'auth.token' => \App\Http\Middleware\AuthorizationToken::class,
 
     ];
 }
