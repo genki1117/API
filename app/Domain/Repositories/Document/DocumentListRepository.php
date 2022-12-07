@@ -85,12 +85,9 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         DocumentWorkFlow $docWorkFlow,
         LogDocAccess $logDocAccess,
         LogDocOperation $logDocOperation,
-        LogSystemAccess $logSystemAccess,
-        DocumentStorageContract $docStorageContract,
-        DocumentStorageTransaction $docStorageTransaction,
-        DocumentStorageInternal $docStorageInternal,
-        DocumentStorageArchive $docStorageArchive
-    ) {
+        LogSystemAccess $logSystemAccess
+    )
+    {
         $this->docDeal = $docDeal;
         $this->docArchive = $docArchive;
         $this->docContract = $docContract;

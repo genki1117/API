@@ -27,6 +27,7 @@ services:
             - redis
             - minio
             - mailhog
+            - storage
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -83,6 +84,12 @@ services:
             - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
         networks:
             - sail
+    storage:
+        image: mcr.microsoft.com/azure-storage/azurite
+        ports:
+            - '10000:10000'
+        volumes:
+            - './storage/data:/data/storage'
 networks:
     sail:
         driver: bridge

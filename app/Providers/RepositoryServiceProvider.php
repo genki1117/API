@@ -6,6 +6,8 @@ use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
 use App\Domain\Repositories\Document\DocumentListRepository;
 use App\Domain\Repositories\Common\LoginUserRepository;
 use App\Domain\Repositories\Interface\Common\LoginUserRepositoryInterface;
+use App\Domain\Repositories\Common\SystemAccessLogRepository;
+use App\Domain\Repositories\Interface\Common\SystemAccessLogRepositoryInterface;
 use App\Domain\Repositories\Interface\Sample\UserRepositoryInterface;
 use App\Domain\Repositories\Sample\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +25,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public array $bindings = [
         UserRepositoryInterface::class => UserRepository::class,
         LoginUserRepositoryInterface::class => LoginUserRepository::class,
+        SystemAccessLogRepositoryInterface::class => SystemAccessLogRepository::class,
         DocumentListRepositoryInterface::class => DocumentListRepository::class,
     ];
 
