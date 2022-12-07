@@ -5,7 +5,6 @@ namespace App\Accessers\DB\Document;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use App\Accessers\DB\FluentDatabase;
-use Illuminate\Contracts\Support\Arrayable;
 
 class DocumentContract extends FluentDatabase
 {
@@ -110,8 +109,9 @@ class DocumentContract extends FluentDatabase
      * @param array $condition
      * @param array $sort
      * @param array $page
+     * @return \Illuminate\Http\Response
      */
-    public function getDocList(array $mUser, array $condition, array $sort, array $page)
+    public function getDocumentList(array $mUser, array $condition, array $sort, array $page)
     {
         return $this->builder()
             ->select([
@@ -268,7 +268,7 @@ class DocumentContract extends FluentDatabase
      * @param array $sort
      * @return int|null
      */
-    public function getDocListCount(array $mUser, array $condition, array $sort): ?int
+    public function getDocumentListCount(array $mUser, array $condition, array $sort): ?int
     {
         return $this->builder()
             ->select([
@@ -406,7 +406,7 @@ class DocumentContract extends FluentDatabase
             ->limit(1)
             ->count();
     }
-    
+
     /**
      * ---------------------------------------------
      * 更新項目（契約書類）

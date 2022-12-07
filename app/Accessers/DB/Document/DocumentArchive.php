@@ -5,7 +5,6 @@ namespace App\Accessers\DB\Document;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use App\Accessers\DB\FluentDatabase;
-use Illuminate\Contracts\Support\Arrayable;
 
 class DocumentArchive extends FluentDatabase
 {
@@ -111,8 +110,9 @@ class DocumentArchive extends FluentDatabase
      * @param array $condition
      * @param array $sort
      * @param array $page
+     * @return \Illuminate\Http\Response
      */
-    public function getDocList(array $mUser, array $condition, array $sort, array $page)
+    public function getDocumentList(array $mUser, array $condition, array $sort, array $page)
     {
         return $this->builder()
             ->select([
@@ -161,7 +161,7 @@ class DocumentArchive extends FluentDatabase
             ->where("t_document_archive.amount", "<=", $condition["amount"]["from"])
             ->where("t_document_archive.amount", ">=", $condition["amount"]["to"])
             ->whereIn("t_document_archive.currency_id", [$condition["currency_id"]])
-            ->where("t_document_archive.product_name", "like", '%'.$condition["productname"].'%')
+            ->where("t_document_archive.product_name", "like", '%'.$condition["product_name"].'%')
             ->where("t_document_archive.remarks", "like", '%'.$condition["remarks"].'%')
             ->whereRaw("JSON_CONTAINS(doc_info, ".$condition['doc_info']['title'].", '$.title')")
             ->whereRaw("JSON_CONTAINS(doc_info, ".$condition['doc_info']['content'].", '$.content')")
@@ -256,7 +256,7 @@ class DocumentArchive extends FluentDatabase
      * @param array $sort
      * @return int|null
      */
-    public function getDocListCount(array $mUser, array $condition, array $sort): ?int
+    public function getDocumentListCount(array $mUser, array $condition, array $sort): ?int
     {
         return $this->builder()
             ->select([
@@ -294,7 +294,7 @@ class DocumentArchive extends FluentDatabase
             ->where("t_document_archive.amount", "<=", $condition["amount"]["from"])
             ->where("t_document_archive.amount", ">=", $condition["amount"]["to"])
             ->whereIn("t_document_archive.currency_id", [$condition["currency_id"]])
-            ->where("t_document_archive.product_name", "like", '%'.$condition["productname"].'%')
+            ->where("t_document_archive.product_name", "like", '%'.$condition["product_name"].'%')
             ->where("t_document_archive.remarks", "like", '%'.$condition["remarks"].'%')
             ->whereRaw("JSON_CONTAINS(doc_info, ".$condition['doc_info']['title'].", '$.title')")
             ->whereRaw("JSON_CONTAINS(doc_info, ".$condition['doc_info']['content'].", '$.content')")
@@ -381,7 +381,7 @@ class DocumentArchive extends FluentDatabase
             ->limit(1)
             ->count();
     }
-    
+
     /**
      * ---------------------------------------------
      * 更新項目（登録書類）
