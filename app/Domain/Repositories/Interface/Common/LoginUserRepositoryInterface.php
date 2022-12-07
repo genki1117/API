@@ -3,28 +3,21 @@ declare(strict_types=1);
 namespace App\Domain\Repositories\Interface\Common;
 
 use App\Domain\Entities\Common\TempToken;
-use App\Domain\Entities\Common\User;
+use App\Domain\Entities\Users\User;
 
 interface LoginUserRepositoryInterface
 {
     /**
      * @param string $token
-     * @param string $expiry_date
+     * @param string $expiryDate
      * @return TempToken
      */
-    public function getToken(string $token, string $expiry_date = null): TempToken;
+    public function getToken(string $token, string $expiryDate = null): TempToken;
 
     /**
-     * @param string $compnay_id
-     * @param string $user_id
+     * @param string $compnayId
+     * @param string $userId
      * @return User
      */
-    public function getUser(string $compnay_id, string $user_id): User;
-
-    /**
-     * @param string $requestUri
-     * @param User $user
-     * @return bool
-     */
-    public function checkAuth(string $requestUri, User $user): bool;
+    public function getUser(string $compnayId, string $userId): User;
 }

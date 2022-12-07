@@ -12,7 +12,7 @@ class TempToken extends FluentDatabase
      * @param string $mailAddress
      * @return \stdClass|null
      */
-    public function getToken(string $token, string $expiry_date = null): ?\stdClass
+    public function getToken(string $token, string $expiryDate = null): ?\stdClass
     {
         return $this->builder()
             ->select([
@@ -22,8 +22,8 @@ class TempToken extends FluentDatabase
                 "expiry_date",
             ])
             ->where("token", $token)
-            ->when($expiry_date, function ($query) use ($expiry_date) {
-                return $query->whereDate('expiry_date', '>=', $expiry_date);
+            ->when($expiryDate, function ($query) use ($expiryDate) {
+                return $query->whereDate('expiry_date', '>=', $expiryDate);
             })
             ->first();
     }

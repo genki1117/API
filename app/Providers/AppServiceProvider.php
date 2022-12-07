@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Providers;
 
+use App\Foundations\Context\LoggedInUserContext;
 use Carbon\Carbon;
 use Illuminate\Database\Events\TransactionBeginning;
 use Illuminate\Database\Events\TransactionCommitted;
@@ -17,7 +18,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        /**
+         * ログインユーザー情報を格納するオブジェクトをサービスコンテナに登録
+         */
+        $this->app->singleton(LoggedInUserContext::class, function () {
+            return new LoggedInUserContext();
+        });
     }
 
     /**

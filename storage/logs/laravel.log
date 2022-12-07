@@ -1,58 +1,43 @@
-[2022-11-24 15:47:13] local.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in C:\work\github\DTG-API\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php on line 338 at C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Translation\\Translator.php:107)
+[2022-11-30 18:21:18] testing.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 at /var/www/html/vendor/laravel/framework/src/Illuminate/Translation/Translator.php:107)
 [stacktrace]
-#0 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(338): Illuminate\\Translation\\Translator->get()
-#1 C:\\work\\github\\DTG-API\\app\\Http\\Responses\\Common\\TokenResponse.php(23): Illuminate\\Support\\Facades\\Facade::__callStatic()
-#2 C:\\work\\github\\DTG-API\\app\\Http\\Middleware\\AuthorizationToken.php(50): App\\Http\\Responses\\Common\\TokenResponse->faildNoToken()
-#3 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): App\\Http\\Middleware\\AuthorizationToken->handle()
-#4 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#5 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
-#6 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
-#7 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#8 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
-#9 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
-#10 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#11 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
-#12 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#13 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
-#14 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#15 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle()
-#16 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#17 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle()
-#18 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#19 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(142): Illuminate\\Pipeline\\Pipeline->then()
-#20 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
-#21 C:\\work\\github\\DTG-API\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
-#22 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('...')
-#23 {main}
+#0 /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(338): Illuminate\\Translation\\Translator->get()
+#1 /var/www/html/app/Http/Responses/Common/TokenResponse.php(23): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#2 /var/www/html/app/Http/Middleware/AuthorizationToken.php(50): App\\Http\\Responses\\Common\\TokenResponse->faildNoToken()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): App\\Http\\Middleware\\AuthorizationToken->handle()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\\Pipeline\\Pipeline->then()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(538): Illuminate\\Foundation\\Http\\Kernel->handle()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php(305): Illuminate\\Foundation\\Testing\\TestCase->call()
+#23 /var/www/html/tests/Feature/ExampleTest.php(17): Illuminate\\Foundation\\Testing\\TestCase->get()
+#24 /var/www/html/vendor/phpunit/phpunit/src/Framework/TestCase.php(1545): Tests\\Feature\\ExampleTest->test_the_application_returns_a_successful_response()
+#25 /var/www/html/vendor/phpunit/phpunit/src/Framework/TestCase.php(1151): PHPUnit\\Framework\\TestCase->runTest()
+#26 /var/www/html/vendor/phpunit/phpunit/src/Framework/TestResult.php(726): PHPUnit\\Framework\\TestCase->runBare()
+#27 /var/www/html/vendor/phpunit/phpunit/src/Framework/TestCase.php(903): PHPUnit\\Framework\\TestResult->run()
+#28 /var/www/html/vendor/phpunit/phpunit/src/Framework/TestSuite.php(672): PHPUnit\\Framework\\TestCase->run()
+#29 /var/www/html/vendor/phpunit/phpunit/src/Framework/TestSuite.php(672): PHPUnit\\Framework\\TestSuite->run()
+#30 /var/www/html/vendor/phpunit/phpunit/src/Framework/TestSuite.php(672): PHPUnit\\Framework\\TestSuite->run()
+#31 /var/www/html/vendor/phpunit/phpunit/src/TextUI/TestRunner.php(673): PHPUnit\\Framework\\TestSuite->run()
+#32 /var/www/html/vendor/phpunit/phpunit/src/TextUI/Command.php(143): PHPUnit\\TextUI\\TestRunner->run()
+#33 /var/www/html/vendor/phpunit/phpunit/src/TextUI/Command.php(96): PHPUnit\\TextUI\\Command->run()
+#34 /var/www/html/vendor/phpunit/phpunit/phpunit(98): PHPUnit\\TextUI\\Command::main()
+#35 {main}
 "} 
-[2022-11-24 15:50:02] local.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in C:\work\github\DTG-API\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php on line 338 at C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Translation\\Translator.php:107)
-[stacktrace]
-#0 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(338): Illuminate\\Translation\\Translator->get()
-#1 C:\\work\\github\\DTG-API\\app\\Http\\Responses\\Common\\TokenResponse.php(23): Illuminate\\Support\\Facades\\Facade::__callStatic()
-#2 C:\\work\\github\\DTG-API\\app\\Http\\Middleware\\AuthorizationToken.php(50): App\\Http\\Responses\\Common\\TokenResponse->faildNoToken()
-#3 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): App\\Http\\Middleware\\AuthorizationToken->handle()
-#4 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#5 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
-#6 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
-#7 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#8 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
-#9 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
-#10 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#11 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle()
-#12 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#13 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
-#14 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#15 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\HandleCors->handle()
-#16 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#17 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle()
-#18 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
-#19 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(142): Illuminate\\Pipeline\\Pipeline->then()
-#20 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
-#21 C:\\work\\github\\DTG-API\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle()
-#22 C:\\work\\github\\DTG-API\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('...')
-#23 {main}
-"} 
-[2022-11-24 15:55:43] local.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 at /var/www/html/vendor/laravel/framework/src/Illuminate/Translation/Translator.php:107)
+[2022-11-30 18:28:53] local.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 at /var/www/html/vendor/laravel/framework/src/Illuminate/Translation/Translator.php:107)
 [stacktrace]
 #0 /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(338): Illuminate\\Translation\\Translator->get()
 #1 /var/www/html/app/Http/Responses/Common/TokenResponse.php(23): Illuminate\\Support\\Facades\\Facade::__callStatic()
@@ -79,7 +64,11 @@
 #22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #23 {main}
 "} 
+<<<<<<< HEAD
+[2022-11-30 18:28:55] local.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 at /var/www/html/vendor/laravel/framework/src/Illuminate/Translation/Translator.php:107)
+=======
 [2022-11-24 15:56:30] local.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 at /var/www/html/vendor/laravel/framework/src/Illuminate/Translation/Translator.php:107)
+>>>>>>> develop
 [stacktrace]
 #0 /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(338): Illuminate\\Translation\\Translator->get()
 #1 /var/www/html/app/Http/Responses/Common/TokenResponse.php(23): Illuminate\\Support\\Facades\\Facade::__callStatic()
@@ -106,7 +95,11 @@
 #22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #23 {main}
 "} 
+<<<<<<< HEAD
+[2022-11-30 18:28:57] local.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 at /var/www/html/vendor/laravel/framework/src/Illuminate/Translation/Translator.php:107)
+=======
 [2022-11-24 16:01:18] local.ERROR: Illuminate\Translation\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 {"exception":"[object] (TypeError(code: 0): Illuminate\\Translation\\Translator::get(): Argument #2 ($replace) must be of type array, null given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 338 at /var/www/html/vendor/laravel/framework/src/Illuminate/Translation/Translator.php:107)
+>>>>>>> develop
 [stacktrace]
 #0 /var/www/html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(338): Illuminate\\Translation\\Translator->get()
 #1 /var/www/html/app/Http/Responses/Common/TokenResponse.php(23): Illuminate\\Support\\Facades\\Facade::__callStatic()
@@ -133,6 +126,8 @@
 #22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #23 {main}
 "} 
+<<<<<<< HEAD
+=======
 [2022-11-24 17:18:43] local.ERROR: App\Http\Responses\Document\DocumentGetDetailResponse::detail(): Argument #2 ($docDetailList) must be of type App\Domain\Entities\Document\DocumentDetail, null given, called in /var/www/html/app/Http/Controllers/Document/DocumentListController.php on line 39 {"exception":"[object] (TypeError(code: 0): App\\Http\\Responses\\Document\\DocumentGetDetailResponse::detail(): Argument #2 ($docDetailList) must be of type App\\Domain\\Entities\\Document\\DocumentDetail, null given, called in /var/www/html/app/Http/Controllers/Document/DocumentListController.php on line 39 at /var/www/html/app/Http/Responses/Document/DocumentGetDetailResponse.php:27)
 [stacktrace]
 #0 /var/www/html/app/Http/Controllers/Document/DocumentListController.php(39): App\\Http\\Responses\\Document\\DocumentGetDetailResponse->detail()
@@ -5601,3 +5596,4 @@ Stack trace:
 #38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
 #39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
 #40 {main}  
+>>>>>>> develop
