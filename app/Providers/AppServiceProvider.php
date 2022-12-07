@@ -34,21 +34,22 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (app()->environment() === 'develop' || app()->environment() === 'local') {
-//            \DB::listen(function ($query) {
-//                $sql = $query->sql;
-//                foreach ($query->bindings as $binding) {
-//                    if (is_string($binding)) {
-//                        $binding = "'{$binding}'";
-//                    } elseif ($binding === null) {
-//                        $binding = 'NULL';
-//                    } elseif ($binding instanceof Carbon) {
-//                        $binding = "'{$binding->toDateTimeString()}'";
-//                    }
-//
-//                    $sql = preg_replace("/\?/", $binding, $sql, 1);
-//                }
-//                \Log::debug($sql, ['time' => "{$query->time}ms"]);
-//            });
+            \DB::listen(function ($query) {
+                $sql = $query->sql;
+                foreach ($query->bindings as $binding) {
+                    if (is_string($binding)) {
+                        $binding = "'{$binding}'";
+                    } elseif (is_int($binding)) {
+                        $binding = (string)$binding;
+                    } elseif ($binding === null) {
+                        $binding = 'NULL';
+                    } elseif ($binding instanceof Carbon) {
+                        $binding = "'{$binding->toDateTimeString()}'";
+                    }
+                    $sql = preg_replace("/\?/", $binding, $sql, 1);
+                }
+                \Log::debug($sql, ['time' => "{$query->time}ms"]);
+            });
 
             // トランザクション開始・終了
             \Event::listen(TransactionBeginning::class, function () {
