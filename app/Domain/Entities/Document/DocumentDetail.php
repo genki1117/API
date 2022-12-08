@@ -22,8 +22,7 @@ class DocumentDetail
         ?\stdClass $documentWorkFlow = null,
         ?\stdClass $logDocAccess = null,
         ?\stdClass $logDocOperation = null
-    )
-    {
+    ) {
         $this->documentList = $documentList;
         $this->documentPermissionList = $documentPermissionList;
         $this->documentWorkFlow = $documentWorkFlow;

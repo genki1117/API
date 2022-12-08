@@ -26,8 +26,7 @@ class AuthorizationToken
     public function __construct(
         LoggedInUserContext $context,
         LoginUserRepositoryInterface $loginUserRepositoryInterface
-    )
-    {
+    ) {
         $this->loggedInUserContext = $context;
         $this->loginUserRepositoryInterface = $loginUserRepositoryInterface;
     }
