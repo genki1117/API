@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Document\DocumentGetListRequest;
 use App\Http\Responses\Document\DocumentGetListResponse;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -53,7 +55,8 @@ class ApiDocumentGetListTest extends TestCase
         $this->assertArrayHasKey('current_page', $jsonData);
     }
 
-    public function testGetListFromController()
+    // データ1件のみをチェックする
+    public function testGetList()
     {
         $request = [
             "m_use" => [
@@ -151,8 +154,28 @@ class ApiDocumentGetListTest extends TestCase
             ]
         ];
         $response = $this->post('/document/list', $request);
-        $this->withoutExceptionHandling();
-        $response->assertStatus(200);
+        $responseData = json_decode($response->content(), true);
+        $this->assertIsArray($responseData);
+        $this->assertArrayHasKey('data', $responseData);
+        $this->assertArrayHasKey('contents', $responseData['data']);
+        $this->assertArrayHasKey('total', $responseData);
+        $this->assertArrayHasKey('per_page', $responseData);
+        $this->assertArrayHasKey('current_page', $responseData);
+        $this->assertEquals(1, $responseData['data']['contents'][0]['document_id']);
+        $this->assertEquals(1, $responseData['data']['contents'][0]['category_id']);
+        $this->assertEquals("2022-11-15", $responseData['data']['contents'][0]['transaction_date']);
+        $this->assertEquals(1, $responseData['data']['contents'][0]['doc_type_id']);
+        $this->assertEquals("test123456", $responseData['data']['contents'][0]['title']);
+        $this->assertEquals("2500.000000", $responseData['data']['contents'][0]['amount']);
+        $this->assertEquals(1, $responseData['data']['contents'][0]['currency_id']);
+        $this->assertEquals(0, $responseData['data']['contents'][0]['status_id']);
+        $this->assertEquals(1670415861, $responseData['data']['contents'][0]['UNIX_TIMESTAMP(t_document_contract.update_datetime)']);
+        $this->assertEquals(1, $responseData['data']['contents'][0]['app_status']);
+        $this->assertEquals("test", $responseData['data']['contents'][0]['create_user']);
+        $this->assertEquals("1 testData,test api", $responseData['data']['contents'][0]['counter_party_name']);
+        $this->assertEquals(1, $responseData['total']);
+        $this->assertEquals(0, $responseData['per_page']);
+        $this->assertEquals(10, $responseData['current_page']);
     }
 
     public function testRequired_category_id()
