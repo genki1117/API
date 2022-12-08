@@ -105,7 +105,7 @@ class DocumentArchive extends FluentDatabase
             ->first();
     }
 
-    /** 
+    /**
      * @param array $mUser
      * @param array $condition
      * @param array $sort
@@ -129,19 +129,19 @@ class DocumentArchive extends FluentDatabase
                 'm_user.full_name as create_user',
                 DB::raw("CONCAT(m_company_counter_party.company_id, ' ', m_company_counter_party.counter_party_name) as counter_party_name")
             ])
-            ->join('m_user', function($query) {
+            ->join('m_user', function ($query) {
                 return $query->on('m_user.user_id', '=', 't_document_archive.create_user')
                 ->where('m_user.company_id', '=', 't_document_archive.company_id')
                 ->whereNull('m_user.delete_datetime');
             })
-            ->leftJoin('t_document_workflow', function($query) use($mUser) {
+            ->leftJoin('t_document_workflow', function ($query) use ($mUser) {
                 return $query->on('t_document_archive.document_id', '=', 't_document_workflow.document_id')
                 ->on('t_document_archive.category_id', '=', 't_document_workflow.category_id')
                 ->where('t_document_workflow.company_id', '=', $mUser['company_id'])
                 ->where('t_document_workflow.app_user_id', '=', $mUser['user_id'])
                 ->whereNull('t_document_workflow.delete_datetime');
             })
-            ->join('m_company_counter_party', function($query) {
+            ->join('m_company_counter_party', function ($query) {
                 return $query->on('m_company_counter_party.company_id', '=', 't_document_archive.company_id')
                 ->on('m_company_counter_party.counter_party_id', '=', 't_document_archive.counter_party_id')
                 ->where('m_company_counter_party.effe_start_date', '<=', DB::raw('CURRENT_DATE'))
@@ -171,7 +171,7 @@ class DocumentArchive extends FluentDatabase
             ->where('t_document_archive.issue_date', '<=', $condition['issue_date']['to'])
             ->where('t_document_archive.transaction_date', '>=', $condition['transaction_date']['from'])
             ->where('t_document_archive.transaction_date', '<=', $condition['transaction_date']['to'])
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('m_user as mu')
                     ->select(DB::raw(1))
                     ->join('t_document_archive', function ($join) {
@@ -180,7 +180,7 @@ class DocumentArchive extends FluentDatabase
                     ->where('mu.full_name', 'like', '%'.$condition['timestamp_user'].'%')
                     ->whereNull('mu.delete_datetime');
             })
-            ->whereExists(function($query) use($mUser) {
+            ->whereExists(function ($query) use ($mUser) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
                     ->join('t_document_archive', function ($join) {
@@ -190,7 +190,7 @@ class DocumentArchive extends FluentDatabase
                     })
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $mUser['user_id'])
-                    ->where(function($jQuery) {
+                    ->where(function ($jQuery) {
                         return $jQuery->where('tdw.wf_sort', '=', 0)
                             ->orWhere('tdw.app_status', '=', 6);
                     })
@@ -205,30 +205,30 @@ class DocumentArchive extends FluentDatabase
                             ->where('tdpc.user_id', '=', $mUser['user_id'])
                     )
                     ->union(
-                            DB::table('m_user as mu')
-                            ->select(DB::raw(1))
-                            ->join('m_user_role as mur', function($join) {
-                                return $join->on('mur.company_id', '=', 'mu.company_id')
-                                    ->on('mur.user_id', '=', 'mu.user_id')
-                                    ->where('mur.admin_role', '=', 0)
-                                    ->whereNull('mur.delete_datetime');
-                            })
-                            ->join('t_document_archive', function($join) {
-                                return $join->on('mu.company_id','t_document_archive.company_id');
-                            })
-                            ->whereNull('mu.delete_datetime')
-                            ->where('mu.user_id', '=', $mUser['user_id'])
+                        DB::table('m_user as mu')
+                        ->select(DB::raw(1))
+                        ->join('m_user_role as mur', function ($join) {
+                            return $join->on('mur.company_id', '=', 'mu.company_id')
+                                ->on('mur.user_id', '=', 'mu.user_id')
+                                ->where('mur.admin_role', '=', 0)
+                                ->whereNull('mur.delete_datetime');
+                        })
+                        ->join('t_document_archive', function ($join) {
+                            return $join->on('mu.company_id', 't_document_archive.company_id');
+                        })
+                        ->whereNull('mu.delete_datetime')
+                        ->where('mu.user_id', '=', $mUser['user_id'])
                     );
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
-                    ->join('m_user as mu', function($join) {
+                    ->join('m_user as mu', function ($join) {
                         return $join->on('mu.company_id', '=', 'tdw.company_id')
                             ->where('mu.user_id', '=', 'tdw.app_user_id')
                             ->where('mu.user_type_id', '=', 0);
                     })
-                    ->join('t_document_archive', function($jQuery) {
+                    ->join('t_document_archive', function ($jQuery) {
                         return $jQuery->on('tdw.company_id', '=', 't_document_archive.company_id')
                             ->on('tdw.document_id', '=', 't_document_archive.document_id')
                             ->on('tdw.category_id', '=', 't_document_archive.category_id');
@@ -236,25 +236,25 @@ class DocumentArchive extends FluentDatabase
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $condition['app_user_id']);
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_doc_permission_archive as tdpa')
                     ->select(DB::raw(1))
-                    ->join('t_document_archive', function($jQuery) {
+                    ->join('t_document_archive', function ($jQuery) {
                         return $jQuery->on('tdpa.company_id', '=', 't_document_archive.company_id')
                         ->on('tdpa.document_id', '=', 't_document_archive.document_id');
                     })
                     ->whereNull('tdpa.delete_datetime')
                     ->where('tdpa.user_id', '=', $condition['view_permission_user_id']);
             })
-            ->where(function($query) use($condition) {
-                return $query->where('m_company_counter_party.counter_party_name', 'like',  '%'.$condition['counter_party_name'].'%')
-                    ->orWhere('m_company_counter_party.counter_party_name_kana', 'like',  '%'.$condition['counter_party_name'].'%');
+            ->where(function ($query) use ($condition) {
+                return $query->where('m_company_counter_party.counter_party_name', 'like', '%'.$condition['counter_party_name'].'%')
+                    ->orWhere('m_company_counter_party.counter_party_name_kana', 'like', '%'.$condition['counter_party_name'].'%');
             })
-            ->when(empty($sort), function($query) {
+            ->when(empty($sort), function ($query) {
                 return $query->orderBy('t_document_archive.document_id', 'ASC')
                     ->orderBy('t_document_archive.category_id', 'DESC');
             })
-            ->when(!empty($sort), function($query) use($sort) {
+            ->when(!empty($sort), function ($query) use ($sort) {
                 return $query->orderBy('t_document_archive.'.$sort['column_name'], $sort['sort_type']);
             })
             ->limit($page['disp_count'])
@@ -262,7 +262,7 @@ class DocumentArchive extends FluentDatabase
             ->get();
     }
 
-    /** 
+    /**
      * @param array $mUser
      * @param array $condition
      * @param array $sort
@@ -274,19 +274,19 @@ class DocumentArchive extends FluentDatabase
             ->select([
                 DB::raw('COUNT(*) AS count')
             ])
-            ->join('m_user', function($query) {
+            ->join('m_user', function ($query) {
                 return $query->on('m_user.user_id', '=', 't_document_archive.create_user')
                 ->where('m_user.company_id', '=', 't_document_archive.company_id')
                 ->whereNull('m_user.delete_datetime');
             })
-            ->leftJoin('t_document_workflow', function($query) use($mUser) {
+            ->leftJoin('t_document_workflow', function ($query) use ($mUser) {
                 return $query->on('t_document_archive.document_id', '=', 't_document_workflow.document_id')
                 ->on('t_document_archive.category_id', '=', 't_document_workflow.category_id')
                 ->where('t_document_workflow.company_id', '=', $mUser['company_id'])
                 ->where('t_document_workflow.app_user_id', '=', $mUser['user_id'])
                 ->whereNull('t_document_workflow.delete_datetime');
             })
-            ->join('m_company_counter_party', function($query) {
+            ->join('m_company_counter_party', function ($query) {
                 return $query->on('m_company_counter_party.company_id', '=', 't_document_archive.company_id')
                 ->on('m_company_counter_party.counter_party_id', '=', 't_document_archive.counter_party_id')
                 ->where('m_company_counter_party.effe_start_date', '<=', DB::raw('CURRENT_DATE'))
@@ -316,7 +316,7 @@ class DocumentArchive extends FluentDatabase
             ->where('t_document_archive.issue_date', '<=', $condition['issue_date']['to'])
             ->where('t_document_archive.transaction_date', '>=', $condition['transaction_date']['from'])
             ->where('t_document_archive.transaction_date', '<=', $condition['transaction_date']['to'])
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('m_user as mu')
                     ->select(DB::raw(1))
                     ->join('t_document_archive', function ($join) {
@@ -325,7 +325,7 @@ class DocumentArchive extends FluentDatabase
                     ->where('mu.full_name', 'like', '%'.$condition['timestamp_user'].'%')
                     ->whereNull('mu.delete_datetime');
             })
-            ->whereExists(function($query) use($mUser) {
+            ->whereExists(function ($query) use ($mUser) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
                     ->join('t_document_archive', function ($join) {
@@ -335,7 +335,7 @@ class DocumentArchive extends FluentDatabase
                     })
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $mUser['user_id'])
-                    ->where(function($jQuery) {
+                    ->where(function ($jQuery) {
                         return $jQuery->where('tdw.wf_sort', '=', 0)
                             ->orWhere('tdw.app_status', '=', 6);
                     })
@@ -350,30 +350,30 @@ class DocumentArchive extends FluentDatabase
                             ->where('tdpc.user_id', '=', $mUser['user_id'])
                     )
                     ->union(
-                            DB::table('m_user as mu')
-                            ->select(DB::raw(1))
-                            ->join('m_user_role as mur', function($join) {
-                                return $join->on('mur.company_id', '=', 'mu.company_id')
-                                    ->on('mur.user_id', '=', 'mu.user_id')
-                                    ->where('mur.admin_role', '=', 0)
-                                    ->whereNull('mur.delete_datetime');
-                            })
-                            ->join('t_document_archive', function($join) {
-                                return $join->on('mu.company_id','t_document_archive.company_id');
-                            })
-                            ->whereNull('mu.delete_datetime')
-                            ->where('mu.user_id', '=', $mUser['user_id'])
+                        DB::table('m_user as mu')
+                        ->select(DB::raw(1))
+                        ->join('m_user_role as mur', function ($join) {
+                            return $join->on('mur.company_id', '=', 'mu.company_id')
+                                ->on('mur.user_id', '=', 'mu.user_id')
+                                ->where('mur.admin_role', '=', 0)
+                                ->whereNull('mur.delete_datetime');
+                        })
+                        ->join('t_document_archive', function ($join) {
+                            return $join->on('mu.company_id', 't_document_archive.company_id');
+                        })
+                        ->whereNull('mu.delete_datetime')
+                        ->where('mu.user_id', '=', $mUser['user_id'])
                     );
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
-                    ->join('m_user as mu', function($join) {
+                    ->join('m_user as mu', function ($join) {
                         return $join->on('mu.company_id', '=', 'tdw.company_id')
                             ->where('mu.user_id', '=', 'tdw.app_user_id')
                             ->where('mu.user_type_id', '=', 0);
                     })
-                    ->join('t_document_archive', function($jQuery) {
+                    ->join('t_document_archive', function ($jQuery) {
                         return $jQuery->on('tdw.company_id', '=', 't_document_archive.company_id')
                             ->on('tdw.document_id', '=', 't_document_archive.document_id')
                             ->on('tdw.category_id', '=', 't_document_archive.category_id');
@@ -381,25 +381,25 @@ class DocumentArchive extends FluentDatabase
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $condition['app_user_id']);
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_doc_permission_archive as tdpa')
                     ->select(DB::raw(1))
-                    ->join('t_document_archive', function($jQuery) {
+                    ->join('t_document_archive', function ($jQuery) {
                         return $jQuery->on('tdpa.company_id', '=', 't_document_archive.company_id')
                         ->on('tdpa.document_id', '=', 't_document_archive.document_id');
                     })
                     ->whereNull('tdpa.delete_datetime')
                     ->where('tdpa.user_id', '=', $condition['view_permission_user_id']);
             })
-            ->where(function($query) use($condition) {
-                return $query->where('m_company_counter_party.counter_party_name', 'like',  '%'.$condition['counter_party_name'].'%')
-                    ->orWhere('m_company_counter_party.counter_party_name_kana', 'like',  '%'.$condition['counter_party_name'].'%');
+            ->where(function ($query) use ($condition) {
+                return $query->where('m_company_counter_party.counter_party_name', 'like', '%'.$condition['counter_party_name'].'%')
+                    ->orWhere('m_company_counter_party.counter_party_name_kana', 'like', '%'.$condition['counter_party_name'].'%');
             })
-            ->when(empty($sort), function($query) {
+            ->when(empty($sort), function ($query) {
                 return $query->orderBy('t_document_archive.document_id', 'ASC')
                     ->orderBy('t_document_archive.category_id', 'DESC');
             })
-            ->when(!empty($sort), function($query) use($sort) {
+            ->when(!empty($sort), function ($query) use ($sort) {
                 return $query->orderBy('t_document_archive.'.$sort['column_name'], $sort['sort_type']);
             })
             ->limit(1)

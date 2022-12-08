@@ -22,10 +22,12 @@ class DocumentGetListRepository implements DocumentGetListRepositoryInterface
      * @param DocumentContract $docContract
      * @param DocumentInternal $docInternal
      */
-    public function __construct(DocumentDeal $docDeal,
-                                DocumentArchive $docArchive,
-                                DocumentContract $docContract,
-                                DocumentInternal $docInternal)
+    public function __construct(
+        DocumentDeal $docDeal,
+        DocumentArchive $docArchive,
+        DocumentContract $docContract,
+        DocumentInternal $docInternal
+    )
     {
         $this->docDeal = $docDeal;
         $this->docArchive = $docArchive;
@@ -45,7 +47,7 @@ class DocumentGetListRepository implements DocumentGetListRepositoryInterface
         $listConstract = $this->docContract->getDocumentList($mUser, $condition, $sort, $page)->all();
         $countListConstract = $this->docContract->getDocumentListCount($mUser, $condition, $sort);
         
-        if(empty($listConstract)) {
+        if (empty($listConstract)) {
             return new DocumentGetListEntity();
         }
 
@@ -64,7 +66,7 @@ class DocumentGetListRepository implements DocumentGetListRepositoryInterface
         $listDeal = $this->docDeal->getDocumentList($mUser, $condition, $sort, $page)->all();
         $countListDeal = $this->docDeal->getDocumentListCount($mUser, $condition, $sort);
 
-        if(empty($listDeal)) {
+        if (empty($listDeal)) {
             return new DocumentGetListEntity();
         }
 
@@ -83,7 +85,7 @@ class DocumentGetListRepository implements DocumentGetListRepositoryInterface
         $listInternal = $this->docInternal->getDocumentList($mUser, $condition, $sort, $page)->all();
         $countListInternal = $this->docInternal->getDocumentListCount($mUser, $condition, $sort);
 
-        if(empty($listInternal)) {
+        if (empty($listInternal)) {
             return new DocumentGetListEntity();
         }
 
@@ -102,7 +104,7 @@ class DocumentGetListRepository implements DocumentGetListRepositoryInterface
         $listArchive = $this->docArchive->getDocumentList($mUser, $condition, $sort, $page)->all();
         $countListArchive = $this->docArchive->getDocumentListCount($mUser, $condition, $sort);
         
-        if(empty($listArchive)) {
+        if (empty($listArchive)) {
             return new DocumentGetListEntity();
         }
 

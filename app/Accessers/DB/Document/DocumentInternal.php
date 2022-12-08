@@ -97,7 +97,7 @@ class DocumentInternal extends FluentDatabase
             ->first();
     }
 
-    /** 
+    /**
      * @param array $mUser
      * @param array $condition
      * @param array $sort
@@ -121,19 +121,19 @@ class DocumentInternal extends FluentDatabase
                 'm_user.full_name as create_user',
                 DB::raw("CONCAT(m_company_counter_party.company_id, ' ', m_company_counter_party.counter_party_name) as counter_party_name")
             ])
-            ->join('m_user', function($query) {
+            ->join('m_user', function ($query) {
                 return $query->on('m_user.user_id', '=', 't_document_internal.create_user')
                 ->where('m_user.company_id', '=', 't_document_internal.company_id')
                 ->whereNull('m_user.delete_datetime');
             })
-            ->leftJoin('t_document_workflow', function($query) use($mUser) {
+            ->leftJoin('t_document_workflow', function ($query) use ($mUser) {
                 return $query->on('t_document_internal.document_id', '=', 't_document_workflow.document_id')
                 ->where('t_document_internal.category_id', '=', 't_document_workflow.category_id')
                 ->where('t_document_workflow.company_id', '=', $mUser['company_id'])
                 ->where('t_document_workflow.app_user_id', '=', $mUser['user_id'])
                 ->whereNull('t_document_workflow.delete_datetime');
             })
-            ->join('m_company_counter_party', function($query) {
+            ->join('m_company_counter_party', function ($query) {
                 return $query->on('m_company_counter_party.company_id', '=', 't_document_internal.company_id')
                 ->on('m_company_counter_party.counter_party_id', '=', 't_document_internal.counter_party_id')
                 ->where('m_company_counter_party.effe_start_date', '<=', DB::raw('CURRENT_DATE'))
@@ -163,7 +163,7 @@ class DocumentInternal extends FluentDatabase
             ->where('t_document_internal.doc_create_date', '<=', $condition['doc_create_date']['to'])
             ->where('t_document_internal.sign_finish_date', '>=', $condition['sign_finish_date']['from'])
             ->where('t_document_internal.sign_finish_date', '<=', $condition['sign_finish_date']['to'])
-            ->whereExists(function($query) use($mUser) {
+            ->whereExists(function ($query) use ($mUser) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
                     ->join($this->table, function ($join) {
@@ -171,9 +171,9 @@ class DocumentInternal extends FluentDatabase
                             ->on('tdw.document_id', 't_document_internal.document_id')
                             ->on('tdw.category_id', 't_document_internal.category_id');
                     })
-                    ->where('tdw.delete_datetime',null)
+                    ->where('tdw.delete_datetime', null)
                     ->where('tdw.app_user_id', '=', $mUser['user_id'])
-                    ->where(function($jQuery) {
+                    ->where(function ($jQuery) {
                         return $jQuery->where('tdw.wf_sort', '=', 0)
                             ->orWhere('tdw.app_status', '=', 6);
                     })
@@ -188,30 +188,30 @@ class DocumentInternal extends FluentDatabase
                             ->where('tdpc.user_id', '=', $mUser['user_id'])
                     )
                     ->union(
-                            DB::table('m_user as mu')
-                            ->select(DB::raw(1))
-                            ->join('m_user_role as mur', function($join) {
-                                return $join->on('mur.company_id', '=', 'mu.company_id')
-                                    ->on('mur.user_id', '=', 'mu.user_id')
-                                    ->where('mur.admin_role', '=', 0)
-                                    ->whereNull('mur.delete_datetime');
-                            })
-                            ->join($this->table, function($join) {
-                                return $join->on('mu.company_id','t_document_internal.company_id');
-                            })
-                            ->whereNull('mu.delete_datetime')
-                            ->where('mu.user_id', '=', $mUser['user_id'])
+                        DB::table('m_user as mu')
+                        ->select(DB::raw(1))
+                        ->join('m_user_role as mur', function ($join) {
+                            return $join->on('mur.company_id', '=', 'mu.company_id')
+                                ->on('mur.user_id', '=', 'mu.user_id')
+                                ->where('mur.admin_role', '=', 0)
+                                ->whereNull('mur.delete_datetime');
+                        })
+                        ->join($this->table, function ($join) {
+                            return $join->on('mu.company_id', 't_document_internal.company_id');
+                        })
+                        ->whereNull('mu.delete_datetime')
+                        ->where('mu.user_id', '=', $mUser['user_id'])
                     );
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
-                    ->join('m_user as mu', function($join) {
+                    ->join('m_user as mu', function ($join) {
                         return $join->on('mu.company_id', '=', 'tdw.company_id')
                             ->on('mu.user_id', '=', 'tdw.app_user_id')
                             ->where('mu.user_type_id', '=', 0);
                     })
-                    ->join('t_document_internal', function($jQuery) {
+                    ->join('t_document_internal', function ($jQuery) {
                         return $jQuery->on('tdw.company_id', '=', 't_document_internal.company_id')
                             ->on('tdw.document_id', '=', 't_document_internal.document_id')
                             ->on('tdw.category_id', '=', 't_document_internal.category_id');
@@ -219,15 +219,15 @@ class DocumentInternal extends FluentDatabase
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $condition['app_user_id']);
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
-                    ->join('m_user as mu', function($join) {
+                    ->join('m_user as mu', function ($join) {
                         return $join->on('mu.company_id', '=', 'tdw.company_id')
                             ->on('mu.user_id', '=', 'tdw.app_user_id')
                             ->where('mu.user_type_id', '=', 1);
                     })
-                    ->join('t_document_internal', function($jQuery) {
+                    ->join('t_document_internal', function ($jQuery) {
                         return $jQuery->on('tdw.company_id', '=', 't_document_internal.company_id')
                             ->on('tdw.document_id', '=', 't_document_internal.document_id')
                             ->on('tdw.category_id', '=', 't_document_internal.category_id');
@@ -235,25 +235,25 @@ class DocumentInternal extends FluentDatabase
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $condition['app_user_id_guest']);
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_doc_permission_internal as tdpi')
                     ->select(DB::raw(1))
-                    ->join('t_document_internal', function($jQuery) {
+                    ->join('t_document_internal', function ($jQuery) {
                         return $jQuery->on('tdpi.company_id', '=', 't_document_internal.company_id')
                         ->on('tdpi.document_id', '=', 't_document_internal.document_id');
                     })
                     ->whereNull('tdpi.delete_datetime')
                     ->where('tdpi.user_id', '=', $condition['view_permission_user_id']);
             })
-            ->where(function($query) use($condition) {
-                return $query->where('m_company_counter_party.counter_party_name', 'like',  '%'.$condition['counter_party_name'].'%')
-                    ->orWhere('m_company_counter_party.counter_party_name_kana', 'like',  '%'.$condition['counter_party_name'].'%');
+            ->where(function ($query) use ($condition) {
+                return $query->where('m_company_counter_party.counter_party_name', 'like', '%'.$condition['counter_party_name'].'%')
+                    ->orWhere('m_company_counter_party.counter_party_name_kana', 'like', '%'.$condition['counter_party_name'].'%');
             })
-            ->when(empty($sort), function($query) {
+            ->when(empty($sort), function ($query) {
                 return $query->orderBy('t_document_internal.document_id', 'ASC')
                     ->orderBy('t_document_internal.category_id', 'DESC');
             })
-            ->when(!empty($sort), function($query) use($sort) {
+            ->when(!empty($sort), function ($query) use ($sort) {
                 return $query->orderBy('t_document_internal.'.$sort['column_name'], $sort['sort_type']);
             })
             ->limit($page['disp_count'])
@@ -261,7 +261,7 @@ class DocumentInternal extends FluentDatabase
             ->get();
     }
 
-    /** 
+    /**
      * @param array $mUser
      * @param array $condition
      * @param array $sort
@@ -273,19 +273,19 @@ class DocumentInternal extends FluentDatabase
             ->select([
                 DB::raw('COUNT(*) AS count')
             ])
-            ->join('m_user', function($query) {
+            ->join('m_user', function ($query) {
                 return $query->on('m_user.user_id', '=', 't_document_internal.create_user')
                 ->where('m_user.company_id', '=', 't_document_internal.company_id')
                 ->whereNull('m_user.delete_datetime');
             })
-            ->leftJoin('t_document_workflow', function($query) use($mUser) {
+            ->leftJoin('t_document_workflow', function ($query) use ($mUser) {
                 return $query->on('t_document_internal.document_id', '=', 't_document_workflow.document_id')
                 ->where('t_document_internal.category_id', '=', 't_document_workflow.category_id')
                 ->where('t_document_workflow.company_id', '=', $mUser['company_id'])
                 ->where('t_document_workflow.app_user_id', '=', $mUser['user_id'])
                 ->whereNull('t_document_workflow.delete_datetime');
             })
-            ->join('m_company_counter_party', function($query) {
+            ->join('m_company_counter_party', function ($query) {
                 return $query->on('m_company_counter_party.company_id', '=', 't_document_internal.company_id')
                 ->on('m_company_counter_party.counter_party_id', '=', 't_document_internal.counter_party_id')
                 ->where('m_company_counter_party.effe_start_date', '<=', DB::raw('CURRENT_DATE'))
@@ -315,7 +315,7 @@ class DocumentInternal extends FluentDatabase
             ->where('t_document_internal.doc_create_date', '<=', $condition['doc_create_date']['to'])
             ->where('t_document_internal.sign_finish_date', '>=', $condition['sign_finish_date']['from'])
             ->where('t_document_internal.sign_finish_date', '<=', $condition['sign_finish_date']['to'])
-            ->whereExists(function($query) use($mUser) {
+            ->whereExists(function ($query) use ($mUser) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
                     ->join($this->table, function ($join) {
@@ -323,9 +323,9 @@ class DocumentInternal extends FluentDatabase
                             ->on('tdw.document_id', 't_document_internal.document_id')
                             ->on('tdw.category_id', 't_document_internal.category_id');
                     })
-                    ->where('tdw.delete_datetime',null)
+                    ->where('tdw.delete_datetime', null)
                     ->where('tdw.app_user_id', '=', $mUser['user_id'])
-                    ->where(function($jQuery) {
+                    ->where(function ($jQuery) {
                         return $jQuery->where('tdw.wf_sort', '=', 0)
                             ->orWhere('tdw.app_status', '=', 6);
                     })
@@ -340,30 +340,30 @@ class DocumentInternal extends FluentDatabase
                             ->where('tdpc.user_id', '=', $mUser['user_id'])
                     )
                     ->union(
-                            DB::table('m_user as mu')
-                            ->select(DB::raw(1))
-                            ->join('m_user_role as mur', function($join) {
-                                return $join->on('mur.company_id', '=', 'mu.company_id')
-                                    ->on('mur.user_id', '=', 'mu.user_id')
-                                    ->where('mur.admin_role', '=', 0)
-                                    ->whereNull('mur.delete_datetime');
-                            })
-                            ->join($this->table, function($join) {
-                                return $join->on('mu.company_id','t_document_internal.company_id');
-                            })
-                            ->whereNull('mu.delete_datetime')
-                            ->where('mu.user_id', '=', $mUser['user_id'])
+                        DB::table('m_user as mu')
+                        ->select(DB::raw(1))
+                        ->join('m_user_role as mur', function ($join) {
+                            return $join->on('mur.company_id', '=', 'mu.company_id')
+                                ->on('mur.user_id', '=', 'mu.user_id')
+                                ->where('mur.admin_role', '=', 0)
+                                ->whereNull('mur.delete_datetime');
+                        })
+                        ->join($this->table, function ($join) {
+                            return $join->on('mu.company_id', 't_document_internal.company_id');
+                        })
+                        ->whereNull('mu.delete_datetime')
+                        ->where('mu.user_id', '=', $mUser['user_id'])
                     );
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
-                    ->join('m_user as mu', function($join) {
+                    ->join('m_user as mu', function ($join) {
                         return $join->on('mu.company_id', '=', 'tdw.company_id')
                             ->on('mu.user_id', '=', 'tdw.app_user_id')
                             ->where('mu.user_type_id', '=', 0);
                     })
-                    ->join('t_document_internal', function($jQuery) {
+                    ->join('t_document_internal', function ($jQuery) {
                         return $jQuery->on('tdw.company_id', '=', 't_document_internal.company_id')
                             ->on('tdw.document_id', '=', 't_document_internal.document_id')
                             ->on('tdw.category_id', '=', 't_document_internal.category_id');
@@ -371,15 +371,15 @@ class DocumentInternal extends FluentDatabase
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $condition['app_user_id']);
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
-                    ->join('m_user as mu', function($join) {
+                    ->join('m_user as mu', function ($join) {
                         return $join->on('mu.company_id', '=', 'tdw.company_id')
                             ->on('mu.user_id', '=', 'tdw.app_user_id')
                             ->where('mu.user_type_id', '=', 1);
                     })
-                    ->join('t_document_internal', function($jQuery) {
+                    ->join('t_document_internal', function ($jQuery) {
                         return $jQuery->on('tdw.company_id', '=', 't_document_internal.company_id')
                             ->on('tdw.document_id', '=', 't_document_internal.document_id')
                             ->on('tdw.category_id', '=', 't_document_internal.category_id');
@@ -387,25 +387,25 @@ class DocumentInternal extends FluentDatabase
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $condition['app_user_id_guest']);
             })
-            ->whereExists(function($query) use($condition) {
+            ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_doc_permission_internal as tdpi')
                     ->select(DB::raw(1))
-                    ->join('t_document_internal', function($jQuery) {
+                    ->join('t_document_internal', function ($jQuery) {
                         return $jQuery->on('tdpi.company_id', '=', 't_document_internal.company_id')
                         ->on('tdpi.document_id', '=', 't_document_internal.document_id');
                     })
                     ->whereNull('tdpi.delete_datetime')
                     ->where('tdpi.user_id', '=', $condition['view_permission_user_id']);
             })
-            ->where(function($query) use($condition) {
-                return $query->where('m_company_counter_party.counter_party_name', 'like',  '%'.$condition['counter_party_name'].'%')
-                    ->orWhere('m_company_counter_party.counter_party_name_kana', 'like',  '%'.$condition['counter_party_name'].'%');
+            ->where(function ($query) use ($condition) {
+                return $query->where('m_company_counter_party.counter_party_name', 'like', '%'.$condition['counter_party_name'].'%')
+                    ->orWhere('m_company_counter_party.counter_party_name_kana', 'like', '%'.$condition['counter_party_name'].'%');
             })
-            ->when(empty($sort), function($query) {
+            ->when(empty($sort), function ($query) {
                 return $query->orderBy('t_document_internal.document_id', 'ASC')
                     ->orderBy('t_document_internal.category_id', 'DESC');
             })
-            ->when(!empty($sort), function($query) use($sort) {
+            ->when(!empty($sort), function ($query) use ($sort) {
                 return $query->orderBy('t_document_internal.'.$sort['column_name'], $sort['sort_type']);
             })
             ->limit(1)

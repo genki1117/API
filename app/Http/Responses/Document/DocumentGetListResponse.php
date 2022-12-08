@@ -13,11 +13,11 @@ class DocumentGetListResponse
     }
 
     /**
-     * @param array $data 
+     * @param array $data
      * @param int $total
      * @param int $dispPage
      * @param int $dispCount
-     * @return array 
+     * @return array
      */
     public function setGetListResponse(array $data, int $total, int $dispPage, int $dispCount): array
     {
