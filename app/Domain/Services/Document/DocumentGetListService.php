@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
+use App\Domain\Consts\DocumentConst;
 use App\Domain\Entities\Document\DocumentGetList;
 use App\Domain\Repositories\Interface\Document\DocumentGetListRepositoryInterface;
 
@@ -19,11 +20,15 @@ class DocumentGetListService
     /** @var DocumentGetListRepositoryInterface */
     private DocumentGetListRepositoryInterface $docGetListRepository;
 
+    /** @var DocumentConst */
+    private DocumentConst $docConst;
+
     /**
      * @param DocumentGetListRepositoryInterface $docGetListRepository
      */
-    public function __construct(DocumentGetListRepositoryInterface $docGetListRepository)
+    public function __construct(DocumentGetListRepositoryInterface $docGetListRepository, DocumentConst $docConst)
     {
+        $this->docConst = $docConst;
         $this->docGetListRepository = $docGetListRepository;
     }
 
@@ -37,16 +42,16 @@ class DocumentGetListService
     public function getList(array $mUser, array $condition, array $sort, array $page): ?DocumentGetList
     {
         switch($condition['category_id']) {
-            case self::DOC_CONTRACT_TYPE:
+            case $this->docConst::DOCUMENT_CONTRACT:
                 $data = $this->docGetListRepository->getListContract($mUser, $condition, $sort, $page);
                 break;
-            case self::DOC_DEAL_TYPE:
+            case $this->docConst::DOCUMENT_DEAL:
                 $data = $this->docGetListRepository->getListDeal($mUser, $condition, $sort, $page);
                 break;
-            case self::DOC_INTERNAL_TYPE:
+            case $this->docConst::DOCUMENT_INTERNAL:
                 $data = $this->docGetListRepository->getListInternal($mUser, $condition, $sort, $page);
                 break;
-            case self::DOC_ARCHIVE_TYPE:
+            case $this->docConst::DOCUMENT_ARCHIVE:
                 $data = $this->docGetListRepository->getListArchive($mUser, $condition, $sort, $page);
                 break;
             default:
