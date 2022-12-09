@@ -145,85 +145,85 @@ class DocumentDeal extends FluentDatabase
             })
             ->whereNull('t_document_deal.delete_datetime')
             ->where('t_document_deal.company_id', '=', $mUser['company_id'])
-            ->when(!empty($condition['search_input']), function($jQuery) use($condition) {
+            ->when(!empty($condition['search_input']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.title', 'like', '%'.$condition['search_input'].'%');
             })
-            ->when(!empty($condition['status_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['status_id']), function ($jQuery) use ($condition) {
                 return $jQuery->whereIn('t_document_deal.status_id', [$condition['status_id']]);
             })
-            ->when(!empty($condition['category_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['category_id']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.category_id', '=', $condition['category_id']);
             })
-            ->when(!empty($condition['register_type_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['register_type_id']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.doc_type_id', '=', $condition['register_type_id']);
             })
-            ->when(!empty($condition['contract_name']), function($jQuery) use($condition) {
+            ->when(!empty($condition['contract_name']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.title', 'like', '%'.$condition['contract_name'].'%');
             })
-            ->when(!empty($condition['doc_no']), function($jQuery) use($condition) {
+            ->when(!empty($condition['doc_no']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.doc_no', 'like', '%'.$condition['doc_no'].'%');
             })
-            ->when(!empty($condition['ref_doc_no']), function($jQuery) use($condition) {
+            ->when(!empty($condition['ref_doc_no']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.ref_doc_no', 'like', '%'.$condition['ref_doc_no'].'%');
             })
-            ->when(!empty($condition['amount']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['amount']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.amount', '<=', $condition['amount']['from']);
             })
-            ->when(!empty($condition['amount']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['amount']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.amount', '>=', $condition['amount']['to']);
             })
-            ->when(!empty($condition['currency_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['currency_id']), function ($jQuery) use ($condition) {
                 return $jQuery->whereIn('t_document_deal.currency_id', [$condition['currency_id']]);
             })
-            ->when(!empty($condition['document_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['document_id']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.document_id', 'like', '%'.$condition['document_id'].'%');
             })
-            ->when(!empty($condition['product_name']), function($jQuery) use($condition) {
+            ->when(!empty($condition['product_name']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.product_name', 'like', '%'.$condition['product_name'].'%');
             })
-            ->when(!empty($condition['remarks']), function($jQuery) use($condition) {
+            ->when(!empty($condition['remarks']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.remarks', 'like', '%'.$condition['remarks'].'%');
             })
-            ->when(!empty($condition['doc_info']['title']), function($jQuery) use($condition) {
+            ->when(!empty($condition['doc_info']['title']), function ($jQuery) use ($condition) {
                 return $jQuery->whereRaw('JSON_CONTAINS(t_document_deal.doc_info->"$.title", \'["'.$condition['doc_info']['title'].'"]\')');
             })
-            ->when(!empty($condition['doc_info']['content']), function($jQuery) use($condition) {
+            ->when(!empty($condition['doc_info']['content']), function ($jQuery) use ($condition) {
                 return $jQuery->whereRaw('JSON_CONTAINS(t_document_deal.doc_info->"$.content", \'["'.$condition['doc_info']['content'].'"]\')');
             })
-            ->when(!empty($condition['create_datetime']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['create_datetime']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.create_datetime', '>=', $condition['create_datetime']['from']);
             })
-            ->when(!empty($condition['create_datetime']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['create_datetime']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.create_datetime', '<=', $condition['create_datetime']['to']);
             })
-            ->when(!empty($condition['issue_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['issue_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.issue_date', '>=', $condition['issue_date']['from']);
             })
-            ->when(!empty($condition['issue_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['issue_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.issue_date', '<=', $condition['issue_date']['to']);
             })
-            ->when(!empty($condition['expiry_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['expiry_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.expiry_date', '>=', $condition['expiry_date']['from']);
             })
-            ->when(!empty($condition['expiry_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['expiry_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.expiry_date', '<=', $condition['expiry_date']['to']);
             })
-            ->when(!empty($condition['payment_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['payment_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.payment_date', '>=', $condition['payment_date']['from']);
             })
-            ->when(!empty($condition['payment_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['payment_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.payment_date', '<=', $condition['payment_date']['to']);
             })
-            ->when(!empty($condition['transaction_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['transaction_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.transaction_date', '>=', $condition['transaction_date']['from']);
             })
-            ->when(!empty($condition['transaction_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['transaction_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.transaction_date', '<=', $condition['transaction_date']['to']);
             })
-            ->when(!empty($condition['download_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['download_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.download_date', '>=', $condition['download_date']['from']);
             })
-            ->when(!empty($condition['download_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['download_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.download_date', '<=', $condition['download_date']['to']);
             })
             ->whereExists(function ($query) use ($mUser) {
@@ -280,7 +280,7 @@ class DocumentDeal extends FluentDatabase
                             ->on('tdw.category_id', '=', 't_document_deal.category_id');
                     })
                     ->whereNull('tdw.delete_datetime')
-                    ->when(!empty($condition['app_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['app_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdw.app_user_id', '=', $condition['app_user_id']);
                     });
             })
@@ -292,11 +292,11 @@ class DocumentDeal extends FluentDatabase
                         ->on('tdpt.document_id', '=', 't_document_deal.document_id');
                     })
                     ->whereNull('tdpt.delete_datetime')
-                    ->when(!empty($condition['view_permission_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['view_permission_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdpt.user_id', '=', $condition['view_permission_user_id']);
                     });
             })
-            ->when(!empty($condition['counter_party_name']), function($query) use($condition) {
+            ->when(!empty($condition['counter_party_name']), function ($query) use ($condition) {
                 return $query->where('m_company_counter_party.counter_party_name', 'like', '%'.$condition['counter_party_name'].'%')
                     ->orWhere('m_company_counter_party.counter_party_name_kana', 'like', '%'.$condition['counter_party_name'].'%');
             })
@@ -344,85 +344,85 @@ class DocumentDeal extends FluentDatabase
             })
             ->whereNull('t_document_deal.delete_datetime')
             ->where('t_document_deal.company_id', '=', $mUser['company_id'])
-            ->when(!empty($condition['search_input']), function($jQuery) use($condition) {
+            ->when(!empty($condition['search_input']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.title', 'like', '%'.$condition['search_input'].'%');
             })
-            ->when(!empty($condition['status_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['status_id']), function ($jQuery) use ($condition) {
                 return $jQuery->whereIn('t_document_deal.status_id', [$condition['status_id']]);
             })
-            ->when(!empty($condition['category_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['category_id']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.category_id', '=', $condition['category_id']);
             })
-            ->when(!empty($condition['register_type_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['register_type_id']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.doc_type_id', '=', $condition['register_type_id']);
             })
-            ->when(!empty($condition['contract_name']), function($jQuery) use($condition) {
+            ->when(!empty($condition['contract_name']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.title', 'like', '%'.$condition['contract_name'].'%');
             })
-            ->when(!empty($condition['doc_no']), function($jQuery) use($condition) {
+            ->when(!empty($condition['doc_no']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.doc_no', 'like', '%'.$condition['doc_no'].'%');
             })
-            ->when(!empty($condition['ref_doc_no']), function($jQuery) use($condition) {
+            ->when(!empty($condition['ref_doc_no']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.ref_doc_no', 'like', '%'.$condition['ref_doc_no'].'%');
             })
-            ->when(!empty($condition['amount']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['amount']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.amount', '<=', $condition['amount']['from']);
             })
-            ->when(!empty($condition['amount']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['amount']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.amount', '>=', $condition['amount']['to']);
             })
-            ->when(!empty($condition['currency_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['currency_id']), function ($jQuery) use ($condition) {
                 return $jQuery->whereIn('t_document_deal.currency_id', [$condition['currency_id']]);
             })
-            ->when(!empty($condition['document_id']), function($jQuery) use($condition) {
+            ->when(!empty($condition['document_id']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.document_id', 'like', '%'.$condition['document_id'].'%');
             })
-            ->when(!empty($condition['product_name']), function($jQuery) use($condition) {
+            ->when(!empty($condition['product_name']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.product_name', 'like', '%'.$condition['product_name'].'%');
             })
-            ->when(!empty($condition['remarks']), function($jQuery) use($condition) {
+            ->when(!empty($condition['remarks']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.remarks', 'like', '%'.$condition['remarks'].'%');
             })
-            ->when(!empty($condition['doc_info']['title']), function($jQuery) use($condition) {
+            ->when(!empty($condition['doc_info']['title']), function ($jQuery) use ($condition) {
                 return $jQuery->whereRaw('JSON_CONTAINS(t_document_deal.doc_info->"$.title", \'["'.$condition['doc_info']['title'].'"]\')');
             })
-            ->when(!empty($condition['doc_info']['content']), function($jQuery) use($condition) {
+            ->when(!empty($condition['doc_info']['content']), function ($jQuery) use ($condition) {
                 return $jQuery->whereRaw('JSON_CONTAINS(t_document_deal.doc_info->"$.content", \'["'.$condition['doc_info']['content'].'"]\')');
             })
-            ->when(!empty($condition['create_datetime']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['create_datetime']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.create_datetime', '>=', $condition['create_datetime']['from']);
             })
-            ->when(!empty($condition['create_datetime']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['create_datetime']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.create_datetime', '<=', $condition['create_datetime']['to']);
             })
-            ->when(!empty($condition['issue_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['issue_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.issue_date', '>=', $condition['issue_date']['from']);
             })
-            ->when(!empty($condition['issue_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['issue_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.issue_date', '<=', $condition['issue_date']['to']);
             })
-            ->when(!empty($condition['expiry_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['expiry_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.expiry_date', '>=', $condition['expiry_date']['from']);
             })
-            ->when(!empty($condition['expiry_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['expiry_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.expiry_date', '<=', $condition['expiry_date']['to']);
             })
-            ->when(!empty($condition['payment_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['payment_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.payment_date', '>=', $condition['payment_date']['from']);
             })
-            ->when(!empty($condition['payment_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['payment_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.payment_date', '<=', $condition['payment_date']['to']);
             })
-            ->when(!empty($condition['transaction_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['transaction_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.transaction_date', '>=', $condition['transaction_date']['from']);
             })
-            ->when(!empty($condition['transaction_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['transaction_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.transaction_date', '<=', $condition['transaction_date']['to']);
             })
-            ->when(!empty($condition['download_date']['from']), function($jQuery) use($condition) {
+            ->when(!empty($condition['download_date']['from']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.download_date', '>=', $condition['download_date']['from']);
             })
-            ->when(!empty($condition['download_date']['to']), function($jQuery) use($condition) {
+            ->when(!empty($condition['download_date']['to']), function ($jQuery) use ($condition) {
                 return $jQuery->where('t_document_deal.download_date', '<=', $condition['download_date']['to']);
             })
             ->whereExists(function ($query) use ($mUser) {
@@ -479,7 +479,7 @@ class DocumentDeal extends FluentDatabase
                             ->on('tdw.category_id', '=', 't_document_deal.category_id');
                     })
                     ->whereNull('tdw.delete_datetime')
-                    ->when(!empty($condition['app_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['app_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdw.app_user_id', '=', $condition['app_user_id']);
                     });
             })
@@ -491,11 +491,11 @@ class DocumentDeal extends FluentDatabase
                         ->on('tdpt.document_id', '=', 't_document_deal.document_id');
                     })
                     ->whereNull('tdpt.delete_datetime')
-                    ->when(!empty($condition['view_permission_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['view_permission_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdpt.user_id', '=', $condition['view_permission_user_id']);
                     });
             })
-            ->when(!empty($condition['counter_party_name']), function($query) use($condition) {
+            ->when(!empty($condition['counter_party_name']), function ($query) use ($condition) {
                 return $query->where('m_company_counter_party.counter_party_name', 'like', '%'.$condition['counter_party_name'].'%')
                     ->orWhere('m_company_counter_party.counter_party_name_kana', 'like', '%'.$condition['counter_party_name'].'%');
             })

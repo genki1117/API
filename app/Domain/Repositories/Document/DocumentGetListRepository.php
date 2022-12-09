@@ -34,8 +34,7 @@ class DocumentGetListRepository implements DocumentGetListRepositoryInterface
         DocumentArchive $docArchive,
         DocumentContract $docContract,
         DocumentInternal $docInternal
-    )
-    {
+    ) {
         $this->docDeal = $docDeal;
         $this->docArchive = $docArchive;
         $this->docContract = $docContract;

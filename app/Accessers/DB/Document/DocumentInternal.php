@@ -143,67 +143,67 @@ class DocumentInternal extends FluentDatabase
             })
             ->whereNull('t_document_internal.delete_datetime')
             ->where('t_document_internal.company_id', '=', $mUser['company_id'])
-            ->when(!empty($condition['search_input']), function($query) use($condition) {
+            ->when(!empty($condition['search_input']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.title', 'like', '%'.$condition['search_input'].'%');
             })
-            ->when(!empty($condition['status_id']), function($query) use($condition) {
+            ->when(!empty($condition['status_id']), function ($query) use ($condition) {
                 return $query->whereIn('t_document_internal.status_id', [$condition['status_id']]);
             })
-            ->when(!empty($condition['category_id']), function($query) use($condition) {
+            ->when(!empty($condition['category_id']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.category_id', '=', $condition['category_id']);
             })
-            ->when(!empty($condition['register_type_id']), function($query) use($condition) {
+            ->when(!empty($condition['register_type_id']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.doc_type_id', '=', $condition['register_type_id']);
             })
-            ->when(!empty($condition['title']), function($query) use($condition) {
+            ->when(!empty($condition['title']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.title', 'like', '%'.$condition['title'].'%');
             })
-            ->when(!empty($condition['amount']['from']), function($query) use($condition) {
+            ->when(!empty($condition['amount']['from']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.amount', '<=', $condition['amount']['from']);
             })
-            ->when(!empty($condition['amount']['to']), function($query) use($condition) {
+            ->when(!empty($condition['amount']['to']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.amount', '>=', $condition['amount']['to']);
             })
-            ->when(!empty($condition['currency_id']), function($query) use($condition) {
+            ->when(!empty($condition['currency_id']), function ($query) use ($condition) {
                 return $query->whereIn('t_document_internal.currency_id', [$condition['currency_id']]);
             })
-            ->when(!empty($condition['product_name']), function($query) use($condition) {
+            ->when(!empty($condition['product_name']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.product_name', 'like', '%'.$condition['product_name'].'%');
             })
-            ->when(!empty($condition['document_id']), function($query) use($condition) {
+            ->when(!empty($condition['document_id']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.document_id', 'like', '%'.$condition['document_id'].'%');
             })
-            ->when(!empty($condition['doc_no']), function($query) use($condition) {
+            ->when(!empty($condition['doc_no']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.doc_no', 'like', '%'.$condition['doc_no'].'%');
             })
-            ->when(!empty($condition['ref_doc_no']), function($query) use($condition) {
+            ->when(!empty($condition['ref_doc_no']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.ref_doc_no', 'like', '%'.$condition['ref_doc_no'].'%');
             })
-            ->when(!empty($condition['content']), function($query) use($condition) {
+            ->when(!empty($condition['content']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.content', 'like', '%'.$condition['content'].'%');
             })
-            ->when(!empty($condition['doc_info']['title']), function($query) use($condition) {
+            ->when(!empty($condition['doc_info']['title']), function ($query) use ($condition) {
                 return $query->whereRaw('JSON_CONTAINS(t_document_internal.doc_info->"$.title", \'["'.$condition['doc_info']['title'].'"]\')');
             })
-            ->when(!empty($condition['doc_info']['content']), function($query) use($condition) {
+            ->when(!empty($condition['doc_info']['content']), function ($query) use ($condition) {
                 return $query->whereRaw('JSON_CONTAINS(t_document_internal.doc_info->"$.content", \'["'.$condition['doc_info']['content'].'"]\')');
             })
-            ->when(!empty($condition['create_datetime']['from']), function($query) use($condition) {
+            ->when(!empty($condition['create_datetime']['from']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.create_datetime', '>=', $condition['create_datetime']['from']);
             })
-            ->when(!empty($condition['create_datetime']['to']), function($query) use($condition) {
+            ->when(!empty($condition['create_datetime']['to']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.create_datetime', '<=', $condition['create_datetime']['to']);
             })
-            ->when(!empty($condition['doc_create_date']['from']), function($query) use($condition) {
+            ->when(!empty($condition['doc_create_date']['from']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.doc_create_date', '>=', $condition['doc_create_date']['from']);
             })
-            ->when(!empty($condition['doc_create_date']['to']), function($query) use($condition) {
+            ->when(!empty($condition['doc_create_date']['to']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.doc_create_date', '<=', $condition['doc_create_date']['to']);
             })
-            ->when(!empty($condition['sign_finish_date']['from']), function($query) use($condition) {
+            ->when(!empty($condition['sign_finish_date']['from']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.sign_finish_date', '>=', $condition['sign_finish_date']['from']);
             })
-            ->when(!empty($condition['sign_finish_date']['to']), function($query) use($condition) {
+            ->when(!empty($condition['sign_finish_date']['to']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.sign_finish_date', '<=', $condition['sign_finish_date']['to']);
             })
             ->whereExists(function ($query) use ($mUser) {
@@ -260,7 +260,7 @@ class DocumentInternal extends FluentDatabase
                             ->on('tdw.category_id', '=', 't_document_internal.category_id');
                     })
                     ->whereNull('tdw.delete_datetime')
-                    ->when(!empty($condition['app_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['app_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdw.app_user_id', '=', $condition['app_user_id']);
                     });
             })
@@ -278,7 +278,7 @@ class DocumentInternal extends FluentDatabase
                             ->on('tdw.category_id', '=', 't_document_internal.category_id');
                     })
                     ->whereNull('tdw.delete_datetime')
-                    ->when(!empty($condition['app_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['app_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdw.app_user_id', '=', $condition['app_user_id_guest']);
                     });
             })
@@ -290,11 +290,11 @@ class DocumentInternal extends FluentDatabase
                         ->on('tdpi.document_id', '=', 't_document_internal.document_id');
                     })
                     ->whereNull('tdpi.delete_datetime')
-                    ->when(!empty($condition['view_permission_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['view_permission_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdpi.user_id', '=', $condition['view_permission_user_id']);
                     });
             })
-            ->when(!empty($condition['counter_party_name']), function($query) use($condition) {
+            ->when(!empty($condition['counter_party_name']), function ($query) use ($condition) {
                 return $query->where('m_company_counter_party.counter_party_name', 'like', '%'.$condition['counter_party_name'].'%')
                     ->orWhere('m_company_counter_party.counter_party_name_kana', 'like', '%'.$condition['counter_party_name'].'%');
             })
@@ -342,67 +342,67 @@ class DocumentInternal extends FluentDatabase
             })
             ->whereNull('t_document_internal.delete_datetime')
             ->where('t_document_internal.company_id', '=', $mUser['company_id'])
-            ->when(!empty($condition['search_input']), function($query) use($condition) {
+            ->when(!empty($condition['search_input']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.title', 'like', '%'.$condition['search_input'].'%');
             })
-            ->when(!empty($condition['status_id']), function($query) use($condition) {
+            ->when(!empty($condition['status_id']), function ($query) use ($condition) {
                 return $query->whereIn('t_document_internal.status_id', [$condition['status_id']]);
             })
-            ->when(!empty($condition['category_id']), function($query) use($condition) {
+            ->when(!empty($condition['category_id']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.category_id', '=', $condition['category_id']);
             })
-            ->when(!empty($condition['register_type_id']), function($query) use($condition) {
+            ->when(!empty($condition['register_type_id']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.doc_type_id', '=', $condition['register_type_id']);
             })
-            ->when(!empty($condition['title']), function($query) use($condition) {
+            ->when(!empty($condition['title']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.title', 'like', '%'.$condition['title'].'%');
             })
-            ->when(!empty($condition['amount']['from']), function($query) use($condition) {
+            ->when(!empty($condition['amount']['from']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.amount', '<=', $condition['amount']['from']);
             })
-            ->when(!empty($condition['amount']['to']), function($query) use($condition) {
+            ->when(!empty($condition['amount']['to']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.amount', '>=', $condition['amount']['to']);
             })
-            ->when(!empty($condition['currency_id']), function($query) use($condition) {
+            ->when(!empty($condition['currency_id']), function ($query) use ($condition) {
                 return $query->whereIn('t_document_internal.currency_id', [$condition['currency_id']]);
             })
-            ->when(!empty($condition['product_name']), function($query) use($condition) {
+            ->when(!empty($condition['product_name']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.product_name', 'like', '%'.$condition['product_name'].'%');
             })
-            ->when(!empty($condition['document_id']), function($query) use($condition) {
+            ->when(!empty($condition['document_id']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.document_id', 'like', '%'.$condition['document_id'].'%');
             })
-            ->when(!empty($condition['doc_no']), function($query) use($condition) {
+            ->when(!empty($condition['doc_no']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.doc_no', 'like', '%'.$condition['doc_no'].'%');
             })
-            ->when(!empty($condition['ref_doc_no']), function($query) use($condition) {
+            ->when(!empty($condition['ref_doc_no']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.ref_doc_no', 'like', '%'.$condition['ref_doc_no'].'%');
             })
-            ->when(!empty($condition['content']), function($query) use($condition) {
+            ->when(!empty($condition['content']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.content', 'like', '%'.$condition['content'].'%');
             })
-            ->when(!empty($condition['doc_info']['title']), function($query) use($condition) {
+            ->when(!empty($condition['doc_info']['title']), function ($query) use ($condition) {
                 return $query->whereRaw('JSON_CONTAINS(t_document_internal.doc_info->"$.title", \'["'.$condition['doc_info']['title'].'"]\')');
             })
-            ->when(!empty($condition['doc_info']['content']), function($query) use($condition) {
+            ->when(!empty($condition['doc_info']['content']), function ($query) use ($condition) {
                 return $query->whereRaw('JSON_CONTAINS(t_document_internal.doc_info->"$.content", \'["'.$condition['doc_info']['content'].'"]\')');
             })
-            ->when(!empty($condition['create_datetime']['from']), function($query) use($condition) {
+            ->when(!empty($condition['create_datetime']['from']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.create_datetime', '>=', $condition['create_datetime']['from']);
             })
-            ->when(!empty($condition['create_datetime']['to']), function($query) use($condition) {
+            ->when(!empty($condition['create_datetime']['to']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.create_datetime', '<=', $condition['create_datetime']['to']);
             })
-            ->when(!empty($condition['doc_create_date']['from']), function($query) use($condition) {
+            ->when(!empty($condition['doc_create_date']['from']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.doc_create_date', '>=', $condition['doc_create_date']['from']);
             })
-            ->when(!empty($condition['doc_create_date']['to']), function($query) use($condition) {
+            ->when(!empty($condition['doc_create_date']['to']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.doc_create_date', '<=', $condition['doc_create_date']['to']);
             })
-            ->when(!empty($condition['sign_finish_date']['from']), function($query) use($condition) {
+            ->when(!empty($condition['sign_finish_date']['from']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.sign_finish_date', '>=', $condition['sign_finish_date']['from']);
             })
-            ->when(!empty($condition['sign_finish_date']['to']), function($query) use($condition) {
+            ->when(!empty($condition['sign_finish_date']['to']), function ($query) use ($condition) {
                 return $query->where('t_document_internal.sign_finish_date', '<=', $condition['sign_finish_date']['to']);
             })
             ->whereExists(function ($query) use ($mUser) {
@@ -459,7 +459,7 @@ class DocumentInternal extends FluentDatabase
                             ->on('tdw.category_id', '=', 't_document_internal.category_id');
                     })
                     ->whereNull('tdw.delete_datetime')
-                    ->when(!empty($condition['app_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['app_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdw.app_user_id', '=', $condition['app_user_id']);
                     });
             })
@@ -477,7 +477,7 @@ class DocumentInternal extends FluentDatabase
                             ->on('tdw.category_id', '=', 't_document_internal.category_id');
                     })
                     ->whereNull('tdw.delete_datetime')
-                    ->when(!empty($condition['app_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['app_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdw.app_user_id', '=', $condition['app_user_id_guest']);
                     });
             })
@@ -489,11 +489,11 @@ class DocumentInternal extends FluentDatabase
                         ->on('tdpi.document_id', '=', 't_document_internal.document_id');
                     })
                     ->whereNull('tdpi.delete_datetime')
-                    ->when(!empty($condition['view_permission_user_id']), function($jQuery) use($condition) {
+                    ->when(!empty($condition['view_permission_user_id']), function ($jQuery) use ($condition) {
                         return $jQuery->where('tdpi.user_id', '=', $condition['view_permission_user_id']);
                     });
             })
-            ->when(!empty($condition['counter_party_name']), function($query) use($condition) {
+            ->when(!empty($condition['counter_party_name']), function ($query) use ($condition) {
                 return $query->where('m_company_counter_party.counter_party_name', 'like', '%'.$condition['counter_party_name'].'%')
                     ->orWhere('m_company_counter_party.counter_party_name_kana', 'like', '%'.$condition['counter_party_name'].'%');
             })
