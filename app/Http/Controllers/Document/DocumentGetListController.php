@@ -13,17 +13,13 @@ class DocumentGetListController extends Controller
     /** @var DocumentGetListService */
     private DocumentGetListService $docGetListService;
 
-    /** @var DocumentGetListResponse */
-    private DocumentGetListResponse $docGetListResponse;
-
     /**
      * @param DocumentGetListService $docGetListService
      * @param DocumentGetListResponse $docGetListResponse
      */
-    public function __construct(DocumentGetListService $docGetListService, DocumentGetListResponse $docGetListResponse)
+    public function __construct(DocumentGetListService $docGetListService)
     {
         $this->docGetListService = $docGetListService;
-        $this->docGetListResponse = $docGetListResponse;
     }
 
     /**
@@ -35,11 +31,9 @@ class DocumentGetListController extends Controller
         $docGetList = $this->docGetListService->getList($request->m_use, $request->condition, $request->sort, $request->page);
         
         if (empty($docGetList)) {
-            return new JsonResponse();
+            return (new DocumentGetListResponse)->faildDocumentGetList();
         }
-        
-        $responseData = $this->docGetListResponse->setGetListResponse($docGetList->getList(), $docGetList->getListCount(), $request->page['disp_page'], $request->page['disp_count']);
-        
-        return (new DocumentGetListResponse)->getListResponse($responseData);
+
+        return (new DocumentGetListResponse)->successDocumentGetList($docGetList->getList(), $docGetList->getListCount(), $request->page['disp_page'], $request->page['disp_count']);
     }
 }

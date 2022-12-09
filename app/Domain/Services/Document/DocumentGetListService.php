@@ -8,15 +8,6 @@ use App\Domain\Repositories\Interface\Document\DocumentGetListRepositoryInterfac
 
 class DocumentGetListService
 {
-    /** @var int */
-    protected const DOC_CONTRACT_TYPE = 0;
-    /** @var int */
-    protected const DOC_DEAL_TYPE = 1;
-    /** @var int */
-    protected const DOC_INTERNAL_TYPE = 2;
-    /** @var int */
-    protected const DOC_ARCHIVE_TYPE = 3;
-
     /** @var DocumentGetListRepositoryInterface */
     private DocumentGetListRepositoryInterface $docGetListRepository;
 

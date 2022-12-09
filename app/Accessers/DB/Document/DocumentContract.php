@@ -124,7 +124,7 @@ class DocumentContract extends FluentDatabase
                 't_document_contract.amount',
                 't_document_contract.currency_id',
                 't_document_contract.status_id',
-                DB::raw('UNIX_TIMESTAMP(t_document_contract.update_datetime)'),
+                DB::raw('UNIX_TIMESTAMP(t_document_contract.update_datetime) as update_datetime'),
                 't_document_workflow.app_status',
                 'm_user.full_name as create_user',
                 DB::raw('CONCAT(m_company_counter_party.company_id, " ", m_company_counter_party.counter_party_name) as counter_party_name')

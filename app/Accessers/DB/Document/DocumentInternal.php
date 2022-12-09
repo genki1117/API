@@ -117,7 +117,7 @@ class DocumentInternal extends FluentDatabase
                 't_document_internal.amount',
                 't_document_internal.currency_id',
                 't_document_internal.status_id',
-                DB::raw('UNIX_TIMESTAMP(t_document_internal.update_datetime)'),
+                DB::raw('UNIX_TIMESTAMP(t_document_internal.update_datetime) as update_datetime'),
                 't_document_workflow.app_status',
                 'm_user.full_name as create_user',
                 DB::raw('CONCAT(m_company_counter_party.company_id, " ", m_company_counter_party.counter_party_name) as counter_party_name')

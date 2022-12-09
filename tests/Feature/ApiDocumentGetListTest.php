@@ -10,51 +10,6 @@ use Tests\TestCase;
 
 class ApiDocumentGetListTest extends TestCase
 {    
-    public function testSetGetListResponse()
-    {
-        $response = new DocumentGetListResponse();
-        $data = [
-            "document_id" => 1,
-            "category_id" => 1,
-            "transaction_date" => "2022-11-15",
-            "doc_type_id" => 1,
-            "title" => "test123456",
-            "amount" => 2500.000000,
-            "currency_id" => 1,
-            "status_id" => 0,
-            "UNIX_TIMESTAMP(t_document_contract.update_datetime)" => "1670415861",
-            "app_status" => 1,
-            "create_user" => "test",
-            "counter_party_name" => "1 testData,test api"
-        ];
-        $getData = $response->setGetListResponse($data, 1, 0, 10);
-        $this->assertIsArray($getData);
-    }
-
-    public function testGetListResponse()
-    {
-        $response = new DocumentGetListResponse();
-        $data = [
-            "document_id" => 1,
-            "category_id" => 1,
-            "transaction_date" => "2022-11-15",
-            "doc_type_id" => 1,
-            "title" => "test123456",
-            "amount" => 2500.000000,
-            "currency_id" => 1,
-            "status_id" => 0,
-            "UNIX_TIMESTAMP(t_document_contract.update_datetime)" => "1670415861",
-            "app_status" => 1,
-            "create_user" => "test",
-            "counter_party_name" => "1 testData,test api"
-        ];
-        $jsonData = $response->setGetListResponse($data, 1, 0, 10);
-        $this->assertArrayHasKey('data', $jsonData);
-        $this->assertArrayHasKey('total', $jsonData);
-        $this->assertArrayHasKey('per_page', $jsonData);
-        $this->assertArrayHasKey('current_page', $jsonData);
-    }
-
     // データ1件のみをチェックする
     public function testGetList()
     {
