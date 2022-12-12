@@ -225,6 +225,8 @@ class DocumentArchive extends FluentDatabase
                     })
                     ->whereNull('mu.delete_datetime');
             })
+            // ログインユーザがワークフローに関連するか閲覧者か
+            // 管理者権限をもっているユーザーのレコードの取得
             ->whereExists(function ($query) use ($mUser) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
@@ -236,8 +238,8 @@ class DocumentArchive extends FluentDatabase
                     ->whereNull('tdw.delete_datetime')
                     ->where('tdw.app_user_id', '=', $mUser['user_id'])
                     ->where(function ($jQuery) {
-                        return $jQuery->where('tdw.wf_sort', '=', 0)
-                            ->orWhere('tdw.app_status', '=', 6);
+                        return $jQuery->where('tdw.wf_sort', '=', 0)    // 起票者かどうか判定
+                            ->orWhere('tdw.app_status', '=', 6);        // 自身が未署名かどうかの判定
                     })
                     ->union(
                         DB::table('t_doc_permission_contract as tdpc')
@@ -265,6 +267,7 @@ class DocumentArchive extends FluentDatabase
                         ->where('mu.user_id', '=', $mUser['user_id'])
                     );
             })
+            // 署名者の絞り込み
             ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_document_workflow as tdw')
                     ->select(DB::raw(1))
@@ -283,6 +286,7 @@ class DocumentArchive extends FluentDatabase
                         return $jQuery->where('tdw.app_user_id', '=', $condition['app_user_id']);
                     });
             })
+            // ゲスト署名者の絞り込み
             ->whereExists(function ($query) use ($condition) {
                 return $query->from('t_doc_permission_archive as tdpa')
                     ->select(DB::raw(1))
