@@ -2,19 +2,90 @@
 declare(strict_types=1);
 namespace App\Http\Responses\Document;
 
+use App\Domain\Constant;
+use App\Domain\Entities\Document\Document;
 use App\Domain\Entities\Document\DocumentDetail;
+use App\Domain\Entities\Document\DocumentInfo;
+use App\Domain\Entities\Organization\User\SelectSignUser;
+use App\Domain\Entities\Organization\User\SignedUser;
 use Illuminate\Http\JsonResponse;
 
 class DocumentGetDetailResponse
 {
-    /** @var int */
-    protected const DOC_CONTRACT_TYPE = 0;
-    /** @var int */
-    protected const DOC_DEAL_TYPE = 1;
-    /** @var int */
-    protected const DOC_INTERNAL_TYPE = 2;
-    /** @var int */
-    protected const DOC_ARCHIVE_TYPE = 3;
+    /**
+     * 書類詳細が存在しない場合のレスポンス
+     * @return JsonResponse
+     */
+    public function notFound(): JsonResponse
+    {
+        return $this->empty();
+    }
+
+    public function emitContract(
+        Document $document,
+        array $selectSignUser,
+        array $selectSignGuestUser,
+        array $selectViewUser,
+        array $operationData,
+        array $accessData
+    ): JsonResponse {
+        $response = [
+            'data' => [
+                'document_id' => $document->getDocumentId(),
+                'category_id' => $document->getCategoryId(),
+                'status_id' => $document->getStatusId(),
+                'doc_type_id' => $document->getDocTypeId(),
+                'title' => $document->getTitle(),
+                'amount' => $document->getAmount(),
+                'currency_id' => $document->getCurrencyId(),
+                'cont_start_date' => $document->getContStartDate(),
+                'cont_end_date' => $document->getContEndDate(),
+                'conc_date' => $document->getConcDate(),
+                'effective_date' => $document->getEffectiveDate(),
+                'doc_no' => $document->getDocNo(),
+                'ref_doc_no' => $document->getRefDocNo(),
+                'counter_party_id' => $document->getCounterPartyId(),
+                'counter_party_name' => $document->getCounterPartyName(),
+                'remarks' => $document->getRemarks(),
+                'doc_info' => !empty($document->getDocInfo()) ? array_map(callback: function (DocumentInfo $documentInfo) {
+                    return [
+                        'title' => $documentInfo->getTitle(),
+                        'content' => $documentInfo->getContent()
+                    ];
+                }, array: $document->getDocInfo()) : [],
+                'sign_level' => $document->getSignLevel(),
+                'app_user' => !empty($document->getAppUser()) ? array_map(callback: function (SignedUser $user) {
+                    return [
+                        'family_name' => $user->getFamilyName(),
+                        'first_name' => $user->getFirstName()
+                    ];
+                }, array: $document->getAppUser()): [],
+                'update_datetime' => $document->getUpdateDatetime()
+            ],
+        ];
+    }
+
+    public function emitDeal(): JsonResponse
+    {
+
+    }
+
+    public function emitInternal(): JsonResponse
+    {
+
+    }
+
+    public function emitArchive(): JsonResponse
+    {
+
+    }
+
+    private function getSelectSignUserResponseBody(SelectSignUser $selectSignUser): array
+    {
+        return [
+            'group_array' =>
+        ];
+    }
 
     /**
      * ---------------------------------------------
@@ -26,28 +97,34 @@ class DocumentGetDetailResponse
      */
     public function detail(int $categoryId, ?DocumentDetail $docDetailList = null): JsonResponse
     {
-        if (empty($docDetailList)) {
-            return (new JsonResponse);
-        }
         $document = $docDetailList->getDocumentList();
         $docPermission = $docDetailList->getDocumentPermissionList();
         $workFlow = $docDetailList->getDocumentWorkFlow();
         $logAccess = $docDetailList->getLogDocAccess();
         $logOperation = $docDetailList->getLogDocOperation();
-        switch($categoryId) {
-            case Self::DOC_CONTRACT_TYPE:
-                return $this->detailContract($document, $docPermission, $workFlow, $logAccess, $logOperation);
-                break;
-            case Self::DOC_DEAL_TYPE:
-                return $this->detailDeal($document, $docPermission, $workFlow, $logAccess, $logOperation);
-                break;
-            case Self::DOC_INTERNAL_TYPE:
-                return $this->detailInternal($document, $docPermission, $workFlow, $logAccess, $logOperation);
-                break;
-            case Self::DOC_ARCHIVE_TYPE:
-                return $this->detailArchive($document, $docPermission, $workFlow, $logAccess, $logOperation);
-                break;
+        if ($categoryId === Constant::DOCUMENT_TYPE_CONTRACT) {
+            return $this->detailContract($document, $docPermission, $workFlow, $logAccess, $logOperation);
         }
+        if ($categoryId === Constant::DOCUMENT_TYPE_DEAL) {
+            return $this->detailDeal($document, $docPermission, $workFlow, $logAccess, $logOperation);
+        }
+        if ($categoryId === Constant::DOCUMENT_TYPE_INTERNAL) {
+            return $this->detailInternal($document, $docPermission, $workFlow, $logAccess, $logOperation);
+        }
+        if ($categoryId === Constant::DOCUMENT_TYPE_ARCHIVE) {
+            return $this->detailArchive($document, $docPermission, $workFlow, $logAccess, $logOperation);
+        }
+
+        return $this->empty();
+    }
+
+    /**
+     * 空の返却
+     * @return JsonResponse
+     */
+    private function empty(): JsonResponse
+    {
+        return (new JsonResponse(data: [], status:404));
     }
 
     /**
@@ -58,7 +135,7 @@ class DocumentGetDetailResponse
      * @param \stdClass|null $logOperation
      * @return JsonResponse
      */
-    public function detailContract(?\stdClass $document, ?\stdClass $docPermission, ?\stdClass $workFlow, ?\stdClass $logAccess, ?\stdClass $logOperation): JsonResponse
+    private function detailContract(?\stdClass $document, ?\stdClass $docPermission, ?\stdClass $workFlow, ?\stdClass $logAccess, ?\stdClass $logOperation): JsonResponse
     {
         return new JsonResponse([
             "data" => [
@@ -136,7 +213,7 @@ class DocumentGetDetailResponse
      * @param \stdClass|null $logOperation
      * @return JsonResponse
      */
-    public function detailDeal(?\stdClass $document, ?\stdClass $docPermission, ?\stdClass $workFlow, ?\stdClass $logAccess, ?\stdClass $logOperation): JsonResponse
+    private function detailDeal(?\stdClass $document, ?\stdClass $docPermission, ?\stdClass $workFlow, ?\stdClass $logAccess, ?\stdClass $logOperation): JsonResponse
     {
         return new JsonResponse([
             "data" => [
@@ -214,7 +291,7 @@ class DocumentGetDetailResponse
      * @param \stdClass|null $logOperation
      * @return JsonResponse
      */
-    public function detailInternal(?\stdClass $document, ?\stdClass $docPermission, ?\stdClass $workFlow, ?\stdClass $logAccess, ?\stdClass $logOperation): JsonResponse
+    private function detailInternal(?\stdClass $document, ?\stdClass $docPermission, ?\stdClass $workFlow, ?\stdClass $logAccess, ?\stdClass $logOperation): JsonResponse
     {
         return new JsonResponse([
             "data" => [
@@ -290,7 +367,7 @@ class DocumentGetDetailResponse
      * @param \stdClass|null $logOperation
      * @return JsonResponse
      */
-    public function detailArchive(?\stdClass $document, ?\stdClass $docPermission, ?\stdClass $workFlow, ?\stdClass $logAccess, ?\stdClass $logOperation): JsonResponse
+    private function detailArchive(?\stdClass $document, ?\stdClass $docPermission, ?\stdClass $workFlow, ?\stdClass $logAccess, ?\stdClass $logOperation): JsonResponse
     {
         return new JsonResponse([
             "data" => [
