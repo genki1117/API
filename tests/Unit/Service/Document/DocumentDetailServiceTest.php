@@ -70,19 +70,19 @@ class DocumentDetailServiceTest extends TestCase
             ->andReturn($documentEntity);
         $this->documentRepositoryMock->shouldReceive('getAccessLog')
             ->once()
-            ->andReturnNull();
+            ->andReturn([]);
         $this->documentRepositoryMock->shouldReceive('getOperationLog')
             ->once()
-            ->andReturnNull();
+            ->andReturn([]);
         $this->documentRepositoryMock->shouldReceive('getSelectSignGuestUsers')
             ->once()
-            ->andReturnNull();
+            ->andReturn([]);
         $this->documentRepositoryMock->shouldReceive('getSelectSignUser')
             ->once()
-            ->andReturnNull();
+            ->andReturn([]);
         $this->documentRepositoryMock->shouldReceive('getSelectViewUser')
             ->once()
-            ->andReturnNull();
+            ->andReturn([]);
 
         $this->assertEquals(
             $this->getObject()->getDetail(categoryId: 1, documentId: 1, companyId: 1, userId: 1),
