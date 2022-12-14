@@ -98,7 +98,12 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
      */
     public function getDetail(int $categoryId, int $documentId, int $companyId, int $userId): Document
     {
-        $documentData = $this->getDocumentData($categoryId, $documentId, $companyId, $userId);
+        $documentData = $this->getDocumentData(
+            categoryId: $categoryId,
+            documentId: $documentId,
+            companyId: $companyId,
+            userId: $userId
+        );
 
         if (empty($docDetailList['documentData']) && empty($docDetailList['permissionData'])) {
             return new Document();
@@ -148,7 +153,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
      */
     public function getAccessLog(int $categoryId, int $documentId, int $companyId): array
     {
-        $logList =  $this->logDocAccess->getList($documentId, $categoryId, $companyId);
+        $logList =  $this->logDocAccess->getList(documentId: $documentId, categoryId: $categoryId, companyId: $companyId);
 
         if (empty($logList)) {
             return [];
@@ -174,7 +179,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
      */
     public function getOperationLog(int $categoryId, int $documentId, int $companyId): array
     {
-        $logList = $this->logDocOperation->getList($documentId, $categoryId, $companyId);
+        $logList = $this->logDocOperation->getList(documentId: $documentId, categoryId: $categoryId, companyId: $companyId);
 
         if (empty($logList)) {
             return [];
@@ -189,10 +194,10 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
                 $afterContent  = json_decode($log->after_content);
             }
             $collection[] = new OperationUser(
-                $log->family_name ?? null,
-                $log->first_name ?? null,
-                $log->create_datetime ?? null,
-                empty($content) ? null : $content
+                familyName: $log->family_name ?? null,
+                firstName: $log->first_name ?? null,
+                createDatetime: $log->create_datetime ?? null,
+                content: empty($content) ? null : $content
             );
         }
         return $collection;
@@ -254,23 +259,39 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
         switch($categoryId) {
             case Constant::DOCUMENT_TYPE_CONTRACT:
                 // 書類カテゴリが契約書類で設定されていた場合、データ抽出
-                $docList = $this->docContract->getList($documentId, $companyId, $userId);
-                $docPermissionList = $this->docPermissionContract->getList($documentId, $companyId);
+                $docList = $this->docContract->getList(
+                    documentId: $documentId,
+                    companyId: $companyId,
+                    userId: $userId
+                );
+                $docPermissionList = $this->docPermissionContract->getList(documentId: $documentId, companyId: $companyId);
                 break;
             case Constant::DOCUMENT_TYPE_DEAL:
                 // 書類カテゴリが取引書類で設定されていた場合、データ抽出
-                $docList = $this->docDeal->getList($documentId, $companyId, $userId);
-                $docPermissionList = $this->docPermissionTransaction->getList($documentId, $companyId);
+                $docList = $this->docDeal->getList(
+                    documentId: $documentId,
+                    companyId: $companyId,
+                    userId: $userId
+                );
+                $docPermissionList = $this->docPermissionTransaction->getList(documentId: $documentId, companyId: $companyId);
                 break;
             case Constant::DOCUMENT_TYPE_INTERNAL:
                 // 書類カテゴリが社内書類で設定されていた場合、データ抽出
-                $docList = $this->docInternal->getList($documentId, $companyId, $userId);
-                $docPermissionList = $this->docPermissionInternal->getList($documentId, $companyId);
+                $docList = $this->docInternal->getList(
+                    documentId: $documentId,
+                    companyId: $companyId,
+                    userId: $userId
+                );
+                $docPermissionList = $this->docPermissionInternal->getList(documentId: $documentId, companyId: $companyId);
                 break;
             case Constant::DOCUMENT_TYPE_ARCHIVE:
                 // 書類カテゴリが登録書類で設定されていた場合、データ抽出
-                $docList = $this->docArchive->getList($documentId, $companyId, $userId);
-                $docPermissionList = $this->docPermissionArchive->getList($documentId, $companyId);
+                $docList = $this->docArchive->getList(
+                    documentId: $documentId,
+                    companyId: $companyId,
+                    userId: $userId
+                );
+                $docPermissionList = $this->docPermissionArchive->getList(documentId: $documentId, companyId: $companyId);
                 break;
         }
         return ['documentData' => $docList, "permissionData" => $docPermissionList];

@@ -42,10 +42,26 @@ class DocumentDetailService
             documentId: $documentId,
             companyId: $companyId
         );
-        $operationLog = $this->documentRepository->getOperationLog($categoryId, $documentId, $companyId);
-        $selectSignGuestUsers = $this->documentRepository->getSelectSignGuestUsers($documentId, $categoryId, $companyId);
-        $selectSignUsers = $this->documentRepository->getSelectSignUser($documentId, $categoryId, $companyId);
-        $selectViewUsers = $this->documentRepository->getSelectViewUser($documentId, $categoryId, $companyId);
+        $operationLog = $this->documentRepository->getOperationLog(
+            categoryId: $categoryId,
+            documentId: $documentId,
+            companyId: $companyId
+        );
+        $selectSignGuestUsers = $this->documentRepository->getSelectSignGuestUsers(
+            documentId: $documentId,
+            categoryId: $categoryId,
+            companyId: $companyId
+        );
+        $selectSignUsers = $this->documentRepository->getSelectSignUser(
+            documentId: $documentId,
+            categoryId: $categoryId,
+            companyId: $companyId
+        );
+        $selectViewUsers = $this->documentRepository->getSelectViewUser(
+            documentId: $documentId,
+            categoryId: $categoryId,
+            companyId: $companyId
+        );
 
         if (is_null($documentDetail->getDocNo()) &&
             empty($accessLog) &&
