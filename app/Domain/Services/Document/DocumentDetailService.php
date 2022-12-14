@@ -31,14 +31,17 @@ class DocumentDetailService
      */
     public function getDetail(int $categoryId, int $documentId, int $companyId, int $userId): array
     {
-//        $documentDetail = $this->documentRepository->getDetail($categoryId, $documentId, $companyId, $userId);
         $documentDetail = $this->documentRepository->getDetail(
             categoryId: $categoryId,
             documentId: $documentId,
             companyId: $companyId,
             userId: $userId
         );
-        $accessLog = $this->documentRepository->getAccessLog($categoryId, $documentId, $companyId);
+        $accessLog = $this->documentRepository->getAccessLog(
+            categoryId: $categoryId,
+            documentId: $documentId,
+            companyId: $companyId
+        );
         $operationLog = $this->documentRepository->getOperationLog($categoryId, $documentId, $companyId);
         $selectSignGuestUsers = $this->documentRepository->getSelectSignGuestUsers($documentId, $categoryId, $companyId);
         $selectSignUsers = $this->documentRepository->getSelectSignUser($documentId, $categoryId, $companyId);

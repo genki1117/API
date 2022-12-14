@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Domain\Entities\Document;
 
-use App\Domain\Entities\Common\TimestampUser;
+use App\Domain\Entities\Organization\User\TimestampUser;
 use Carbon\Carbon;
 
 /**

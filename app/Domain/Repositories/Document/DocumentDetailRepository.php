@@ -124,7 +124,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
             'counterPartyId' => $documentDetail->counter_party_id ?? null,
             'counterPartyName' => $documentDetail->counter_party_name ?? null,
             'remarks' => $documentDetail->remarks ?? null,
-            'docInfo' => $documentDetail->doc_info ? json_decode($documentDetail->doc_info) : null,
+            'docInfo' => $documentDetail->doc_info ? json_decode($documentDetail->doc_info) : null, //TODO
             'signLevel' => $documentDetail->sign_level ?? null,
             'productName' => $documentDetail->product_name ?? null,
             'filePath' => $documentDetail->file_path ?? null,
