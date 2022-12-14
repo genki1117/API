@@ -113,8 +113,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         string $accessContent = null,
         JsonResponse $beforeContent = null,
         JsonResponse $afterContet = null
-    ): bool
-    {
+    ): bool {
         // アクセスログを出力する（登録処理）
         $blAccess = $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
         // 操作ログを出力する（登録処理）

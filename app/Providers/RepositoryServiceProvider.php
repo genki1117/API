@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Domain\Repositories\Document\DocumentDetailRepository;
 use App\Domain\Repositories\Interface\Document\DocumentDetailRepositoryInterface;
+use App\Domain\Repositories\Interface\Document\DocumentGetListRepositoryInterface;
+use App\Domain\Repositories\Document\DocumentGetListRepository;
 use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
 use App\Domain\Repositories\Document\DocumentListRepository;
 use App\Domain\Repositories\Common\LoginUserRepository;
@@ -29,7 +31,8 @@ class RepositoryServiceProvider extends ServiceProvider
         LoginUserRepositoryInterface::class => LoginUserRepository::class,
         SystemAccessLogRepositoryInterface::class => SystemAccessLogRepository::class,
         DocumentListRepositoryInterface::class => DocumentListRepository::class,
-        DocumentDetailRepositoryInterface::class => DocumentDetailRepository::class
+        DocumentDetailRepositoryInterface::class => DocumentDetailRepository::class,
+        DocumentGetListRepositoryInterface::class => DocumentGetListRepository::class,
     ];
 
     /**

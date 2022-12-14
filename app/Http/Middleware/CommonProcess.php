@@ -20,8 +20,7 @@ class CommonProcess
     public function __construct(
         LoggedInUserContext $context,
         SystemAccessLogRepositoryInterface $systemAccessLogRepositoryInterface
-    )
-    {
+    ) {
         $this->loggedInUserContext = $context;
         $this->systemAccessLogRepositoryInterface = $systemAccessLogRepositoryInterface;
     }
