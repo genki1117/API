@@ -2,7 +2,6 @@
 
 use Illuminate\Routing\Router;
 use App\Http\Controllers\Samples\Api\UseSampleController;
-use App\Http\Controllers\Document\DocumentListController;
 use App\Http\Controllers\Document\DocumentDetailController;
 use App\Http\Controllers\Document\DocumentGetListController;
 
