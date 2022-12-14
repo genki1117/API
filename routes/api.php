@@ -3,6 +3,7 @@
 use Illuminate\Routing\Router;
 use App\Http\Controllers\Samples\Api\UseSampleController;
 use App\Http\Controllers\Document\DocumentListController;
+use App\Http\Controllers\Document\DocumentDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +20,5 @@ use App\Http\Controllers\Document\DocumentListController;
 $router->get('/sample-get', [UseSampleController::class, 'getSample']);
 $router->post('/sample-login', [UseSampleController::class, 'login']);
 
-$router->post('/document/detail', [DocumentListController::class, 'getDetail']);
+$router->post('/document/detail', [DocumentDetailController::class, 'getDetail']);
 $router->post('/document/delete', [DocumentListController::class, 'delete']);
