@@ -84,8 +84,34 @@ class Document
     /**
      * @param array $properties
      */
-    public function __construct(array $properties = [])
-    {
+    public function __construct(array $properties = [
+        'documentId' => null,
+        'categoryId' => null,
+        'statusId'   => null,
+        'docTypeId'  => null,
+        'title' => null,
+        'amount' => null,
+        'currencyId' => null,
+        'contStartDate' => null,
+        'contEndDate' => null,
+        'concDate' => null,
+        'effectiveDate' => null,
+        'docNo' => null,
+        'refDocNo' => null,
+        'counterPartyId' => null,
+        'counterPartyName' => null,
+        'remarks' => null,
+        'docInfo' => null,
+        'signLevel' => null,
+        'productName' => null,
+        'filePath' => null,
+        'pdf' => null,
+        'sign_position' => null,
+        'totalPages' => null,
+        'appUser' => null,
+        'timestampUser' => null,
+        'updateDatetime' =>  null
+    ]) {
         foreach ($properties as $property => $data) {
             $this->{$property} = $data;
         }

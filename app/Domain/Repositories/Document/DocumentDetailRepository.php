@@ -100,7 +100,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
     {
         $documentData = $this->getDocumentData($categoryId, $documentId, $companyId, $userId);
 
-        if (empty($docDetailList)) {
+        if (empty($docDetailList['documentData']) && empty($docDetailList['permissionData'])) {
             return new Document();
         }
 

@@ -54,19 +54,47 @@ class DocumentDetailController
 
         $categoryId = $documentDetail->getCategoryId();
         if (Constant::DOCUMENT_TYPE_CONTRACT === $categoryId) {
-            return (new DocumentGetDetailResponse)->emitContract();
+            return (new DocumentGetDetailResponse)->emitContract(
+                document: $documentDetail,
+                selectSignUser: $selectSignUsers,
+                selectSignGuestUser: $selectSignGuestUsers,
+                selectViewUser: $selectViewUsers,
+                operationData: $operationLog,
+                accessData: $accessLog
+            );
         }
 
         if (Constant::DOCUMENT_TYPE_DEAL === $categoryId) {
-            return (new DocumentGetDetailResponse)->emitDeal();
+            return (new DocumentGetDetailResponse)->emitDeal(
+                document: $documentDetail,
+                selectSignUser: $selectSignUsers,
+                selectSignGuestUser: $selectSignGuestUsers,
+                selectViewUser: $selectViewUsers,
+                operationData: $operationLog,
+                accessData: $accessLog
+            );
         }
 
         if (Constant::DOCUMENT_TYPE_INTERNAL === $categoryId) {
-            return (new DocumentGetDetailResponse)->emitInternal();
+            return (new DocumentGetDetailResponse)->emitInternal(
+                document: $documentDetail,
+                selectSignUser: $selectSignUsers,
+                selectSignGuestUser: $selectSignGuestUsers,
+                selectViewUser: $selectViewUsers,
+                operationData: $operationLog,
+                accessData: $accessLog
+            );
         }
 
         if (Constant::DOCUMENT_TYPE_ARCHIVE) {
-            return (new DocumentGetDetailResponse)->emitArchive();
+            return (new DocumentGetDetailResponse)->emitArchive(
+                document: $documentDetail,
+                selectSignUser: $selectSignUsers,
+                selectSignGuestUser: $selectSignGuestUsers,
+                selectViewUser: $selectViewUsers,
+                operationData: $operationLog,
+                accessData: $accessLog
+            );
         }
 
         return (new DocumentGetDetailResponse)->notFound();
