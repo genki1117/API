@@ -7,5 +7,4 @@ namespace App\Domain\Entities\Organization\User;
  */
 class SignedUser extends User
 {
-
 }

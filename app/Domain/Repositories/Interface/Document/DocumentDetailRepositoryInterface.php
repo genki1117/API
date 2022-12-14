@@ -63,5 +63,4 @@ interface DocumentDetailRepositoryInterface
      * @return array
      */
     public function getSelectViewUser(int $documentId, int $categoryId, int $companyId): array;
-
 }

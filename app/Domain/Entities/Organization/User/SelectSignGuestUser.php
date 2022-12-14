@@ -66,5 +66,4 @@ class SelectSignGuestUser extends Signer
     {
         return $this->wfSort;
     }
-
 }

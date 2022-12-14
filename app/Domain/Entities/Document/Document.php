@@ -111,7 +111,8 @@ class Document
         'appUser' => null,
         'timestampUser' => null,
         'updateDatetime' =>  null
-    ]) {
+    ])
+    {
         foreach ($properties as $property => $data) {
             $this->{$property} = $data;
         }
