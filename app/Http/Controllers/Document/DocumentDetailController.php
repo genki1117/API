@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Http\Controllers\Document;
 
-use App\Domain\Constant;
+use App\Domain\Consts\DocumentConst;
 use App\Domain\Services\Document\DocumentDetailService;
 use App\Http\Requests\Document\DocumentGetDetailRequest;
 use App\Http\Responses\Document\DocumentGetDetailResponse;
@@ -53,7 +53,7 @@ class DocumentDetailController
         [$documentDetail, $accessLog, $operationLog, $selectSignGuestUsers, $selectViewUsers, $selectSignUsers] = $data;
 
         $categoryId = $documentDetail->getCategoryId();
-        if (Constant::DOCUMENT_TYPE_CONTRACT === $categoryId) {
+        if (DocumentConst::DOCUMENT_CONTRACT=== $categoryId) {
             return (new DocumentGetDetailResponse)->emitContract(
                 document: $documentDetail,
                 selectSignUser: $selectSignUsers,
@@ -64,7 +64,7 @@ class DocumentDetailController
             );
         }
 
-        if (Constant::DOCUMENT_TYPE_DEAL === $categoryId) {
+        if (DocumentConst::DOCUMENT_DEAL === $categoryId) {
             return (new DocumentGetDetailResponse)->emitDeal(
                 document: $documentDetail,
                 selectSignUser: $selectSignUsers,
@@ -75,7 +75,7 @@ class DocumentDetailController
             );
         }
 
-        if (Constant::DOCUMENT_TYPE_INTERNAL === $categoryId) {
+        if (DocumentConst::DOCUMENT_INTERNAL === $categoryId) {
             return (new DocumentGetDetailResponse)->emitInternal(
                 document: $documentDetail,
                 selectSignUser: $selectSignUsers,
@@ -86,7 +86,7 @@ class DocumentDetailController
             );
         }
 
-        if (Constant::DOCUMENT_TYPE_ARCHIVE) {
+        if (DocumentConst::DOCUMENT_ARCHIVE === $categoryId) {
             return (new DocumentGetDetailResponse)->emitArchive(
                 document: $documentDetail,
                 selectSignUser: $selectSignUsers,

@@ -2,29 +2,32 @@
 declare(strict_types=1);
 namespace App\Domain\Consts;
 
+/**
+ * 定数の設定
+ */
 class DocumentConst
 {
     /** @var int */
-    const DOCUMENT_CONTRACT = 1;
-    
+    const DOCUMENT_CONTRACT = 0;
+
     /** @var string */
     const DOCUMENT_CONTRACT_NAME = '契約書類';
-    
+
     /** @var int */
-    const DOCUMENT_DEAL = 2;
-    
+    const DOCUMENT_DEAL = 1;
+
     /** @var string */
     const DOCUMENT_DEAL_NAME = '取引書類';
-    
+
     /** @var int */
-    const DOCUMENT_INTERNAL = 3;
-    
+    const DOCUMENT_INTERNAL = 2;
+
     /** @var string */
     const DOCUMENT_INTERNAL_NAME = '社員書類';
-    
+
     /** @var int */
-    const DOCUMENT_ARCHIVE = 4;
-    
+    const DOCUMENT_ARCHIVE = 3;
+
     /** @var string */
     const DOCUMENT_ARCHIVE_NAME = '登録書類';
 

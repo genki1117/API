@@ -2,9 +2,7 @@
 declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
-use App\Domain\Entities\Document\DocumentDetail;
 use App\Domain\Repositories\Interface\Document\DocumentDetailRepositoryInterface;
-use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
 
 /**
  * 書類詳細のビジネスロジッククラス

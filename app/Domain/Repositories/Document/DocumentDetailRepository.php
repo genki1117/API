@@ -13,7 +13,7 @@ use App\Accessers\DB\Document\DocumentPermissionTransaction;
 use App\Accessers\DB\Document\DocumentWorkFlow;
 use App\Accessers\DB\Log\System\LogDocAccess;
 use App\Accessers\DB\Log\System\LogDocOperation;
-use App\Domain\Constant;
+use App\Domain\Consts\DocumentConst;
 use App\Domain\Entities\Document\Document;
 use App\Domain\Entities\Organization\User\AccessUser;
 use App\Domain\Entities\Organization\User\OperationUser;
@@ -137,7 +137,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
             'sign_position' => null,// TODO 別途実装対応
             'totalPages' => $documentDetail->total_pages ?? null,
             'appUser' => new SignedUser($permission->family_name ?? null, $permission->first_name ?? null),
-            'timestampUser' => $documentDetail->category_id === Constant::DOCUMENT_TYPE_ARCHIVE ?
+            'timestampUser' => $documentDetail->category_id === DocumentConst::DOCUMENT_ARCHIVE ?
                 new TimestampUser($permission->family_name ?? null, $permission->first_name ?? null):
                 null,
             'updateDatetime' => $documentDetail->update_time ?? null
@@ -257,7 +257,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
     private function getDocumentData(int $categoryId, int $documentId, int $companyId, int $userId): ?array
     {
         switch($categoryId) {
-            case Constant::DOCUMENT_TYPE_CONTRACT:
+            case DocumentConst::DOCUMENT_CONTRACT:
                 // 書類カテゴリが契約書類で設定されていた場合、データ抽出
                 $docList = $this->docContract->getList(
                     documentId: $documentId,
@@ -266,7 +266,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
                 );
                 $docPermissionList = $this->docPermissionContract->getList(documentId: $documentId, companyId: $companyId);
                 break;
-            case Constant::DOCUMENT_TYPE_DEAL:
+            case DocumentConst::DOCUMENT_DEAL:
                 // 書類カテゴリが取引書類で設定されていた場合、データ抽出
                 $docList = $this->docDeal->getList(
                     documentId: $documentId,
@@ -275,7 +275,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
                 );
                 $docPermissionList = $this->docPermissionTransaction->getList(documentId: $documentId, companyId: $companyId);
                 break;
-            case Constant::DOCUMENT_TYPE_INTERNAL:
+            case DocumentConst::DOCUMENT_INTERNAL:
                 // 書類カテゴリが社内書類で設定されていた場合、データ抽出
                 $docList = $this->docInternal->getList(
                     documentId: $documentId,
@@ -284,7 +284,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
                 );
                 $docPermissionList = $this->docPermissionInternal->getList(documentId: $documentId, companyId: $companyId);
                 break;
-            case Constant::DOCUMENT_TYPE_ARCHIVE:
+            case DocumentConst::DOCUMENT_ARCHIVE:
                 // 書類カテゴリが登録書類で設定されていた場合、データ抽出
                 $docList = $this->docArchive->getList(
                     documentId: $documentId,
