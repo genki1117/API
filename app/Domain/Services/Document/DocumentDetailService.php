@@ -23,6 +23,7 @@ class DocumentDetailService
     }
 
     /**
+     * 書類詳細を取得
      * @param int $categoryId
      * @param int $documentId
      * @param int $companyId

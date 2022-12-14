@@ -8,7 +8,6 @@ use App\Domain\Entities\Document\DocumentDetail;
 use App\Domain\Entities\Document\DocumentInfo;
 use App\Domain\Entities\Document\Sign;
 use App\Domain\Entities\Organization\User\SignedUser;
-use App\Domain\Entities\Organization\User\TimestampUser;
 use App\Http\Responses\SystemResponseFunc;
 use Illuminate\Http\JsonResponse;
 
