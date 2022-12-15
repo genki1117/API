@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Domain\Entities\Organization\User;
 
+use App\Domain\Entities\Organization\Group;
+
 /**
  * 選択署名者（ゲスト）
  */
@@ -15,7 +17,7 @@ class SelectSignUser extends Signer
      * @param string|null $firstName
      * @param string|null $email
      * @param int|null $userId
-     * @param array|null $groups
+     * @param array<Group>|null $groups
      * @param int|null $wfSort
      */
     public function __construct(?string $familyName, ?string $firstName, ?string $email, ?int $userId, ?array $groups, ?int $wfSort)

@@ -18,6 +18,8 @@ use App\Domain\Entities\Document\Document;
 use App\Domain\Entities\Document\DocumentInfo;
 use App\Domain\Entities\Organization\User\AccessUser;
 use App\Domain\Entities\Organization\User\OperationUser;
+use App\Domain\Entities\Organization\User\SelectSignUser;
+use App\Domain\Entities\Organization\User\SelectViewUser;
 use App\Domain\Entities\Organization\User\SignedUser;
 use App\Domain\Entities\Organization\User\TimestampUser;
 use App\Domain\Repositories\Interface\Document\DocumentDetailRepositoryInterface;
@@ -162,7 +164,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
      * @param int $categoryId
      * @param int $documentId
      * @param int $companyId
-     * @return array
+     * @return array<AccessUser>
      */
     public function getAccessLog(int $categoryId, int $documentId, int $companyId): array
     {
@@ -188,7 +190,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
      * @param int $categoryId
      * @param int $documentId
      * @param int $companyId
-     * @return array
+     * @return array<OperationUser>
      */
     public function getOperationLog(int $categoryId, int $documentId, int $companyId): array
     {
@@ -236,7 +238,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
      * @param int $documentId
      * @param int $categoryId
      * @param int $companyId
-     * @return array
+     * @return array<SelectSignUser>
      */
     public function getSelectSignUser(int $documentId, int $categoryId, int $companyId): array
     {
@@ -250,7 +252,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
      * @param int $documentId
      * @param int $categoryId
      * @param int $companyId
-     * @return array
+     * @return array<SelectViewUser>
      */
     public function getSelectViewUser(int $documentId, int $categoryId, int $companyId): array
     {
@@ -265,7 +267,7 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
      * @param int $documentId
      * @param int $companyId
      * @param int $userId
-     * @return array|null
+     * @return array<array<\stdClass>, array<\stdClass>>|null
      */
     private function getDocumentData(int $categoryId, int $documentId, int $companyId, int $userId): ?array
     {

@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Domain\Entities\Organization\User;
 
+use App\Domain\Entities\Organization\Group;
+
 /**
  * 署名者関連の親クラス
  */
@@ -11,7 +13,7 @@ abstract class Signer extends User
     private ?string $email;
     /** @var int|null ユーザID */
     private ?int $userId;
-    /** @var array|null 所属部署 */
+    /** @var array<Group>|null 所属部署 */
     private ?array $groups;
 
     /**
@@ -19,7 +21,7 @@ abstract class Signer extends User
      * @param string|null $firstName
      * @param string|null $email
      * @param int|null $userId
-     * @param array|null $groups
+     * @param array<Group>|null $groups
      */
     public function __construct(?string $familyName, ?string $firstName, ?string $email, ?int $userId, ?array $groups)
     {

@@ -2,6 +2,12 @@
 declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
+use App\Domain\Entities\Document\Document;
+use App\Domain\Entities\Organization\User\AccessUser;
+use App\Domain\Entities\Organization\User\OperationUser;
+use App\Domain\Entities\Organization\User\SelectSignGuestUser;
+use App\Domain\Entities\Organization\User\SelectSignUser;
+use App\Domain\Entities\Organization\User\SelectViewUser;
 use App\Domain\Repositories\Interface\Document\DocumentDetailRepositoryInterface;
 
 /**
@@ -26,7 +32,7 @@ class DocumentDetailService
      * @param int $documentId
      * @param int $companyId
      * @param int $userId
-     * @return array
+     * @return array<array<Document>, array<AccessUser>, array<OperationUser>, array<SelectViewUser>, array<SelectSignGuestUser>, array<SelectSignUser>>
      */
     public function getDetail(int $categoryId, int $documentId, int $companyId, int $userId): array
     {
