@@ -4,11 +4,11 @@ namespace App\Http\Responses\Document;
 
 use App\Domain\Constant;
 use App\Domain\Entities\Document\Document;
-use App\Domain\Entities\Document\DocumentDetail;
 use App\Domain\Entities\Document\DocumentInfo;
 use App\Domain\Entities\Document\Sign;
 use App\Domain\Entities\Organization\User\SignedUser;
 use App\Http\Responses\SystemResponseFunc;
+use App\Libraries\TimeFunc;
 use Illuminate\Http\JsonResponse;
 
 class DocumentGetDetailResponse
@@ -17,6 +17,11 @@ class DocumentGetDetailResponse
      * システム共通レスポンスボディ生成関数郡の読み込み
      */
     use SystemResponseFunc;
+
+    /**
+     * 時間操作をする関数群の読み込み
+     */
+    use TimeFunc;
 
     /**
      * 書類詳細が存在しない場合のレスポンス
@@ -54,10 +59,10 @@ class DocumentGetDetailResponse
                 'title' => $document->getTitle(),
                 'amount' => $document->getAmount(),
                 'currency_id' => $document->getCurrencyId(),
-                'cont_start_date' => $document->getContStartDate(),
-                'cont_end_date' => $document->getContEndDate(),
-                'conc_date' => $document->getConcDate(),
-                'effective_date' => $document->getEffectiveDate(),
+                'cont_start_date' => $this->convertCarbonToString($document->getContStartDate()),
+                'cont_end_date' => $this->convertCarbonToString($document->getContStartDate()),
+                'conc_date' => $this->convertCarbonToString($document->getConcDate()),
+                'effective_date' => $this->convertCarbonToString($document->getEffectiveDate()),
                 'doc_no' => $document->getDocNo(),
                 'ref_doc_no' => $document->getRefDocNo(),
                 'counter_party_id' => $document->getCounterPartyId(),
@@ -124,16 +129,16 @@ class DocumentGetDetailResponse
                 'title' => $document->getTitle(),
                 'amount' => $document->getAmount(),
                 'currency_id' => $document->getCurrencyId(),
-                'download_date' => $document->getDownloadDate(),
-                'issue_date' => $document->getIssueDate(),
-                'expiry_date' => $document->getExpiryDate(),
-                'payment_date' => $document->getPaymentDate(),
+                'download_date' => $this->convertCarbonToString($document->getDownloadDate()),
+                'issue_date' => $this->convertCarbonToString($document->getIssueDate()),
+                'expiry_date' => $this->convertCarbonToString($document->getExpiryDate()),
+                'payment_date' => $this->convertCarbonToString($document->getPaymentDate()),
                 'doc_no' => $document->getDocNo(),
                 'ref_doc_no' => $document->getRefDocNo(),
                 'counter_party_id' => $document->getCounterPartyId(),
                 'counter_party_name' => $document->getCounterPartyName(),
                 'remarks' => $document->getRemarks(),
-                'transaction_date' => $document->getTransactionDate(),
+                'transaction_date' => $this->convertCarbonToString($document->getTransactionDate()),
                 'doc_info' => !empty($document->getDocInfo()) ? array_map(callback: function (DocumentInfo $documentInfo) {
                     return [
                         'title' => $documentInfo->getTitle(),
@@ -194,8 +199,8 @@ class DocumentGetDetailResponse
                 'title' => $document->getTitle(),
                 'amount' => $document->getAmount(),
                 'currency_id' => $document->getCurrencyId(),
-                'doc_create_date' => $document->getDocCreateDate(),
-                'sign_finish_date' => $document->getSignFinishDate(),
+                'doc_create_date' => $this->convertCarbonToString($document->getDocCreateDate()),
+                'sign_finish_date' => $this->convertCarbonToString($document->getSignFinishDate()),
                 'doc_no' => $document->getDocNo(),
                 'ref_doc_no' => $document->getRefDocNo(),
                 'content' => $document->getContent(),
@@ -262,13 +267,13 @@ class DocumentGetDetailResponse
                 'title' => $document->getTitle(),
                 'amount' => $document->getAmount(),
                 'currency_id' => $document->getCurrencyId(),
-                'issue_date' => $document->getIssueDate(),
+                'issue_date' => $this->convertCarbonToString($document->getIssueDate()),
                 'doc_no' => $document->getDocNo(),
                 'ref_doc_no' => $document->getRefDocNo(),
                 'counter_party_id' => $document->getCounterPartyId(),
                 'counter_party_name' => $document->getCounterPartyName(),
                 'remarks' => $document->getRemarks(),
-                'transaction_date' => $document->getTransactionDate(),
+                'transaction_date' => $this->convertCarbonToString($document->getTransactionDate()),
                 'doc_info' => !empty($document->getDocInfo()) ? array_map(callback: function (DocumentInfo $documentInfo) {
                     return [
                         'title' => $documentInfo->getTitle(),

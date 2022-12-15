@@ -9,7 +9,7 @@ use App\Domain\Entities\Organization\User\OperationUser;
 use App\Domain\Entities\Organization\User\SelectSignGuestUser;
 use App\Domain\Entities\Organization\User\SelectSignUser;
 use App\Domain\Entities\Organization\User\SelectViewUser;
-use Carbon\Carbon;
+use App\Libraries\TimeFunc;
 
 /**
  * システム共通レスポンスボディ生成関数郡
@@ -17,18 +17,9 @@ use Carbon\Carbon;
 trait SystemResponseFunc
 {
     /**
-     * Carbonクラスから文字列の日付情報に変換
-     * @param Carbon|null $date
-     * @param string $format
-     * @return string|null
+     * 時間操作をする関数群の読み込み
      */
-    private function convertCarbonToString(?Carbon $date, string $format = 'Y-m-d'): ?string
-    {
-        if (is_null($date)) {
-            return null;
-        }
-        return $date->format($format);
-    }
+    use TimeFunc;
 
     /**
      * 選択署名者（ホスト）のレスポンスボディ生成
@@ -125,7 +116,7 @@ trait SystemResponseFunc
 
         return array_map(callback: function (OperationUser $user) {
             return [
-                'create_datetime' => $user->getCreateDatetime(),
+                'create_datetime' => $this->convertCarbonToString($user->getCreateDatetime(), 'Y-m-d H:i:s'),
                 'family_name' => $user->getFamilyName(),
                 'first_name' => $user->getFirstName(),
                 'content' => !empty($user->getContent()) ? array_map(callback: function (ChangeContent $content) {
@@ -151,7 +142,7 @@ trait SystemResponseFunc
 
         return array_map(callback: function (AccessUser $user) {
             return [
-                'create_datetime' => $user->getCreateDatetime(),
+                'create_datetime' => $this->convertCarbonToString($user->getCreateDatetime(), 'Y-m-d H:i:s'),
                 'family_name' => $user->getFamilyName(),
                 'first_name' => $user->getFirstName(),
             ];

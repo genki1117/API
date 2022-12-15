@@ -15,11 +15,13 @@ use App\Accessers\DB\Log\System\LogDocAccess;
 use App\Accessers\DB\Log\System\LogDocOperation;
 use App\Domain\Consts\DocumentConst;
 use App\Domain\Entities\Document\Document;
+use App\Domain\Entities\Document\DocumentInfo;
 use App\Domain\Entities\Organization\User\AccessUser;
 use App\Domain\Entities\Organization\User\OperationUser;
 use App\Domain\Entities\Organization\User\SignedUser;
 use App\Domain\Entities\Organization\User\TimestampUser;
 use App\Domain\Repositories\Interface\Document\DocumentDetailRepositoryInterface;
+use Carbon\Carbon;
 
 /**
  * 書類詳細リポジトリ
@@ -120,18 +122,29 @@ class DocumentDetailRepository implements DocumentDetailRepositoryInterface
             'title' => $documentDetail->title ?? null,
             'amount' => $documentDetail->amount ?? null,
             'currencyId' => $documentDetail->currency_id ?? null,
-            'contStartDate' => $documentDetail->cont_start_date ?? null,
-            'contEndDate' => $documentDetail->cont_end_date ?? null,
-            'concDate' => $documentDetail->conc_date ?? null,
-            'effectiveDate' => $documentDetail->effective_date ?? null,
+            'contStartDate' => !empty($documentDetail->cont_start_date) ? new Carbon($documentDetail->cont_start_date) : null,
+            'contEndDate' => !empty($documentDetail->cont_end_date) ? new Carbon($documentDetail->cont_end_date) : null,
+            'concDate' => !empty($documentDetail->conc_date) ? new Carbon($documentDetail->conc_date) : null,
+            'effectiveDate' => !empty($documentDetail->effective_date) ? new Carbon($documentDetail->effective_date) : null,
+            'downloadDate' => !empty($documentDetail->download_date) ? new Carbon($documentDetail->download_date) : null,
+            'docCreateDate' => !empty($documentDetail->doc_create_date) ? new Carbon($documentDetail->doc_create_date) : null,
+            'signFinishDate' => !empty($documentDetail->sign_finish_date) ? new Carbon($documentDetail->sign_finish_date) : null,
+            'issueDate' => !empty($documentDetail->issue_date) ? new Carbon($documentDetail->issue_date) : null,
+            'expiryDate' => !empty($documentDetail->expiry_date) ? new Carbon($documentDetail->expiry_date) : null,
+            'paymentDate' => !empty($documentDetail->payment_date) ? new Carbon($documentDetail->payment_date) : null,
             'docNo' => $documentDetail->doc_no ?? null,
-            'refDocNo' => $documentDetail->ref_doc_no ?? null,
+            'refDocNo' => $documentDetail->ref_doc_no ?? null, //TODO jsonの取得なので変換して、「1,2,3」の文字列で返却する必要あり（どういうjson構造か分かり次第対応
+            'content' => $documentDetail->content ?? null,
             'counterPartyId' => $documentDetail->counter_party_id ?? null,
             'counterPartyName' => $documentDetail->counter_party_name ?? null,
             'remarks' => $documentDetail->remarks ?? null,
-            'docInfo' => $documentDetail->doc_info ? json_decode($documentDetail->doc_info) : null, //TODO
+            'transactionDate' => !empty($documentDetail->transaction_date) ? new Carbon($documentDetail->transaction_date) : null,
+            'docInfo' => $documentDetail->doc_info ? array_map(callback: function ($data) {
+                return new DocumentInfo(title: $data->title, content: $data->content);
+            }, array: json_decode($documentDetail->doc_info)) : null,
             'signLevel' => $documentDetail->sign_level ?? null,
             'productName' => $documentDetail->product_name ?? null,
+            'scanDocFlg' => $documentDetail->scan_doc_flg ?? null,
             'filePath' => $documentDetail->file_path ?? null,
             'pdf' => null,  // TODO 別途実装対応
             'sign_position' => null,// TODO 別途実装対応

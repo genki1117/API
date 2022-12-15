@@ -47,7 +47,7 @@ class Document
     /** @var int|null 書類No */
     private ?int $docNo;
     /** @var string|null 参考書類No */
-    private ?string $refDocNo; //TODO 「1,2,3」の文字列で返却
+    private ?string $refDocNo;
     /** @var string|null 内容 */
     private ?string $content;
     /** @var int|null 相手先ID */
@@ -96,14 +96,23 @@ class Document
         'contEndDate' => null,
         'concDate' => null,
         'effectiveDate' => null,
+        'downloadDate' => null,
+        'docCreateDate' => null,
+        'signFinishDate' => null,
+        'issueDate' => null,
+        'expiryDate' => null,
+        'paymentDate' => null,
         'docNo' => null,
         'refDocNo' => null,
+        'content' => null,
         'counterPartyId' => null,
         'counterPartyName' => null,
         'remarks' => null,
+        'transactionDate' => null,
         'docInfo' => null,
         'signLevel' => null,
         'productName' => null,
+        'scanDocFlg' => null,
         'filePath' => null,
         'pdf' => null,
         'sign_position' => null,
