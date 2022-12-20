@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Document;
 
 use App\Domain\Consts\DocumentConst;
+use App\Domain\Entities\Document\Document;
 use App\Domain\Services\Document\DocumentDetailService;
 use App\Http\Requests\Document\DocumentGetDetailRequest;
 use App\Http\Responses\Document\DocumentGetDetailResponse;
@@ -50,10 +51,15 @@ class DocumentDetailController
             return (new DocumentGetDetailResponse)->notFound();
         }
 
-        [$documentDetail, $accessLog, $operationLog, $selectSignGuestUsers, $selectViewUsers, $selectSignUsers] = $data;
+        $documentDetail = $data['documentDetail'];
+        $accessLog = $data['accessLog'];
+        $operationLog = $data['operationLog'];
+        $selectSignGuestUsers = $data['selectSignGuestUsers'];
+        $selectViewUsers = $data['selectViewUsers'];
+        $selectSignUsers = $data['selectSignUsers'];
 
         $categoryId = $documentDetail->getCategoryId();
-        if (DocumentConst::DOCUMENT_CONTRACT=== $categoryId) {
+        if (DocumentConst::DOCUMENT_CONTRACT === $categoryId) {
             return (new DocumentGetDetailResponse)->emitContract(
                 document: $documentDetail,
                 selectSignUser: $selectSignUsers,

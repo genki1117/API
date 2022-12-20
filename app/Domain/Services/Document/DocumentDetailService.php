@@ -32,7 +32,7 @@ class DocumentDetailService
      * @param int $documentId
      * @param int $companyId
      * @param int $userId
-     * @return array<array<Document>, array<AccessUser>, array<OperationUser>, array<SelectViewUser>, array<SelectSignGuestUser>, array<SelectSignUser>>
+     * @return array<Document, array<AccessUser>, array<OperationUser>, array<SelectViewUser>, array<SelectSignGuestUser>, array<SelectSignUser>>
      */
     public function getDetail(int $categoryId, int $documentId, int $companyId, int $userId): array
     {
@@ -68,7 +68,7 @@ class DocumentDetailService
             companyId: $companyId
         );
 
-        if (is_null($documentDetail->getDocNo()) &&
+        if (is_null($documentDetail->getCategoryId()) &&
             empty($accessLog) &&
             empty($operationLog) &&
             empty($selectSignGuestUsers) &&
