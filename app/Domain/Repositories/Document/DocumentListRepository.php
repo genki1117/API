@@ -46,14 +46,9 @@ class DocumentListRepository implements DocumentListRepositoryInterface
     private DocumentPermissionContract $docPermissionContract;
     private DocumentPermissionArchive $docPermissionArchive;
     private DocumentPermissionTransaction $docPermissionTransaction;
-    private DocumentWorkFlow $docWorkFlow;
     private LogDocAccess $logDocAccess;
     private LogDocOperation $logDocOperation;
     private LogSystemAccess $logSystemAccess;
-    private DocumentStorageContract $docStorageContract;
-    private DocumentStorageTransaction $docStorageTransaction;
-    private DocumentStorageInternal $docStorageInternal;
-    private DocumentStorageArchive $docStorageArchive;
 
     /**
      * @param DocumentDeal $docDeal
@@ -61,17 +56,13 @@ class DocumentListRepository implements DocumentListRepositoryInterface
      * @param DocumentContract $docContract
      * @param DocumentInternal $docInternal
      * @param DocumentPermissionArchive $docPermissionArchive
-     * @param DocumentPermissionInternal $docPermissionContract
-     * @param DocumentPermissionContract $document
+     * @param DocumentPermissionInternal $docPermissionInternal
+     * @param DocumentPermissionContract $docPermissionContract
      * @param DocumentPermissionTransaction $docPermissionTransaction
      * @param DocumentWorkFlow $docWorkFlow
      * @param LogDocAccess $logDocAccess
      * @param LogDocOperation $logDocOperation
      * @param LogSystemAccess $logSystemAccess
-     * @param DocumentStorageContract $docStorageContract
-     * @param DocumentStorageTransaction $docStorageTransaction
-     * @param DocumentStorageInternal $docStorageInternal
-     * @param DocumentStorageArchive $docStorageArchive
      */
     public function __construct(
         DocumentDeal $docDeal,
@@ -95,14 +86,9 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $this->docPermissionInternal = $docPermissionInternal;
         $this->docPermissionContract = $docPermissionContract;
         $this->docPermissionTransaction = $docPermissionTransaction;
-        $this->docWorkFlow = $docWorkFlow;
         $this->logDocAccess = $logDocAccess;
         $this->logDocOperation = $logDocOperation;
         $this->logSystemAccess = $logSystemAccess;
-        $this->docStorageContract = $docStorageContract;
-        $this->docStorageTransaction = $docStorageTransaction;
-        $this->docStorageInternal = $docStorageInternal;
-        $this->docStorageArchive = $docStorageArchive;
     }
 
     /**
@@ -150,7 +136,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $archive = $this->docArchive->getBeforeOrAfterData($companyId, $documentId);
         $perArchive = $this->docPermissionArchive->getBeforeOrAfterData($companyId, $documentId);
         $stoArchive = $this->docStorageArchive->getBeforeOrAfterData($companyId, $documentId);
-        
+
         if (empty($archive) && empty($perArchive) && empty($stoArchive)) {
             return new DocumentDeleteEntity();
         }
@@ -168,7 +154,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $internal = $this->docInternal->getBeforeOrAfterData($companyId, $documentId);
         $perInternal = $this->docPermissionInternal->getBeforeOrAfterData($companyId, $documentId);
         $stoInternal = $this->docStorageInternal->getBeforeOrAfterData($companyId, $documentId);
-        
+
         if (empty($internal) && empty($perInternal) && empty($stoInternal)) {
             return new DocumentDeleteEntity();
         }
@@ -186,7 +172,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $deal = $this->docDeal->getBeforeOrAfterData($companyId, $documentId);
         $perDeal = $this->docPermissionTransaction->getBeforeOrAfterData($companyId, $documentId);
         $stoDeal = $this->docStorageTransaction->getBeforeOrAfterData($companyId, $documentId);
-        
+
         if (empty($deal) && empty($perDeal) && empty($stoDeal)) {
             return new DocumentDeleteEntity();
         }
@@ -204,7 +190,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $contract = $this->docContract->getBeforeOrAfterData($companyId, $documentId);
         $perContract = $this->docPermissionContract->getBeforeOrAfterData($companyId, $documentId);
         $stoContract = $this->docStorageContract->getBeforeOrAfterData($companyId, $documentId);
-        
+
         if (empty($contract) && empty($perContract) && empty($stoContract)) {
             return new DocumentDeleteEntity();
         }
@@ -244,7 +230,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $blInternal = $this->docInternal->getDelete($userId, $companyId, $documentId, $updateDatetime);
         $blPerInternal = $this->docPermissionInternal->getDelete($userId, $companyId, $documentId);
         $blStoInternal = $this->docStorageInternal->getDelete($userId, $companyId, $documentId, $updateDatetime);
-        
+
         if (!$blInternal || !$blPerInternal || !$blStoInternal) {
             throw new Exception('社内書類テーブルおよび社内書類閲覧権限および社内書類容量を削除できません。');
         }
@@ -264,7 +250,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $blDeal = $this->docDeal->getDelete($userId, $companyId, $documentId, $updateDatetime);
         $blPerTransaction = $this->docPermissionTransaction->getDelete($userId, $companyId, $documentId);
         $blStoTransaction = $this->docStorageTransaction->getDelete($userId, $companyId, $documentId, $updateDatetime);
-        
+
         if (!$blDeal || !$blPerTransaction || !$blStoTransaction) {
             throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を削除できません。');
         }
@@ -284,89 +270,12 @@ class DocumentListRepository implements DocumentListRepositoryInterface
         $blContract = $this->docContract->getDelete($userId, $companyId, $documentId, $updateDatetime);
         $blPerContract = $this->docPermissionContract->getDelete($userId, $companyId, $documentId);
         $blStoContract = $this->docStorageContract->getDelete($userId, $companyId, $documentId, $updateDatetime);
-        
+
         if (!$blContract || !$blPerContract || !$blStoContract) {
             throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を削除できません。');
         }
 
         return true;
-    }
-
-    /**
-     * @param int $categoryId
-     * @param int $documentId
-     * @param int $companyId
-     * @param int $userId
-     * @return DocumentEntity
-     */
-    public function getDetail(int $categoryId, int $documentId, int $companyId, int $userId): DocumentEntity
-    {
-        $docDetailList = $this->getDocumentList($categoryId, $documentId, $companyId, $userId);
-        $logList = $this->getLogList($documentId, $categoryId, $companyId);
-        $workFlowList = $this->getWorkFlowList($documentId, $categoryId, $companyId);
-        return new DocumentEntity($docDetailList["docList"], $docDetailList["docPermissionList"], $workFlowList, $logList["logAccessList"], $logList["logOperationList"]);
-    }
-
-    /**
-     * @param int $categoryId
-     * @param int $documentId
-     * @param int $companyId
-     * @param int $userId
-     * @return array|null
-     */
-    public function getDocumentList(int $categoryId, int $documentId, int $companyId, int $userId): ?array
-    {
-        switch($categoryId) {
-            case Self::DOC_CONTRACT_TYPE:
-                // 書類カテゴリが契約書類で設定されていた場合、データ抽出
-                $docList = $this->docContract->getList($documentId, $companyId, $userId);
-                $docPermissionList = $this->docPermissionContract->getList($documentId, $companyId, $userId);
-                break;
-            case Self::DOC_DEAL_TYPE:
-                // 書類カテゴリが取引書類で設定されていた場合、データ抽出
-                $docList = $this->docDeal->getList($documentId, $companyId, $userId);
-                $docPermissionList = $this->docPermissionTransaction->getList($documentId, $companyId, $userId);
-                break;
-            case Self::DOC_INTERNAL_TYPE:
-                // 書類カテゴリが社内書類で設定されていた場合、データ抽出
-                $docList = $this->docInternal->getList($documentId, $companyId, $userId);
-                $docPermissionList = $this->docPermissionInternal->getList($documentId, $companyId, $userId);
-                break;
-            case Self::DOC_ARCHIVE_TYPE:
-                // 書類カテゴリが登録書類で設定されていた場合、データ抽出
-                $docList = $this->docArchive->getList($documentId, $companyId, $userId);
-                $docPermissionList = $this->docPermissionArchive->getList($documentId, $companyId, $userId);
-                break;
-        }
-        return ["docList" => $docList, "docPermissionList" => $docPermissionList];
-    }
-
-    /**
-     * @param int $documentId
-     * @param int $categoryId
-     * @param int $companyId
-     * @return array|null
-     */
-    public function getLogList(int $documentId, int $categoryId, int $companyId): ?array
-    {
-        // 履歴情報・操作ログ情報を取得する
-        $logOperationList = $this->logDocOperation->getList($documentId, $categoryId, $companyId);
-        // アクセスログ情報を取得する
-        $logAccessList = $this->logDocAccess->getList($documentId, $categoryId, $companyId);
-        return ["logAccessList" => $logAccessList, "logOperationList" => $logOperationList];
-    }
-
-    /**
-     * @param int $documentId
-     * @param int $categoryId
-     * @param int $companyId
-     * @return \stdClass|null
-     */
-    public function getWorkFlowList(int $documentId, int $categoryId, int $companyId): ?\stdClass
-    {
-        // ワークフォーロー
-        $docWorkflowList = $this->docWorkFlow->getList($documentId, $categoryId, $companyId);
-        return $docWorkflowList;
     }
 
     /**

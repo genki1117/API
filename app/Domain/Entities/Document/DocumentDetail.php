@@ -14,7 +14,11 @@ class DocumentDetail
     private ?\stdClass $logSystemAccess;
 
     /**
-     * @param \stdClass|null $documentType
+     * @param \stdClass|null $documentList
+     * @param \stdClass|null $documentPermissionList
+     * @param \stdClass|null $documentWorkFlow
+     * @param \stdClass|null $logDocAccess
+     * @param \stdClass|null $logDocOperation
      */
     public function __construct(
         ?\stdClass $documentList = null,

@@ -19,9 +19,9 @@ class LogDocAccess extends FluentDatabase
      * @param int $documentId
      * @param int $categoryId
      * @param int $companyId
-     * @return \stdClass|null
+     * @return array
      */
-    public function getList(int $documentId, int $categoryId, int $companyId)
+    public function getList(int $documentId, int $categoryId, int $companyId): array
     {
         return $this->builder($this->table)
             ->select([
@@ -40,7 +40,8 @@ class LogDocAccess extends FluentDatabase
             ->where("t_log_doc_access.category_id", "=", $categoryId)
             ->where("t_log_doc_access.company_id", "=", $companyId)
             ->orderBy("t_log_doc_access.log_id", "desc")
-            ->first();
+            ->get()
+            ->all();
     }
 
     /**

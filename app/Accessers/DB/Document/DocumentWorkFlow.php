@@ -15,9 +15,9 @@ class DocumentWorkFlow extends FluentDatabase
      * @param int $documentId
      * @param int $categoryId
      * @param int $companyId
-     * @return \stdClass|null
+     * @return array
      */
-    public function getList(int $documentId, int $categoryId, int $companyId): ?\stdClass
+    public function getList(int $documentId, int $categoryId, int $companyId): array
     {
         return $this->builder($this->table)
             ->select([
@@ -37,6 +37,7 @@ class DocumentWorkFlow extends FluentDatabase
             ->where("t_document_workflow.category_id", $categoryId)
             ->where("t_document_workflow.company_id", $companyId)
             ->orderBy("t_document_workflow.wf_sort", "DESC")
-            ->first();
+            ->get()
+            ->all();
     }
 }

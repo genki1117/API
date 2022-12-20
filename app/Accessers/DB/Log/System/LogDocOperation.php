@@ -20,9 +20,9 @@ class LogDocOperation extends FluentDatabase
      * @param int $documentId
      * @param int $categoryId
      * @param int $companyId
-     * @return \stdClass|null
+     * @return array
      */
-    public function getList(int $documentId, int $categoryId, int $companyId)
+    public function getList(int $documentId, int $categoryId, int $companyId): array
     {
         return $this->builder($this->table)
             ->select([
@@ -30,7 +30,7 @@ class LogDocOperation extends FluentDatabase
                 "t_log_doc_operation.create_datetime",
                 "t_log_doc_operation.create_user",
                 "t_log_doc_operation.before_content",
-                "t_log_doc_operation.after_contet",
+                "t_log_doc_operation.after_content",
                 "m_user.family_name",
                 "m_user.first_name"
             ])
@@ -43,7 +43,8 @@ class LogDocOperation extends FluentDatabase
             ->where("t_log_doc_operation.category_id", "=", $categoryId)
             ->where("t_log_doc_operation.company_id", "=", $companyId)
             ->orderBy("t_log_doc_operation.log_id", "desc")
-            ->first();
+            ->get()
+            ->all();
     }
 
     /**
