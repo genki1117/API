@@ -139,7 +139,7 @@ class DocumentContract extends FluentDatabase
             'update_datetime'  => $requestContent['update_datetime'],
             'delete_user'      => $requestContent['delete_user'],
             'delete_datetime'  => $requestContent['delete_datetime']
-    ]);
+        ]);
     }
 
     public function update($requestContent)
