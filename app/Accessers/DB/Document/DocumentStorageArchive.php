@@ -4,6 +4,7 @@ namespace App\Accessers\DB\Document;
 
 use App\Accessers\DB\FluentDatabase;
 use Illuminate\Support\Facades\DB;
+use Carbon\CarbonImmutable;
 
 class DocumentStorageArchive extends FluentDatabase
 {
@@ -91,5 +92,42 @@ class DocumentStorageArchive extends FluentDatabase
             ->where('company_id', $company_id)
             ->where('document_id', $request->document_id)
             ->update($data);
+    }
+
+    /*
+     * 更新項目（登録書類容量）
+     * ---------------------------------------------
+     * @param int $userId
+     * @param int $companyId
+     * @param int $documentId
+     * @return bool
+     */
+    public function getDelete(int $userId, int $companyId, int $documentId)
+    {
+        return $this->builder()
+            ->whereNull("delete_datetime")
+            ->where("company_id", "=", $companyId)
+            ->where("document_id", "=", $documentId)
+            ->update([
+                "delete_user" => $userId,
+                "delete_datetime" => CarbonImmutable::now()
+            ]);
+    }
+
+    /**
+     * @param int $companyId
+     * @param int $documentId
+     * @return \stdClass|null
+     */
+    public function getBeforeOrAfterData(int $companyId, int $documentId): ?\stdClass
+    {
+        return $this->builder()
+            ->select([
+                "delete_user",
+                "delete_datetime"
+            ])
+            ->where("company_id", "=", $companyId)
+            ->where("document_id", "=", $documentId)
+            ->first();
     }
 }

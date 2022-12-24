@@ -34,7 +34,7 @@ class LogSystemAccess extends FluentDatabase
             "access_datetime" => CarbonImmutable::now(),
             "access_type" => 1,
             "access_func_name" => $accessFuncName,
-            "action" => $action,
+            "action" => json_encode($action),
             "create_user" => $userId,
             "create_datetime" => CarbonImmutable::now(),
             "delete_user" => null,

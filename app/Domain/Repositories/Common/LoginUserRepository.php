@@ -5,7 +5,7 @@ namespace App\Domain\Repositories\Common;
 use App\Accessers\DB\Master\MUser;
 use App\Accessers\DB\Master\MUserRole;
 use App\Accessers\DB\TempToken;
-use App\Domain\Entities\Common\User as UserEntity;
+use App\Domain\Entities\Users\User as UserEntity;
 use App\Domain\Entities\Common\TempToken as TempTokenEntity;
 use App\Domain\Repositories\Interface\Common\LoginUserRepositoryInterface;
 
@@ -27,7 +27,9 @@ class LoginUserRepository implements LoginUserRepositoryInterface
     private TempToken $tempToken;
 
     /**
-     * @param User $user
+     * @param TempToken $tempToken
+     * @param MUser $mUser
+     * @param MUserRole $mUserRole
      */
     public function __construct(TempToken $tempToken, MUser $mUser, MUserRole $mUserRole)
     {
@@ -38,11 +40,12 @@ class LoginUserRepository implements LoginUserRepositoryInterface
 
     /**
      * @param string $token
+     * @param string $expiryDate
      * @return TempTokenEntity
      */
-    public function getToken(string $token, string $expiry_date = null): TempTokenEntity
+    public function getToken(string $token, string $expiryDate = null): TempTokenEntity
     {
-        $tempToken = $this->tempToken->getToken($token, $expiry_date);
+        $tempToken = $this->tempToken->getToken($token, $expiryDate);
 
         if (empty($tempToken)) {
             return new TempTokenEntity();
@@ -52,79 +55,19 @@ class LoginUserRepository implements LoginUserRepositoryInterface
     }
 
     /**
-     * @param string $compnay_id
-     * @param string $user_id
+     * @param string $compnayId
+     * @param string $userId
      * @return UserEntity
      */
-    public function getUser(string $compnay_id, string $user_id): UserEntity
+    public function getUser(string $compnayId, string $userId): UserEntity
     {
-        $user = $this->mUser->getUser($compnay_id, $user_id);
-        $userRole = $this->mUserRole->getUserRole($compnay_id, $user_id);
+        $user = $this->mUser->getUser($compnayId, $userId);
+        $userRole = $this->mUserRole->getUserRole($compnayId, $userId);
 
         if (empty($user)) {
             return new UserEntity();
         }
 
         return new UserEntity($user, $userRole);
-    }
-
-    /**
-     * @param string $requestUri
-     * @param UserEntity $user
-     * @return bool
-     */
-    public function checkAuth(string $requestUri, UserEntity $user): bool
-    {
-        $ret = false;
-        $auth = config('aut_list')[$requestUri];
-        if ($auth === null) {
-            $ret = false;
-        } elseif ($user->getUser()->user_type_id == 1) {
-            $ret = $auth['guest_user_role'];
-        } elseif ($user->getUser()->user_type_id == 99) {
-            $ret = $auth['system_administrator_role'];
-        } else {
-            switch(true) {
-                case $user->getUserRole()->{"admin_role"}:
-                    $ret = $auth['reader_role']['admin_role'];
-                    break;
-                case $user->getUserRole()->{"template_set_role"}:
-                    $ret = $auth['reader_role']['template_set_role'];
-                    break;
-                case $user->getUserRole()->{"workflow_set_role"}:
-                    $ret = $auth['reader_role']['workflow_set_role'];
-                    break;
-                case $user->getUserRole()->{"master_set_role"}:
-                    $ret = $auth['reader_role']['workflow_set_role'];
-                    break;
-                case $user->getUserRole()->{"archive_func_role"}:
-                    $ret = $auth['reader_role']['archive_func_role'];
-                    break;
-                case $user->getUserRole()->{"ts_role"}:
-                    $ret = $auth['reader_role']['ts_role'];
-                    break;
-                case $user->getUserRole()->{"bulk_ts_role"}:
-                    $ret = $auth['reader_role']['bulk_ts_role'];
-                    break;
-                case $user->getUserRole()->{"cont_doc_app_role"}:
-                    $ret = $auth['reader_role']['cont_doc_app_role'];
-                    break;
-                case $user->getUserRole()->{"deal_doc_app_role"}:
-                    $ret = $auth['reader_role']['deal_doc_app_role'];
-                    break;
-                case $user->getUserRole()->{"int_doc_app_role"}:
-                    $ret = $auth['reader_role']['int_doc_app_role'];
-                    break;
-                case $user->getUserRole()->{"arch_doc_app_role"}:
-                    $ret = $auth['reader_role']['arch_doc_app_role'];
-                    break;
-                case $user->getUserRole()->{"use_cert_role"}:
-                    $ret = $auth['reader_role']['use_cert_role'];
-                    break;
-                default:
-                    $ret = false;
-            }
-        }
-        return $ret;
     }
 }

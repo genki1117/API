@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Providers;
 
+use App\Foundations\Context\LoggedInUserContext;
 use Carbon\Carbon;
 use Illuminate\Database\Events\TransactionBeginning;
 use Illuminate\Database\Events\TransactionCommitted;
@@ -17,7 +18,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        /**
+         * ログインユーザー情報を格納するオブジェクトをサービスコンテナに登録
+         */
+        $this->app->singleton(LoggedInUserContext::class, function () {
+            return new LoggedInUserContext();
+        });
     }
 
     /**
@@ -28,21 +34,22 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (app()->environment() === 'develop' || app()->environment() === 'local') {
-//            \DB::listen(function ($query) {
-//                $sql = $query->sql;
-//                foreach ($query->bindings as $binding) {
-//                    if (is_string($binding)) {
-//                        $binding = "'{$binding}'";
-//                    } elseif ($binding === null) {
-//                        $binding = 'NULL';
-//                    } elseif ($binding instanceof Carbon) {
-//                        $binding = "'{$binding->toDateTimeString()}'";
-//                    }
-//
-//                    $sql = preg_replace("/\?/", $binding, $sql, 1);
-//                }
-//                \Log::debug($sql, ['time' => "{$query->time}ms"]);
-//            });
+            \DB::listen(function ($query) {
+                $sql = $query->sql;
+                foreach ($query->bindings as $binding) {
+                    if (is_string($binding)) {
+                        $binding = "'{$binding}'";
+                    } elseif (is_int($binding)) {
+                        $binding = (string)$binding;
+                    } elseif ($binding === null) {
+                        $binding = 'NULL';
+                    } elseif ($binding instanceof Carbon) {
+                        $binding = "'{$binding->toDateTimeString()}'";
+                    }
+                    $sql = preg_replace("/\?/", $binding, $sql, 1);
+                }
+                \Log::debug($sql, ['time' => "{$query->time}ms"]);
+            });
 
             // トランザクション開始・終了
             \Event::listen(TransactionBeginning::class, function () {

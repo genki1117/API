@@ -7,16 +7,10 @@ use Illuminate\Support\Facades\Lang;
 
 class TokenResponse
 {
-    // public function successLogin()
-    // {
-    //     return new JsonResponse([
-    //         "status" => "200",
-    //         "message" => "login_ok"
-    //     ], 200);
-
-    // }
-
-    public function faildNoToken()
+    /**
+     * @return JsonResponse
+     */
+    public function faildNoToken(): JsonResponse
     {
         return new JsonResponse([
             "status" => "401",
@@ -24,7 +18,10 @@ class TokenResponse
         ], 401);
     }
 
-    public function faildNoUser()
+    /**
+     * @return JsonResponse
+     */
+    public function faildNoUser(): JsonResponse
     {
         return new JsonResponse([
             "status" => "403",
@@ -32,7 +29,10 @@ class TokenResponse
         ], 403);
     }
 
-    public function faildNoAuth()
+    /**
+     * @return JsonResponse
+     */
+    public function faildNoAuth(): JsonResponse
     {
         return new JsonResponse([
             "status" => "403",

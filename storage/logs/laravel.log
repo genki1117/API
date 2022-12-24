@@ -18123,3 +18123,1195 @@ Stack trace:
 "} 
 [2022-12-25 02:16:54] local.DEBUG: START TRANSACTION  
 [2022-12-25 02:16:54] local.DEBUG: COMMIT  
+[2022-12-25 02:18:22] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:18:22] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:18:22] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:18:22] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:18:22] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Http/Kernel.php:25)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:18:22] local.ERROR: Uncaught ReflectionException: Class "translator" does not exist in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:875
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(875): ReflectionClass->__construct()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\Foundation\Application->make()
+#6 Command line code(1): app()
+#7 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [translator] does not exist. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\Foundation\Application->make()
+#5 Command line code(1): app()
+#6 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"translator\" does not exist in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:875
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(875): ReflectionClass->__construct()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\\Foundation\\Application->make()
+#6 Command line code(1): app()
+#7 {main}
+
+Next Illuminate\\Contracts\\Container\\BindingResolutionException: Target class [translator] does not exist. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\\Foundation\\Application->make()
+#5 Command line code(1): app()
+#6 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:18:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:18:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:18:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:19:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:19:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:19:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:19:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:19:36] local.ERROR: Uncaught ReflectionException: Class "blade.compiler" does not exist in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:875
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(875): ReflectionClass->__construct()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\Foundation\Application->make()
+#6 Command line code(1): app()
+#7 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [blade.compiler] does not exist. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\Foundation\Application->make()
+#5 Command line code(1): app()
+#6 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"blade.compiler\" does not exist in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:875
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(875): ReflectionClass->__construct()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\\Foundation\\Application->make()
+#6 Command line code(1): app()
+#7 {main}
+
+Next Illuminate\\Contracts\\Container\\BindingResolutionException: Target class [blade.compiler] does not exist. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\\Foundation\\Application->make()
+#5 Command line code(1): app()
+#6 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:20:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:20:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:20:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:21:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:21:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:21:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:22:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:22:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:22:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:23:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:23:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:23:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:24:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:24:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:24:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:25:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:25:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:25:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:26:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:26:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:26:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:27:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:27:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:27:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:28:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:28:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:28:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:29:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:29:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:29:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:29:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:29:36] local.ERROR: Uncaught ReflectionException: Class "blade.compiler" does not exist in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:875
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(875): ReflectionClass->__construct()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\Foundation\Application->make()
+#6 Command line code(1): app()
+#7 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [blade.compiler] does not exist. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\Foundation\Application->make()
+#5 Command line code(1): app()
+#6 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught ReflectionException: Class \"blade.compiler\" does not exist in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:875
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(875): ReflectionClass->__construct()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\\Foundation\\Application->make()
+#6 Command line code(1): app()
+#7 {main}
+
+Next Illuminate\\Contracts\\Container\\BindingResolutionException: Target class [blade.compiler] does not exist. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(119): Illuminate\\Foundation\\Application->make()
+#5 Command line code(1): app()
+#6 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:877)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:30:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:30:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:30:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:31:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:31:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:31:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:32:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:32:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:32:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:33:31] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:33:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:33:36] local.ERROR: syntax error, unexpected token "<<", expecting "]" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting \"]\" at /home/shoutasudo/work/production/github/DTG-API/app/Providers/RepositoryServiceProvider.php:36)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/composer/ClassLoader.php(428): Composer\\Autoload\\includeFile()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(208): Composer\\Autoload\\ClassLoader->loadClass()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(663): Illuminate\\Foundation\\ProviderRepository->load()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#10 {main}
+"} 
+[2022-12-25 02:33:36] local.ERROR: Uncaught Illuminate\Contracts\Container\BindingResolutionException: Target [Illuminate\Contracts\Auth\Access\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\Container\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\Container\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\Container\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\Foundation\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\Container\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\Foundation\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\Container\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\Support\Facades\Facade::__callStatic()
+#10 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught Illuminate\\Contracts\\Container\\BindingResolutionException: Target [Illuminate\\Contracts\\Auth\\Access\\Gate] is not instantiable. in /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087
+Stack trace:
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(884): Illuminate\\Container\\Container->notInstantiable()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(756): Illuminate\\Container\\Container->build()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(857): Illuminate\\Container\\Container->resolve()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(692): Illuminate\\Foundation\\Application->resolve()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(842): Illuminate\\Container\\Container->make()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(1415): Illuminate\\Foundation\\Application->make()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(222): Illuminate\\Container\\Container->offsetGet()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(193): Illuminate\\Support\\Facades\\Facade::resolveFacadeInstance()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(332): Illuminate\\Support\\Facades\\Facade::getFacadeRoot()
+#9 Command line code(1): Illuminate\\Support\\Facades\\Facade::__callStatic()
+#10 {main}
+  thrown at /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php:1087)
+[stacktrace]
+#0 {main}
+"} 
+[2022-12-25 02:34:01] local.ERROR: syntax error, unexpected token "<<", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\", expecting end of file at /home/shoutasudo/work/production/github/DTG-API/routes/api.php:26)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Routing/Router.php(430): Illuminate\\Routing\\RouteFileRegistrar->register()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Routing/Router.php(386): Illuminate\\Routing\\Router->loadRoutes()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Routing/RouteRegistrar.php(165): Illuminate\\Routing\\Router->group()
+#3 /home/shoutasudo/work/production/github/DTG-API/app/Providers/RouteServiceProvider.php(34): Illuminate\\Routing\\RouteRegistrar->group()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): App\\Providers\\RouteServiceProvider->App\\Providers\\{closure}()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(81): Illuminate\\Container\\Util::unwrapIfClosure()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(651): Illuminate\\Container\\BoundMethod::call()
+#9 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Support/Providers/RouteServiceProvider.php(120): Illuminate\\Container\\Container->call()
+#10 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Support/Providers/RouteServiceProvider.php(45): Illuminate\\Foundation\\Support\\Providers\\RouteServiceProvider->loadRoutes()
+#11 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Foundation\\Support\\Providers\\RouteServiceProvider->Illuminate\\Foundation\\Support\\Providers\\{closure}()
+#12 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#13 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(81): Illuminate\\Container\\Util::unwrapIfClosure()
+#14 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#15 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Container/Container.php(651): Illuminate\\Container\\BoundMethod::call()
+#16 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Support/ServiceProvider.php(119): Illuminate\\Container\\Container->call()
+#17 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\\Support\\ServiceProvider->callBootedCallbacks()
+#18 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(911): Illuminate\\Foundation\\Application->bootProvider()
+#19 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}()
+#20 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(912): array_walk()
+#21 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#22 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(239): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap()
+#23 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith()
+#24 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#25 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle()
+#26 {main}
+"} 

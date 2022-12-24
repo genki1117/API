@@ -4,6 +4,8 @@ use Illuminate\Routing\Router;
 use App\Http\Controllers\Samples\Api\UseSampleController;
 use App\Http\Controllers\Document\DocumentListController;
 use App\Http\Controllers\Document\DocumentSaveController;
+use App\Http\Controllers\Document\DocumentDetailController;
+use App\Http\Controllers\Document\DocumentGetListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +30,5 @@ $router->get('/token-test', function ($request) {
 $router->post('/document/detail', [DocumentListController::class, 'getDetail']);
 
 $router->post('/document/save', [DocumentSaveController::class, 'saveDocument']);
+$router->post('/document/detail', [DocumentDetailController::class, 'getDetail']);
+$router->post('/document/list', [DocumentGetListController::class, 'getList']);

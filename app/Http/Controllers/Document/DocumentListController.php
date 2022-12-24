@@ -2,13 +2,14 @@
 declare(strict_types=1);
 namespace App\Http\Controllers\Document;
 
-use Illuminate\Support\Facades\Storage;
+use App\Http\Responses\Document\DocumentDeleteResponse;
+use App\Http\Requests\Document\DocumentDeleteRequest;
 use App\Http\Responses\Document\DocumentGetDetailResponse;
 use App\Http\Requests\Document\DocumentGetDetailRequest;
 use App\Domain\Services\Document\DocumentListService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Exception;
 
 class DocumentListController extends Controller
 {
@@ -37,7 +38,5 @@ class DocumentListController extends Controller
 
         // Responseの格納、JSON形式
         return (new DocumentGetDetailResponse)->detail($categoryId, $docDetailList);
-        
     }
-
 }

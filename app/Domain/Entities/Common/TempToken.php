@@ -11,18 +11,20 @@ class TempToken
     /** @var string|null */
     private ?string $data;
     /** @var string|null */
-    private ?string $expiry_date;
+    private ?string $expiryDate;
 
     /**
-     * @param string|null $mailAddress
-     * @param string|null $password
+     * @param string|null $token
+     * @param string|null $type
+     * @param string|null $data
+     * @param string|null $expiryDate
      */
-    public function __construct(?string $token = null, ?string $type = null, ?string $data = null, ?string $expiry_date = null)
+    public function __construct(?string $token = null, ?string $type = null, ?string $data = null, ?string $expiryDate = null)
     {
         $this->token = $token;
         $this->type = $type;
         $this->data = $data;
-        $this->expiry_date = $expiry_date;
+        $this->expiryDate = $expiryDate;
     }
 
     /**
@@ -54,6 +56,6 @@ class TempToken
      */
     public function getExpiryDate(): ?string
     {
-        return $this->expiry_date;
+        return $this->expiryDate;
     }
 }

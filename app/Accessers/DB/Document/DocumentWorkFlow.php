@@ -16,9 +16,9 @@ class DocumentWorkFlow extends FluentDatabase
      * @param int $documentId
      * @param int $categoryId
      * @param int $companyId
-     * @return \stdClass|null
+     * @return array
      */
-    public function getList(int $documentId, int $categoryId, int $companyId): ?\stdClass
+    public function getList(int $documentId, int $categoryId, int $companyId): array
     {
         return $this->builder($this->table)
             ->select([
@@ -29,16 +29,17 @@ class DocumentWorkFlow extends FluentDatabase
                 "m_user.email",
                 "m_user.group_array"
             ])
-            ->leftjoin("m_user", function($query) {
-                return $query->on("m_user.company_id","t_document_workflow.company_id")
+            ->leftjoin("m_user", function ($query) {
+                return $query->on("m_user.company_id", "t_document_workflow.company_id")
                     ->where("m_user.delete_datetime", null);
             })
             ->where("t_document_workflow.delete_datetime", null)
-            ->where("t_document_workflow.document_id",$documentId)
-            ->where("t_document_workflow.category_id",$categoryId)
-            ->where("t_document_workflow.company_id",$companyId)
-            ->orderBy("t_document_workflow.wf_sort","DESC")
-            ->first();
+            ->where("t_document_workflow.document_id", $documentId)
+            ->where("t_document_workflow.category_id", $categoryId)
+            ->where("t_document_workflow.company_id", $companyId)
+            ->orderBy("t_document_workflow.wf_sort", "DESC")
+            ->get()
+            ->all();
     }
 
 
