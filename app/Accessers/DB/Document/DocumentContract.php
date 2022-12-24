@@ -2,8 +2,10 @@
 declare(strict_types=1);
 namespace App\Accessers\DB\Document;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Carbon\CarbonImmutable;
 use App\Accessers\DB\FluentDatabase;
+use Illuminate\Support\Facades\DB;
 
 class DocumentContract extends FluentDatabase
 {
@@ -101,5 +103,75 @@ class DocumentContract extends FluentDatabase
                     );
             })
             ->first();
+    }
+
+    public function insert(array $requestContent)
+    {
+        // ***m_user***
+        // $requestContent['m_user_id']
+        // $requestContent['m_user_company_id']
+        // $requestContent['m_user_type_id']
+        return $this->builder($this->table)->insert([
+            'company_id'       => $requestContent['company_id'],
+            'category_id'      => $requestContent['category_id'],
+            'template_id'      => $requestContent['template_id'],
+            'doc_type_id'      => $requestContent['doc_type_id'],
+            'status_id'        => $requestContent['status_id'],
+            'cont_start_date'  => $requestContent['cont_start_date'],
+            'cont_end_date'    => $requestContent['cont_end_date'],
+            'conc_date'        => $requestContent['conc_date'],
+            'effective_date'   => $requestContent['effective_date'],
+            'cancel_date'      => $requestContent['cancel_date'],
+            'expiry_date'      => $requestContent['expiry_date'],
+            'doc_no'           => $requestContent['company_id'],
+            'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+            'product_name'     => $requestContent['product_name'],
+            'title'            => $requestContent['title'],
+            'amount'           => $requestContent['amount'],
+            'currency_id'      => $requestContent['currency_id'],
+            'counter_party_id' => $requestContent['counter_party_id'],
+            'remarks'          => $requestContent['remarks'],
+            'doc_info'         => json_encode($requestContent['doc_info'], JSON_UNESCAPED_UNICODE),
+            'sign_level'       => $requestContent['sign_level'],
+            'create_user'      => $requestContent['create_user'],
+            'create_datetime'  => $requestContent['create_datetime'],
+            'update_user'      => $requestContent['update_user'],
+            'update_datetime'  => $requestContent['update_datetime'],
+            'delete_user'      => $requestContent['delete_user'],
+            'delete_datetime'  => $requestContent['delete_datetime']
+    ]);
+    }
+
+    public function update($requestContent)
+    {
+        return $this->builder($this->table)
+            ->where('document_id', $requestContent['document_id'])
+            ->where('company_id', $requestContent['company_id'])
+            ->where('category_id', $requestContent['category_id'])
+            ->update([
+                'template_id'      => $requestContent['template_id'],
+                'doc_type_id'      => $requestContent['doc_type_id'],
+                'status_id'        => $requestContent['status_id'],
+                'cont_start_date'  => $requestContent['cont_start_date'],
+                'cont_end_date'    => $requestContent['cont_end_date'],
+                'conc_date'        => $requestContent['conc_date'],
+                'effective_date'   => $requestContent['effective_date'],
+                'cancel_date'      => $requestContent['cancel_date'],
+                'doc_no'           => $requestContent['doc_no'],
+                'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+                'product_name'     => $requestContent['product_name'],
+                'title'            => $requestContent['title'],
+                'amount'           => $requestContent['amount'],
+                'currency_id'      => $requestContent['currency_id'],
+                'counter_party_id' => $requestContent['counter_party_id'],
+                'remarks'          => $requestContent['remarks'],
+                'doc_info'         => $requestContent['doc_info'],
+                'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+                'sign_level'       => $requestContent['sign_level'],
+                'update_user'      => $requestContent['update_user'],
+                'update_datetime'  => $requestContent['update_datetime'],
+                'delete_user'      => $requestContent['delete_user'],
+                'delete_datetime'  => $requestContent['delete_datetime']
+        ]);
     }
 }

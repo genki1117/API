@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace App\Accessers\DB\Document;
 
 use App\Accessers\DB\FluentDatabase;
+use Illuminate\Support\Facades\DB;
 
 class DocumentWorkFlow extends FluentDatabase
 {
@@ -38,5 +39,23 @@ class DocumentWorkFlow extends FluentDatabase
             ->where("t_document_workflow.company_id",$companyId)
             ->orderBy("t_document_workflow.wf_sort","DESC")
             ->first();
+    }
+
+
+    public function insert(int $companyId, int $categoryId, int $appUserId, int $wfSort, int $userId, string $createDate)
+    {
+        $LastdocumentId = DB::table('t_document_contract')->select(["document_id"])
+        ->orderByDesc('document_id')->limit(1)->first();
+        return $this->builder($this->table)->insert([
+            'document_id'           => $LastdocumentId->document_id,
+            'company_id'            => $companyId,
+            'category_id'           => $categoryId,
+            'app_user_id'           => $appUserId,
+            'wf_sort'             => $wfSort,
+            'create_user'           => $userId,
+            'create_datetime'       => $createDate,
+            'update_user'           => $userId,
+            'update_datetime'       => $createDate
+            ]);
     }
 }

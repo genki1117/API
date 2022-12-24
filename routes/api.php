@@ -3,6 +3,7 @@
 use Illuminate\Routing\Router;
 use App\Http\Controllers\Samples\Api\UseSampleController;
 use App\Http\Controllers\Document\DocumentListController;
+use App\Http\Controllers\Document\DocumentSaveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,12 @@ use App\Http\Controllers\Document\DocumentListController;
 /** @var Router $router */
 $router->get('/sample-get', [UseSampleController::class, 'getSample']);
 $router->post('/sample-login', [UseSampleController::class, 'login']);
+$router->get('/test', [UseSampleController::class, 'test']);
 
 $router->get('/token-test', function ($request) {
     return 'success';
 })->middleware('auth.token');
 
 $router->post('/document/detail', [DocumentListController::class, 'getDetail']);
+
+$router->post('/document/save', [DocumentSaveController::class, 'saveDocument']);

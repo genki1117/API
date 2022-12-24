@@ -9,6 +9,7 @@ use App\Http\Responses\Samples\GetSampleRequest;
 use App\Http\Responses\Samples\LoginResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UseSampleController extends Controller
 {
@@ -43,5 +44,10 @@ class UseSampleController extends Controller
         } else {
             return (new LoginResponse())->faildLogin();
         }
+    }
+
+    public function test()
+    {
+        
     }
 }

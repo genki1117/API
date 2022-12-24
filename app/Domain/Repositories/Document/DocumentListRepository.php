@@ -99,7 +99,7 @@ class DocumentListRepository implements DocumentListRepositoryInterface
     {
         $docDetailList = $this->getDocumentList($categoryId, $documentId, $companyId, $userId);
         $logList = $this->getLogList($documentId, $categoryId, $companyId);
-        $workFlowList = $this->getWorkFlowList($documentId, $categoryId, $companyId);
+        $workFlowList = $DocumentEntity->getWorkFlowList($documentId, $categoryId, $companyId);
         return new DocumentEntity($docDetailList["docList"],$docDetailList["docPermissionList"],$workFlowList,$logList["logAccessList"],$logList["logOperationList"]);
     }
 

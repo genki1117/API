@@ -2,8 +2,10 @@
 declare(strict_types=1);
 namespace App\Accessers\DB\Document;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Carbon\CarbonImmutable;
 use App\Accessers\DB\FluentDatabase;
+use Illuminate\Support\Facades\DB;
 
 class DocumentInternal extends FluentDatabase
 {
@@ -94,5 +96,75 @@ class DocumentInternal extends FluentDatabase
                     );
             })
             ->first();
+    }
+    public function save($request): bool
+    {
+        $login_user = 1; //$request->m_user->user_id;
+        $company_id = 1; //$request->m_user->company_id;
+
+        $data = [
+            'company_id' => $company_id ?? null,
+            'template_id' => $request->template_id ?? null,
+            'category_id' => $request->category_id ?? null,
+            'doc_type_id' => $request->doc_type_id ?? null,
+            'status_id' => $request->status_id ?? null,
+            'doc_create_date' => $request->doc_create_date ?? null,
+            'sign_finish_date' => $request->sign_finish_date ?? null,
+            'doc_no' => $request->doc_no ?? null,
+            'ref_doc_no' => json_encode($request->ref_doc_no, JSON_UNESCAPED_UNICODE) ?? null,
+            'product_name' => $request->product_name ?? null,
+            'title' => $request->title ?? null,
+            'amount' => $request->amount ?? null,
+            'currency_id' => $request->currency_id ?? null,
+            'counter_party_id' => $request->counter_party_id ?? null,
+            'content' => $request->content ?? null,
+            'remarks' => $request->remarks ?? null,
+            'doc_info' => json_encode($request->doc_info, JSON_UNESCAPED_UNICODE) ?? null,
+            'sign_level' => $request->sign_level ?? null,
+            'create_user' => $login_user ?? null,
+            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s') ?? null,
+            'update_user' => $login_user ?? null,
+            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s') ?? null,
+            'delete_user' => null,
+            'delete_datetime' => null
+        ];
+        return $this->builder($this->table)->insert($data);
+    }
+
+    public function update($request)
+    {
+        $login_user = 1; //$request->m_user->user_id;
+        $company_id = 1; //$request->m_user->company_id;
+        $data = [
+            'company_id' => $company_id ?? null,
+            'template_id' => $request->template_id ?? null,
+            'category_id' => $request->category_id ?? null,
+            'doc_type_id' => $request->doc_type_id ?? null,
+            'status_id' => $request->status_id ?? null,
+            'doc_create_date' => $request->doc_create_date ?? null,
+            'sign_finish_date' => $request->sign_finish_date ?? null,
+            'doc_no' => $request->doc_no ?? null,
+            'ref_doc_no' => json_encode($request->ref_doc_no, JSON_UNESCAPED_UNICODE) ?? null,
+            'product_name' => $request->product_name ?? null,
+            'title' => $request->title ?? null,
+            'amount' => $request->amount ?? null,
+            'currency_id' => $request->currency_id ?? null,
+            'counter_party_id' => $request->counter_party_id ?? null,
+            'content' => $request->content ?? null,
+            'remarks' => $request->remarks ?? null,
+            'doc_info' => json_encode($request->doc_info, JSON_UNESCAPED_UNICODE) ?? null,
+            'sign_level' => $request->sign_level ?? null,
+            'create_user' => $login_user,
+            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            'update_user' => $login_user,
+            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            'delete_user' => null,
+            'delete_datetime' => null  
+        ];
+        return $this->builder($this->table)
+            ->where('document_id', $request->document_id)
+            ->where('company_id', $company_id)
+            ->where('category_id', $request->category_id)
+            ->update($data);
     }
 }

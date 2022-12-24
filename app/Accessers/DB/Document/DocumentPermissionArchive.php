@@ -2,7 +2,10 @@
 declare(strict_types=1);
 namespace App\Accessers\DB\Document;
 
+use Illuminate\Http\Request;
+use Carbon\CarbonImmutable;
 use App\Accessers\DB\FluentDatabase;
+use Illuminate\Support\Facades\DB;
 
 class DocumentPermissionArchive extends FluentDatabase
 {
@@ -36,5 +39,46 @@ class DocumentPermissionArchive extends FluentDatabase
             ->where("t_doc_permission_archive.company_id", $companyId)
             ->orderBy("t_doc_permission_archive.user_id")
             ->first();
+    }
+
+    public function save($request): bool
+    {
+        $login_user = 1; //$request->m_user->user_id;
+        $company_id = 1; //$request->m_user->company_id;
+        $document_id = DB::table('t_document_archive')->select(["document_id"])
+        ->orderByDesc('document_id')->limit(1)->first();
+        $data = [
+            "document_id" => $document_id->document_id,
+            "company_id" => $company_id,
+            "user_id" => $login_user,
+            "create_user" => $login_user,
+            "create_datetime" => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            "update_user" => $login_user,
+            "update_datetime" => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            "delete_user" => null,
+            "delete_datetime" => null
+        ];
+        return $this->builder($this->table)->insert($data);
+    }
+
+    public function update($request)
+    {
+        $login_user = 1; //$request->m_user->user_id;
+        $company_id = 1; //$request->m_user->company_id;
+        $data = [
+            "document_id" => $request->document_id,
+            "company_id" => $company_id,
+            "user_id" => $login_user,
+            "create_user" => $login_user,
+            "create_datetime" => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            "update_user" => $login_user,
+            "update_datetime" => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            "delete_user" => null,
+            "delete_datetime" => null
+        ];
+        return $this->builder($this->table)
+            ->where('document_id', $request->document_id)
+            ->where('company_id', $company_id)
+            ->update($data);
     }
 }

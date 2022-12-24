@@ -2,8 +2,10 @@
 declare(strict_types=1);
 namespace App\Accessers\DB\Document;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Carbon\CarbonImmutable;
 use App\Accessers\DB\FluentDatabase;
+use Illuminate\Support\Facades\DB;
 
 class DocumentArchive extends FluentDatabase
 {
@@ -103,4 +105,85 @@ class DocumentArchive extends FluentDatabase
             })
             ->first();
     }
+
+    public function save($request): bool
+    {
+        $login_user = 1; //$request->m_user->user_id;
+        $company_id = 1; //$request->m_user->company_id;
+        $scan_doc_flg = 1;
+
+        $data = [
+            'company_id' => $company_id, // 変更
+            'template_id' => $request->template_id ?? null,
+            'category_id' => $request->category_id,
+            'doc_type_id' => $request->doc_type_id ?? null,
+            'scan_doc_flg' => $scan_doc_flg, // 変更
+            'status_id' => $request->status_id ?? null,
+            'issue_date' => $request->issue_date ?? null,
+            'expiry_date' => $request->expiry_date ?? null,
+            'transaction_date' => $request->transaction_date ?? null,
+            'doc_no' => $request->doc_no ?? null,
+            'ref_doc_no' => json_encode($request->ref_doc_no, JSON_UNESCAPED_UNICODE) ?? null,
+            'title' => $request->title ?? null,
+            'product_name' => $request->product_name ?? null,
+            'amount' => $request->amount ?? null,
+            'currency_id' => $request->currency_id ?? null,
+            'counter_party_id' => $request->counter_party_id ?? null,
+            'remarks' => $request->remarks ?? null,
+            'doc_info' => json_encode($request->doc_info, JSON_UNESCAPED_UNICODE) ?? null,
+            'sign_level' => $request->sign_level ?? null,
+            'timestamp_user' => $request->timestamp_user ?? null,
+            'create_user' => $login_user, // 変更
+            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            'update_user' => $login_user, // 変更
+            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            'delete_user' => null,
+            'delete_datetime' => null
+        ];
+        return $this->builder($this->table)->insert($data);
+    }
+
+    public function update($request)
+    {
+        $login_user = 1; //$request->m_user->user_id;
+        $company_id = 1; //$request->m_user->company_id;
+        $scan_doc_flg = 1;
+
+        $data = [
+            'company_id' => $company_id, // 変更
+            'company_id' => $company_id, // 変更
+            'template_id' => $request->template_id ?? null,
+            'category_id' => $request->category_id,
+            'doc_type_id' => $request->doc_type_id ?? nul,
+            'scan_doc_flg' => $scan_doc_flg, // 変更
+            'status_id' => $request->status_id ?? null,
+            'issue_date' => $request->issue_date ?? null,
+            'expiry_date' => $request->expiry_date ?? null,
+            'transaction_date' => $request->transaction_date ?? null,
+            'doc_no' => $request->doc_no ?? null,
+            'ref_doc_no' => json_encode($request->ref_doc_no, JSON_UNESCAPED_UNICODE) ?? null,
+            'title' => $request->title ?? null,
+            'product_name' => $request->product_name ?? null,
+            'amount' => $request->amount ?? null,
+            'currency_id' => $request->currency_id ?? null,
+            'counter_party_id' => $request->counter_party_id ?? null,
+            'remarks' => $request->remarks ?? null,
+            'doc_info' => json_encode($request->doc_info, JSON_UNESCAPED_UNICODE) ?? null,
+            'sign_level' => $request->sign_level ?? null,
+            'timestamp_user' => $request->timestamp_user ?? null,
+            'create_user' => $login_user, // 変更
+            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            'update_user' => $login_user, // 変更
+            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
+            'delete_user' => null,
+            'delete_datetime' => null
+        ];
+        return $this->builder($this->table)
+            ->where('document_id', $request->document_id)
+            ->where('company_id', $company_id)
+            ->where('category_id', $request->category_id)
+            ->update($data);
+    }
 }
+// https://qiita.com/youstr/items/04018908522be2eda8ff
+//楽観ロック

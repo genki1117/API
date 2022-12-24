@@ -3,7 +3,9 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
+use App\Domain\Repositories\Interface\Document\DocumentSaveRepositoryInterface;
 use App\Domain\Repositories\Document\DocumentListRepository;
+use App\Domain\Repositories\Document\DocumentSaveRepository;
 use App\Domain\Repositories\Common\LoginUserRepository;
 use App\Domain\Repositories\Interface\Common\LoginUserRepositoryInterface;
 use App\Domain\Repositories\Interface\Sample\UserRepositoryInterface;
@@ -15,7 +17,7 @@ class RepositoryServiceProvider extends ServiceProvider
     /**
      * 抽象クラスと具象クラスの結合
      * [
-     *   抽象クラス => 具象クラス
+     *   抽象クラス => 具象クラスa
      * ]
      *
      * @var array
@@ -24,6 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider
         UserRepositoryInterface::class => UserRepository::class,
         LoginUserRepositoryInterface::class => LoginUserRepository::class,
         DocumentListRepositoryInterface::class => DocumentListRepository::class,
+        DocumentSaveRepositoryInterface::class => DocumentSaveRepository::class,
     ];
 
     /**
