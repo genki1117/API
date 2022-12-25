@@ -41,11 +41,52 @@ class DocumentWorkFlow extends FluentDatabase
             ->get()
             ->all();
     }
-
-
-    public function insert(int $companyId, int $categoryId, int $appUserId, int $wfSort, int $userId, string $createDate)
+    /**
+     * -------------------------
+     * 契約書類ワークフロー登録
+     * -------------------------
+     *
+     * @param integer $companyId
+     * @param integer $categoryId
+     * @param integer $appUserId
+     * @param integer $wfSort
+     * @param integer $userId
+     * @param string $createDate
+     * @return boolean
+     */
+    public function insertContract(int $companyId, int $categoryId, int $appUserId, int $wfSort, int $userId, string $createDate)
     {
         $LastdocumentId = DB::table('t_document_contract')->select(["document_id"])
+        ->orderByDesc('document_id')->limit(1)->first();
+        return $this->builder($this->table)->insert([
+            'document_id'           => $LastdocumentId->document_id,
+            'company_id'            => $companyId,
+            'category_id'           => $categoryId,
+            'app_user_id'           => $appUserId,
+            'wf_sort'             => $wfSort,
+            'create_user'           => $userId,
+            'create_datetime'       => $createDate,
+            'update_user'           => $userId,
+            'update_datetime'       => $createDate
+            ]);
+    }
+
+    /**
+     * -------------------------
+     * 取引書類ワークフロー登録
+     * -------------------------
+     *
+     * @param integer $companyId
+     * @param integer $categoryId
+     * @param integer $appUserId
+     * @param integer $wfSort
+     * @param integer $userId
+     * @param string $createDate
+     * @return boolean
+     */
+    public function insertDeal(int $companyId, int $categoryId, int $appUserId, int $wfSort, int $userId, string $createDate)
+    {
+        $LastdocumentId = DB::table('t_document_deal')->select(["document_id"])
         ->orderByDesc('document_id')->limit(1)->first();
         return $this->builder($this->table)->insert([
             'document_id'           => $LastdocumentId->document_id,

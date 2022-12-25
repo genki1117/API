@@ -109,7 +109,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $docStorageInsertResult    = $this->docStorageContract->insert($requestContent);
 
         // ワークフローテーブル登録 
-
         // ワークフローが起票者のみ
         if (count($requestContent['select_sign_user']) === 1) {
             $companyId  = $requestContent['company_id'];
@@ -119,7 +118,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $userId     = $requestContent['m_user_id'];
             $createDate = $requestContent['create_datetime'];
 
-            $documentWorkFlowResult = $this->documentWorkFlow->insert($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+            $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。');
                     exit;
@@ -136,7 +135,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insert($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。');
                     exit;
@@ -152,7 +151,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insert($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。');
                     exit;
@@ -160,11 +159,10 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             }
         }
         if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
-            throw new Exception('登録書類テーブルおよび登録書類閲覧権限および登録書類容量を登録できません。');
+            throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。');
         }
         return true;
     }
-
     /**
      * -------------------------
      * 契約書類更新
@@ -185,7 +183,84 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $docStorageUpdateResult    = $this->docStorageContract->update($requestContent);
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
-            throw new Exception('登録書類テーブルおよび登録書類閲覧権限および登録書類容量を更新できません。');
+            throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を更新出来ません。');
+        }
+        return true;
+    }
+
+
+
+    /**
+     * -------------------------
+     * 取引書類登録
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function dealInsert($requestContent)
+    {
+        // 取引書類登録
+        $docInsertResult           = $this->docDeal->insert($requestContent);
+
+        // 取引書類閲覧権限登録
+        $docPermissionInsertResult = $this->docPermissionTransaction->insert($requestContent) ;
+
+        // 取引書類容量登録
+        $docStorageInsertResult    = $this->docStorageTransaction->insert($requestContent);
+
+        // ワークフローテーブル登録 
+        // ワークフローが起票者のみ
+        if (count($requestContent['select_sign_user']) === 1) {
+            $companyId  = $requestContent['company_id'];
+            $categoryId = $requestContent['category_id'];
+            $appUserId  = $requestContent['select_sign_user'][0]['user_id'];
+            $wfSort     = 0;
+            $userId     = $requestContent['m_user_id'];
+            $createDate = $requestContent['create_datetime'];
+
+            $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。');
+                    exit;
+                }
+
+        // ゲスト署名者が未入力の場合
+        } else if ($requestContent['select_sign_guest_user'] === null) {
+            $selectSignUserList = $requestContent['select_sign_user'];
+            foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
+                $companyId              = $requestContent['company_id'];
+                $categoryId             = $requestContent['category_id'];
+                $appUserId              = $selectSignUser['user_id'];
+                $wfSort                 = $wf_sort * 10;
+                $userId                 = $requestContent['m_user_id'];
+                $createDate             = $requestContent['create_datetime'];
+
+                $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。');
+                    exit;
+                }
+            }
+        } else {
+            $selectSignUserList = array_merge($requestContent['select_sign_user'], $requestContent['select_sign_guest_user']);
+            foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
+                $companyId              = $requestContent['company_id'];
+                $categoryId             = $requestContent['category_id'];
+                $appUserId              = $selectSignUser['user_id'];
+                $wfSort                 = $wf_sort * 10;
+                $userId                 = $requestContent['m_user_id'];
+                $createDate             = $requestContent['create_datetime'];
+
+                $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。');
+                    exit;
+                }
+            }
+        }
+        if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
+            throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。');
         }
         return true;
     }
@@ -198,22 +273,14 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
 
 
-    
 
-    // 取引書類新規登録
-    public function dealInsert($request)
-    {
-        \DB::beginTransaction($request);
-            $docSave = $this->docDeal->save($request);
-            $docPermissionSave = $this->docPermissionTransaction->save($request);
-            $docStorageSave = $this->docStorageTransaction->save($request);
-        if ($docSave === false && $docPermissionSave === false && $docStorageSave === false) {
-            \DB::rollback();
-            return false;
-        }
-        \DB::commit();
-            return true;
-    }
+
+
+
+
+
+
+
 
     // 社内書類新規登録
     public function internalInsert($request)

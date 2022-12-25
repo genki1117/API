@@ -38,7 +38,7 @@ class DocumentSaveService
      * @param array $requestContent
      * @return boolean
      */
-    public function saveDocument(array $requestContent): bool
+    public function saveDocument(array $requestContent)
     {
         DB::beginTransaction($requestContent);
         try {
@@ -48,11 +48,22 @@ class DocumentSaveService
                     // 新規登録
                     if (!$requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->contractInsert($requestContent);
-                        
                     }
                     // 更新登録
                     if ($requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->contractUpdate($requestContent);
+                    }   
+                break;
+
+                // 取引書類の登録、更新
+                case Self::DOC_DEAL_TYPE:
+                    // 新規登録
+                    if (!$requestContent['document_id']) {
+                        $documentSaveResult = $this->documentRepository->dealInsert($requestContent);
+                    }
+                    // 更新登録
+                    if ($requestContent['document_id']) {
+                        $documentSaveResult = $this->documentRepository->dealUpdate($requestContent);
                     }   
                 break;
             }

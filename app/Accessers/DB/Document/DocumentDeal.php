@@ -99,40 +99,47 @@ class DocumentDeal extends FluentDatabase
             ->first();
     }
 
-    public function save($request): bool
+
+    /**
+   * -------------------------
+   * 契約書類登録処理
+   * -------------------------
+   *
+   * @param array $requestContent
+   * @return boolean
+   */
+    public function insert(array $requestContent)
     {
-        $login_user = 1; //$request->m_user->user_id;
-        $company_id = 1; //$request->m_user->company_id;
-        $data = [
-            'company_id' => $company_id,
-            'template_id' => $request->template_id ?? null,
-            'category_id' => $request->category_id,
-            'doc_type_id' => $request->doc_type_id ?? null,
-            'status_id' => $request->status_id ?? null,
-            'issue_date' => $request->issue_date ?? null,
-            'expiry_date'=> $request->expiry_date ?? null,
-            'payment_date' => $request->payment_date ?? null,
-            'transaction_date' => $request->transaction_date ?? null,
-            'download_date' => $request->download_date ?? null,
-            'doc_no' => $request->doc_no ?? null,
-            'ref_doc_no' => json_encode($request->ref_doc_no, JSON_UNESCAPED_UNICODE) ?? null,
-            'product_name' => $request->product_name ?? null,
-            'title' => $request->title ?? null,
-            'amount' => $request->amount ?? null,
-            'currency_id' => $request->currency_id ?? null,
-            'counter_party_id' => $request->counter_party_id ?? null,
-            'remarks' => $request->remarks ?? null,
-            'doc_info' => json_encode($request->doc_info, JSON_UNESCAPED_UNICODE) ?? null,
-            'sign_level' => $request->sign_level ?? null,
-            'create_user' => $login_user,
-            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'update_user' => $login_user ?? null,
-            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'delete_user' => null,
-            'delete_datetime' => null            
-        ];
-        return $this->builder($this->table)->insert($data);
+        return $this->builder($this->table)->insert([
+            'company_id'       => $requestContent['company_id'],
+            'category_id'      => $requestContent['category_id'],
+            'template_id'      => $requestContent['template_id'],
+            'doc_type_id'      => $requestContent['doc_type_id'],
+            'status_id'        => $requestContent['status_id'],
+            'issue_date'       => $requestContent['issue_date'],
+            'expiry_date'      => $requestContent['expiry_date'],
+            'payment_date'     => $requestContent['payment_date'],
+            'transaction_date' => $requestContent['transaction_date'],
+            'doc_no'           => $requestContent['doc_no'],
+            'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+            'product_name'     => $requestContent['product_name'],
+            'title'            => $requestContent['title'],
+            'amount'           => $requestContent['amount'],
+            'currency_id'      => $requestContent['currency_id'],
+            'counter_party_id' => $requestContent['counter_party_id'],
+            'remarks'          => $requestContent['remarks'],
+            'doc_info'         => json_encode($requestContent['doc_info'], JSON_UNESCAPED_UNICODE),
+            'sign_level'       => $requestContent['sign_level'],
+            'create_user'      => $requestContent['m_user_id'],
+            'create_datetime'  => $requestContent['create_datetime'],
+            'update_user'      => $requestContent['m_user_id'],
+            'update_datetime'  => $requestContent['update_datetime']
+            
+        ]);
     }
+
+
+
 
     public function update($request)
     {

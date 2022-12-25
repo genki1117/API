@@ -39,7 +39,15 @@ class DocumentPermissionContract extends FluentDatabase
             ->orderBy("t_doc_permission_contract.user_id")
             ->first();
     }
-
+    
+    /**
+     * -------------------------
+     * 契約書類閲覧権限登録
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
     public function insert(array $requestContent)
     {
         $LastdocumentId = DB::table('t_document_contract')->select(["document_id"])
@@ -58,7 +66,15 @@ class DocumentPermissionContract extends FluentDatabase
         return $this->builder($this->table)->insert($data);
     }
 
-    public function update($requestContent)
+    /**
+     * -------------------------
+     * 契約書類閲覧権限更新
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function update(array $requestContent)
     {
         return $this->builder($this->table)
             ->where('document_id', $requestContent['document_id'])
@@ -73,6 +89,7 @@ class DocumentPermissionContract extends FluentDatabase
                 "delete_datetime" => null
             ]);
     }
+
     /**
      * ---------------------------------------------
      * 更新項目（契約書類閲覧権限）

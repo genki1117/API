@@ -12,14 +12,17 @@ interface DocumentSaveRepositoryInterface
 
     public function dealInsert($requestContent);
 
+    public function dealUpdate($requestContent);
 
+
+
+
+    
     public function internalInsert($requestContent);
 
 
     public function archiveInsert($requestContent);
 
-
-    public function dealUpdate($requestContent);
 
 
     public function internalUpdate($requestContent);

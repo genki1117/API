@@ -105,6 +105,14 @@ class DocumentContract extends FluentDatabase
             ->first();
     }
 
+  /**
+   * -------------------------
+   * 契約書類登録処理
+   * -------------------------
+   *
+   * @param array $requestContent
+   * @return boolean
+   */
     public function insert(array $requestContent)
     {
         return $this->builder($this->table)->insert([
@@ -119,7 +127,7 @@ class DocumentContract extends FluentDatabase
             'effective_date'   => $requestContent['effective_date'],
             'cancel_date'      => $requestContent['cancel_date'],
             'expiry_date'      => $requestContent['expiry_date'],
-            'doc_no'           => $requestContent['company_id'],
+            'doc_no'           => $requestContent['doc_no'],
             'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
             'product_name'     => $requestContent['product_name'],
             'title'            => $requestContent['title'],
@@ -137,7 +145,15 @@ class DocumentContract extends FluentDatabase
         ]);
     }
 
-    public function update($requestContent)
+    /**
+     * -------------------------
+     * 契約書類登録処理
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function update(array $requestContent)
     {
         return $this->builder($this->table)
             ->where('document_id', $requestContent['document_id'])

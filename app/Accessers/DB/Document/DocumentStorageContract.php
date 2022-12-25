@@ -11,11 +11,11 @@ class DocumentStorageContract extends FluentDatabase
     protected string $table = "t_doc_storage_contract";
 
     /**
-     * ---------------------------------------------
-     * 契約書類容量情報を保存する
-     * ---------------------------------------------
-     * @param Request $request
-     * @return
+     * -------------------------
+     * 契約書類容量新規登録
+     * -------------------------
+     * @param array $requestContent
+     * @return boolean
      */
     
      public function insert(array $requestContent): bool
@@ -52,7 +52,15 @@ class DocumentStorageContract extends FluentDatabase
             ]);
      }
 
-     public function update($requestContent)
+     /**
+      * -------------------------
+      * 契約書類容量更新
+      * -------------------------
+      *
+      * @param array $requestContent
+      * @return boolean
+      */
+     public function update(array $requestContent)
     {
         return $this->builder($this->table)
             ->where('company_id', $requestContent['company_id'])
