@@ -9,6 +9,7 @@ use App\Http\Responses\Document\DocumentSaveResponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 
 class DocumentSaveController extends Controller
@@ -41,16 +42,14 @@ class DocumentSaveController extends Controller
      * @param Request $request
      * @return DocumentSaveResponse
      */
-    public function saveDocument(Request $request)
+    public function saveDocument(Request $request): JsonResponse
     {
         try {
             switch ($request->category_id) {
                 case Self::DOC_CONTRACT_TYPE:
-                    // m_userはオブジェクト
-                    $requestContent['m_user_id']               = $request->m_user_id;
-                    $requestContent['m_user_company_id']       = $request->m_user_company_id;
-                    $requestContent['m_user_type_id']          = $request->m_user_type_id;
-
+                    $requestContent['m_user_id']               = $request->m_user['user_id'];
+                    $requestContent['m_user_company_id']       = $request->m_user['company_id'];
+                    $requestContent['m_user_type_id']          = $request->m_user['user_type'];
                     $requestContent['document_id']             = $request->document_id ?? null;
                     $requestContent['company_id']              = $request->company_id;
                     $requestContent['category_id']             = $request->category_id;
@@ -78,16 +77,10 @@ class DocumentSaveController extends Controller
                     $requestContent['upload_pdf']              = $request->input('upload_pdf') ?? null;
                     $requestContent['sign_position']           = $request->input('sign_position') ?? null;
                     $requestContent['total_pages']             = $request->total_pages ?? null;
-                    $requestContent['create_user']             = $request->m_user_id ?? null;
+                    $requestContent['create_user']             = $request->m_user['user_id'] ?? null;
                     $requestContent['create_datetime']         = $this->carbon->format('Y-m-d') ?? null;
-                    $requestContent['update_user']             = $request->m_user_id ?? null;
+                    $requestContent['update_user']             = $request->m_user['user_id'] ?? null;
                     $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
-                    $requestContent['delete_user']             = $request->delete_user ?? null;
-                    $requestContent['delete_datetime']         = $request->delete_datetime ?? null;
-                    
-                    // return count($request->input('select_sign_user'));// 2
-                    // return count($requestContent['select_sign_user']); // 2
-                    // return $requestContent['select_sign_guest_user'];
 
                     // 書類の保存を実行
                     $this->documentSaveService->saveDocument($requestContent);
@@ -96,7 +89,6 @@ class DocumentSaveController extends Controller
                     // $this->documentSaveService->getLog(
 
                     // );
-                    
                     break;
 
                 case Self::DOC_DEAL_TYPE:

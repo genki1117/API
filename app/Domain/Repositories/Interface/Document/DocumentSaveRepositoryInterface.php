@@ -4,10 +4,10 @@ namespace App\Domain\Repositories\Interface\Document;
 
 interface DocumentSaveRepositoryInterface
 {
-    public function contractInsert($requestContent);
+    public function contractInsert(array $requestContent): bool;
 
 
-    public function contractUpdate($requestContent);
+    public function contractUpdate(array $requestContent): bool;
 
 
     public function dealInsert($requestContent);

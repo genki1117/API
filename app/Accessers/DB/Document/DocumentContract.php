@@ -107,10 +107,6 @@ class DocumentContract extends FluentDatabase
 
     public function insert(array $requestContent)
     {
-        // ***m_user***
-        // $requestContent['m_user_id']
-        // $requestContent['m_user_company_id']
-        // $requestContent['m_user_type_id']
         return $this->builder($this->table)->insert([
             'company_id'       => $requestContent['company_id'],
             'category_id'      => $requestContent['category_id'],
@@ -133,12 +129,11 @@ class DocumentContract extends FluentDatabase
             'remarks'          => $requestContent['remarks'],
             'doc_info'         => json_encode($requestContent['doc_info'], JSON_UNESCAPED_UNICODE),
             'sign_level'       => $requestContent['sign_level'],
-            'create_user'      => $requestContent['create_user'],
+            'create_user'      => $requestContent['m_user_id'],
             'create_datetime'  => $requestContent['create_datetime'],
-            'update_user'      => $requestContent['update_user'],
-            'update_datetime'  => $requestContent['update_datetime'],
-            'delete_user'      => $requestContent['delete_user'],
-            'delete_datetime'  => $requestContent['delete_datetime']
+            'update_user'      => $requestContent['m_user_id'],
+            'update_datetime'  => $requestContent['update_datetime']
+            
         ]);
     }
 
@@ -168,10 +163,8 @@ class DocumentContract extends FluentDatabase
                 'doc_info'         => $requestContent['doc_info'],
                 'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
                 'sign_level'       => $requestContent['sign_level'],
-                'update_user'      => $requestContent['update_user'],
-                'update_datetime'  => $requestContent['update_datetime'],
-                'delete_user'      => $requestContent['delete_user'],
-                'delete_datetime'  => $requestContent['delete_datetime']
+                'update_user'      => $requestContent['m_user_id'],
+                'update_datetime'  => $requestContent['update_datetime']
         ]);
     }
 
