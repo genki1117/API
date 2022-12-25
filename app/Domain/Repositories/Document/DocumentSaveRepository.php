@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Log;
 
 class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 {
+    protected const ISSUE_USER_WF_SORT = 0;
+    protected const SIGN_USER_COUNT    = 0;
     /**
      * @var Document
      */
@@ -131,7 +133,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10;
+                $wfSort                 = $wf_sort * 10; //連番に変更
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
@@ -147,7 +149,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10;
+                $wfSort                 = $wf_sort * 10; //連番に変更
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
@@ -187,7 +189,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         }
         return true;
     }
-
 
 
     /**
