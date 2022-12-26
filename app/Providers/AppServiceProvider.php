@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Foundations\Context\LoggedInUserContext;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Events\TransactionBeginning;
 use Illuminate\Database\Events\TransactionCommitted;
 use Illuminate\Database\Events\TransactionRolledBack;
@@ -44,6 +45,8 @@ class AppServiceProvider extends ServiceProvider
                     } elseif ($binding === null) {
                         $binding = 'NULL';
                     } elseif ($binding instanceof Carbon) {
+                        $binding = "'{$binding->toDateTimeString()}'";
+                    } elseif ($binding instanceof CarbonImmutable) {
                         $binding = "'{$binding->toDateTimeString()}'";
                     }
                     $sql = preg_replace("/\?/", $binding, $sql, 1);
