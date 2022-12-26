@@ -42,7 +42,6 @@ class SystemAccessLogRepository implements SystemAccessLogRepositoryInterface
             $userId = $user->user_id;
             $fullName = $user->full_name;
         } else {
-            //TODO ユーザなしの場合は、下記の内容でよいか？
             $companyId = -1;
             $userId = -1;
             $fullName = "";

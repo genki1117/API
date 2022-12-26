@@ -9,6 +9,16 @@ use MicrosoftAzure\Storage\Queue\Models\CreateQueueOptions;
 
 class QueueUtility
 {
+    public const QUEUE_NAME_SENDMAIL = "sendmail";
+    public const QUEUE_NAME_BULKVALIDATION = "bulkvalidation";
+    public const QUEUE_NAME_SIGN = "sign";
+    public const QUEUE_NAME_TIMESTAMP = "timestamp";
+    public const QUEUE_NAME_DOCUMENTSAVE = "documentsave";
+    public const QUEUE_NAME_DOCUMENTDELETE = "documentdelete";
+    public const QUEUE_NAME_DLCSV = "dlcsv";
+    public const QUEUE_NAME_DLPDF = "dlpdf";
+    public const QUEUE_META_KEY_DEFAULT = "option";
+
     /**
      * @param string $queName
      * @param array $param
@@ -34,9 +44,7 @@ class QueueUtility
 
         try {
             // Create queue.
-            //TODO 同一名称でキューは登録できないので、末尾にタイムスタンプを付与しておく　要確認
-            $microTime = str_replace('.', '-', (string)microtime(true));
-            $queueClient->createQueue($queName."-".$microTime, $createQueueOptions);
+            $queueClient->createQueue($queName, $createQueueOptions);
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());

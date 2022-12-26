@@ -72,8 +72,9 @@ class AuthorizationToken
 
         // $user = $this->loginUserRepositoryInterface->getUser($tokenData->company_id, $tokenData->user_id);
 
-        //TODO 仮でAzureADとの認証処理で、compnayId=1 userId=1のユーザを取得したとしておく)
-        $user = $this->loginUserRepositoryInterface->getUser(compnayId:"1", userId:"1");
+        //TODO 仮でAzureADとの認証処理で、compnayId=1 userId=1のユーザを取得したとしておく
+        // テストDBにcompnayId=1 userId=1  email="host1@email.com"で登録していること前提
+        $user = $this->loginUserRepositoryInterface->getUser(compnayId:"1", email:"host1@email.com");
         if ($user->getUser() === null) {
             // ユーザー存在しない場合
             throw new AuthenticateException(
