@@ -3,12 +3,11 @@ declare(strict_types=1);
 namespace App\Accessers\Queue;
 
 use Illuminate\Support\Facades\Log;
-use JetBrains\PhpStorm\Pure;
 use MicrosoftAzure\Storage\Queue\QueueRestProxy;
 use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
-use MicrosoftAzure\Storage\Queue\Models\CreateMessageOptions;
+use MicrosoftAzure\Storage\Queue\Models\CreateQueueOptions;
 
-class AddQueue
+class QueueUtility
 {
     /**
      * @param string $queName
@@ -21,8 +20,8 @@ class AddQueue
 
         $accountName = env("AZURE_ACCOUNT_NAME");
         $accountKey = env("AZURE_ACCOUNT_KEY");
-        $debug="UseDevelopmentStorage=true";
-        $connectionString = sprintf("%s;DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s", $debug, $accountName, $accountKey);
+        $queueEndpoint = env("AZURE_STORAGE_QUEUE_ENDPOINT");
+        $connectionString = sprintf("DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s;QueueEndpoint=%s", $accountName, $accountKey, $queueEndpoint);
 
         // Create queue REST proxy.
         $queueClient = QueueRestProxy::createQueueService($connectionString);
@@ -35,7 +34,9 @@ class AddQueue
 
         try {
             // Create queue.
-            $queueClient->createQueue("myqueue", $createQueueOptions);
+            //TODO 同一名称でキューは登録できないので、末尾にタイムスタンプを付与しておく　要確認
+            $microTime = str_replace('.', '-', (string)microtime(true));
+            $queueClient->createQueue($queName."-".$microTime, $createQueueOptions);
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());
