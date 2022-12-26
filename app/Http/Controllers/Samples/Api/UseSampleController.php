@@ -48,6 +48,5 @@ class UseSampleController extends Controller
 
     public function test()
     {
-        
     }
 }

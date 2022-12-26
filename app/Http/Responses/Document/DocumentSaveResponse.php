@@ -22,7 +22,6 @@ class DocumentSaveResponse
             "status" => "200",
             "message" => "書類保存が完了しました。" ,
         ], 200, [], JSON_UNESCAPED_UNICODE);
-
     }
 
     public function faildSave(string $exceptionMessage)

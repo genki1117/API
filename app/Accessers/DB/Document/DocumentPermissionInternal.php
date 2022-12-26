@@ -40,46 +40,56 @@ class DocumentPermissionInternal extends FluentDatabase
             ->first();
     }
 
-    public function save($request): bool
+    /**
+     * -------------------------
+     * 社内書類閲覧権限登録
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function insert(array $requestContent): bool
     {
-        $login_user = 1; //$request->m_user->user_id;
-        $company_id = 1; //$request->m_user->company_id;
-        $document_id = DB::table('t_document_internal')->select(["document_id"])
+        $LastdocumentId = DB::table('t_document_internal')->select(["document_id"])
         ->orderByDesc('document_id')->limit(1)->first();
         $data = [
-            "document_id" => $document_id->document_id,
-            "company_id" => $company_id,
-            "user_id" => $login_user,
-            "create_user" => $login_user,
-            "create_datetime" => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            "update_user" => $login_user,
-            "update_datetime" => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            "delete_user" => null,
+            "document_id"     => $LastdocumentId->document_id,
+            "company_id"      => $requestContent['company_id'],
+            "user_id"         => $requestContent['m_user_id'],
+            "create_user"     => $requestContent['m_user_id'],
+            "create_datetime" => $requestContent['create_datetime'],
+            "update_user"     => $requestContent['m_user_id'],
+            "update_datetime" => $requestContent['update_datetime'],
+            "delete_user"     => null,
             "delete_datetime" => null
         ];
         return $this->builder($this->table)->insert($data);
     }
 
-    public function update($request)
+    /**
+     * -------------------------
+     * 社内書類閲覧権限更新
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function update(array $requestContent): bool
     {
-        $login_user = 1; //$request->m_user->user_id;
-        $company_id = 1; //$request->m_user->company_id;
-        $data = [
-            "document_id" => $request->document_id,
-            "company_id" => $company_id,
-            "user_id" => $login_user,
-            "create_user" => $login_user,
-            "create_datetime" => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            "update_user" => $login_user,
-            "update_datetime" => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            "delete_user" => null,
-            "delete_datetime" => null
-        ];
         return $this->builder($this->table)
-            ->where('document_id', $request->document_id)
-            ->where('company_id', $company_id)
-            ->update($data);
+            ->where('document_id', $requestContent['document_id'])
+            ->where('company_id', $requestContent['company_id'])
+            ->update([
+                "document_id"     => $requestContent['company_id'],
+                "company_id"      => $requestContent['company_id'],
+                "user_id"         => $requestContent['m_user_id'],
+                "update_user"     => $requestContent['m_user_id'],
+                "update_datetime" => $requestContent['update_datetime'],
+                "delete_user"     => null,
+                "delete_datetime" => null
+            ]);
     }
+
     /**
      * ---------------------------------------------
      * 更新項目（社内書類閲覧権限）

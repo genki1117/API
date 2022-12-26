@@ -23,5 +23,4 @@ interface DocumentSaveRepositoryInterface
     public function archiveInsert(array $requestContent);
 
     public function archiveUpdate(array $requestContent);
-
 }

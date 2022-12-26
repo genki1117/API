@@ -36,14 +36,14 @@ class DocumentSaveRequest extends FormRequest
             'document_id'      => 'numeric',
             'company_id'       => 'required | numeric',
             'category_id'      => 'required | numeric',
-            'template_id'      => 'numeric',            
+            'template_id'      => 'numeric',
             'doc_type_id'      => 'required | numeric',
             'status_id'        => 'numeric',
 
             'doc_no'           => 'string | max:30',
             'ref_doc_no'       => 'json',
             'product_name'     => 'string | max:255',
-            'title'            => 'string | max:255',  
+            'title'            => 'string | max:255',
             'amount'           => 'numeric',
             'currency_id'      => 'numeric',
             'counter_party_id' => 'numeric',
@@ -120,7 +120,7 @@ class DocumentSaveRequest extends FormRequest
             'expiry_date.date' => '失効日の形式を確認してください',
             'doc_no.string' => '書類NOは文字列で入力してください',
             'doc_no.max' => '書類NOは30文字以内で入力してください',
-            'ref_doc_no.json' => '参照書類NOはJSON形式で入力してください。' 
+            'ref_doc_no.json' => '参照書類NOはJSON形式で入力してください。'
 
          ];
     }

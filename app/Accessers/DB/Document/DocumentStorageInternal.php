@@ -11,87 +11,85 @@ class DocumentStorageInternal extends FluentDatabase
     protected string $table = "t_doc_storage_internal";
 
     /**
-     * ---------------------------------------------
-     * 契約書類容量情報を保存する
-     * ---------------------------------------------
-     * @param Request $request
-     * @return
+     * -------------------------
+     * 社内書類容量新規登録
+     * -------------------------
+     * @param array $requestContent
+     * @return boolean
      */
     
-     public function save($request): bool
-     {
-        // return $request->upload_pdf['file_size'];
-        $login_user = 1; //$request->m_user->user_id;
-        $company_id = 1; //$request->m_user->company_id;
-        $document_id = DB::table('t_document_internal')->select(["document_id"])
-        ->orderByDesc('document_id')->limit(1)->first();
-        $data = [
-            'document_id' => $document_id->document_id, // 変更する
-            'company_id' => $company_id, // ログインユーザ会社ID
-            'template_id' => $request->template_id,
-            'doc_type_id' => $request->doc_type_id,
-            'file_name' => $request->upload_pdf['file_name'],
-            'file_size' => $request->upload_pdf['file_size'],
-            'file_path' => $request->upload_pdf['file_path'] ?? null,
-            // 'file_hash' => $request->upload_pdf['file_hash'],
-            // 'file_prot_flg' => $request->upload_pdf['file_prot_flg'],
-            // 'file_prot_pw_flg' => $request->upload_pdf['file_prot_pw_flg'],
-            // 'file_timestamp_flg' => $request->upload_pdf['file_timestamp_flg'],
-            // 'file_sign' => $request->upload_pdf['file_sign'],
-            // 'width' => $request->upload_file['width'],
-            // 'height' => $request->upload_file['height'],
-            // 'dpi' => $request->upload_file['dpi'],
-            // 'color_depth' => $request->upload_pdf['color_depth'],
-            // 'pdf_type' => $request->upload_pdf['pdf_type'],
-            // 'pdf_version' => $request->upload_pdf['pdf_version'],
-            // 'sign_position' => $request->upload_pdf['sign_position'],
-            // 'total_pages' => $request->upload_pdf['total_pages'],
-            'create_user' => $login_user,
-            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'update_user' => $login_user,
-            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'delete_user' => null,
-            'delete_datetime' => null
-            ];
-            return $this->builder($this->table)->insert($data);
-     }
-
-     public function update($request)
+    public function insert(array $requestContent): bool
     {
-        $login_user = 1; //$request->m_user->user_id;
-        $company_id = 1; //$request->m_user->company_id;
-        $data = [
-            'document_id' => $request->document_id, // 変更する
-            'company_id' => $company_id, // ログインユーザ会社ID
-            'template_id' => $request->template_id,
-            'doc_type_id' => $request->doc_type_id,
-            'file_name' => $request->upload_pdf['file_name'],
-            'file_size' => $request->upload_pdf['file_size'],
-            'file_path' => $request->upload_pdf['file_path'] ?? null,
-            // 'file_hash' => $request->upload_pdf['file_hash'],
-            // 'file_prot_flg' => $request->upload_pdf['file_prot_flg'],
-            // 'file_prot_pw_flg' => $request->upload_pdf['file_prot_pw_flg'],
-            // 'file_timestamp_flg' => $request->upload_pdf['file_timestamp_flg'],
-            // 'file_sign' => $request->upload_pdf['file_sign'],
-            // 'width' => $request->upload_file['width'],
-            // 'height' => $request->upload_file['height'],
-            // 'dpi' => $request->upload_file['dpi'],
-            // 'color_depth' => $request->upload_pdf['color_depth'],
-            // 'pdf_type' => $request->upload_pdf['pdf_type'],
-            // 'pdf_version' => $request->upload_pdf['pdf_version'],
-            // 'sign_position' => $request->upload_pdf['sign_position'],
-            // 'total_pages' => $request->upload_pdf['total_pages'],
-            'create_user' => $login_user,
-            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'update_user' => $login_user,
-            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'delete_user' => null,
-            'delete_datetime' => null
-        ];
+        $LastdocumentId = DB::table('t_document_internal')->select(["document_id"])
+        ->orderByDesc('document_id')->limit(1)->first();
+        return $this->builder($this->table)->insert([
+        'document_id'           => $LastdocumentId->document_id,
+        'company_id'            => $requestContent['m_user_company_id'],
+        'template_id'           => $requestContent['template_id'],
+        'doc_type_id'           => $requestContent['doc_type_id'],
+        'file_name'             => $requestContent['upload_pdf']['file_name'],
+        'file_size'             => $requestContent['upload_pdf']['file_size'],
+        'file_path'             => $requestContent['upload_pdf']['file_path'],
+        'file_hash'             => $requestContent['upload_pdf']['file_hash'],
+        'file_prot_flg'         => $requestContent['upload_pdf']['file_prot_flg'],
+        'file_prot_pw_flg'      => $requestContent['upload_pdf']['file_prot_pw_flg'],
+        'file_timestamp_flg'    => $requestContent['upload_pdf']['file_timestamp'],
+        'file_sign'             => $requestContent['upload_pdf']['file_sign'],
+        'width'                 => $requestContent['upload_pdf']['width'],
+        'height'                => $requestContent['upload_pdf']['height'],
+        'dpi'                   => $requestContent['upload_pdf']['dpi'],
+        'color_depth'           => $requestContent['upload_pdf']['color_depth'],
+        'pdf_type'              => $requestContent['upload_pdf']['pdf_type'],
+        'pdf_version'           => $requestContent['upload_pdf']['pdf_version'],
+        'sign_position'         => json_encode($requestContent['sign_position']),
+        'total_pages'           => $requestContent['total_pages'],
+        'create_user'           => $requestContent['m_user_id'],
+        'create_datetime'       => $requestContent['create_datetime'],
+        'update_user'           => $requestContent['m_user_id'],
+        'update_datetime'       => $requestContent['update_datetime'],
+        'delete_user'           => null,
+        'delete_datetime'       => null
+        ]);
+    }
+    /**
+     * -------------------------
+     * 契約書類容量更新
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function update(array $requestContent)
+    {
         return $this->builder($this->table)
-            ->where('document_id', $request->document_id)
-            ->where('company_id', $company_id)
-            ->update($data);
+            ->where('company_id', $requestContent['company_id'])
+            ->where('document_id', $requestContent['document_id'])
+            ->update([
+                'document_id'           => $requestContent['document_id'],
+                'company_id'            => $requestContent['m_user_company_id'],
+                'template_id'           => $requestContent['template_id'],
+                'doc_type_id'           => $requestContent['doc_type_id'],
+                'file_name'             => $requestContent['upload_pdf']['file_name'],
+                'file_size'             => $requestContent['upload_pdf']['file_size'],
+                'file_path'             => $requestContent['upload_pdf']['file_path'],
+                'file_hash'             => $requestContent['upload_pdf']['file_hash'],
+                'file_prot_flg'         => $requestContent['upload_pdf']['file_prot_flg'],
+                'file_prot_pw_flg'      => $requestContent['upload_pdf']['file_prot_pw_flg'],
+                'file_timestamp_flg'    => $requestContent['upload_pdf']['file_timestamp'],
+                'file_sign'             => $requestContent['upload_pdf']['file_sign'],
+                'width'                 => $requestContent['upload_pdf']['width'],
+                'height'                => $requestContent['upload_pdf']['height'],
+                'dpi'                   => $requestContent['upload_pdf']['dpi'],
+                'color_depth'           => $requestContent['upload_pdf']['color_depth'],
+                'pdf_type'              => $requestContent['upload_pdf']['pdf_type'],
+                'pdf_version'           => $requestContent['upload_pdf']['pdf_version'],
+                'sign_position'         => json_encode($requestContent['sign_position']),
+                'total_pages'           => $requestContent['total_pages'],
+                'update_user'           => $requestContent['m_user_id'],
+                'update_datetime'       => $requestContent['update_datetime'],
+                'delete_user'           => null,
+                'delete_datetime'       => null
+            ]);
     }
     
     /*

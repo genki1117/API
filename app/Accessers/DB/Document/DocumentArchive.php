@@ -7,7 +7,6 @@ use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use App\Accessers\DB\FluentDatabase;
 
-
 class DocumentArchive extends FluentDatabase
 {
     protected string $table = 't_document_archive';
@@ -107,84 +106,85 @@ class DocumentArchive extends FluentDatabase
             ->first();
     }
 
-    public function save($request): bool
-    {
-        $login_user = 1; //$request->m_user->user_id;
-        $company_id = 1; //$request->m_user->company_id;
-        $scan_doc_flg = 1;
+    /**
+   * -------------------------
+   * 登録書類登録処理
+   * -------------------------
+   *
+   * @param array $requestContent
+   * @return boolean
+   */
+  public function insert(array $requestContent)
+  {
+      return $this->builder($this->table)->insert([
+          'company_id'       => $requestContent['company_id'],
+          'category_id'      => $requestContent['category_id'],
+          'template_id'      => $requestContent['template_id'],
+          'doc_type_id'      => $requestContent['doc_type_id'],
+          'status_id'        => $requestContent['status_id'],
+          'cont_start_date'  => $requestContent['cont_start_date'],
+          'cont_end_date'    => $requestContent['cont_end_date'],
+          'conc_date'        => $requestContent['conc_date'],
+          'effective_date'   => $requestContent['effective_date'],
+          'cancel_date'      => $requestContent['cancel_date'],
+          'expiry_date'      => $requestContent['expiry_date'],
+          'doc_no'           => $requestContent['doc_no'],
+          'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+          'product_name'     => $requestContent['product_name'],
+          'title'            => $requestContent['title'],
+          'amount'           => $requestContent['amount'],
+          'currency_id'      => $requestContent['currency_id'],
+          'counter_party_id' => $requestContent['counter_party_id'],
+          'remarks'          => $requestContent['remarks'],
+          'doc_info'         => json_encode($requestContent['doc_info'], JSON_UNESCAPED_UNICODE),
+          'sign_level'       => $requestContent['sign_level'],
+          'create_user'      => $requestContent['m_user_id'],
+          'create_datetime'  => $requestContent['create_datetime'],
+          'update_user'      => $requestContent['m_user_id'],
+          'update_datetime'  => $requestContent['update_datetime']
+          
+      ]);
+  }
 
-        $data = [
-            'company_id' => $company_id, // 変更
-            'template_id' => $request->template_id ?? null,
-            'category_id' => $request->category_id,
-            'doc_type_id' => $request->doc_type_id ?? null,
-            'scan_doc_flg' => $scan_doc_flg, // 変更
-            'status_id' => $request->status_id ?? null,
-            'issue_date' => $request->issue_date ?? null,
-            'expiry_date' => $request->expiry_date ?? null,
-            'transaction_date' => $request->transaction_date ?? null,
-            'doc_no' => $request->doc_no ?? null,
-            'ref_doc_no' => json_encode($request->ref_doc_no, JSON_UNESCAPED_UNICODE) ?? null,
-            'title' => $request->title ?? null,
-            'product_name' => $request->product_name ?? null,
-            'amount' => $request->amount ?? null,
-            'currency_id' => $request->currency_id ?? null,
-            'counter_party_id' => $request->counter_party_id ?? null,
-            'remarks' => $request->remarks ?? null,
-            'doc_info' => json_encode($request->doc_info, JSON_UNESCAPED_UNICODE) ?? null,
-            'sign_level' => $request->sign_level ?? null,
-            'timestamp_user' => $request->timestamp_user ?? null,
-            'create_user' => $login_user, // 変更
-            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'update_user' => $login_user, // 変更
-            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'delete_user' => null,
-            'delete_datetime' => null
-        ];
-        return $this->builder($this->table)->insert($data);
-    }
+  /**
+   * -------------------------
+   * 登録書類更新処理
+   * -------------------------
+   *
+   * @param array $requestContent
+   * @return boolean
+   */
+  public function update(array $requestContent)
+  {
+      return $this->builder($this->table)
+          ->where('document_id', $requestContent['document_id'])
+          ->where('company_id', $requestContent['company_id'])
+          ->where('category_id', $requestContent['category_id'])
+          ->update([
+              'template_id'      => $requestContent['template_id'],
+              'doc_type_id'      => $requestContent['doc_type_id'],
+              'status_id'        => $requestContent['status_id'],
+              'cont_start_date'  => $requestContent['cont_start_date'],
+              'cont_end_date'    => $requestContent['cont_end_date'],
+              'conc_date'        => $requestContent['conc_date'],
+              'effective_date'   => $requestContent['effective_date'],
+              'cancel_date'      => $requestContent['cancel_date'],
+              'doc_no'           => $requestContent['doc_no'],
+              'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+              'product_name'     => $requestContent['product_name'],
+              'title'            => $requestContent['title'],
+              'amount'           => $requestContent['amount'],
+              'currency_id'      => $requestContent['currency_id'],
+              'counter_party_id' => $requestContent['counter_party_id'],
+              'remarks'          => $requestContent['remarks'],
+              'doc_info'         => $requestContent['doc_info'],
+              'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+              'sign_level'       => $requestContent['sign_level'],
+              'update_user'      => $requestContent['m_user_id'],
+              'update_datetime'  => $requestContent['update_datetime']
+      ]);
+  }
 
-    public function update($request)
-    {
-        $login_user = 1; //$request->m_user->user_id;
-        $company_id = 1; //$request->m_user->company_id;
-        $scan_doc_flg = 1;
-
-        $data = [
-            'company_id' => $company_id, // 変更
-            'company_id' => $company_id, // 変更
-            'template_id' => $request->template_id ?? null,
-            'category_id' => $request->category_id,
-            'doc_type_id' => $request->doc_type_id ?? nul,
-            'scan_doc_flg' => $scan_doc_flg, // 変更
-            'status_id' => $request->status_id ?? null,
-            'issue_date' => $request->issue_date ?? null,
-            'expiry_date' => $request->expiry_date ?? null,
-            'transaction_date' => $request->transaction_date ?? null,
-            'doc_no' => $request->doc_no ?? null,
-            'ref_doc_no' => json_encode($request->ref_doc_no, JSON_UNESCAPED_UNICODE) ?? null,
-            'title' => $request->title ?? null,
-            'product_name' => $request->product_name ?? null,
-            'amount' => $request->amount ?? null,
-            'currency_id' => $request->currency_id ?? null,
-            'counter_party_id' => $request->counter_party_id ?? null,
-            'remarks' => $request->remarks ?? null,
-            'doc_info' => json_encode($request->doc_info, JSON_UNESCAPED_UNICODE) ?? null,
-            'sign_level' => $request->sign_level ?? null,
-            'timestamp_user' => $request->timestamp_user ?? null,
-            'create_user' => $login_user, // 変更
-            'create_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'update_user' => $login_user, // 変更
-            'update_datetime' => CarbonImmutable::now()->format('Y/m/d H:i:s'),
-            'delete_user' => null,
-            'delete_datetime' => null
-        ];
-        return $this->builder($this->table)
-            ->where('document_id', $request->document_id)
-            ->where('company_id', $company_id)
-            ->where('category_id', $request->category_id)
-            ->update($data);
-    }
     /**
      * 登録書類一覧情報を取得
      * @param array $mUser
@@ -196,7 +196,6 @@ class DocumentArchive extends FluentDatabase
 
     public function getDocumentList(array $mUser, array $condition, array $sort, array $page): ?array
     {
-    
         return $this->builder()
             ->select([
                 't_document_archive.document_id',
@@ -396,7 +395,6 @@ class DocumentArchive extends FluentDatabase
             ->offset($page['disp_page'])
             ->get()
             ->all();
-        
     }
 
     /**

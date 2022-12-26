@@ -21,6 +21,7 @@ use App\Domain\Repositories\Interface\Document\DocumentSaveRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
+
 // use App\Domain\Entities\Document\DocumentDetail as DocumentEntity;
 
 class DocumentSaveRepository implements DocumentSaveRepositoryInterface
@@ -79,21 +80,21 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param DocumentWorkFlow $documentWorkFlow
      */
 
-     public function __construct(DocumentContract $docContract,
-                                 DocumentDeal $docDeal,
-                                 DocumentInternal $docInternal,
-                                 DocumentArchive $docArchive,
-                                 DocumentPermissionContract $docPermissionContract,
-                                 DocumentPermissionTransaction $docPermissionTransaction,
-                                 DocumentPermissionInternal $docPermissionInternal,
-                                 DocumentPermissionArchive $docPermissionArchive,
-                                 DocumentStorageContract $docStorageContract,
-                                 DocumentStorageTransaction $docStorageTransaction,
-                                 DocumentStorageInternal $docStorageInternal,
-                                 DocumentStorageArchive $docStorageArchive,
-                                 DocumentWorkFlow $documentWorkFlow
-                                 )
-    {
+    public function __construct(
+        DocumentContract $docContract,
+        DocumentDeal $docDeal,
+        DocumentInternal $docInternal,
+        DocumentArchive $docArchive,
+        DocumentPermissionContract $docPermissionContract,
+        DocumentPermissionTransaction $docPermissionTransaction,
+        DocumentPermissionInternal $docPermissionInternal,
+        DocumentPermissionArchive $docPermissionArchive,
+        DocumentStorageContract $docStorageContract,
+        DocumentStorageTransaction $docStorageTransaction,
+        DocumentStorageInternal $docStorageInternal,
+        DocumentStorageArchive $docStorageArchive,
+        DocumentWorkFlow $documentWorkFlow
+    ) {
         $this->docContract              = $docContract;
         $this->docDeal                  = $docDeal;
         $this->docInternal              = $docInternal;
@@ -113,7 +114,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * -------------------------
      * 契約書類新規登録
      * -------------------------
-     * 
+     *
      * @param array $requestContent
      * @return boolean
      */
@@ -128,7 +129,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         // 契約書類容量登録
         $docStorageInsertResult    = $this->docStorageContract->insert($requestContent);
 
-        // ワークフローテーブル登録 
+        // ワークフローテーブル登録
         // ワークフローが起票者のみ
         if (count($requestContent['select_sign_user']) === 1) {
             $companyId  = $requestContent['company_id'];
@@ -139,13 +140,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $createDate = $requestContent['create_datetime'];
 
             $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
-                if (!$documentWorkFlowResult) {
-                    throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
-                    exit;
-                }
+            if (!$documentWorkFlowResult) {
+                throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
+                exit;
+            }
 
         // ゲスト署名者が未入力の場合
-        } else if ($requestContent['select_sign_guest_user'] === null) {
+        } elseif ($requestContent['select_sign_guest_user'] === null) {
             $selectSignUserList = $requestContent['select_sign_user'];
             foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
                 $companyId              = $requestContent['company_id'];
@@ -228,7 +229,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         // 取引書類容量登録
         $docStorageInsertResult    = $this->docStorageTransaction->insert($requestContent);
 
-        // ワークフローテーブル登録 
+        // ワークフローテーブル登録
         // ワークフローが起票者のみ
         if (count($requestContent['select_sign_user']) === 1) {
             $companyId  = $requestContent['company_id'];
@@ -239,13 +240,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $createDate = $requestContent['create_datetime'];
 
             $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
-                if (!$documentWorkFlowResult) {
-                    throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
-                    exit;
-                }
+            if (!$documentWorkFlowResult) {
+                throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
+                exit;
+            }
 
         // ゲスト署名者が未入力の場合
-        } else if ($requestContent['select_sign_guest_user'] === null) {
+        } elseif ($requestContent['select_sign_guest_user'] === null) {
             $selectSignUserList = $requestContent['select_sign_user'];
             foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
                 $companyId              = $requestContent['company_id'];
@@ -297,17 +298,16 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $docUpdateResult           = $this->docDeal->update($requestContent);
 
         // 取引書類閲覧権限更新
-        $docPermissionUpdateResult = $this->docPermissionDeal->update($requestContent);
+        $docPermissionUpdateResult = $this->docPermissionTransaction->update($requestContent);
 
         // 取引書類容量更新
-        $docStorageUpdateResult    = $this->docStorageDeal->update($requestContent);
+        $docStorageUpdateResult    = $this->docStorageTransaction->update($requestContent);
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
             throw new Exception(Self::DEAL_UPDATE_ERROR_MESSAGE);
         }
         return true;
     }
-
 
     /**
      * -------------------------
@@ -328,7 +328,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         // 社内書類容量登録
         $docStorageInsertResult    = $this->docStorageInternal->insert($requestContent);
 
-        // ワークフローテーブル登録 
+        // ワークフローテーブル登録
         // ワークフローが起票者のみ
         if (count($requestContent['select_sign_user']) === 1) {
             $companyId  = $requestContent['company_id'];
@@ -339,13 +339,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $createDate = $requestContent['create_datetime'];
 
             $documentWorkFlowResult = $this->documentWorkFlow->insertInternal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
-                if (!$documentWorkFlowResult) {
-                    throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
-                    exit;
-                }
+            if (!$documentWorkFlowResult) {
+                throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
+                exit;
+            }
 
         // ゲスト署名者が未入力の場合
-        } else if ($requestContent['select_sign_guest_user'] === null) {
+        } elseif ($requestContent['select_sign_guest_user'] === null) {
             $selectSignUserList = $requestContent['select_sign_user'];
             foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
                 $companyId              = $requestContent['company_id'];
@@ -428,7 +428,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         // 取引書類容量登録
         $docStorageInsertResult    = $this->docStorageArchive->insert($requestContent);
 
-        // ワークフローテーブル登録 
+        // ワークフローテーブル登録
         // ワークフローが起票者のみ
         if (count($requestContent['select_sign_user']) === 1) {
             $companyId  = $requestContent['company_id'];
@@ -439,13 +439,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $createDate = $requestContent['create_datetime'];
 
             $documentWorkFlowResult = $this->documentWorkFlow->insertArchive($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
-                if (!$documentWorkFlowResult) {
-                    throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
-                    exit;
-                }
+            if (!$documentWorkFlowResult) {
+                throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
+                exit;
+            }
 
         // ゲスト署名者が未入力の場合
-        } else if ($requestContent['select_sign_guest_user'] === null) {
+        } elseif ($requestContent['select_sign_guest_user'] === null) {
             $selectSignUserList = $requestContent['select_sign_user'];
             foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
                 $companyId              = $requestContent['company_id'];
@@ -507,12 +507,4 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         }
         return true;
     }
-
-
-
-
-
-
-    
-    
 }

@@ -10,14 +10,14 @@ use App\Domain\Repositories\Interface\Document\DocumentSaveRepositoryInterface;
 
 class DocumentSaveService
 {
-     /** @var int */
-     protected const DOC_CONTRACT_TYPE = 0;
-     /** @var int */
-     protected const DOC_DEAL_TYPE = 1;
-     /** @var int */
-     protected const DOC_INTERNAL_TYPE = 2;
-     /** @var int */
-     protected const DOC_ARCHIVE_TYPE = 3;
+    /** @var int */
+    protected const DOC_CONTRACT_TYPE = 0;
+    /** @var int */
+    protected const DOC_DEAL_TYPE = 1;
+    /** @var int */
+    protected const DOC_INTERNAL_TYPE = 2;
+    /** @var int */
+    protected const DOC_ARCHIVE_TYPE = 3;
 
 
 
@@ -52,10 +52,10 @@ class DocumentSaveService
                     // 更新登録
                     if ($requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->contractUpdate($requestContent);
-                    }   
-                break;
+                    }
+                    break;
 
-                // 取引書類の登録、更新
+                    // 取引書類の登録、更新
                 case Self::DOC_DEAL_TYPE:
                     // 新規登録
                     if (!$requestContent['document_id']) {
@@ -64,10 +64,10 @@ class DocumentSaveService
                     // 更新登録
                     if ($requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->dealUpdate($requestContent);
-                    }   
-                break;
+                    }
+                    break;
 
-                // 社内書類の登録、更新
+                    // 社内書類の登録、更新
                 case Self::DOC_DEAL_TYPE:
                     // 新規登録
                     if (!$requestContent['document_id']) {
@@ -76,10 +76,10 @@ class DocumentSaveService
                     // 更新登録
                     if ($requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->internalUpdate($requestContent);
-                    }   
-                break;
+                    }
+                    break;
 
-                // 登録書類の登録、更新
+                    // 登録書類の登録、更新
                 case Self::DOC_DEAL_TYPE:
                     // 新規登録
                     if (!$requestContent['document_id']) {
@@ -88,8 +88,8 @@ class DocumentSaveService
                     // 更新登録
                     if ($requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->archiveUpdate($requestContent);
-                    }   
-                break;
+                    }
+                    break;
             }
             DB::commit();
         } catch (Exception $e) {

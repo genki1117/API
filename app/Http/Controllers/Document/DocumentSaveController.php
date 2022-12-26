@@ -11,7 +11,6 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
-
 class DocumentSaveController extends Controller
 {
     /** @var */
@@ -28,10 +27,10 @@ class DocumentSaveController extends Controller
 
     /** @param DocumentSaveService $documentService */
 
-    public function __construct(DocumentSaveService $documentSaveService,
-                                Carbon $carbon,
-    )
-    {
+    public function __construct(
+        DocumentSaveService $documentSaveService,
+        Carbon $carbon,
+    ) {
         $this->documentSaveService = $documentSaveService;
         $this->carbon          = $carbon;
     }
@@ -216,4 +215,3 @@ class DocumentSaveController extends Controller
         }
     }
 }
-        
