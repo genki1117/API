@@ -147,7 +147,7 @@ class DocumentContract extends FluentDatabase
 
     /**
      * -------------------------
-     * 契約書類登録処理
+     * 契約書類更新処理
      * -------------------------
      *
      * @param array $requestContent

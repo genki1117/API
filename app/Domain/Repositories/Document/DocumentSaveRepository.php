@@ -25,8 +25,26 @@ use Illuminate\Support\Facades\Log;
 
 class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 {
-    protected const ISSUE_USER_WF_SORT = 0;
-    protected const SIGN_USER_COUNT    = 0;
+    /** @var */
+    protected const ISSUE_USER_WF_SORT   = 0; // 起票者のワークフローソート
+    /** @var */
+    protected const CONTRACT_INSERT_ERROR_MESSAGE   = '契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。';
+    /** @var */
+    protected const CONTRACT_UPDATE_ERROR_MESSAGE   = '契約書類テーブルおよび契約書類閲覧権限および契約書類容量を更新出来ません。';
+    /** @var */
+    protected const DEAL_INSERT_ERROR_MESSAGE       = '取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。';
+    /** @var */
+    protected const DEAL_UPDATE_ERROR_MESSAGE       = '取引書類テーブルおよび取引書類閲覧権限および取引書類容量を更新出来ません。';
+    /** @var */
+    protected const INTERNAL_INSERT_ERROR_MESSAGE   = '社内書類テーブルおよび社内書類閲覧権限および社内書類容量を登録出来ません。';
+    /** @var */
+    protected const INTERNAL_UPDATE_ERROR_MESSAGE   = '社内書類テーブルおよび社内書類閲覧権限および社内書類容量を更新出来ません。';
+    /** @var */
+    protected const ARCHIVE_INSERT_ERROR_MESSAGE    = '登録書類テーブルおよび登録書類閲覧権限および登録書類容量を登録出来ません。';
+    /** @var */
+    protected const ARCHIVE_UPDATE_ERROR_MESSAGE    = '登録書類テーブルおよび登録書類閲覧権限および登録書類容量を更新出来ません。';
+
+
     /**
      * @var Document
      */
@@ -99,7 +117,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function contractInsert(array $requestContent): bool
+    public function contractInsert(array $requestContent)
     {
         // 契約書類登録
         $docInsertResult           = $this->docContract->insert($requestContent);
@@ -116,13 +134,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $companyId  = $requestContent['company_id'];
             $categoryId = $requestContent['category_id'];
             $appUserId  = $requestContent['select_sign_user'][0]['user_id'];
-            $wfSort     = 0;
+            $wfSort     = Self::ISSUE_USER_WF_SORT;
             $userId     = $requestContent['m_user_id'];
             $createDate = $requestContent['create_datetime'];
 
             $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
-                    throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。');
+                    throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
                     exit;
                 }
 
@@ -139,7 +157,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
                 $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
-                    throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。');
+                    throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
                     exit;
                 }
             }
@@ -155,13 +173,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
                 $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
-                    throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。');
+                    throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
                     exit;
                 }
             }
         }
         if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
-            throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を登録出来ません。');
+            throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
         }
         return true;
     }
@@ -185,7 +203,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $docStorageUpdateResult    = $this->docStorageContract->update($requestContent);
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
-            throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を更新出来ません。');
+            throw new Exception(Self::CONTRACT_UPDATE_ERROR_MESSAGE);
         }
         return true;
     }
@@ -199,7 +217,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function dealInsert($requestContent)
+    public function dealInsert(array $requestContent)
     {
         // 取引書類登録
         $docInsertResult           = $this->docDeal->insert($requestContent);
@@ -216,13 +234,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $companyId  = $requestContent['company_id'];
             $categoryId = $requestContent['category_id'];
             $appUserId  = $requestContent['select_sign_user'][0]['user_id'];
-            $wfSort     = 0;
+            $wfSort     = Self::ISSUE_USER_WF_SORT;
             $userId     = $requestContent['m_user_id'];
             $createDate = $requestContent['create_datetime'];
 
             $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
-                    throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。');
+                    throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
                     exit;
                 }
 
@@ -239,7 +257,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
                 $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
-                    throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。');
+                    throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
                     exit;
                 }
             }
@@ -255,13 +273,237 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
                 $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
-                    throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。');
+                    throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
                     exit;
                 }
             }
         }
         if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
-            throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を登録出来ません。');
+            throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
+        }
+        return true;
+    }
+    /**
+     * -------------------------
+     * 取引書類更新
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function dealUpdate(array $requestContent)
+    {
+        // 取引書類更新
+        $docUpdateResult           = $this->docDeal->update($requestContent);
+
+        // 取引書類閲覧権限更新
+        $docPermissionUpdateResult = $this->docPermissionDeal->update($requestContent);
+
+        // 取引書類容量更新
+        $docStorageUpdateResult    = $this->docStorageDeal->update($requestContent);
+
+        if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
+            throw new Exception(Self::DEAL_UPDATE_ERROR_MESSAGE);
+        }
+        return true;
+    }
+
+
+    /**
+     * -------------------------
+     * 社内書類登録
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function internalInsert(array $requestContent)
+    {
+        // 社内書類登録
+        $docInsertResult           = $this->docInternal->insert($requestContent);
+
+        // 社内書類閲覧権限登録
+        $docPermissionInsertResult = $this->docPermissionInternal->insert($requestContent) ;
+
+        // 社内書類容量登録
+        $docStorageInsertResult    = $this->docStorageInternal->insert($requestContent);
+
+        // ワークフローテーブル登録 
+        // ワークフローが起票者のみ
+        if (count($requestContent['select_sign_user']) === 1) {
+            $companyId  = $requestContent['company_id'];
+            $categoryId = $requestContent['category_id'];
+            $appUserId  = $requestContent['select_sign_user'][0]['user_id'];
+            $wfSort     = Self::ISSUE_USER_WF_SORT;
+            $userId     = $requestContent['m_user_id'];
+            $createDate = $requestContent['create_datetime'];
+
+            $documentWorkFlowResult = $this->documentWorkFlow->insertInternal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
+                    exit;
+                }
+
+        // ゲスト署名者が未入力の場合
+        } else if ($requestContent['select_sign_guest_user'] === null) {
+            $selectSignUserList = $requestContent['select_sign_user'];
+            foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
+                $companyId              = $requestContent['company_id'];
+                $categoryId             = $requestContent['category_id'];
+                $appUserId              = $selectSignUser['user_id'];
+                $wfSort                 = $wf_sort * 10;
+                $userId                 = $requestContent['m_user_id'];
+                $createDate             = $requestContent['create_datetime'];
+
+                $documentWorkFlowResult = $this->documentWorkFlow->insertInternal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
+                    exit;
+                }
+            }
+        } else {
+            $selectSignUserList = array_merge($requestContent['select_sign_user'], $requestContent['select_sign_guest_user']);
+            foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
+                $companyId              = $requestContent['company_id'];
+                $categoryId             = $requestContent['category_id'];
+                $appUserId              = $selectSignUser['user_id'];
+                $wfSort                 = $wf_sort * 10;
+                $userId                 = $requestContent['m_user_id'];
+                $createDate             = $requestContent['create_datetime'];
+
+                $documentWorkFlowResult = $this->documentWorkFlow->insertInternal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
+                    exit;
+                }
+            }
+        }
+        if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
+            throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
+        }
+        return true;
+    }
+    /**
+     * -------------------------
+     * 社内書類更新
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function InternalUpdate(array $requestContent)
+    {
+        // 社内書類更新
+        $docUpdateResult           = $this->docInternal->update($requestContent);
+
+        // 社内書類閲覧権限更新
+        $docPermissionUpdateResult = $this->docPermissionInternal->update($requestContent);
+
+        // 社内書類容量更新
+        $docStorageUpdateResult    = $this->docStorageInternal->update($requestContent);
+
+        if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
+            throw new Exception(Self::INTERNAL_UPDATE_ERROR_MESSAGE);
+        }
+        return true;
+    }
+
+
+    /**
+     * -------------------------
+     * 登録書類登録
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function archiveInsert(array $requestContent)
+    {
+        // 取引書類登録
+        $docInsertResult           = $this->docArchive->insert($requestContent);
+
+        // 取引書類閲覧権限登録
+        $docPermissionInsertResult = $this->docPermissionArchive->insert($requestContent) ;
+
+        // 取引書類容量登録
+        $docStorageInsertResult    = $this->docStorageArchive->insert($requestContent);
+
+        // ワークフローテーブル登録 
+        // ワークフローが起票者のみ
+        if (count($requestContent['select_sign_user']) === 1) {
+            $companyId  = $requestContent['company_id'];
+            $categoryId = $requestContent['category_id'];
+            $appUserId  = $requestContent['select_sign_user'][0]['user_id'];
+            $wfSort     = Self::ISSUE_USER_WF_SORT;
+            $userId     = $requestContent['m_user_id'];
+            $createDate = $requestContent['create_datetime'];
+
+            $documentWorkFlowResult = $this->documentWorkFlow->insertArchive($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
+                    exit;
+                }
+
+        // ゲスト署名者が未入力の場合
+        } else if ($requestContent['select_sign_guest_user'] === null) {
+            $selectSignUserList = $requestContent['select_sign_user'];
+            foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
+                $companyId              = $requestContent['company_id'];
+                $categoryId             = $requestContent['category_id'];
+                $appUserId              = $selectSignUser['user_id'];
+                $wfSort                 = $wf_sort * 10;
+                $userId                 = $requestContent['m_user_id'];
+                $createDate             = $requestContent['create_datetime'];
+
+                $documentWorkFlowResult = $this->documentWorkFlow->insertArchive($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
+                    exit;
+                }
+            }
+        } else {
+            $selectSignUserList = array_merge($requestContent['select_sign_user'], $requestContent['select_sign_guest_user']);
+            foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
+                $companyId              = $requestContent['company_id'];
+                $categoryId             = $requestContent['category_id'];
+                $appUserId              = $selectSignUser['user_id'];
+                $wfSort                 = $wf_sort * 10;
+                $userId                 = $requestContent['m_user_id'];
+                $createDate             = $requestContent['create_datetime'];
+
+                $documentWorkFlowResult = $this->documentWorkFlow->insertArchive($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception('登録書類テーブルおよび登録書類閲覧権限および登録書類容量を登録出来ません。');
+                    exit;
+                }
+            }
+        }
+        if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
+            throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
+        }
+        return true;
+    }
+    /**
+     * -------------------------
+     * 登録書類更新
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return boolean
+     */
+    public function archiveUpdate(array $requestContent)
+    {
+        // 契約書類更新
+        $docUpdateResult           = $this->docInternal->update($requestContent);
+
+        // 契約書類閲覧権限更新
+        $docPermissionUpdateResult = $this->docPermissionInternal->update($requestContent);
+
+        // 契約書類容量更新
+        $docStorageUpdateResult    = $this->docStorageInternal->update($requestContent);
+
+        if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
+            throw new Exception(Self::ARCHIVE_UPDATE_ERROR_MESSAGE);
         }
         return true;
     }
@@ -270,94 +512,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // 社内書類新規登録
-    public function internalInsert($request)
-    {
-        \DB::beginTransaction($request);
-            $docSave = $this->docInternal->save($request);
-            $docPermissionSave = $this->docPermissionInternal->save($request);
-            $docStorageSave = $this->docStorageInternal->save($request);
-        if ($docSave === false && $docPermissionSave === false && $docStorageSave === false) {
-            \DB::rollback();
-            return false;
-        }
-        \DB::commit();
-            return true;
-    }
-
-    // 登録書類新規登録
-    public function archiveInsert($request)
-    {
-        \DB::beginTransaction($request);
-            $docSave = $this->docArchive->save($request);
-            $docPermissionSave = $this->docPermissionArchive->save($request);
-            $docStorageSave = $this->docStorageArchive->save($request);
-        if ($docSave === false && $docPermissionSave === false && $docStorageSave === false) {
-            \DB::rollback();
-            return false;
-        }
-        \DB::commit();
-            return true;
-    }
 
     
-
-    // 取引書類更新保存
-    public function dealUpdate($request)
-    {
-        \DB::beginTransaction($request);
-            $docUpdate = $this->docDeal->update($request);
-            $docPermissionUpdate = $this->docPermissionTransaction->update($request);
-            $docStorageUpdate = $this->docStorageTransaction->update($request);
-        if (!$docUpdate === 1 && !$docPermissionUpdate === 1 && !$docStorageUpdate === 1) {
-            \DB::rollback();
-            return false;
-        }
-        \DB::commit();
-        return true;
-    }
-
-    // 社内書類更新保存
-    public function internalUpdate($request)
-    {
-        \DB::beginTransaction($request);
-            $docUpdate = $this->docInternal->update($request);
-            $docPermissionUpdate = $this->docPermissionInternal->update($request);
-            $docStorageUpdate = $this->docStorageInternal->update($request);
-        if (!$docUpdate === 1 && !$docPermissionUpdate === 1 && !$docStorageUpdate === 1) {
-            \DB::rollback();
-            return false;
-        }
-        \DB::commit();
-        return true;
-    }
-
-    // 登録書類更新保存
-    public function archiveUpdate($request)
-    {
-        \DB::beginTransaction($request);
-            $docUpdate = $this->docArchive->update($request);
-            $docPermissionUpdate = $this->docPermissionArchive->update($request);
-            $docStorageUpdate = $this->docStorageArchive->update($request); 
-        if (!$docUpdate === 1 && !$docPermissionUpdate === 1 && !$docStorageUpdate === 1) {
-            \DB::rollback();
-            return false;
-        }
-        \DB::commit();
-        return true;
-    }
     
 }

@@ -622,4 +622,54 @@ class DocumentInternal extends FluentDatabase
             ->where('status_id', '=', 0)
             ->first();
     }
+
+    /**
+   * -------------------------
+   * 契約書類登録処理
+   * -------------------------
+   *
+   * @param array $requestContent
+   * @return boolean
+   */
+  /**
+   * -------------------------
+   * 社内書類登録処理
+   * -------------------------
+   *
+   * @param array $requestContent
+   * @return boolean
+   */
+  public function insert(array $requestContent)
+  {
+      return $this->builder($this->table)->insert([
+          'company_id'       => $requestContent['company_id'],
+          'category_id'      => $requestContent['category_id'],
+          'template_id'      => $requestContent['template_id'],
+          'doc_type_id'      => $requestContent['doc_type_id'],
+          'status_id'        => $requestContent['status_id'],
+
+          'doc_create_date'  => $requestContent['doc_create_date'],
+          'cont_end_date'    => $requestContent['cont_end_date'],
+          'conc_date'        => $requestContent['conc_date'],
+          'effective_date'   => $requestContent['effective_date'],
+          'cancel_date'      => $requestContent['cancel_date'],
+          'expiry_date'      => $requestContent['expiry_date'],
+
+          'doc_no'           => $requestContent['doc_no'],
+          'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+          'product_name'     => $requestContent['product_name'],
+          'title'            => $requestContent['title'],
+          'amount'           => $requestContent['amount'],
+          'currency_id'      => $requestContent['currency_id'],
+          'counter_party_id' => $requestContent['counter_party_id'],
+          'remarks'          => $requestContent['remarks'],
+          'doc_info'         => json_encode($requestContent['doc_info'], JSON_UNESCAPED_UNICODE),
+          'sign_level'       => $requestContent['sign_level'],
+          'create_user'      => $requestContent['m_user_id'],
+          'create_datetime'  => $requestContent['create_datetime'],
+          'update_user'      => $requestContent['m_user_id'],
+          'update_datetime'  => $requestContent['update_datetime']
+          
+      ]);
+  }
 }

@@ -46,6 +46,7 @@ class DocumentSaveController extends Controller
     {
         try {
             switch ($request->category_id) {
+                // 契約書類処理
                 case Self::DOC_CONTRACT_TYPE:
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
                     $requestContent['m_user_company_id']       = $request->m_user['company_id'];
@@ -87,6 +88,7 @@ class DocumentSaveController extends Controller
                     break;
 
                 case Self::DOC_DEAL_TYPE:
+                    // 取引書類処理
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
                     $requestContent['m_user_company_id']       = $request->m_user['company_id'];
                     $requestContent['m_user_type_id']          = $request->m_user['user_type'];
@@ -96,10 +98,11 @@ class DocumentSaveController extends Controller
                     $requestContent['template_id']             = $request->template_id;
                     $requestContent['doc_type_id']             = $request->doc_type_id;
                     $requestContent['status_id']               = $request->status_id;
-                    $requestContent['issue_date']              = $request->issue_datea ?? null;
+                    $requestContent['issue_date']              = $request->issue_date ?? null;
                     $requestContent['expiry_date']             = $request->expiry_date ?? null;
                     $requestContent['payment_date']            = $request->payment_date ?? null;
                     $requestContent['transaction_date']        = $request->transaction_date ?? null;
+                    $requestContent['download_date']           = $request->download_date ?? null;
                     $requestContent['doc_no']                  = $request->doc_no ?? null;
                     $requestContent['ref_doc_no']              = $request->input('ref_doc_no') ?? null;
                     $requestContent['product_name']            = $request->product_name ?? null;
@@ -125,11 +128,80 @@ class DocumentSaveController extends Controller
                     break;
 
                 case Self::DOC_INTERNAL_TYPE:
-                    return 'test2';
+                    // 社内書類処理
+                    $requestContent['m_user_id']               = $request->m_user['user_id'];
+                    $requestContent['m_user_company_id']       = $request->m_user['company_id'];
+                    $requestContent['m_user_type_id']          = $request->m_user['user_type'];
+                    $requestContent['document_id']             = $request->document_id ?? null;
+                    $requestContent['company_id']              = $request->company_id;
+                    $requestContent['category_id']             = $request->category_id;
+                    $requestContent['template_id']             = $request->template_id;
+                    $requestContent['doc_type_id']             = $request->doc_type_id;
+                    $requestContent['status_id']               = $request->status_id;
+                    $requestContent['doc_create_date']         = $request->doc_create_date ?? null;
+                    $requestContent['sign_finish_date']        = $request->sign_finish_date ?? null;
+                    $requestContent['doc_no']                  = $request->doc_no ?? null;
+                    $requestContent['ref_doc_no']              = $request->input('ref_doc_no') ?? null;
+                    $requestContent['product_name']            = $request->product_name ?? null;
+                    $requestContent['select_sign_user']        = $request->input('select_sign_user') ?? null;
+                    $requestContent['select_sign_guest_user']  = $request->input('select_sign_guest_user') ?? null;
+                    $requestContent['title']                   = $request->title ?? null;
+                    $requestContent['amount']                  = $request->amount ?? null;
+                    $requestContent['currency_id']             = $request->currency_id ?? null;
+                    $requestContent['counter_party_id']        = $request->counter_party_id ?? null;
+                    $requestContent['content']                 = $request->content ?? null;
+                    $requestContent['remarks']                 = $request->remarks ?? null;
+                    $requestContent['doc_info']                = $request->input('doc_info') ?? null;
+                    $requestContent['sign_level']              = $request->sign_level ?? null;
+                    $requestContent['upload_pdf']              = $request->input('upload_pdf') ?? null;
+                    $requestContent['sign_position']           = $request->input('sign_position') ?? null;
+                    $requestContent['total_pages']             = $request->total_pages ?? null;
+                    $requestContent['create_user']             = $request->m_user['user_id'] ?? null;
+                    $requestContent['create_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['update_user']             = $request->m_user['user_id'] ?? null;
+                    $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+
+                    // 書類保存の実行
+                    $result = $this->documentSaveService->saveDocument($requestContent);
                     break;
 
                 case Self::DOC_ARCHIVE_TYPE:
-                    return 'test3';
+                    // 登録書類処理
+                    $requestContent['m_user_id']               = $request->m_user['user_id'];
+                    $requestContent['m_user_company_id']       = $request->m_user['company_id'];
+                    $requestContent['m_user_type_id']          = $request->m_user['user_type'];
+                    $requestContent['document_id']             = $request->document_id ?? null;
+                    $requestContent['company_id']              = $request->company_id;
+                    $requestContent['category_id']             = $request->category_id;
+                    $requestContent['template_id']             = $request->template_id;
+                    $requestContent['doc_type_id']             = $request->doc_type_id;
+                    $requestContent['status_id']               = $request->status_id;
+                    $requestContent['issue_date']              = $request->issue_date ?? null;
+                    $requestContent['expiry_date']             = $request->expiry_date ?? null;
+                    $requestContent['transaction_date']        = $request->transaction_date ?? null;
+                    $requestContent['doc_no']                  = $request->doc_no ?? null;
+                    $requestContent['ref_doc_no']              = $request->input('ref_doc_no') ?? null;
+                    $requestContent['product_name']            = $request->product_name ?? null;
+                    $requestContent['select_sign_user']        = $request->input('select_sign_user') ?? null;
+                    $requestContent['select_sign_guest_user']  = $request->input('select_sign_guest_user') ?? null;
+                    $requestContent['title']                   = $request->title ?? null;
+                    $requestContent['amount']                  = $request->amount ?? null;
+                    $requestContent['currency_id']             = $request->currency_id ?? null;
+                    $requestContent['counter_party_id']        = $request->counter_party_id ?? null;
+                    $requestContent['content']                 = $request->content ?? null;
+                    $requestContent['remarks']                 = $request->remarks ?? null;
+                    $requestContent['doc_info']                = $request->input('doc_info') ?? null;
+                    $requestContent['sign_level']              = $request->sign_level ?? null;
+                    $requestContent['upload_pdf']              = $request->input('upload_pdf') ?? null;
+                    $requestContent['sign_position']           = $request->input('sign_position') ?? null;
+                    $requestContent['total_pages']             = $request->total_pages ?? null;
+                    $requestContent['create_user']             = $request->m_user['user_id'] ?? null;
+                    $requestContent['create_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['update_user']             = $request->m_user['user_id'] ?? null;
+                    $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+
+                    // 書類保存の実行
+                    $result = $this->documentSaveService->saveDocument($requestContent);
                     break;
             }
 
@@ -142,14 +214,6 @@ class DocumentSaveController extends Controller
             // ログの出力
             return (new DocumentSaveResponse)->faildSave($e->getMessage());
         }
-        
-
-        
-        // return $documentSaveResult;
-        // return (new DocumentSaveResponse)->documentSaveResponse($documentSaveResult);
-        // Requestクラスを直
-        // $documentSaveResult = $this->documentService->saveDocument($request);
-        // return (new DocumentSaveResponse)->documentSaveResponse($documentSaveResult);
     }
 }
         

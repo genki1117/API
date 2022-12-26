@@ -4,30 +4,24 @@ namespace App\Domain\Repositories\Interface\Document;
 
 interface DocumentSaveRepositoryInterface
 {
-    public function contractInsert(array $requestContent): bool;
+    // 契約書類
+    public function contractInsert(array $requestContent);
 
+    public function contractUpdate(array $requestContent);
 
-    public function contractUpdate(array $requestContent): bool;
+    // 取引書類
+    public function dealInsert(array $requestContent);
 
+    public function dealUpdate(array $requestContent);
 
-    public function dealInsert($requestContent);
+    // 社内書類
+    public function internalInsert(array $requestContent);
 
-    public function dealUpdate($requestContent);
+    public function internalUpdate(array $requestContent);
 
+    // 登録書類
+    public function archiveInsert(array $requestContent);
 
-
-
-    
-    public function internalInsert($requestContent);
-
-
-    public function archiveInsert($requestContent);
-
-
-
-    public function internalUpdate($requestContent);
-
-
-    public function archiveUpdate($requestContent);
+    public function archiveUpdate(array $requestContent);
 
 }

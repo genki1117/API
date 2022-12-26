@@ -60,8 +60,6 @@ class DocumentPermissionTransaction extends FluentDatabase
             "create_datetime" => $requestContent['create_datetime'],
             "update_user"     => $requestContent['m_user_id'],
             "update_datetime" => $requestContent['update_datetime'],
-            "delete_user"     => null,
-            "delete_datetime" => null
         ];
         return $this->builder($this->table)->insert($data);
     }
@@ -85,8 +83,6 @@ class DocumentPermissionTransaction extends FluentDatabase
                 "user_id"         => $requestContent['m_user_id'],
                 "update_user"     => $requestContent['m_user_id'],
                 "update_datetime" => $requestContent['update_datetime'],
-                "delete_user"     => null,
-                "delete_datetime" => null
             ]);
     }
 
