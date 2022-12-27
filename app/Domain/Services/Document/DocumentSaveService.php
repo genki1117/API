@@ -68,7 +68,7 @@ class DocumentSaveService
                     break;
 
                     // 社内書類の登録、更新
-                case Self::DOC_DEAL_TYPE:
+                case Self::DOC_INTERNAL_TYPE:
                     // 新規登録
                     if (!$requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->internalInsert($requestContent);
@@ -80,7 +80,7 @@ class DocumentSaveService
                     break;
 
                     // 登録書類の登録、更新
-                case Self::DOC_DEAL_TYPE:
+                case Self::DOC_ARCHIVE_TYPE:
                     // 新規登録
                     if (!$requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->archiveInsert($requestContent);
@@ -99,5 +99,11 @@ class DocumentSaveService
         }
         
         return $documentSaveResult;
+    }
+
+    // ログ登録
+    public function saveLog($requestContent)
+    {
+        $logSaveResult = $this->documentRepository->saveLog($requestContent);
     }
 }

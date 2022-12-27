@@ -23,4 +23,7 @@ interface DocumentSaveRepositoryInterface
     public function archiveInsert(array $requestContent);
 
     public function archiveUpdate(array $requestContent);
+
+    // ログ登録
+    public function saveLog(array $requestContent);
 }

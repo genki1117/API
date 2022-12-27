@@ -61,10 +61,12 @@ class DocumentStorageInternal extends FluentDatabase
      */
     public function update(array $requestContent)
     {
-        return $this->builder($this->table)
-            ->where('company_id', $requestContent['company_id'])
-            ->where('document_id', $requestContent['document_id'])
-            ->update([
+        $deleteResult = DB::table('t_doc_storage_internal')
+        ->where('document_id', $requestContent['document_id'])
+        ->where('company_id', $requestContent['company_id'])
+        ->delete();
+        if ($deleteResult) {
+            return $this->builder($this->table)->insert([
                 'document_id'           => $requestContent['document_id'],
                 'company_id'            => $requestContent['m_user_company_id'],
                 'template_id'           => $requestContent['template_id'],
@@ -85,11 +87,17 @@ class DocumentStorageInternal extends FluentDatabase
                 'pdf_version'           => $requestContent['upload_pdf']['pdf_version'],
                 'sign_position'         => json_encode($requestContent['sign_position']),
                 'total_pages'           => $requestContent['total_pages'],
+                'create_user'           => $requestContent['m_user_id'],
+                'create_datetime'       => $requestContent['create_datetime'],
                 'update_user'           => $requestContent['m_user_id'],
                 'update_datetime'       => $requestContent['update_datetime'],
                 'delete_user'           => null,
                 'delete_datetime'       => null
-            ]);
+                ]);
+        } else {
+            throw new Exception('取引書類テーブルおよび取引書類閲覧権限および取引書類容量を更新出来ません。');
+            exit;
+        }
     }
     
     /*

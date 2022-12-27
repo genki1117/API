@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Domain\Repositories\Document;
 
+use App\Accessers\DB\Log\System\LogDocAccess;
+use App\Accessers\DB\Log\System\LogDocOperation;
 use App\Accessers\DB\Document\DocumentContract;
 use App\Accessers\DB\Document\DocumentArchive;
 use App\Accessers\DB\Document\DocumentInternal;
@@ -15,8 +17,6 @@ use App\Accessers\DB\Document\DocumentStorageTransaction;
 use App\Accessers\DB\Document\DocumentStorageInternal;
 use App\Accessers\DB\Document\DocumentStorageArchive;
 use App\Accessers\DB\Document\DocumentWorkFlow;
-use App\Accessers\DB\Log\System\LogSystemAccess;
-use App\Accessers\DB\Log\System\LogDocOperation;
 use App\Domain\Repositories\Interface\Document\DocumentSaveRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -44,7 +44,8 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     protected const ARCHIVE_INSERT_ERROR_MESSAGE    = '登録書類テーブルおよび登録書類閲覧権限および登録書類容量を登録出来ません。';
     /** @var */
     protected const ARCHIVE_UPDATE_ERROR_MESSAGE    = '登録書類テーブルおよび登録書類閲覧権限および登録書類容量を更新出来ません。';
-
+    /** @var */
+    protected const LOG_ERROR_MESSAGE               = 'ログを登録できませんでした';
 
     /**
      * @var Document
@@ -62,6 +63,8 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     private DocumentStorageInternal $docStorageInternal;
     private DocumentStorageArchive $docStorageArchive;
     private DocumentWorkFlow $documentWorkFlow;
+    private LogDocAccess $logDocAccess;
+    private LogDocOperation $logDocOperation;
 
 
     /**
@@ -78,6 +81,8 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param DocumentStorageInternal $docStorageInternal
      * @param DocumentStorageArchive $docStorageArchive
      * @param DocumentWorkFlow $documentWorkFlow
+     * @param LogDocAccess $logDocAccess
+     * @param LogDocOperation $logDocOperation;
      */
 
     public function __construct(
@@ -93,7 +98,9 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         DocumentStorageTransaction $docStorageTransaction,
         DocumentStorageInternal $docStorageInternal,
         DocumentStorageArchive $docStorageArchive,
-        DocumentWorkFlow $documentWorkFlow
+        DocumentWorkFlow $documentWorkFlow,
+        LogDocAccess $logDocAccess,
+        LogDocOperation $logDocOperation
     ) {
         $this->docContract              = $docContract;
         $this->docDeal                  = $docDeal;
@@ -108,6 +115,8 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $this->docStorageInternal       = $docStorageInternal;
         $this->docStorageArchive        = $docStorageArchive;
         $this->documentWorkFlow         = $documentWorkFlow;
+        $this->logDocAccess             = $logDocAccess;
+        $this->logDocOperation          = $logDocOperation;
     }
 
     /**
@@ -494,17 +503,47 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function archiveUpdate(array $requestContent)
     {
         // 契約書類更新
-        $docUpdateResult           = $this->docInternal->update($requestContent);
+        $docUpdateResult           = $this->docArchive->update($requestContent);
 
         // 契約書類閲覧権限更新
-        $docPermissionUpdateResult = $this->docPermissionInternal->update($requestContent);
+        $docPermissionUpdateResult = $this->docPermissionArchive->update($requestContent);
 
         // 契約書類容量更新
-        $docStorageUpdateResult    = $this->docStorageInternal->update($requestContent);
+        $docStorageUpdateResult    = $this->docStorageArchive->update($requestContent);
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
             throw new Exception(Self::ARCHIVE_UPDATE_ERROR_MESSAGE);
         }
         return true;
     }
+
+    /**
+     * ログ登録
+     *
+     * @param array $requestContent
+     * @return void
+     */
+    public function saveLog(array $requestContent)
+    {
+        $companyId     = $requestContent['company_id']; 
+        $categoryId    = $requestContent['category_id'];
+        $documentId    = $requestContent['document_id'];
+        $userId        = $requestContent['user_id'];
+        $userType      = $requestContent['user_type_id'];
+        $ipAddress     = $requestContent['ip_adress'];
+        $accessContent = $requestContent['access_content'];
+        $beforeContent = $requestContent['before_content'];
+        $afterContet   = $requestContent['after_contet'];
+
+        $accessLogResult    = $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
+        $operationLogResult = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
+        if (!$accessLogResult || !$operationLogResult) {
+            throw new Exception(Self::LOG_ERROR_MESSAGE);
+            exit;
+        }
+    }
+
 }
+
+
+

@@ -110,7 +110,24 @@ class DocumentWorkFlow extends FluentDatabase
             'company_id'            => $companyId,
             'category_id'           => $categoryId,
             'app_user_id'           => $appUserId,
-            'wf_sort'             => $wfSort,
+            'wf_sort'               => $wfSort,
+            'create_user'           => $userId,
+            'create_datetime'       => $createDate,
+            'update_user'           => $userId,
+            'update_datetime'       => $createDate
+            ]);
+    }
+
+    public function insertArchive(int $companyId, int $categoryId, int $appUserId, int $wfSort, int $userId, string $createDate)
+    {
+        $LastdocumentId = DB::table('t_document_archive')->select(["document_id"])
+        ->orderByDesc('document_id')->limit(1)->first();
+        return $this->builder($this->table)->insert([
+            'document_id'           => $LastdocumentId->document_id,
+            'company_id'            => $companyId,
+            'category_id'           => $categoryId,
+            'app_user_id'           => $appUserId,
+            'wf_sort'               => $wfSort,
             'create_user'           => $userId,
             'create_datetime'       => $createDate,
             'update_user'           => $userId,

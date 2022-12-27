@@ -50,7 +50,7 @@ class DocumentPermissionArchive extends FluentDatabase
      */
     public function insert(array $requestContent)
     {
-        $LastdocumentId = DB::table('t_document_insert')->select(["document_id"])
+        $LastdocumentId = DB::table('t_document_archive')->select(["document_id"])
         ->orderByDesc('document_id')->limit(1)->first();
         $data = [
             "document_id"     => $LastdocumentId->document_id,
@@ -76,18 +76,28 @@ class DocumentPermissionArchive extends FluentDatabase
      */
     public function update(array $requestContent)
     {
-        return $this->builder($this->table)
-            ->where('document_id', $requestContent['document_id'])
-            ->where('company_id', $requestContent['company_id'])
-            ->update([
-                "document_id"     => $requestContent['company_id'],
+        $deleteResult = DB::table('t_doc_permission_archive')
+        ->where('document_id', $requestContent['document_id'])
+        ->where('company_id', $requestContent['company_id'])
+        ->delete();
+        
+        if ($deleteResult) {
+            $data = [
+                "document_id"     => $requestContent['document_id'],
                 "company_id"      => $requestContent['company_id'],
                 "user_id"         => $requestContent['m_user_id'],
+                "create_user"     => $requestContent['m_user_id'],
+                "create_datetime" => $requestContent['create_datetime'],
                 "update_user"     => $requestContent['m_user_id'],
                 "update_datetime" => $requestContent['update_datetime'],
                 "delete_user"     => null,
                 "delete_datetime" => null
-            ]);
+            ];
+            return $this->builder($this->table)->insert($data); 
+        } else {
+            throw new Exception('登録書類テーブルおよび登録書類閲覧権限および登録書類容量を更新出来ません。');
+            exit;
+        }
     }
     /**
      * ---------------------------------------------

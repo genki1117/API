@@ -123,7 +123,7 @@ class DocumentSaveController extends Controller
                     $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
 
                     // 書類保存の実行
-                    $result = $this->documentSaveService->saveDocument($requestContent);
+                    $this->documentSaveService->saveDocument($requestContent);
                     break;
 
                 case Self::DOC_INTERNAL_TYPE:
@@ -161,7 +161,7 @@ class DocumentSaveController extends Controller
                     $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
 
                     // 書類保存の実行
-                    $result = $this->documentSaveService->saveDocument($requestContent);
+                    $this->documentSaveService->saveDocument($requestContent);
                     break;
 
                 case Self::DOC_ARCHIVE_TYPE:
@@ -174,8 +174,9 @@ class DocumentSaveController extends Controller
                     $requestContent['category_id']             = $request->category_id;
                     $requestContent['template_id']             = $request->template_id;
                     $requestContent['doc_type_id']             = $request->doc_type_id;
+                    $requestContent['scan_doc_flg']            = $request->scan_doc_flg;
                     $requestContent['status_id']               = $request->status_id;
-                    $requestContent['issue_date']              = $request->issue_date ?? null;
+                    $requestContent['issue_date']              = $request->issue_date;
                     $requestContent['expiry_date']             = $request->expiry_date ?? null;
                     $requestContent['transaction_date']        = $request->transaction_date ?? null;
                     $requestContent['doc_no']                  = $request->doc_no ?? null;
@@ -194,20 +195,20 @@ class DocumentSaveController extends Controller
                     $requestContent['upload_pdf']              = $request->input('upload_pdf') ?? null;
                     $requestContent['sign_position']           = $request->input('sign_position') ?? null;
                     $requestContent['total_pages']             = $request->total_pages ?? null;
+                    $requestContent['timestamp_user']          = $request->timestamp_user ?? null;
                     $requestContent['create_user']             = $request->m_user['user_id'] ?? null;
                     $requestContent['create_datetime']         = $this->carbon->format('Y-m-d') ?? null;
                     $requestContent['update_user']             = $request->m_user['user_id'] ?? null;
                     $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
-
                     // 書類保存の実行
                     $result = $this->documentSaveService->saveDocument($requestContent);
                     break;
             }
 
-            // ログの出力を実行
-            // $this->documentSaveService->getLog(
+                    // ログの出力を実行
+                    $this->documentSaveService->saveLog($requestContent);
 
-            // );
+
             return (new DocumentSaveResponse)->successSave();
         } catch (Exception $e) {
             // ログの出力

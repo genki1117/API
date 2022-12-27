@@ -155,6 +155,10 @@ class DocumentContract extends FluentDatabase
      */
     public function update(array $requestContent)
     {
+
+
+
+        
         return $this->builder($this->table)
             ->where('document_id', $requestContent['document_id'])
             ->where('company_id', $requestContent['company_id'])
