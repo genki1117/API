@@ -24,7 +24,36 @@ class QueueUtility
      * @param array $param
      * @return int
      */
-    public function createMessage(string $queName, array $param): int
+    public function createMessage(string $queName, string $param): int
+    {
+        $ret = 0;
+
+        $accountName = env("AZURE_ACCOUNT_NAME");
+        $accountKey = env("AZURE_ACCOUNT_KEY");
+        $queueEndpoint = env("AZURE_STORAGE_QUEUE_ENDPOINT");
+        $connectionString = sprintf("DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s;QueueEndpoint=%s", $accountName, $accountKey, $queueEndpoint);
+
+        // Create queue REST proxy.
+        $queueClient = QueueRestProxy::createQueueService($connectionString);
+
+        try {
+            // Create Message.
+            $queueClient->createMessage($queName, $param);
+        } catch(ServiceException $e) {
+            // Handle exception based on error codes and messages.
+            Log::error($e->getMessage());
+            $ret = -1;
+        }
+
+        return $ret;
+    }
+
+    /**
+     * @param string $queName
+     * @param array $param
+     * @return int
+     */
+    public function createQueue(string $queName, array $param): int
     {
         $ret = 0;
 
@@ -44,10 +73,6 @@ class QueueUtility
 
         try {
             // Create queue.
-            // 同一名称でキューは登録できないが、一旦はBL設計書の名称通りとする。
-            // (将来的に考慮が必要であれば、末尾にタイムスタンプ等を付与して対応
-            // $microTime = str_replace('.', '-', (string)microtime(true));
-            // $queueClient->createQueue($queName."-".$microTime, $createQueueOptions);
             $queueClient->createQueue($queName, $createQueueOptions);
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
