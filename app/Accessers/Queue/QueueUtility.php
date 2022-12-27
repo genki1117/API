@@ -44,6 +44,10 @@ class QueueUtility
 
         try {
             // Create queue.
+            // 同一名称でキューは登録できないが、一旦はBL設計書の名称通りとする。
+            // (将来的に考慮が必要であれば、末尾にタイムスタンプ等を付与して対応
+            // $microTime = str_replace('.', '-', (string)microtime(true));
+            // $queueClient->createQueue($queName."-".$microTime, $createQueueOptions);
             $queueClient->createQueue($queName, $createQueueOptions);
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
