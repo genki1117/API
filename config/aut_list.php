@@ -79,7 +79,7 @@ return [
         'guest_user_role' => false,						        // ゲスト
     ],
 
-    // [書類一覧] - [PDF一括ダウンロード] 
+    // [書類一覧] - [PDF一括ダウンロード]
     '/documents/set-bulkdlpdf' => [
         'admin_role' => true,								    // 管理者権限
         'template_set_role' => false,						    // テンプレート作成・編集権限
@@ -142,7 +142,7 @@ return [
         'guest_user_role' => true,						        // ゲスト
     ],
 
-    // [書類一覧] - [一括タイムスタンプ付与] 
+    // [書類一覧] - [一括タイムスタンプ付与]
     '/documents/set-bulkts' => [
         'admin_role' => false,								    // 管理者権限
         'template_set_role' => false,						    // テンプレート作成・編集権限
@@ -163,7 +163,7 @@ return [
         'guest_user_role' => false,						        // ゲスト
     ],
 
-    // [書類詳細（社内ユーザ）] - [タイムスタンプ付与] 
+    // [書類詳細（社内ユーザ）] - [タイムスタンプ付与]
     '/documents/save-ts' => [
         'admin_role' => false,								    // 管理者権限
         'template_set_role' => false,						    // テンプレート作成・編集権限
@@ -184,7 +184,7 @@ return [
         'guest_user_role' => false,						        // ゲスト
     ],
 
-    // [書類詳細（社内ユーザ・社外ユーザ）] - [画面初期表示] 
+    // [書類詳細（社内ユーザ・社外ユーザ）] - [画面初期表示]
     '/documents/get-detail' => [
         'admin_role' => true,								    // 管理者権限
         'template_set_role' => false,						    // テンプレート作成・編集権限
@@ -205,7 +205,7 @@ return [
         'guest_user_role' => true,						        // ゲスト
     ],
 
-    // [書類作成] - [署名依頼] 
+    // [書類作成] - [署名依頼]
     '/documents/save-order' => [
         'admin_role' => true,								    // 管理者権限
         'template_set_role' => false,						    // テンプレート作成・編集権限
@@ -226,7 +226,7 @@ return [
         'guest_user_role' => false,						        // ゲスト
     ],
 
-    // [書類詳細（社内ユーザ）] - [メール再送] 
+    // [書類詳細（社内ユーザ）] - [メール再送]
     '/documents/set-sendbackmail' => [
         'admin_role' => true,								    // 管理者権限
         'template_set_role' => false,						    // テンプレート作成・編集権限
@@ -247,7 +247,7 @@ return [
         'guest_user_role' => false,						        // ゲスト
     ],
 
-    // [書類詳細（社内ユーザ・社外ユーザ）] - [転送] 
+    // [書類詳細（社内ユーザ・社外ユーザ）] - [転送]
     '/documents/set-sendforwardmail' => [
         'admin_role' => false,								    // 管理者権限
         'template_set_role' => false,						    // テンプレート作成・編集権限
@@ -268,7 +268,7 @@ return [
         'guest_user_role' => true,						        // ゲスト
     ],
 
-    // [書類詳細（社内ユーザ・社外ユーザ）] - [差戻] 
+    // [書類詳細（社内ユーザ・社外ユーザ）] - [差戻]
     '/documents/set-back' => [
         'admin_role' => false,								    // 管理者権限
         'template_set_role' => false,						    // テンプレート作成・編集権限
