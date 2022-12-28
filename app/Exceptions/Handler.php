@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use App\Exceptions\AuthenticateException;
 use App\Exceptions\ConflictException;
-use Illuminate\Database\QueryException;
+use PDOException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
@@ -87,14 +87,10 @@ class Handler extends ExceptionHandler
             ], 404);
         }
 
-        // TODO: DB接続エラーだけを判定する方法について、要確認
-        // (SQLSTATE[HY000] [2002] 以外には何があるのか？)
-        if ($e instanceof QueryException) {
-            if ($e->errorInfo[1] === 2002) {
-                return new JsonResponse([
-                    'error' => "common.message.db-connection.failed"
-                ], 500);
-            }
+        if ($e instanceof PDOException) {
+            return new JsonResponse([
+                'error' => "common.message.db-connection.failed"
+            ], 500);
         }
 
         $response = parent::render($request, $e);
