@@ -134,6 +134,9 @@ class AuthorizationToken
                 if ($ret === false && $user->getUserRole()->archive_func_role) {
                     $ret = $auth['archive_func_role'];
                 }
+                if ($ret === false && $user->getUserRole()->template_rgst_role) {
+                    $ret = $auth['template_rgst_role'];
+                }
                 if ($ret === false && $user->getUserRole()->ts_role) {
                     $ret = $auth['ts_role'];
                 }

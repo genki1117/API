@@ -23,6 +23,7 @@ return [
         'workflow_set_role' => true,						    // 承認経路作成権限
         'master_set_role' => true,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => true,							// テンプレート登録権限権限
         'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => true,							        // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => true,						    // 一括検証利用権限
@@ -44,6 +45,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => true,							// テンプレート登録権限権限
         'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -65,6 +67,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => true,							// テンプレート登録権限権限
         'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -86,6 +89,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => true,							// テンプレート登録権限権限
         'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -107,7 +111,8 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => false,						    // 書類登録権限
-        'ts_role' => true,									    // タイムスタンプ付与権限
+        'template_rgst_role' => true,							// テンプレート登録権限権限
+        'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
         'cont_doc_app_role' => true,						    // 契約書類承認権限
@@ -128,6 +133,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -149,6 +155,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => false,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -170,7 +177,8 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
-        'ts_role' => false,									    // タイムスタンプ付与権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
+        'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
         'cont_doc_app_role' => false,						    // 契約書類承認権限
@@ -191,6 +199,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => true,							// テンプレート登録権限権限
         'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -212,6 +221,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -233,6 +243,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => true,							// テンプレート登録権限権限
         'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -254,7 +265,8 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
-        'ts_role' => false,									    // タイムスタンプ付与権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
+        'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
         'cont_doc_app_role' => true,						    // 契約書類承認権限
@@ -275,7 +287,8 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
-        'ts_role' => false,									    // タイムスタンプ付与権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
+        'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
         'cont_doc_app_role' => true,						    // 契約書類承認権限
@@ -296,7 +309,8 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
-        'ts_role' => true,									    // タイムスタンプ付与権限
+        'template_rgst_role' => true,							// テンプレート登録権限権限
+        'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
         'cont_doc_app_role' => false,						    // 契約書類承認権限
@@ -317,6 +331,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -338,6 +353,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -359,6 +375,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -380,6 +397,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -401,6 +419,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => false,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => true,						    // 一括検証利用権限
@@ -422,6 +441,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => false,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => true,						    // 一括検証利用権限
@@ -443,6 +463,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => false,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => true,						    // 一括検証利用権限
@@ -464,6 +485,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => false,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => true,						    // 一括検証利用権限
@@ -485,7 +507,8 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => true,						    // 書類登録権限
-        'ts_role' => false,									    // タイムスタンプ付与権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
+        'ts_role' => true,									    // タイムスタンプ付与権限
         'bulk_ts_role' => true,							        // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => true,						    // 一括検証利用権限
         'cont_doc_app_role' => true,						    // 契約書類承認権限
@@ -506,6 +529,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => false,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
@@ -527,6 +551,7 @@ return [
         'workflow_set_role' => false,						    // 承認経路作成権限
         'master_set_role' => false,							    // マスタ作成・編集権限
         'archive_func_role' => false,						    // 書類登録権限
+        'template_rgst_role' => false,							// テンプレート登録権限権限
         'ts_role' => false,									    // タイムスタンプ付与権限
         'bulk_ts_role' => false,							    // 一括タイムスタンプ付与権限
         'bulk_veri_func_role' => false,						    // 一括検証利用権限
