@@ -24,6 +24,9 @@ interface DocumentSaveRepositoryInterface
 
     public function archiveUpdate(array $requestContent);
 
+    // ログ取得
+    public function getBeforOrAfterUpdateContract(array $requestContent);
+
     // ログ登録
-    public function saveLog(array $requestContent);
+    public function getUpdateLog($requestContent, $beforeList, $afterList);
 }

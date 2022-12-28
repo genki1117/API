@@ -32,7 +32,7 @@ class DocumentSaveController extends Controller
         Carbon $carbon,
     ) {
         $this->documentSaveService = $documentSaveService;
-        $this->carbon          = $carbon;
+        $this->carbon              = $carbon;
     }
 
     /**
@@ -45,11 +45,15 @@ class DocumentSaveController extends Controller
     {
         try {
             switch ($request->category_id) {
+                
                 // 契約書類処理
                 case Self::DOC_CONTRACT_TYPE:
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
                     $requestContent['m_user_company_id']       = $request->m_user['company_id'];
                     $requestContent['m_user_type_id']          = $request->m_user['user_type'];
+                    $requestContent['ip_address']              = $request->ip_address;
+                    $requestContent['access_content']          = $request->access_content;
+
                     $requestContent['document_id']             = $request->document_id ?? null;
                     $requestContent['company_id']              = $request->company_id;
                     $requestContent['category_id']             = $request->category_id;
@@ -206,7 +210,7 @@ class DocumentSaveController extends Controller
             }
 
                     // ログの出力を実行
-                    $this->documentSaveService->saveLog($requestContent);
+                    //$this->documentSaveService->saveLog($requestContent);
 
 
             return (new DocumentSaveResponse)->successSave();

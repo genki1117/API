@@ -21,6 +21,7 @@ use App\Domain\Repositories\Interface\Document\DocumentSaveRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use App\Domain\Entities\Document\DocumentUpdate as DocumentUpdateEntity;
 
 // use App\Domain\Entities\Document\DocumentDetail as DocumentEntity;
 
@@ -188,9 +189,11 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 }
             }
         }
+
         if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
             throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
         }
+
         return true;
     }
     /**
@@ -201,7 +204,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function contractUpdate(array $requestContent): bool
+    public function contractUpdate(array $requestContent)
     {
         // 契約書類更新
         $docUpdateResult           = $this->docContract->update($requestContent);
@@ -211,6 +214,8 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
         // 契約書類容量更新
         $docStorageUpdateResult    = $this->docStorageContract->update($requestContent);
+
+
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
             throw new Exception(Self::CONTRACT_UPDATE_ERROR_MESSAGE);
@@ -291,6 +296,11 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
             throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
         }
+
+        // アクセスログ登録
+
+
+
         return true;
     }
     /**
@@ -518,29 +528,48 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     }
 
     /**
-     * ログ登録
+     * -------------------------
+     * ログ取得
+     * -------------------------
      *
      * @param array $requestContent
-     * @return void
+     * @return boolean
      */
-    public function saveLog(array $requestContent)
+    public function getBeforOrAfterUpdateContract(array $requestContent)
     {
-        $companyId     = $requestContent['company_id']; 
+        //return new DocumentUpdateEntity($contract);
+        $contract    = $this->docContract->getBeforeOrAfterUpdateData($requestContent);
+        $perContract = $this->docPermissionContract->getBeforeOrAfterUpdateData($requestContent);
+        $stoContract = $this->docStorageContract->getBeforeOrAfterUpdateData($requestContent);
+        if (empty($contract) && empty($perContract) && empty($stoContract)) {
+            return new DocumentUpdateEntity();
+        }
+        return new DocumentUpdateEntity($contract, $perContract, $stoContract);
+    }
+
+    public function getUpdateLog($requestContent, $beforeContent, $afterContet) {
+
+        // return $requestContent; // ここまで大丈夫
+        $companyId     = $requestContent['m_user_company_id'];
         $categoryId    = $requestContent['category_id'];
         $documentId    = $requestContent['document_id'];
-        $userId        = $requestContent['user_id'];
-        $userType      = $requestContent['user_type_id'];
-        $ipAddress     = $requestContent['ip_adress'];
+        $userId        = $requestContent['m_user_id'];
+        $userType      = $requestContent['m_user_type_id'];
+        $ipAddress     = $requestContent['ip_address'];
         $accessContent = $requestContent['access_content'];
-        $beforeContent = $requestContent['before_content'];
-        $afterContet   = $requestContent['after_contet'];
 
-        $accessLogResult    = $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
-        $operationLogResult = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
-        if (!$accessLogResult || !$operationLogResult) {
-            throw new Exception(Self::LOG_ERROR_MESSAGE);
-            exit;
+        // テストリクエストとコントローラーにip_addressとaccess_contentを追加する。
+        //アクセスログに登録
+        $accessLogResult    = $this->logDocAccess->insert( $companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
+
+        // 操作ログに登録
+        $operationLogResutl = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
+
+        if (!$accessLogResult || !$operationLogResutl) {
+            throw new Exception("ログが出力出来ません。");
         }
+
+        return true;
     }
 
 }

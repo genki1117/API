@@ -156,9 +156,6 @@ class DocumentContract extends FluentDatabase
     public function update(array $requestContent)
     {
 
-
-
-        
         return $this->builder($this->table)
             ->where('document_id', $requestContent['document_id'])
             ->where('company_id', $requestContent['company_id'])
@@ -671,6 +668,26 @@ class DocumentContract extends FluentDatabase
             ])
             ->where('company_id', '=', $companyId)
             ->where('document_id', '=', $documentId)
+            ->where('status_id', '=', 0)
+            ->first();
+    }
+
+    /**
+     * 契約書類の変更前、変更後の情報を取得
+     *
+     * @param array $requestContent
+     * @return \stdClass|null
+     */
+    public function getBeforeOrAfterUpdateData(array $requestContent)
+    {
+        
+        return $this->builder()
+            ->select([
+                'update_user',
+                'update_datetime',
+            ])
+            ->where('company_id', '=', $requestContent['company_id'])
+            ->where('document_id', '=', $requestContent['document_id'])
             ->where('status_id', '=', 0)
             ->first();
     }
