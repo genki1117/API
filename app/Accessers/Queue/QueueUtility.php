@@ -9,17 +9,8 @@ use MicrosoftAzure\Storage\Queue\Models\CreateQueueOptions;
 
 class QueueUtility
 {
-    public const QUEUE_NAME_SENDMAIL = "sendmail";
-    public const QUEUE_NAME_BULKVALIDATION = "bulkvalidation";
-    public const QUEUE_NAME_SIGN = "sign";
-    public const QUEUE_NAME_TIMESTAMP = "timestamp";
-    public const QUEUE_NAME_DOCUMENTSAVE = "documentsave";
-    public const QUEUE_NAME_DOCUMENTDELETE = "documentdelete";
-    public const QUEUE_NAME_DLCSV = "dlcsv";
-    public const QUEUE_NAME_DLPDF = "dlpdf";
-    public const QUEUE_META_KEY_DEFAULT = "option";
-
     /**
+     * Azure Queue storageのキューへメッセージを追加する
      * @param string $queName
      * @param array $param
      * @return int
@@ -28,10 +19,7 @@ class QueueUtility
     {
         $ret = 0;
 
-        $accountName = env("AZURE_ACCOUNT_NAME");
-        $accountKey = env("AZURE_ACCOUNT_KEY");
-        $queueEndpoint = env("AZURE_STORAGE_QUEUE_ENDPOINT");
-        $connectionString = sprintf("DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s;QueueEndpoint=%s", $accountName, $accountKey, $queueEndpoint);
+        $connectionString = $this->getConnectionString();
 
         // Create queue REST proxy.
         $queueClient = QueueRestProxy::createQueueService($connectionString);
@@ -49,6 +37,7 @@ class QueueUtility
     }
 
     /**
+     * Azure Queue storageへキューを作成する
      * @param string $queName
      * @param array $param
      * @return int
@@ -57,10 +46,7 @@ class QueueUtility
     {
         $ret = 0;
 
-        $accountName = env("AZURE_ACCOUNT_NAME");
-        $accountKey = env("AZURE_ACCOUNT_KEY");
-        $queueEndpoint = env("AZURE_STORAGE_QUEUE_ENDPOINT");
-        $connectionString = sprintf("DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s;QueueEndpoint=%s", $accountName, $accountKey, $queueEndpoint);
+        $connectionString = $this->getConnectionString();
 
         // Create queue REST proxy.
         $queueClient = QueueRestProxy::createQueueService($connectionString);
@@ -81,5 +67,20 @@ class QueueUtility
         }
 
         return $ret;
+    }
+
+    /**
+     * Azure Queue storageへの接続文字列を取得する
+     *
+     * @return string
+     */
+    private function getConnectionString(): string
+    {
+        $accountName = env("AZURE_ACCOUNT_NAME");
+        $accountKey = env("AZURE_ACCOUNT_KEY");
+        $queueEndpoint = env("AZURE_STORAGE_QUEUE_ENDPOINT");
+        $connectionString = sprintf("DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s;QueueEndpoint=%s", $accountName, $accountKey, $queueEndpoint);
+
+        return $connectionString;
     }
 }

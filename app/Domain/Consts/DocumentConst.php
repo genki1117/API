@@ -37,4 +37,121 @@ class DocumentConst
         self::DOCUMENT_ARCHIVE => self::DOCUMENT_INTERNAL_NAME,
         self::DOCUMENT_ARCHIVE => self::DOCUMENT_ARCHIVE_NAME
     ];
+
+
+    /** @var int */
+    const DOCUMENT_STATUS_DRAFT = 0;
+
+    /** @var string */
+    const DOCUMENT_STATUS_DRAFT_NAME ='下書き';
+
+    /** @var int */
+    const DOCUMENT_STATUS_APPROVALREQUEST = 1;
+
+    /** @var string */
+    const DOCUMENT_STATUS_APPROVALREQUEST_NAME = '承認依頼中';
+
+    /** @var int */
+    const DOCUMENT_STATUS_SENT = 2;
+
+    /** @var string */
+    const DOCUMENT_STATUS_SENT_NAME = '送付済';
+
+    /** @var int */
+    const DOCUMENT_STATUS_WAITINGSIGN = 3;
+
+    /** @var string */
+    const DOCUMENT_STATUS_WAITINGSIGN_NAME = '署名待ち';
+
+    /** @var int */
+    const DOCUMENT_STATUS_CANCEL = 4;
+
+    /** @var string */
+    const DOCUMENT_STATUS_CANCEL_NAME = 'キャンセル';
+
+    /** @var int */
+    const DOCUMENT_STATUS_SENDBACK = 5;
+
+    /** @var string */
+    const DOCUMENT_STATUS_SENDBACK_NAME = '差戻';
+
+    /** @var int */
+    const DOCUMENT_STATUS_CONCLUDED = 6;
+
+    /** @var string */
+    const DOCUMENT_STATUS_CONCLUDED_NAME = '締結済';
+
+    /** @var int */
+    const DOCUMENT_STATUS_CONTRACTEXPIRATION = 7;
+
+    /** @var string */
+    const DOCUMENT_STATUS_CONTRACTEXPIRATION_NAME = '契約満了';
+
+    /** @var int */
+    const DOCUMENT_STATUS_CONTRACTBREAK = 8;
+
+    /** @var string */
+    const DOCUMENT_STATUS_CONTRACTBREAK_NAME = '契約破棄';
+
+    /** @var int */
+    const DOCUMENT_STATUS_DOWNLOADED = 9;
+
+    /** @var string */
+    const DOCUMENT_STATUS_DOWNLOADED_NAME = '相手先DL済';
+
+    /** @var int */
+    const DOCUMENT_STATUS_CIRCULATION = 10;
+
+    /** @var string */
+    const DOCUMENT_STATUS_CIRCULATION_NAME = '回覧中';
+
+    /** @var int */
+    const DOCUMENT_STATUS_TIMESTAMP = 11;
+
+    /** @var string */
+    const DOCUMENT_STATUS_TIMESTAMP_NAME = 'タイムスタンプ済';
+
+    /** @var int */
+    const DOCUMENT_STATUS_BULKVARIDATIONNEEDLESS = 12;
+
+    /** @var string */
+    const DOCUMENT_STATUS_BULKVARIDATIONNEEDLESS_NAME = '一括検証不要';
+
+    /** @var int */
+    const DOCUMENT_STATUS_EXPIRATION = 13;
+
+    /** @var string */
+    const DOCUMENT_STATUS_EXPIRATION_NAME = '期限切れ';
+
+    /** @var int */
+    const DOCUMENT_STATUS_SIGNED = 14;
+
+    /** @var string */
+    const DOCUMENT_STATUS_SIGNED_NAME = '署名済';
+
+    /** @var int */
+    const DOCUMENT_STATUS_APPROVED = 15;
+
+    /** @var string */
+    const DOCUMENT_STATUS_APPROVED_NAME = '承認済';
+
+
+    const DOCUMENT_STATUS = [
+        self::DOCUMENT_STATUS_DRAFT => self::DOCUMENT_STATUS_DRAFT_NAME,
+        self::DOCUMENT_STATUS_APPROVALREQUEST => self::DOCUMENT_STATUS_APPROVALREQUEST_NAME,
+        self::DOCUMENT_STATUS_SENT => self::DOCUMENT_STATUS_SENT_NAME,
+        self::DOCUMENT_STATUS_WAITINGSIGN => self::DOCUMENT_STATUS_WAITINGSIGN_NAME,
+        self::DOCUMENT_STATUS_CANCEL => self::DOCUMENT_STATUS_CANCEL_NAME,
+        self::DOCUMENT_STATUS_SENDBACK => self::DOCUMENT_STATUS_SENDBACK_NAME,
+        self::DOCUMENT_STATUS_CONCLUDED => self::DOCUMENT_STATUS_CONCLUDED_NAME,
+        self::DOCUMENT_STATUS_CONTRACTEXPIRATION => self::DOCUMENT_STATUS_CONTRACTEXPIRATION_NAME,
+        self::DOCUMENT_STATUS_CONTRACTBREAK => self::DOCUMENT_STATUS_CONTRACTBREAK_NAME,
+        self::DOCUMENT_STATUS_DOWNLOADED => self::DOCUMENT_STATUS_DOWNLOADED_NAME,
+        self::DOCUMENT_STATUS_CIRCULATION => self::DOCUMENT_STATUS_CIRCULATION_NAME,
+        self::DOCUMENT_STATUS_TIMESTAMP => self::DOCUMENT_STATUS_TIMESTAMP_NAME,
+        self::DOCUMENT_STATUS_BULKVARIDATIONNEEDLESS => self::DOCUMENT_STATUS_BULKVARIDATIONNEEDLESS_NAME,
+        self::DOCUMENT_STATUS_EXPIRATION => self::DOCUMENT_STATUS_EXPIRATION_NAME,
+        self::DOCUMENT_STATUS_SIGNED => self::DOCUMENT_STATUS_SIGNED_NAME,
+        self::DOCUMENT_STATUS_APPROVED => self::DOCUMENT_STATUS_APPROVED_NAME
+    ];
 }

@@ -103,13 +103,12 @@ class AuthorizationToken
     {
         $ret = false;
 
-        //TODO 不正なURL(404)となる場合は、権限チェックはOKとして通す.これでよいか？
         //全体共通のミドルウェア（Kernel.phpの$middleware）は、ルート存在チェックより先に動作するため
-        if (!array_key_exists($requestUri, config('aut_list'))) {
+        if (!array_key_exists($requestUri, config('auth_list'))) {
             return true;
         }
 
-        $auth = config('aut_list')[$requestUri];
+        $auth = config('auth_list')[$requestUri];
 
         // 申込者については、該当するAPIがPHP側にはないため、考慮不要
         if ($user->getUser()->user_type_id === 1) {
