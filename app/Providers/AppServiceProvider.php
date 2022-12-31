@@ -42,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
                         $binding = "'{$binding}'";
                     } elseif (is_int($binding)) {
                         $binding = (string)$binding;
+                    } elseif (is_bool($binding)) {
+                        $binding = $binding ? 'true':'false';
                     } elseif ($binding === null) {
                         $binding = 'NULL';
                     } elseif ($binding instanceof Carbon) {
