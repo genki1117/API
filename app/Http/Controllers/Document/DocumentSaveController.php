@@ -87,7 +87,7 @@ class DocumentSaveController extends Controller
                     $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
 
                     // 書類の保存を実行
-                    return $this->documentSaveService->saveDocument($requestContent);
+                    $this->documentSaveService->saveDocument($requestContent);
                     break;
 
                 case Self::DOC_DEAL_TYPE:

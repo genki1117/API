@@ -46,7 +46,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     /** @var */
     protected const ARCHIVE_UPDATE_ERROR_MESSAGE    = '登録書類テーブルおよび登録書類閲覧権限および登録書類容量を更新出来ません。';
     /** @var */
-    protected const LOG_ERROR_MESSAGE               = 'ログを登録できませんでした';
+    protected const LOG_ERROR_MESSAGE               = 'ログを出力、登録できません';
 
     /**
      * @var Document
@@ -162,7 +162,8 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10; //連番に変更
+                // $wfSort                 = $wf_sort * 10; //連番に変更
+                $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
@@ -565,7 +566,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $operationLogResutl = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
 
         if (!$accessLogResult || !$operationLogResutl) {
-            throw new Exception("ログが出力出来ません。");
+            throw new Exception(Self::LOG_ERROR_MESSAGE);
         }
         return true;
     }
