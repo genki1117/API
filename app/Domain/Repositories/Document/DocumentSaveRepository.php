@@ -537,7 +537,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      */
     public function getBeforOrAfterUpdateContract(array $requestContent)
     {
-        //return new DocumentUpdateEntity($contract);
+        // return new DocumentUpdateEntity($contract);
         $contract    = $this->docContract->getBeforeOrAfterUpdateData($requestContent);
         $perContract = $this->docPermissionContract->getBeforeOrAfterUpdateData($requestContent);
         $stoContract = $this->docStorageContract->getBeforeOrAfterUpdateData($requestContent);
@@ -547,9 +547,8 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         return new DocumentUpdateEntity($contract, $perContract, $stoContract);
     }
 
-    public function getUpdateLog($requestContent, $beforeContent, $afterContet) {
-
-        // return $requestContent; // ここまで大丈夫
+    public function getUpdateLog($requestContent, $beforeContent, $afterContet)
+    {
         $companyId     = $requestContent['m_user_company_id'];
         $categoryId    = $requestContent['category_id'];
         $documentId    = $requestContent['document_id'];
@@ -568,7 +567,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         if (!$accessLogResult || !$operationLogResutl) {
             throw new Exception("ログが出力出来ません。");
         }
-
         return true;
     }
 

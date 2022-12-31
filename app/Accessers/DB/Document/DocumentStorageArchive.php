@@ -137,4 +137,22 @@ class DocumentStorageArchive extends FluentDatabase
             ->where("document_id", "=", $documentId)
             ->first();
     }
+
+    /**
+     * 登録書類容量の変更前、変更後の情報を取得
+     *
+     * @param array $requestContent
+     * @return \stdClass|null
+     */
+    public function getBeforeOrAfterUpdateData(array $requestContent): ?\stdClass
+    {
+        return $this->builder()
+            ->select([
+                'update_user',
+                'update_datetime'
+            ])
+            ->where('company_id', '=', $requestContent['company_id'])
+            ->where('document_id', '=', $requestContent['document_id'])
+            ->first();
+    }
 }

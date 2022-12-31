@@ -680,7 +680,6 @@ class DocumentContract extends FluentDatabase
      */
     public function getBeforeOrAfterUpdateData(array $requestContent)
     {
-        
         return $this->builder()
             ->select([
                 'update_user',

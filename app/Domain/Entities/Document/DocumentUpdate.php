@@ -16,13 +16,13 @@ class DocumentUpdate
      * @param \stdClass|null $docStorage
      */
     public function __construct(
-        ?\stdClass $document = null,
+        ?\stdClass $document      = null,
         ?\stdClass $docPermission = null,
-        ?\stdClass $docStorage = null
+        ?\stdClass $docStorage    = null
     ) {
-        $this->document = $document;
+        $this->document      = $document;
         $this->docPermission = $docPermission;
-        $this->docStorage = $docStorage;
+        $this->docStorage    = $docStorage;
     }
 
     /** @return \stdClass|null */

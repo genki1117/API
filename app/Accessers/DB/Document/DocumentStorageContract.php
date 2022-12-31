@@ -139,7 +139,7 @@ class DocumentStorageContract extends FluentDatabase
     }
 
     /**
-     * 契約書類の変更前、変更後の情報を取得
+     * 契約書類容量の変更前、変更後の情報を取得
      *
      * @param array $requestContent
      * @return \stdClass|null

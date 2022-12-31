@@ -87,7 +87,7 @@ class DocumentSaveController extends Controller
                     $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
 
                     // 書類の保存を実行
-                    $this->documentSaveService->saveDocument($requestContent);
+                    return $this->documentSaveService->saveDocument($requestContent);
                     break;
 
                 case Self::DOC_DEAL_TYPE:
@@ -208,11 +208,6 @@ class DocumentSaveController extends Controller
                     $result = $this->documentSaveService->saveDocument($requestContent);
                     break;
             }
-
-                    // ログの出力を実行
-                    //$this->documentSaveService->saveLog($requestContent);
-
-
             return (new DocumentSaveResponse)->successSave();
         } catch (Exception $e) {
             // ログの出力

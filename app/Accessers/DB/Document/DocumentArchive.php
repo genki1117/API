@@ -140,8 +140,7 @@ class DocumentArchive extends FluentDatabase
           'create_user'      => $requestContent['m_user_id'],
           'create_datetime'  => $requestContent['create_datetime'],
           'update_user'      => $requestContent['m_user_id'],
-          'update_datetime'  => $requestContent['update_datetime']
-          
+          'update_datetime'  => $requestContent['update_datetime']  
       ]);
   }
 
@@ -627,6 +626,23 @@ class DocumentArchive extends FluentDatabase
             ->where('status_id', '=', 0)
             ->first();
     }
+
+    /**
+     * 登録書類の変更前、変更後の情報を取得
+     *
+     * @param array $requestContent
+     * @return \stdClass|null
+     */
+    public function getBeforeOrAfterUpdateData(array $requestContent)
+    {
+        return $this->builder()
+            ->select([
+                'update_user',
+                'update_datetime',
+            ])
+            ->where('company_id', '=', $requestContent['company_id'])
+            ->where('document_id', '=', $requestContent['document_id'])
+            ->where('status_id', '=', 0)
+            ->first();
+    }
 }
-// https://qiita.com/youstr/items/04018908522be2eda8ff
-//楽観ロック

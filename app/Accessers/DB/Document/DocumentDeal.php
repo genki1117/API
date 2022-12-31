@@ -640,4 +640,23 @@ class DocumentDeal extends FluentDatabase
             ->where('status_id', '=', 0)
             ->first();
     }
+
+    /**
+     * 取引書類の変更前、変更後の情報を取得
+     *
+     * @param array $requestContent
+     * @return \stdClass|null
+     */
+    public function getBeforeOrAfterUpdateData(array $requestContent)
+    {
+        return $this->builder()
+            ->select([
+                'update_user',
+                'update_datetime',
+            ])
+            ->where('company_id', '=', $requestContent['company_id'])
+            ->where('document_id', '=', $requestContent['document_id'])
+            ->where('status_id', '=', 0)
+            ->first();
+    }
 }

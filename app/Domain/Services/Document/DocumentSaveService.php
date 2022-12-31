@@ -122,10 +122,4 @@ class DocumentSaveService
         
         return $documentSaveResult;
     }
-
-    // ログ登録
-    // public function saveLog($requestContent)
-    // {
-    //     $logSaveResult = $this->documentRepository->saveLog($requestContent);
-    // }
 }
