@@ -5,6 +5,7 @@ namespace App\Accessers\DB\Document;
 use App\Accessers\DB\FluentDatabase;
 use Illuminate\Support\Facades\DB;
 use Carbon\CarbonImmutable;
+use Exception;
 
 class DocumentStorageContract extends FluentDatabase
 {

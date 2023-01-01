@@ -5,6 +5,7 @@ namespace App\Accessers\DB\Document;
 use Carbon\CarbonImmutable;
 use App\Accessers\DB\FluentDatabase;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class DocumentPermissionArchive extends FluentDatabase
 {

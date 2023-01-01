@@ -113,11 +113,8 @@ class DocumentInternal extends FluentDatabase
           'template_id'      => $requestContent['template_id'],
           'doc_type_id'      => $requestContent['doc_type_id'],
           'status_id'        => $requestContent['status_id'],
-
           'doc_create_date'  => $requestContent['doc_create_date'],
           'sign_finish_date' => $requestContent['sign_finish_date'],
-          
-
           'doc_no'           => $requestContent['doc_no'],
           'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
           'product_name'     => $requestContent['product_name'],

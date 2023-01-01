@@ -25,11 +25,6 @@ class DocumentSaveService
 
     /** @var DocumentSaveRepositoryInterface */
     private DocumentSaveRepositoryInterface $documentRepository;
-    /** @var  */
-
-
-
-
 
     /**
      * @param DocumentSaveRepositoryInterface $documentRepository
@@ -85,7 +80,21 @@ class DocumentSaveService
                     }
                     // 更新登録
                     if ($requestContent['document_id']) {
+                        //更新前の情報を取得する
+                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateDeal($requestContent);
+
+                        // 取引書類更新
                         $documentSaveResult = $this->documentRepository->dealUpdate($requestContent);
+
+                        // 更新後の情報を取得する
+                        $afterList = $this->documentRepository->getBeforOrAfterUpdateDeal($requestContent);
+
+                        // ログ出力を行う
+                        $this->documentRepository->getUpdateLog(
+                            $requestContent,
+                            $beforeList->getUpdateDocument(),
+                            $afterList->getUpdateDocument(),
+                        );
                     }
                     break;
 
@@ -97,7 +106,22 @@ class DocumentSaveService
                     }
                     // 更新登録
                     if ($requestContent['document_id']) {
+                        //更新前の情報を取得する
+                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateInternal($requestContent);
+                        
+                        // 社内書類更新
                         $documentSaveResult = $this->documentRepository->internalUpdate($requestContent);
+
+                        // 更新後の情報を取得する
+                        $afterList = $this->documentRepository->getBeforOrAfterUpdateInternal($requestContent);
+
+                        // ログ出力を行う
+                        $this->documentRepository->getUpdateLog(
+                            $requestContent,
+                            $beforeList->getUpdateDocument(),
+                            $afterList->getUpdateDocument(),
+                        );
+
                     }
                     break;
 
@@ -109,11 +133,27 @@ class DocumentSaveService
                     }
                     // 更新登録
                     if ($requestContent['document_id']) {
+                        //更新前の情報を取得する
+                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateARchive($requestContent);
+
+                        // 登録書類更新
                         $documentSaveResult = $this->documentRepository->archiveUpdate($requestContent);
+
+                        // 更新後の情報を取得する
+                        $afterList = $this->documentRepository->getBeforOrAfterUpdateArchive($requestContent);
+
+                        // ログ出力を行う
+                        $this->documentRepository->getUpdateLog(
+                            $requestContent,
+                            $beforeList->getUpdateDocument(),
+                            $afterList->getUpdateDocument(),
+                        );
+
                     }
                     break;
             }
             DB::commit();
+            return true;
         } catch (Exception $e) {
             DB::rollback();
             Log::error($e);

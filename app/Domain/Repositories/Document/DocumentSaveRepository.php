@@ -190,7 +190,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 }
             }
         }
-
         if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
             throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
         }
@@ -215,7 +214,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
         // 契約書類容量更新
         $docStorageUpdateResult    = $this->docStorageContract->update($requestContent);
-
 
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
@@ -267,7 +265,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10;
+                $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
@@ -283,7 +281,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10;
+                $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
@@ -297,11 +295,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         if ($docInsertResult === false || $docPermissionInsertResult === false || $docStorageInsertResult === false || $documentWorkFlowResult === false) {
             throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
         }
-
-        // アクセスログ登録
-
-
-
         return true;
     }
     /**
@@ -371,7 +364,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10;
+                $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
@@ -387,7 +380,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10;
+                $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
@@ -471,7 +464,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10;
+                $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
@@ -487,13 +480,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10;
+                $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
                 $documentWorkFlowResult = $this->documentWorkFlow->insertArchive($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
                 if (!$documentWorkFlowResult) {
-                    throw new Exception('登録書類テーブルおよび登録書類閲覧権限および登録書類容量を登録出来ません。');
+                    throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
                     exit;
                 }
             }
@@ -530,15 +523,14 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
     /**
      * -------------------------
-     * ログ取得
+     * 契約書類ログ取得
      * -------------------------
      *
      * @param array $requestContent
-     * @return boolean
+     * @return 
      */
     public function getBeforOrAfterUpdateContract(array $requestContent)
     {
-        // return new DocumentUpdateEntity($contract);
         $contract    = $this->docContract->getBeforeOrAfterUpdateData($requestContent);
         $perContract = $this->docPermissionContract->getBeforeOrAfterUpdateData($requestContent);
         $stoContract = $this->docStorageContract->getBeforeOrAfterUpdateData($requestContent);
@@ -548,7 +540,74 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         return new DocumentUpdateEntity($contract, $perContract, $stoContract);
     }
 
-    public function getUpdateLog($requestContent, $beforeContent, $afterContet)
+    /**
+     * -------------------------
+     * 取引書類ログ取得
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return 
+     */
+    public function getBeforOrAfterUpdateDeal(array $requestContent)
+    {
+        $deal = $this->docDeal->getBeforeOrAfterUpdateData($requestContent);
+        $perDeal = $this->docDeal->getBeforeOrAfterUpdateData($requestContent);
+        $stoDeal = $this->docDeal->getBeforeOrAfterUpdateData($requestContent);
+        if (empty($dela) && empty($perDeal) && empty($stoDeal)) {
+            return new DocumentUpdateEntity();
+        }
+        return new DocumentUpdateEntity($deal, $perDeal, $stoDeal);
+    }
+
+    /**
+     * -------------------------
+     * 社内書類ログ取得
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return 
+     */
+    public function getBeforOrAfterUpdateInternal(array $requestContent)
+    {
+        $internal = $this->docInternal->getBeforeOrAfterUpdateData($requestContent);
+        $perInternal = $this->docInternal->getBeforeOrAfterUpdateData($requestContent);
+        $stoInternal = $this->docInternal->getBeforeOrAfterUpdateData($requestContent);
+        if (empty($internal) && empty($perInternal) && empty($stoInternal)) {
+            return new DocumentUpdateEntity();
+        }
+        return new DocumentUpdateEntity($internal, $perInternal, $stoInternal);
+    }
+
+    /**
+     * -------------------------
+     * 登録書類ログ取得
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @return 
+     */
+    public function getBeforOrAfterUpdateArchive(array $requestContent)
+    {
+        $archive = $this->docArchive->getBeforeOrAfterUpdateData($requestContent);
+        $perArchive = $this->docArchive->getBeforeOrAfterUpdateData($requestContent);
+        $stoArchive = $this->docArchive->getBeforeOrAfterUpdateData($requestContent);
+        if (empty($archive) && empty($perArchive) && empty($stoArchive)) {
+            return new DocumentUpdateEntity();
+        }
+        return new DocumentUpdateEntity($archive, $perArchive, $stoArchive);
+    }
+
+    /**
+     * -------------------------
+     * ログ登録
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @param [type] $beforeContent
+     * @param [type] $afterContet
+     * @return boolean
+     */
+    public function getUpdateLog(array $requestContent, $beforeContent, $afterContet)
     {
         $companyId     = $requestContent['m_user_company_id'];
         $categoryId    = $requestContent['category_id'];
@@ -558,7 +617,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $ipAddress     = $requestContent['ip_address'];
         $accessContent = $requestContent['access_content'];
 
-        // テストリクエストとコントローラーにip_addressとaccess_contentを追加する。
         //アクセスログに登録
         $accessLogResult    = $this->logDocAccess->insert( $companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
 

@@ -116,13 +116,11 @@ class DocumentDeal extends FluentDatabase
             'template_id'      => $requestContent['template_id'],
             'doc_type_id'      => $requestContent['doc_type_id'],
             'status_id'        => $requestContent['status_id'],
-
             'issue_date'       => $requestContent['issue_date'],
             'expiry_date'      => $requestContent['expiry_date'],
             'payment_date'     => $requestContent['payment_date'],
             'transaction_date' => $requestContent['transaction_date'],
             'download_date'    => $requestContent['download_date'],
-
             'doc_no'           => $requestContent['doc_no'],
             'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
             'product_name'     => $requestContent['product_name'],
