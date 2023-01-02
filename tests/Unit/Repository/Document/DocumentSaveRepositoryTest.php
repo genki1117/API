@@ -23,21 +23,21 @@ use PHPUnit\Framework\TestCase;
 
 class DocumentSaveRepositoryTest extends TestCase
 {
-    private $docContract;
-    private $docDeal;
-    private $docInternal;
-    private $docArchive;
-    private $docPermissionContract;
-    private $docPermissionTransaction;
-    private $docPermissionInternal;
-    private $docPermissionArchive;
-    private $docStorageContract;
-    private $docStorageTransaction;
-    private $docStorageInternal;
-    private $docStorageArchive;
-    private $documentWorkFlow;
-    private $logDocAccess;
-    private $logDocOperation;
+    private $docContractMock;
+    private $docDealMock;
+    private $docInternalMock;
+    private $docArchiveMock;
+    private $docPermissionContractMock;
+    private $docPermissionTransactionMock;
+    private $docPermissionInternalMock;
+    private $docPermissionArchiveMock;
+    private $docStorageContractMock;
+    private $docStorageTransactionMock;
+    private $docStorageInternalMock;
+    private $docStorageArchiveMock;
+    private $documentWorkFlowMock;
+    private $logDocAccessMock;
+    private $logDocOperationMock;
 
     public function setUp(): void
     {
