@@ -66,7 +66,6 @@ class DocumentSaveService
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),
                         );
-
                     }
                     break;
 
@@ -119,7 +118,6 @@ class DocumentSaveService
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),
                         );
-
                     }
                     break;
 
@@ -146,7 +144,6 @@ class DocumentSaveService
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),
                         );
-
                     }
                     break;
             }

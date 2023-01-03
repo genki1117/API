@@ -77,7 +77,6 @@ class DocumentPermissionInternal extends FluentDatabase
      */
     public function update(array $requestContent)
     {
-        
         $deleteResult = DB::table('t_doc_permission_internal')
         ->where('document_id', $requestContent['document_id'])
         ->where('company_id', $requestContent['company_id'])
@@ -95,7 +94,7 @@ class DocumentPermissionInternal extends FluentDatabase
                 "delete_user"     => null,
                 "delete_datetime" => null
             ];
-            return $this->builder($this->table)->insert($data); 
+            return $this->builder($this->table)->insert($data);
         } else {
             throw new Exception('登録書類テーブルおよび登録書類閲覧権限および登録書類容量を更新出来ません。');
             exit;

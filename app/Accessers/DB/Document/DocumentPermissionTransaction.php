@@ -92,7 +92,7 @@ class DocumentPermissionTransaction extends FluentDatabase
                 "delete_user"     => null,
                 "delete_datetime" => null
             ];
-            return $this->builder($this->table)->insert($data); 
+            return $this->builder($this->table)->insert($data);
         } else {
             throw new Exception('登録書類テーブルおよび登録書類閲覧権限および登録書類容量を更新出来ません。');
             exit;

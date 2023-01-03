@@ -140,7 +140,7 @@ class DocumentArchive extends FluentDatabase
           'create_user'      => $requestContent['m_user_id'],
           'create_datetime'  => $requestContent['create_datetime'],
           'update_user'      => $requestContent['m_user_id'],
-          'update_datetime'  => $requestContent['update_datetime']  
+          'update_datetime'  => $requestContent['update_datetime']
       ]);
   }
 

@@ -527,7 +527,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * -------------------------
      *
      * @param array $requestContent
-     * @return 
+     * @return
      */
     public function getBeforOrAfterUpdateContract(array $requestContent)
     {
@@ -546,7 +546,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * -------------------------
      *
      * @param array $requestContent
-     * @return 
+     * @return
      */
     public function getBeforOrAfterUpdateDeal(array $requestContent)
     {
@@ -565,7 +565,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * -------------------------
      *
      * @param array $requestContent
-     * @return 
+     * @return
      */
     public function getBeforOrAfterUpdateInternal(array $requestContent)
     {
@@ -584,7 +584,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * -------------------------
      *
      * @param array $requestContent
-     * @return 
+     * @return
      */
     public function getBeforOrAfterUpdateArchive(array $requestContent)
     {
@@ -618,7 +618,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $accessContent = $requestContent['access_content'];
 
         //アクセスログに登録
-        $accessLogResult    = $this->logDocAccess->insert( $companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
+        $accessLogResult    = $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
 
         // 操作ログに登録
         $operationLogResutl = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
@@ -628,8 +628,4 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         }
         return true;
     }
-
 }
-
-
-

@@ -94,7 +94,7 @@ class DocumentPermissionContract extends FluentDatabase
                 "delete_user"     => null,
                 "delete_datetime" => null
             ];
-            return $this->builder($this->table)->insert($data); 
+            return $this->builder($this->table)->insert($data);
         } else {
             throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を更新出来ません。');
             exit;

@@ -48,7 +48,6 @@ class DocumentSaveController extends Controller
         DB::beginTransaction($request);
         try {
             switch ($request->category_id) {
-                
                 // 契約書類処理
                 case Self::DOC_CONTRACT_TYPE:
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
