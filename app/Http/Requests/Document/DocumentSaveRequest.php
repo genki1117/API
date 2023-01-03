@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Document;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DocumentSaveRequest extends FormRequest
@@ -21,7 +23,7 @@ class DocumentSaveRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -48,30 +50,30 @@ class DocumentSaveRequest extends FormRequest
             'sign_level'        => 'numeric',
 
             // 契約書類
-            'cont_start_date'   => 'required |string | unique:' . self::tables[$this->request->all()['category_id']],
-            'cont_end_date'     => 'required |string | unique:' . self::tables[$this->request->all()['category_id']],
-            'conc_date'         => 'required |string | unique:' . self::tables[$this->request->all()['category_id']],
-            'effective_date'    => 'required |string | unique:' . self::tables[$this->request->all()['category_id']],
-            'cancel_date'       => 'required |string | unique:' . self::tables[$this->request->all()['category_id']],
-            'expiry_date'       => 'required |string | unique:' . self::tables[$this->request->all()['category_id']],
+            'cont_start_date'   => 'date',
+            'cont_end_date'     => 'date',
+            'conc_date'         => 'date',
+            'effective_date'    => 'date',
+            'cancel_date'       => 'date',
+            'expiry_date'       => 'date',
             
             // 取引書類
-            'issue_date'        => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
-            'payment_date'      => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
-            'transaction_date'  => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
-            'download_date'     => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
+            'issue_date'        => 'date',
+            'payment_date'      => 'date',
+            'transaction_date'  => 'date',
+            'download_date'     => 'date',
 
             // 社内書類
-            'doc_create_date'   => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
-            'sign_finish_date'  => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
-            'content'           => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
+            'doc_create_date'   => 'date',
+            'sign_finish_date'  => 'date',
+            'content'           => 'string',
 
             // 登録書類
-            'scan_doc_flg'      => 'required | numeric | unique:' . self::tables[$this->request->all()['category_id']],
-            'issue_date'        => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
-            'expiry_date'       => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
-            'transaction_date'  => 'required | string | unique:' . self::tables[$this->request->all()['category_id']],
-            'timestamp_user'    => 'required | numeric | unique:' . self::tables[$this->request->all()['category_id']],
+            'scan_doc_flg'      => 'numeric',
+            'issue_date'        => 'date',
+            'expiry_date'       => 'date',
+            'transaction_date'  => 'date',
+            'timestamp_user'    => 'numeric',
 
             // 各書類容量
             'file_name'          => 'string | max:255',
@@ -95,22 +97,22 @@ class DocumentSaveRequest extends FormRequest
     {
         return [
             
-             'document_id.numeric'        => 'error.message.number',
-             'company_id.required'        => 'error.message.required',
-             'company_id.numeric'         => 'error.message.number',
-             'category_id.required'       => 'error.message.required',
-             'category_id.numeric'        => 'error.message.number',
-             'template_id.numeric'        => 'error.message.number',
-             'doc_type_id.required'       => 'error.message.required',
-             'doc_type_id.number'         => 'error.message.number',
-             'status_id.numeric'          =>'error.message.number',
-             'doc_no.string'              => 'error.message.string',
-             'doc_no.max'                 => 'error.message.lenth.over',
+             'document_id.numeric'         => 'error.message.number',
+             'company_id.required'         => 'error.message.required',
+             'company_id.numeric'          => 'error.message.number',
+             'category_id.required'        => 'error.message.required',
+             'category_id.numeric'         => 'error.message.number',
+             'template_id.numeric'         => 'error.message.number',
+             'doc_type_id.required'        => 'error.message.required',
+             'doc_type_id.number'          => 'error.message.number',
+             'status_id.numeric'           =>'error.message.number',
+             'doc_no.string'               => 'error.message.string',
+             'doc_no.max'                  => 'error.message.lenth.over',
              'product_name.string'         => 'error.message.string',
              'product_name.max'            => 'error.message.length.over',
-             'title.required'             => 'error.message.required',
-             'title.string'               => 'error.message.string',
-             'title.max'                  => 'error.message.length.over',
+             'title.required'              => 'error.message.required',
+             'title.string'                => 'error.message.string',
+             'title.max'                   => 'error.message.length.over',
              'amount.required'             => 'error.message.required',
              'amount.numeric'              => 'error.message.number',
              'currency_id.required'        => 'error.message.required',
@@ -184,8 +186,8 @@ class DocumentSaveRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        $exception = new ValidationException($validator);
-        $exception->status(400);
+        $response['errors']  = $validator->errors()->toArray();
+        $exception = new HttpResponseException(response()->json($response, 400));
         throw $exception;
     }
 }

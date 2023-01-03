@@ -9,6 +9,8 @@ use App\Http\Responses\Document\DocumentSaveResponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
 
 class DocumentSaveController extends Controller
@@ -43,6 +45,7 @@ class DocumentSaveController extends Controller
      */
     public function saveDocument(Request $request)
     {
+        DB::beginTransaction($request);
         try {
             switch ($request->category_id) {
                 
@@ -215,9 +218,11 @@ class DocumentSaveController extends Controller
                     $result = $this->documentSaveService->saveDocument($requestContent);
                     break;
             }
+            DB::commit();
             return (new DocumentSaveResponse)->successSave();
         } catch (Exception $e) {
-            // ログの出力
+            DB::rollback();
+            Log::error($e);
             return (new DocumentSaveResponse)->faildSave($e->getMessage());
         }
     }

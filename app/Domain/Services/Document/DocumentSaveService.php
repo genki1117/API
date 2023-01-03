@@ -5,7 +5,6 @@ namespace App\Domain\Services\Document;
 use App\Accessers\DB\Log\System\LogDocAccess;
 use App\Accessers\DB\Log\System\LogDocOperation;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Domain\Entities\Document\DocumentDetail;
 use App\Domain\Repositories\Interface\Document\DocumentSaveRepositoryInterface;
@@ -42,7 +41,6 @@ class DocumentSaveService
      */
     public function saveDocument(array $requestContent)
     {
-        DB::beginTransaction($requestContent);
         try {
             switch ($requestContent['category_id']) {
                 // 契約書類の登録、更新
@@ -152,14 +150,10 @@ class DocumentSaveService
                     }
                     break;
             }
-            DB::commit();
             return true;
         } catch (Exception $e) {
-            DB::rollback();
-            Log::error($e);
             throw $e;
         }
-        
         return $documentSaveResult;
     }
 }
