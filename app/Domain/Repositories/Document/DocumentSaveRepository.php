@@ -128,7 +128,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function contractInsert(array $requestContent)
+    public function contractInsert(array $requestContent): ?bool
     {
         // 契約書類登録
         $docInsertResult           = $this->docContract->insert($requestContent);
@@ -204,7 +204,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function contractUpdate(array $requestContent)
+    public function contractUpdate(array $requestContent): ?bool
     {
         // 契約書類更新
         $docUpdateResult           = $this->docContract->update($requestContent);
@@ -231,7 +231,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function dealInsert(array $requestContent)
+    public function dealInsert(array $requestContent): ?bool
     {
         // 取引書類登録
         $docInsertResult           = $this->docDeal->insert($requestContent);
@@ -305,7 +305,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function dealUpdate(array $requestContent)
+    public function dealUpdate(array $requestContent): ?bool
     {
         // 取引書類更新
         $docUpdateResult           = $this->docDeal->update($requestContent);
@@ -330,7 +330,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function internalInsert(array $requestContent)
+    public function internalInsert(array $requestContent): ?bool
     {
         // 社内書類登録
         $docInsertResult           = $this->docInternal->insert($requestContent);
@@ -404,7 +404,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function InternalUpdate(array $requestContent)
+    public function InternalUpdate(array $requestContent): ?bool
     {
         // 社内書類更新
         $docUpdateResult           = $this->docInternal->update($requestContent);
@@ -430,7 +430,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function archiveInsert(array $requestContent)
+    public function archiveInsert(array $requestContent): ?bool
     {
         // 取引書類登録
         $docInsertResult           = $this->docArchive->insert($requestContent);
@@ -504,7 +504,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return boolean
      */
-    public function archiveUpdate(array $requestContent)
+    public function archiveUpdate(array $requestContent): ?bool
     {
         // 契約書類更新
         $docUpdateResult           = $this->docArchive->update($requestContent);
@@ -529,7 +529,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return
      */
-    public function getBeforOrAfterUpdateContract(array $requestContent)
+    public function getBeforOrAfterUpdateContract(array $requestContent): DocumentUpdateEntity
     {
         $contract    = $this->docContract->getBeforeOrAfterUpdateData($requestContent);
         $perContract = $this->docPermissionContract->getBeforeOrAfterUpdateData($requestContent);
@@ -548,7 +548,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return
      */
-    public function getBeforOrAfterUpdateDeal(array $requestContent)
+    public function getBeforOrAfterUpdateDeal(array $requestContent): DocumentUpdateEntity
     {
         $deal = $this->docDeal->getBeforeOrAfterUpdateData($requestContent);
         $perDeal = $this->docDeal->getBeforeOrAfterUpdateData($requestContent);
@@ -567,7 +567,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return
      */
-    public function getBeforOrAfterUpdateInternal(array $requestContent)
+    public function getBeforOrAfterUpdateInternal(array $requestContent): DocumentUpdateEntity
     {
         $internal = $this->docInternal->getBeforeOrAfterUpdateData($requestContent);
         $perInternal = $this->docInternal->getBeforeOrAfterUpdateData($requestContent);
@@ -586,7 +586,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return
      */
-    public function getBeforOrAfterUpdateArchive(array $requestContent)
+    public function getBeforOrAfterUpdateArchive(array $requestContent): DocumentUpdateEntity
     {
         $archive = $this->docArchive->getBeforeOrAfterUpdateData($requestContent);
         $perArchive = $this->docArchive->getBeforeOrAfterUpdateData($requestContent);
@@ -607,7 +607,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param [type] $afterContet
      * @return boolean
      */
-    public function getUpdateLog(array $requestContent, $beforeContent, $afterContet)
+    public function getUpdateLog(array $requestContent, $beforeContent, $afterContet): ?bool
     {
         $companyId     = $requestContent['m_user_company_id'];
         $categoryId    = $requestContent['category_id'];

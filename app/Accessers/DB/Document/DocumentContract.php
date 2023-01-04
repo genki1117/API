@@ -113,7 +113,7 @@ class DocumentContract extends FluentDatabase
    * @param array $requestContent
    * @return boolean
    */
-    public function insert(array $requestContent)
+    public function insert(array $requestContent): bool
     {
         return $this->builder($this->table)->insert([
             'company_id'       => $requestContent['company_id'],
@@ -153,7 +153,7 @@ class DocumentContract extends FluentDatabase
      * @param array $requestContent
      * @return boolean
      */
-    public function update(array $requestContent)
+    public function update(array $requestContent): int
     {
         return $this->builder($this->table)
             ->where('document_id', $requestContent['document_id'])
@@ -677,7 +677,7 @@ class DocumentContract extends FluentDatabase
      * @param array $requestContent
      * @return \stdClass|null
      */
-    public function getBeforeOrAfterUpdateData(array $requestContent)
+    public function getBeforeOrAfterUpdateData(array $requestContent): ?\stdClass
     {
         return $this->builder()
             ->select([

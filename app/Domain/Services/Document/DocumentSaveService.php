@@ -39,7 +39,7 @@ class DocumentSaveService
      * @param array $requestContent
      * @return boolean
      */
-    public function saveDocument(array $requestContent)
+    public function saveDocument(array $requestContent): ?bool
     {
         try {
             switch ($requestContent['category_id']) {

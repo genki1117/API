@@ -2,48 +2,50 @@
 declare(strict_types=1);
 namespace App\Domain\Repositories\Interface\Document;
 
+use App\Domain\Entities\Document\DocumentUpdate as DocumentUpdateEntity;
+
 interface DocumentSaveRepositoryInterface
 {
     // 契約書類登録
-    public function contractInsert(array $requestContent);
+    public function contractInsert(array $requestContent): ?bool;
 
     // 契約書類更新
-    public function contractUpdate(array $requestContent);
+    public function contractUpdate(array $requestContent): ?bool;
 
 
     // 取引書類登録
-    public function dealInsert(array $requestContent);
+    public function dealInsert(array $requestContent): ?bool;
 
     // 取引書類更新
-    public function dealUpdate(array $requestContent);
+    public function dealUpdate(array $requestContent): ?bool;
 
 
     // 社内書類登録
-    public function internalInsert(array $requestContent);
+    public function internalInsert(array $requestContent): ?bool;
 
     // 社内書類更新
-    public function internalUpdate(array $requestContent);
+    public function internalUpdate(array $requestContent): ?bool;
 
 
     // 登録書類登録
-    public function archiveInsert(array $requestContent);
+    public function archiveInsert(array $requestContent): ?bool;
 
     // 登録書類更新
-    public function archiveUpdate(array $requestContent);
+    public function archiveUpdate(array $requestContent): ?bool;
 
 
     // 契約書類ログ取得
-    public function getBeforOrAfterUpdateContract(array $requestContent);
+    public function getBeforOrAfterUpdateContract(array $requestContent): DocumentUpdateEntity;
 
     // 取引書類ログ取得
-    public function getBeforOrAfterUpdateDeal(array $requestContent);
+    public function getBeforOrAfterUpdateDeal(array $requestContent): DocumentUpdateEntity;
 
     // 社内書類のログ取得
-    public function getBeforOrAfterUpdateInternal(array $requestContent);
+    public function getBeforOrAfterUpdateInternal(array $requestContent): DocumentUpdateEntity;
 
     // 登録書類のログ取得
-    public function getBeforOrAfterUpdateArchive(array $requestContent);
+    public function getBeforOrAfterUpdateArchive(array $requestContent): DocumentUpdateEntity;
 
     // ログ登録
-    public function getUpdateLog(array $requestContent, $beforeList, $afterList);
+    public function getUpdateLog(array $requestContent, $beforeList, $afterList): ?bool;
 }
