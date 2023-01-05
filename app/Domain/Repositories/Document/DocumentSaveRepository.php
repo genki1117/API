@@ -162,7 +162,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                // $wfSort                 = $wf_sort * 10; //連番に変更
                 $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
@@ -179,7 +178,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $companyId              = $requestContent['company_id'];
                 $categoryId             = $requestContent['category_id'];
                 $appUserId              = $selectSignUser['user_id'];
-                $wfSort                 = $wf_sort * 10; //連番に変更
+                $wfSort                 = $selectSignUser['wf_sort'];
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
