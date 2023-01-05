@@ -22,8 +22,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
 
-//        \App\Http\Middleware\AuthorizationToken::class, //TODO AzureADとの認証処理が整い次第、設定
-//        \App\Http\Middleware\CommonProcess::class, //TODO 認証後のアクセスログの保存処理
+        \App\Http\Middleware\AuthorizationToken::class,
+        \App\Http\Middleware\CommonProcess::class,
 
     ];
 
