@@ -14,10 +14,10 @@ interface DocumentGetDocumentRepositoryInterface
      * @param integer $mUsertypeId
      * @return void
      */
-    public function getLoginUser(int $mUserId, int $mUserCompanyId, int $mUsertypeId);
+    public function getLoginUser(int $mUserId, int $mUserCompanyId);
 
     /**
-     * 次の署名者の取得
+     * 次の署名者の取得（ワークフロー）
      *
      * @param integer $documentId
      * @param integer $doctypeId

@@ -26,12 +26,14 @@ class DocumentSignOrderService
 
     public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId, string $updateDatetime)
     {
-        $loginUser = $this->documentGetDocumentRepositoryInterface->getLoginUser($mUserId, $mUserCompanyId, $mUsertypeId);
+        // ログインユーザのワークフローソート取得
+        return $loginUserWorkFlowSort = $this->documentGetDocumentRepositoryInterface->getLoginUser($mUserId, $mUserCompanyId, $documentId);
+        
         switch($categoryId) {
             case $this->docConst::DOCUMENT_CONTRACT:
                 // return 'contract';
-                // 送信者取得
-                return $this->documentGetDocumentRepositoryInterface->getContractSignUser($documentId, $docTypeId, $categoryId);
+                // 次の送信者取得
+                return $this->documentGetDocumentRepositoryInterface->getContractSignUser($documentId, $categoryId, $loginUserWorkFlowSort);
 
                 // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。
                 // 社内書類以外の場合はSQLにLIMITを設けて特定の人だけに送信する。

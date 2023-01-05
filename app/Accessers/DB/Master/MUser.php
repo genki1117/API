@@ -24,4 +24,17 @@ class MUser extends FluentDatabase
             ->whereNull("mu.delete_datetime")
             ->first();
     }
+
+    public function getLoginUser (int $mUserId, int $mUserCompanyId, int $documentId)
+    {
+        return $this->builder($this->table)
+                    ->join('t_document_workflow', function ($join) {
+                        $join->on('user_id', '=', 't_document_workflow.app_user')
+                             ->and()
+                             ->whereNull('t_document_workflow.delete_datetime');
+                    })
+                    ->where('m_user.company_id', '=', $mUserCompanyId)
+                    ->where('m_user.user_id', '=', $mUserId)
+                    ->get();
+    }
 }
