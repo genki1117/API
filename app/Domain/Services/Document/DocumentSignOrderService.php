@@ -24,8 +24,9 @@ class DocumentSignOrderService
     }
     
 
-    public function signOrder(int $documentId, int $docTypeId, int $categoryId, string $updateDatetime)
+    public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId, string $updateDatetime)
     {
+        $loginUser = $this->documentGetDocumentRepositoryInterface->getLoginUser($mUserId, $mUserCompanyId, $mUsertypeId);
         switch($categoryId) {
             case $this->docConst::DOCUMENT_CONTRACT:
                 // return 'contract';

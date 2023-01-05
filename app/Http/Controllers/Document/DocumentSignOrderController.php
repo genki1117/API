@@ -30,6 +30,6 @@ class DocumentSignOrderController extends Controller
         $categoryId     = $request->category_id;
         $updateDatetime = $request->update_datetime;
 
-        return $this->documentSignOrderService->signOrder($documentId, $docTypeId, $categoryId, $updateDatetime);
+        return $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
     }
 }
