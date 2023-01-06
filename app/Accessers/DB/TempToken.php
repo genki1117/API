@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Accessers\DB;
 
+use Carbon\CarbonImmutable;
 use App\Accessers\DB\FluentDatabase;
 
 class TempToken extends FluentDatabase
@@ -26,5 +27,18 @@ class TempToken extends FluentDatabase
                 return $query->whereDate('expiry_date', '>=', $expiryDate);
             })
             ->first();
+    }
+
+    public function insertToken($token, $dataContent)
+    {
+        $carbon = new CarbonImmutable;
+        $data = [
+            "token" => $token,
+            "type" => "承認依頼",
+            "data" => json_encode($dataContent, JSON_UNESCAPED_UNICODE),
+            "expiry_date" => $carbon->addDays(32)
+        ]; 
+        return $this->builder()->insert($data);
+            
     }
 }

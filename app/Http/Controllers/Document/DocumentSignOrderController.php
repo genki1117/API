@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Document;
 use App\Domain\Services\Document\DocumentSignOrderService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class DocumentSignOrderController extends Controller
 {
@@ -30,6 +31,10 @@ class DocumentSignOrderController extends Controller
         $categoryId     = $request->category_id;
         $updateDatetime = $request->update_datetime;
 
-        return $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
+        
+        return $test = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
+        // return $test->getLoginUserWorkFlow();
+        // return var_dump($test->getLoginUserWorkFlow());
+        return new JsonResponse(status:200);
     }
 }
