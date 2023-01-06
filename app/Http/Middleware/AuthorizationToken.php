@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Http\Middleware;
 
+use App\Domain\Consts\UserConst;
 use App\Domain\Entities\Users\User;
 use App\Domain\Repositories\Interface\Common\LoginUserRepositoryInterface;
 use App\Foundations\Context\LoggedInUserContext;
@@ -111,11 +112,11 @@ class AuthorizationToken
         $auth = config('auth_list')[$requestUri];
 
         // 申込者については、該当するAPIがPHP側にはないため、考慮不要
-        if ($user->getUser()->user_type_id === 1) {
+        if ($user->getUser()->user_type_id === UserConst::USER_TYPE_GUEST) {
             $ret = $auth['guest_user_role'];
-        } elseif ($user->getUser()->user_type_id === 99) {
+        } elseif ($user->getUser()->user_type_id === UserConst::USER_TYPE_SYSTEMMANAGER) {
             $ret = $auth['system_administrator_role'];
-        } elseif ($user->getUser()->user_type_id === 0) {
+        } elseif ($user->getUser()->user_type_id === UserConst::USER_TYPE_HOST) {
             $ret = $auth['reader_role'];
             if (!empty($user->getUserRole())) {
                 if ($ret === false && $user->getUserRole()->admin_role) {
