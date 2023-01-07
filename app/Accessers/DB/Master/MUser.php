@@ -25,7 +25,15 @@ class MUser extends FluentDatabase
             ->first();
     }
 
-    // ログインユーザのワークフロー取得
+    /**
+     * ------------------------------------
+     * ログインユーザーのワークフローを取得
+     * ------------------------------------
+     *
+     * @param integer $mUserId
+     * @param integer $mUserCompanyId
+     * @return \stdClass|null
+     */
     public function getLoginUserWorkflow (int $mUserId, int $mUserCompanyId): ?\stdClass
     {
         return $this->builder($this->table)

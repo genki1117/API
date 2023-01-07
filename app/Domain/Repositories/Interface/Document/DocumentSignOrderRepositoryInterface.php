@@ -12,7 +12,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $mUserId
      * @param integer $mUserCompanyId
      * @param integer $mUsertypeId
-     * @return void
+     * @return stdClass|null
      */
     public function getLoginUserWorkflow(int $mUserId, int $mUserCompanyId);
 
@@ -23,7 +23,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $doctypeId
      * @param integer $$loginUserWorkFlowSort
-     * @return void
+     * @return DocumentSaveOrder|null
      */
     public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort);
 
@@ -34,7 +34,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $loginUserWorkFlowSort
-     * @return void
+     * @return DocumentSaveOrder|null
      */
     public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort);
 
@@ -45,7 +45,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return void
+     * @return DocumentSaveOrder|null
      */
     public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId);
 
@@ -56,7 +56,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return void
+     * @return DocumentSaveOrder|null
      */
     public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId);
 
@@ -68,7 +68,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $category_id
      * @param integer $document_id
      * @param integer $user_id
-     * @return void
+     * @return bool
      */
     public function insertToken($token, $nextSignUserInfomation);
     

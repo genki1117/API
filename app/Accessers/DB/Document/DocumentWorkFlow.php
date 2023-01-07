@@ -43,7 +43,9 @@ class DocumentWorkFlow extends FluentDatabase
     }
 
     /**
-     * 次の署名者の情報を取得（契約書類）
+     * ------------------------------------
+     * 次の署名者を取得（契約書類）
+     * ------------------------------------
      *
      * @param integer $documentId
      * @param integer $categoryId
@@ -80,7 +82,9 @@ class DocumentWorkFlow extends FluentDatabase
     }
 
     /**
+     * ------------------------------------
      * 起票者の取得（契約書類）
+     * ------------------------------------
      *
      * @param integer $documentId
      * @param integer $categoryId
@@ -109,7 +113,9 @@ class DocumentWorkFlow extends FluentDatabase
 
 
     /**
-     * 次の署名者の情報を取得（取引書類）
+     * ------------------------------------
+     * 次の署名者を取得（取引書類）
+     * ------------------------------------
      *
      * @param integer $documentId
      * @param integer $categoryId
@@ -146,7 +152,10 @@ class DocumentWorkFlow extends FluentDatabase
     }
 
      /**
+      * ------------------------------------
      * 起票者の取得（取引書類）
+    　* ------------------------------------
+     * 
      *
      * @param integer $documentId
      * @param integer $categoryId
@@ -174,11 +183,17 @@ class DocumentWorkFlow extends FluentDatabase
     }
 
 
-
-
-
-
-    public function getInternalSignUserList(int $documentId, int $categoryId, int $mUserCompanyId)
+    /**
+     * ------------------------------------
+     * 署名者全員取得（社内書類）
+     * ------------------------------------
+     *
+     * @param integer $documentId
+     * @param integer $categoryId
+     * @param integer $mUserCompanyId
+     * @return void
+     */
+    public function getInternalSignUserList(int $documentId, int $categoryId, int $mUserCompanyId): ?array
     {
         return $this->builder($this->table)
             ->select([
@@ -202,6 +217,16 @@ class DocumentWorkFlow extends FluentDatabase
             ->all();
     }
 
+    /**
+     * ------------------------------------
+     * 起票者を取得（社内書類）
+     * ------------------------------------
+     *
+     * @param integer $documentId
+     * @param integer $categoryId
+     * @param integer $mUserCompanyId
+     * @return \stdClass|null
+     */
     public function getInternalIsseuUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
     {
         return $this->builder($this->table)
@@ -225,6 +250,16 @@ class DocumentWorkFlow extends FluentDatabase
     }
 
 
+    /**
+     * ------------------------------------
+     * 署名者を取得（登録書類）
+     * ------------------------------------
+     *
+     * @param integer $documentId
+     * @param integer $categoryId
+     * @param integer $mUserCompanyId
+     * @return \stdClass|null
+     */
     public function getArchiveNextSignUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
     {
         return $this->builder($this->table)
@@ -249,6 +284,16 @@ class DocumentWorkFlow extends FluentDatabase
     }
 
 
+    /**
+     * ------------------------------------
+     * 起票者を取得（登録書類）
+     * ------------------------------------
+     *
+     * @param integer $documentId
+     * @param integer $categoryId
+     * @param integer $mUserCompanyId
+     * @return \stdClass|null
+     */
     public function getArchiveIsseuUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
     {
         return $this->builder($this->table)

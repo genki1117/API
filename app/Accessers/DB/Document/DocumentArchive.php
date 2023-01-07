@@ -549,9 +549,18 @@ class DocumentArchive extends FluentDatabase
     }
 
 
+    /**
+     * ------------------------------------
+     * 署名する書類の取得
+     * ------------------------------------
+     *
+     * @param integer $documentId
+     * @param integer $categoryId
+     * @param integer $mUserCompanyId
+     * @return \stdClass|null
+     */
     public function getSignDocument(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
     {
-
         return $this->builder()
             ->select([
                 't_document_archive.document_id',

@@ -560,7 +560,16 @@ class DocumentDeal extends FluentDatabase
             ->first();
     }
 
-    public function getSignDocument($documentId, $categoryId)
+    /**
+     * ------------------------------------
+     * 署名する書類の取得
+     * ------------------------------------
+     *
+     * @param int $documentId
+     * @param int $categoryId
+     * @return void
+     */
+    public function getSignDocument(int $documentId, int $categoryId)
     {
         return $this->builder()
             ->select([

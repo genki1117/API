@@ -29,7 +29,16 @@ class TempToken extends FluentDatabase
             ->first();
     }
 
-    public function insertToken($token, $dataContent)
+    /**
+     * ------------------------------------
+     * トークンの登録
+     * ------------------------------------
+     *
+     * @param string $token
+     * @param array $dataContent
+     * @return bool
+     */
+    public function insertToken(string $token, array $dataContent): bool
     {
         $carbon = new CarbonImmutable;
         $data = [

@@ -40,9 +40,9 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      *
      * @param integer $mUserId
      * @param integer $mUserCompanyId
-     * @return void
+     * @return stdClass|null
      */
-    public function getLoginUserWorkflow (int $mUserId, int $mUserCompanyId)
+    public function getLoginUserWorkflow (int $mUserId, int $mUserCompanyId): ?\stdClass
     {
         return $loginUserWorkflow = $this->mUser->getLoginUserWorkflow($mUserId, $mUserCompanyId);  
     }
@@ -107,7 +107,7 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $mUserCompanyId
      * @return DocumentSaveOrder|null
      */
-    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId)
+    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId): ?DocumentSaveOrder
     {
         $signDocArchive      = $this->documentArchive->getSignDocument($documentId, $categoryId, $mUserCompanyId);
         $archiveNextSignUser = $this->documentWorkFlow->getArchiveNextSignUser($documentId, $categoryId, $mUserCompanyId);
@@ -124,7 +124,7 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $user_id
      * @return void
      */
-    public function insertToken($token, $dataContent)
+    public function insertToken($token, $dataContent): bool
     {
         return $this->token->insertToken($token, $dataContent);
     }
