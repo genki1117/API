@@ -172,4 +172,102 @@ class DocumentWorkFlow extends FluentDatabase
             ->orderBy("t_document_workflow.wf_sort", "ASC")
             ->first();
     }
+
+
+
+
+
+
+    public function getInternalSignUserList(int $documentId, int $categoryId, int $mUserCompanyId)
+    {
+        return $this->builder($this->table)
+            ->select([
+                "m_user.full_name",
+                "m_user.family_name",
+                "m_user.first_name",
+                "m_user.email",
+                "t_document_workflow.wf_sort",
+                "t_document_workflow.category_id",
+            ])
+            ->join("m_user", function ($query) {
+                return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
+                             ->where("m_user.delete_datetime", null);
+            })
+            ->where("t_document_workflow.wf_sort", "<>", 0)
+            ->where("t_document_workflow.document_id", "=", $documentId)
+            ->where("t_document_workflow.category_id", "=", $categoryId)
+            ->where("t_document_workflow.company_id", "=", $mUserCompanyId)
+            ->orderBy("t_document_workflow.wf_sort", "ASC")
+            ->get()
+            ->all();
+    }
+
+    public function getInternalIsseuUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
+    {
+        return $this->builder($this->table)
+            ->select([
+                "m_user.full_name",
+                "m_user.family_name",
+                "m_user.first_name",
+                "t_document_workflow.wf_sort",
+                "t_document_workflow.category_id",
+            ])
+            ->join("m_user", function ($query) {
+                return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
+                             ->where("m_user.delete_datetime", null);
+            })
+            ->where("t_document_workflow.wf_sort", "=", 0)
+            ->where("t_document_workflow.document_id", "=", $documentId)
+            ->where("t_document_workflow.category_id", "=", $categoryId)
+            ->where("t_document_workflow.company_id", "=", $mUserCompanyId)
+            ->orderBy("t_document_workflow.wf_sort", "ASC")
+            ->first();
+    }
+
+
+    public function getArchiveNextSignUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
+    {
+        return $this->builder($this->table)
+            ->select([
+                "m_user.full_name",
+                "m_user.family_name",
+                "m_user.first_name",
+                "m_user.email",
+                "t_document_workflow.wf_sort",
+                "t_document_workflow.category_id",
+            ])
+            ->join("m_user", function ($query) {
+                return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
+                             ->where("m_user.delete_datetime", null);
+            })
+            ->where("t_document_workflow.wf_sort", "<>", 0)
+            ->where("t_document_workflow.document_id", "=", $documentId)
+            ->where("t_document_workflow.category_id", "=", $categoryId)
+            ->where("t_document_workflow.company_id", "=", $mUserCompanyId)
+            ->orderBy("t_document_workflow.wf_sort", "ASC")
+            ->first();
+    }
+
+
+    public function getArchiveIsseuUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
+    {
+        return $this->builder($this->table)
+            ->select([
+                "m_user.full_name",
+                "m_user.family_name",
+                "m_user.first_name",
+                "t_document_workflow.wf_sort",
+                "t_document_workflow.category_id",
+            ])
+            ->join("m_user", function ($query) {
+                return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
+                             ->where("m_user.delete_datetime", null);
+            })
+            ->where("t_document_workflow.wf_sort", "=", 0)
+            ->where("t_document_workflow.document_id", "=", $documentId)
+            ->where("t_document_workflow.category_id", "=", $categoryId)
+            ->where("t_document_workflow.company_id", "=", $mUserCompanyId)
+            ->orderBy("t_document_workflow.wf_sort", "ASC")
+            ->first();
+    }
 }

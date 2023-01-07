@@ -47,15 +47,16 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
         return $loginUserWorkflow = $this->mUser->getLoginUserWorkflow($mUserId, $mUserCompanyId);  
     }
 
+
     /**
-     * 次の署名者と起票者の取得（契約書類）
+     * 署名する契約書類、次の署名者、起票者の取得
      *
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $loginUserWorkFlowSort
-     * @return DocumentSaveOrder
+     * @return DocumentSaveOrder|null
      */
-    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
+    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort): ?DocumentSaveOrder
     {
         $signDocContract      = $this->documentContract->getSignDocument($documentId, $categoryId);
         $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser($documentId, $categoryId, $loginUserWorkFlowSort);
@@ -63,20 +64,55 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
         return new DocumentSaveOrder($signDocContract, $contractNextSignUser, $contractIsseuUser);
     }
 
+
     /**
-     * 次の署名者と起票者の取得（取引書類）
+     * 署名する取引書類、次の署名者、起票者の取得
      *
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $loginUserWorkFlowSort
-     * @return void
+     * @return DocumentSaveOrder|null
      */
-    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
+    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort): ?DocumentSaveOrder
     {
         $signDocDeal      = $this->documentDeal->getSignDocument($documentId, $categoryId);
         $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser($documentId, $categoryId, $loginUserWorkFlowSort);
         $dealIsseuUser    = $this->documentWorkFlow->getDealIsseuUser($documentId, $categoryId);
         return new DocumentSaveOrder($signDocDeal, $dealNextSignUser, $dealIsseuUser);
+    }
+
+
+    /**
+     * 署名する社内書類、署名者全員、起票者の取得
+     *
+     * @param integer $documentId
+     * @param integer $categoryId
+     * @param integer $mUserCompanyId
+     * @return DocumentSaveOrder|null
+     */
+    public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId): ?DocumentSaveOrder
+    {
+        $signDocInternal      = $this->documentInternal->getSignDocument($documentId, $categoryId, $mUserCompanyId);
+        $internalSignUserList = (object)$this->documentWorkFlow->getInternalSignUserList($documentId, $categoryId, $mUserCompanyId);
+        $internalIsseuUser    = $this->documentWorkFlow->getInternalIsseuUser($documentId, $categoryId, $mUserCompanyId);
+        return new DocumentSaveOrder($signDocInternal, $internalSignUserList, $internalIsseuUser);
+    }
+
+
+    /**
+     * 署名する登録書類、署名するホスト署名者、起票者の取得
+     *
+     * @param integer $documentId
+     * @param integer $categoryId
+     * @param integer $mUserCompanyId
+     * @return DocumentSaveOrder|null
+     */
+    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId)
+    {
+        $signDocArchive      = $this->documentArchive->getSignDocument($documentId, $categoryId, $mUserCompanyId);
+        $archiveNextSignUser = $this->documentWorkFlow->getArchiveNextSignUser($documentId, $categoryId, $mUserCompanyId);
+        $archiveIsseuUser    = $this->documentWorkFlow->getArchiveIsseuUser($documentId, $categoryId, $mUserCompanyId);
+        return new DocumentSaveOrder($signDocArchive, $archiveNextSignUser, $archiveIsseuUser);
     }
 
     /**

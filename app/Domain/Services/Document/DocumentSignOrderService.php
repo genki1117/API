@@ -11,7 +11,7 @@ use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterf
 
 class DocumentSignOrderService
 {
-    private $emailAdress;
+    private $emailAddress;
     private $emailTitle;
     private $emailContent;
 
@@ -49,7 +49,7 @@ class DocumentSignOrderService
 
         switch($categoryId) {
             
-            // 取引書類の場合
+            // 取引書類
             case $this->docConst::DOCUMENT_CONTRACT:
                 // 次の署名書類と送信者取得と起票者を取得
                 $contractIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
@@ -69,7 +69,7 @@ class DocumentSignOrderService
                 }
                 
                 // 次の署名者のメールアドレス取得
-                $emailAdress = $contractIsseuAndNextSignUser->getNextSignUser()->email;
+                $emailAddress = $contractIsseuAndNextSignUser->getNextSignUser()->email;
 
                 // メールタイトル作成
                 $emailTitle = "[KOT電子契約]「{$contractIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
@@ -117,7 +117,7 @@ class DocumentSignOrderService
             break;
             
 
-            // 契約書類の場合
+            // 契約書類
             case $this->docConst::DOCUMENT_DEAL:
                 // 次の送信者取得と起票者を取得
                 $dealIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
@@ -132,7 +132,7 @@ class DocumentSignOrderService
                 }
                 
                 // 次の署名者のメールアドレス取得
-                $emailAdress = $dealIsseuAndNextSignUser->getNextSignUser()->email;
+                $emailAddress = $dealIsseuAndNextSignUser->getNextSignUser()->email;
 
                 // メールタイトル作成
                 $emailTitle = "[KOT電子契約]「{$dealIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
@@ -179,55 +179,100 @@ class DocumentSignOrderService
                 }
             break;
 
+            // 社内書類
             case $this->docConst::DOCUMENT_INTERNAL:
-                return 'internal';
-                // 社内書類以外の場合はSQLにLIMITを設けて特定の人だけに送信する。
-                // 社内書類は全員送信する。
                 // 次の署名書類と送信者取得と起票者を取得
-                return $internalIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
+                $internalIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
                                                       ->getInternalSignUserListInfo(
                                                         $documentId, $categoryId, $mUserCompanyId
                                                     );
 
+                // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
+                if ($internalIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
+                    throw new Exception("メールを送信しません");
+                    exit;
+                }
 
+                foreach ($internalIsseuAndNextSignUser->getNextSignUser() as $signUser) {
+                    // 次の署名者のメールアドレス取得
+                    $emailUrl = $systemUrl . $documentDetailendPoint . $internalIsseuAndNextSignUser->getSignDoc()->document_id;
 
+                    $emailAddress = $signUser->email;
+                    // メールタイトル作成
+                    $emailTitle = "[KOT電子契約]「{$internalIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
 
+                    $emailContent = "
+                    {$signUser->full_name} 様\n
+                    {$internalIsseuAndNextSignUser->getIssueUser()->full_name} 様から社内書類の署名依頼が送信されました。\n
+                    以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
+                    {$emailUrl}\n
+                    このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
+                    お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+                    
 
+                    // キューパラメータを作成
+                    $paramdata = [];
+                    
+                    $paramdata['email']   = $emailAddress;
+                    $paramdata['title']   = $emailTitle;
+                    $paramdata['content'] = $emailContent;
 
-
-
-
-
-
-
-
-
-
-
+                    // キューをJSON形式に返却
+                    $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+                    
+                    // キューを書き込み
+                    // $ret = $queueUtility->createMessage(QueueUtility::QUEUE_NAME_SIGN, $param);
+                }
+            exit;
             break;
 
             case $this->docConst::DOCUMENT_ARCHIVE:
-                return 'archive';
+                // 次の署名書類と送信者取得と起票者を取得
+                $archiveIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
+                                                      ->getArchiveIsseuAndNextSignUserInfo(
+                                                        $documentId, $categoryId, $mUserCompanyId
+                                                    );
+                                                    
+                // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
+                if ($archiveIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
+                    throw new Exception("メールを送信しません");
+                    exit;
+                }
+                
+                // 次の署名者のメールアドレス取得
+                $emailAddress = $archiveIsseuAndNextSignUser->getNextSignUser()->email;
+
+                // メールタイトル作成
+                $emailTitle = "[KOT電子契約]「{$archiveIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
+                
+                // ユーザに送付するURL作成
+                $emailUrl = $systemUrl . $documentDetailendPoint . $archiveIsseuAndNextSignUser->getSignDoc()->document_id;
+
+                // メール本文作成
+                $emailContent = 
+                    "{$archiveIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
+                    {$archiveIsseuAndNextSignUser->getIssueUser()->full_name} 様から登録書類の署名依頼が送信されました。\n
+                    以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
+                    {$emailUrl}\n
+                    このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
+                    お手数ですが support@huubhr.comまでご連絡をお願い致します。";
             break;
 
         }
 
-        return $emailUrl;
+        return var_dump($emailAddress, $emailTitle, $emailContent);
         // //キューにパラメータを渡す
         // $queueUtility = new QueueUtility();
 
-        // // キューパラメータを作成
-        // $paramdata = [];
-        
-        // $paramdata['company_id'] = $mUser['company_id'];
-        // $paramdata['user_id'] = $mUser['user_id'];
-        // $paramdata['form']['document_id'] = $form['document_id'];
-        // $paramdata['form']['category_id'] = $form['category_id'];
-        // $paramdata['form']['update_datetime'] = $form['update_datetime'];
-        // $paramdata['form']['user_id'] = $mUser['user_id'];
+        // キューパラメータを作成
+        $paramdata = [];
+                    
+        $paramdata['email']   = $emailAddress;
+        $paramdata['title']   = $emailTitle;
+        $paramdata['content'] = $emailContent;
 
-        // // キューをJSON形式に返却
-        // $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+        // キューをJSON形式に返却
+        return $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
         
         // // キューを書き込み
         // $ret = $queueUtility->createMessage(QueueUtility::QUEUE_NAME_SIGN, $param);

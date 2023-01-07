@@ -553,4 +553,24 @@ class DocumentInternal extends FluentDatabase
             ->where('status_id', '=', 0)
             ->first();
     }
+
+    public function getSignDocument(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
+    {
+
+        return $this->builder()
+            ->select([
+                't_document_internal.document_id',
+                't_document_internal.title',
+                't_doc_storage_internal.file_prot_pw_flg',
+            ])
+            ->join("t_doc_storage_internal", function ($query) {
+                 return $query->on("t_doc_storage_internal.document_id", "t_document_internal.document_id")
+                             ->whereNull("t_doc_storage_internal.delete_datetime");
+            })
+            ->where('t_document_internal.document_id', '=', $documentId)
+            ->where('t_document_internal.category_id', '=', $categoryId)
+            ->where('t_document_internal.company_id', '=', $mUserCompanyId)
+            ->whereNull('t_document_internal.delete_datetime')
+            ->first();
+    }
 }
