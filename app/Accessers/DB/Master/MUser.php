@@ -35,7 +35,10 @@ class MUser extends FluentDatabase
                     })
                     ->where('m_user.company_id', '=', $mUserCompanyId)
                     ->where('m_user.user_id', '=', $mUserId)
-                    ->select('t_document_workflow.wf_sort')
+                    ->select([
+                        't_document_workflow.wf_sort',
+                        'm_user.full_name'
+                    ])
                     ->first();
     }
 }

@@ -54,38 +54,27 @@ class DocumentWorkFlow extends FluentDatabase
     { 
         return $this->builder($this->table)
             ->select([
-                "t_document_contract.title",
-                "t_document_contract.document_id",
-                "t_document_contract.category_id",
-                "m_user.email",
-                "m_user.full_name",
-                "m_user.company_id",
                 "m_user.user_id",
+                "m_user.full_name",
+                "m_user.email",
                 "m_user.user_type_id",
                 "t_document_workflow.wf_sort",
-                "t_doc_storage_contract.file_prot_pw_flg",
-                "m_company_counter_party.counter_party_name",
-                "m_company_counter_party.counter_party_id"
+                "t_document_workflow.category_id",
+                "m_company_counter_party.counter_party_id",
+                "m_company_counter_party.counter_party_name"
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
+                             ->on("m_user.company_id", "t_document_workflow.company_id")
                              ->where("m_user.delete_datetime", null);
             })
-            ->join("t_document_contract", function ($query) {
-                return $query->on("t_document_contract.document_id", "t_document_workflow.document_id")
-                             ->where("m_user.delete_datetime", null);
-            })
-            ->join("t_doc_storage_contract", function ($query) {
-                return $query->on("t_doc_storage_contract.document_id", "t_document_workflow.document_id")
-                             ->where("m_user.delete_datetime", null);
-            })
-            ->leftjoin("m_company_counter_party", function ($query) {
+            ->leftjoin("m_company_counter_party", function($query) {
                 return $query->on("m_company_counter_party.company_id", "t_document_workflow.company_id")
-                             ->where("m_user.delete_datetime", null);
+                             ->whereNull("m_company_counter_party.delete_datetime");
             })
             ->where("t_document_workflow.wf_sort", ">", $loginUserWorkFlowSort)
-            ->where("t_document_contract.document_id", '=', $documentId)
-            ->where("t_document_contract.category_id", '=', $categoryId)
+            ->where("t_document_workflow.document_id", "=", $documentId)
+            ->where("t_document_workflow.category_id", "=", $categoryId)
             ->orderBy("t_document_workflow.wf_sort", "ASC")
             ->first();
     }
@@ -113,6 +102,7 @@ class DocumentWorkFlow extends FluentDatabase
             })
             ->where("t_document_workflow.wf_sort", "=", 0)
             ->where("t_document_workflow.document_id", "=", $documentId)
+            ->where("t_document_workflow.category_id", "=", $categoryId)
             ->orderBy("t_document_workflow.wf_sort", "ASC")
             ->first();
     }
@@ -130,43 +120,32 @@ class DocumentWorkFlow extends FluentDatabase
     { 
         return $this->builder($this->table)
             ->select([
-                "t_document_deal.title",
-                "t_document_deal.document_id",
-                "t_document_deal.category_id",
-                "m_user.email",
-                "m_user.full_name",
-                "m_user.company_id",
                 "m_user.user_id",
+                "m_user.full_name",
+                "m_user.email",
                 "m_user.user_type_id",
                 "t_document_workflow.wf_sort",
-                "t_doc_storage_transaction.file_prot_pw_flg",
-                "m_company_counter_party.counter_party_name",
-                "m_company_counter_party.counter_party_id"
+                "t_document_workflow.category_id",
+                "m_company_counter_party.counter_party_id",
+                "m_company_counter_party.counter_party_name"
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
+                             ->on("m_user.company_id", "t_document_workflow.company_id")
                              ->where("m_user.delete_datetime", null);
             })
-            ->join("t_document_deal", function ($query) {
-                return $query->on("t_document_deal.document_id", "t_document_workflow.document_id")
-                             ->where("m_user.delete_datetime", null);
-            })
-            ->join("t_doc_storage_transaction", function ($query) {
-                return $query->on("t_doc_storage_transaction.document_id", "t_document_workflow.document_id")
-                             ->where("m_user.delete_datetime", null);
-            })
-            ->leftjoin("m_company_counter_party", function ($query) {
+            ->leftjoin("m_company_counter_party", function($query) {
                 return $query->on("m_company_counter_party.company_id", "t_document_workflow.company_id")
-                             ->where("m_user.delete_datetime", null);
+                             ->whereNull("m_company_counter_party.delete_datetime");
             })
             ->where("t_document_workflow.wf_sort", ">", $loginUserWorkFlowSort)
-            ->where("t_document_deal.document_id", $documentId)
-            ->where("t_document_deal.category_id", $categoryId)
+            ->where("t_document_workflow.document_id", "=", $documentId)
+            ->where("t_document_workflow.category_id", "=", $categoryId)
             ->orderBy("t_document_workflow.wf_sort", "ASC")
             ->first();
     }
 
-    /**
+     /**
      * 起票者の取得（取引書類）
      *
      * @param integer $documentId
@@ -180,7 +159,8 @@ class DocumentWorkFlow extends FluentDatabase
                 "m_user.full_name",
                 "m_user.family_name",
                 "m_user.first_name",
-                "t_document_workflow.wf_sort"
+                "t_document_workflow.wf_sort",
+                "t_document_workflow.category_id",
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
@@ -188,6 +168,7 @@ class DocumentWorkFlow extends FluentDatabase
             })
             ->where("t_document_workflow.wf_sort", "=", 0)
             ->where("t_document_workflow.document_id", "=", $documentId)
+            ->where("t_document_workflow.category_id", "=", $categoryId)
             ->orderBy("t_document_workflow.wf_sort", "ASC")
             ->first();
     }

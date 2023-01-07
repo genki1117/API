@@ -590,4 +590,22 @@ class DocumentContract extends FluentDatabase
             ->where('status_id', '=', 0)
             ->first();
     }
+
+    public function getSignDocument($documentId, $categoryId)
+    {
+        return $this->builder()
+            ->select([
+                't_document_contract.document_id',
+                't_document_contract.title',
+                't_doc_storage_contract.file_prot_pw_flg',
+            ])
+            ->join("t_doc_storage_contract", function ($query) {
+                 return $query->on("t_doc_storage_contract.document_id", "t_document_contract.document_id")
+                             ->whereNull("t_doc_storage_contract.delete_datetime");
+            })
+            ->where('t_document_contract.document_id', '=', $documentId)
+            ->where('t_document_contract.category_id', '=', $categoryId)
+            ->whereNull('t_document_contract.delete_datetime')
+            ->first();
+    }
 }

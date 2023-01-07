@@ -55,11 +55,12 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $loginUserWorkFlowSort
      * @return DocumentSaveOrder
      */
-    public function getContractIsseuUserAndNextSignUserInfomation(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
+    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
     {
+        $signDocContract      = $this->documentContract->getSignDocument($documentId, $categoryId);
         $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser($documentId, $categoryId, $loginUserWorkFlowSort);
         $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser($documentId, $categoryId);
-        return new DocumentSaveOrder($contractNextSignUser, $contractIsseuUser);
+        return new DocumentSaveOrder($signDocContract, $contractNextSignUser, $contractIsseuUser);
     }
 
     /**
@@ -70,11 +71,12 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $loginUserWorkFlowSort
      * @return void
      */
-    public function getDealIsseuUserAndNextSignUserInfomation(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
+    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
     {
+        $signDocDeal      = $this->documentDeal->getSignDocument($documentId, $categoryId);
         $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser($documentId, $categoryId, $loginUserWorkFlowSort);
         $dealIsseuUser    = $this->documentWorkFlow->getDealIsseuUser($documentId, $categoryId);
-        return new DocumentSaveOrder($dealNextSignUser, $dealIsseuUser);
+        return new DocumentSaveOrder($signDocDeal, $dealNextSignUser, $dealIsseuUser);
     }
 
     /**
