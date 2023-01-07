@@ -33,8 +33,5 @@ class DocumentSignOrderController extends Controller
 
         
         return $test = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
-        // return $test->getLoginUserWorkFlow();
-        // return var_dump($test->getLoginUserWorkFlow());
-        return new JsonResponse(status:200);
     }
 }

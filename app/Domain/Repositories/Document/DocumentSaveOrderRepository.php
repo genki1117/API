@@ -44,25 +44,37 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      */
     public function getLoginUserWorkflow (int $mUserId, int $mUserCompanyId)
     {
-        
-        $loginUserWorkflowSort = $this->mUser->getLoginUserWorkflow($mUserId, $mUserCompanyId);
-        return $loginUserWorkflowSort->wf_sort  ;
-        $test = new DocumentSaveOrder($loginUserWorkflowSort);
-        return var_dump($test);
-       
+        return $loginUserWorkflow = $this->mUser->getLoginUserWorkflow($mUserId, $mUserCompanyId);  
     }
 
     /**
-     * ログインユーザの次の署名者の情報を取得
+     * 次の署名者と起票者の取得（契約書類）
+     *
+     * @param integer $documentId
+     * @param integer $categoryId
+     * @param integer $loginUserWorkFlowSort
+     * @return DocumentSaveOrder
+     */
+    public function getContractIsseuUserAndNextSignUserInfomation(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
+    {
+        $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser($documentId, $categoryId, $loginUserWorkFlowSort);
+        $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser($documentId, $categoryId);
+        return new DocumentSaveOrder($contractNextSignUser, $contractIsseuUser);
+    }
+
+    /**
+     * 次の署名者と起票者の取得（取引書類）
      *
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $loginUserWorkFlowSort
      * @return void
      */
-    public function getContractNextSignUserInfomation(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
+    public function getDealIsseuUserAndNextSignUserInfomation(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
     {
-        return $this->documentWorkFlow->getContractNextSignUserInfomation($documentId, $categoryId, $loginUserWorkFlowSort);
+        $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser($documentId, $categoryId, $loginUserWorkFlowSort);
+        $dealIsseuUser    = $this->documentWorkFlow->getDealIsseuUser($documentId, $categoryId);
+        return new DocumentSaveOrder($dealNextSignUser, $dealIsseuUser);
     }
 
     /**

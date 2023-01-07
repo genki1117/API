@@ -5,15 +5,33 @@ namespace App\Domain\Entities\Document;
 
 class DocumentSaveOrder
 {
-    private $loginUserWorkFlow;
+    /** @var \stdClass|null */
+    private ?\stdClass $nextSignUser;
+    private ?\stdClass $issueUser;
 
-    public function __counstuct($loginUserWorkFlow)
+    /**
+     * @param \stdClass|null $nextSignUser
+     * @param \stdClass|null $isseuUser
+     */
+    public function __construct(
+        ?\stdClass $nextSignUser = null,
+        ?\stdClass $issueUser    = null,
+    ) 
     {
-        $this->loginUserWorkFlow = $loginUserWorkFlow;
+        $this->nextSignUser = $nextSignUser;
+        $this->issueUser    = $issueUser;
     }
 
-    public function getLoginUserWorkFlow()
+    /** @return \stdClass|null */
+    public function getNextSignUser(): ?\stdClass
     {
-       return $this->loginUserWorkFlow;
+        return $this->nextSignUser;
     }
+
+    /** @return \stdClass|null */
+    public function getIssueUser(): ?\stdClass
+    {
+        return $this->issueUser;
+    }
+
 }
