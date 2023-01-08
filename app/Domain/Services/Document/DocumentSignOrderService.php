@@ -117,7 +117,6 @@ class DocumentSignOrderService
                                                         ->getDealIsseuAndNextSignUserInfo(
                                                             $documentId, $categoryId, $loginUserWorkFlowSort->wf_sort
                                                         );
-                                                        
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($dealIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("メールを送信しません");
@@ -200,7 +199,7 @@ class DocumentSignOrderService
                         このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
                         お手数ですが support@huubhr.comまでご連絡をお願い致します。";
                         
-
+                        // TODO:キュー作成（社内書類）
                         // キューパラメータを作成
                         $paramdata = [];
                         
@@ -213,7 +212,7 @@ class DocumentSignOrderService
                         
                         // キューを書き込み
                         // $ret = $queueUtility->createMessage(QueueUtility::QUEUE_NAME_SIGN, $param);
-                        // var_dump($emailAddress, $emailTitle, $emailContent);
+                        // var_dump($emailAddress, $emailTitle, $emailContent); // 確認用
                     }
                 exit;
                 break;
@@ -252,9 +251,10 @@ class DocumentSignOrderService
                 break;
             }
 
-            // return var_dump($emailAddress, $emailTitle, $emailContent); // 後消す
+            // return var_dump($emailAddress, $emailTitle, $emailContent); // 確認用
 
-            // //キューにパラメータを渡す
+            // TODO:キュー作成
+            //キューにパラメータを渡す
             // $queueUtility = new QueueUtility();
 
             // キューパラメータを作成

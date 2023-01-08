@@ -124,6 +124,7 @@ class DocumentWorkFlow extends FluentDatabase
      */
     public function getDealNextSignUser(int $documentId, int $categoryId, int $loginUserWorkFlowSort): ?\stdClass
     { 
+        
         return $this->builder($this->table)
             ->select([
                 "m_user.user_id",

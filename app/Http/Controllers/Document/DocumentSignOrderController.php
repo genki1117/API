@@ -24,7 +24,7 @@ class DocumentSignOrderController extends Controller
      * @param Request $request
      * @return void
      */
-    public function documentSignOrder(DocumentSignOrderRequest $request)
+    public function documentSignOrder(DocumentSignOrderRequest $request): JsonResponse
     {
         try {
             $mUserId        = $request->m_user['user_id'];

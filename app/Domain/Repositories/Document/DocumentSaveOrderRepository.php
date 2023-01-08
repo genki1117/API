@@ -77,7 +77,7 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $loginUserWorkFlowSort
      * @return DocumentSaveOrder|null
      */
-    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort): ?DocumentSaveOrder
+    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
     {
         $signDocDeal      = $this->documentDeal->getSignDocument(documentId: $documentId, categoryId: $categoryId);
         $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser(documentId: $documentId, categoryId: $categoryId, loginUserWorkFlowSort: $loginUserWorkFlowSort);
