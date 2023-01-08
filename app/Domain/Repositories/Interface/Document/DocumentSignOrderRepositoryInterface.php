@@ -62,14 +62,12 @@ interface DocumentSignOrderRepositoryInterface
 
 
     /**
-     * トークン新規登録
+     * トークン登録
      *
-     * @param integer $counter_party_id
-     * @param integer $category_id
-     * @param integer $document_id
-     * @param integer $user_id
-     * @return bool
+     * @param string $token
+     * @param array $dataContent
+     * @return void
      */
-    public function insertToken($token, $nextSignUserInfomation);
+    public function insertToken(string $token, array $dataContent);
     
 }

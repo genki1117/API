@@ -39,7 +39,7 @@ class DocumentSignOrderService
     public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId, string $updateDatetime)
     {
         // ログインユーザのワークフローソート取得
-        $loginUserWorkFlowSort = $this->documentSignOrderRepositoryInterface->getLoginUserWorkflow($mUserId, $mUserCompanyId);
+        $loginUserWorkFlowSort = $this->documentSignOrderRepositoryInterface->getLoginUserWorkflow(mUserId: $mUserId, mUserCompanyId :$mUserCompanyId);
 
         // 書類詳細エンドポイント作成
         $documentDetailendPoint = '/document/detail/';
