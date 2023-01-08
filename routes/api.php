@@ -24,4 +24,4 @@ $router->post('/sample-login', [UseSampleController::class, 'login']);
 $router->post('/document/detail', [DocumentDetailController::class, 'getDetail']);
 $router->post('/document/list', [DocumentGetListController::class, 'getList']);
 
-$router->post('/document/save-order', [DocumentSignOrderController::class, 'save_order']);
+$router->post('/document/sign-order', [DocumentSignOrderController::class, 'documentSignOrder']);
