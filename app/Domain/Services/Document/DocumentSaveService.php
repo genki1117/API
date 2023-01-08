@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
+use App\Domain\Consts\DocumentConst;
 use App\Accessers\DB\Log\System\LogDocAccess;
 use App\Accessers\DB\Log\System\LogDocOperation;
 use Illuminate\Support\Facades\Log;
@@ -11,25 +12,19 @@ use App\Domain\Repositories\Interface\Document\DocumentSaveRepositoryInterface;
 
 class DocumentSaveService
 {
-    /** @var int */
-    protected const DOC_CONTRACT_TYPE = 0;
-    /** @var int */
-    protected const DOC_DEAL_TYPE = 1;
-    /** @var int */
-    protected const DOC_INTERNAL_TYPE = 2;
-    /** @var int */
-    protected const DOC_ARCHIVE_TYPE = 3;
-
-
+    /** @var DocumentConst */
+    private DocumentConst $docConst;
 
     /** @var DocumentSaveRepositoryInterface */
     private DocumentSaveRepositoryInterface $documentRepository;
 
     /**
+     * @param DocumentConst $docConst
      * @param DocumentSaveRepositoryInterface $documentRepository
      */
-    public function __construct(DocumentSaveRepositoryInterface $documentRepository)
+    public function __construct(DocumentSaveRepositoryInterface $documentRepository, DocumentConst $docConst)
     {
+        $this->docConst           = $docConst;
         $this->documentRepository = $documentRepository;
     }
 
@@ -44,21 +39,21 @@ class DocumentSaveService
         try {
             switch ($requestContent['category_id']) {
                 // 契約書類の登録、更新
-                case Self::DOC_CONTRACT_TYPE:
+                case $this->docConst::DOCUMENT_CONTRACT:
                     // 新規登録
                     if (!$requestContent['document_id']) {
-                        $documentSaveResult = $this->documentRepository->contractInsert($requestContent);
+                        $documentSaveResult = $this->documentRepository->contractInsert(requestContent: $requestContent);
                     }
                     // 更新登録
                     if ($requestContent['document_id']) {
                         //更新前の情報を取得する
-                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateContract($requestContent);
+                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateContract(requestContent: $requestContent);
 
                         // 契約書類更新
-                        $documentSaveResult = $this->documentRepository->contractUpdate($requestContent);
+                        $documentSaveResult = $this->documentRepository->contractUpdate(requestContent: $requestContent);
 
                         // 更新後の情報を取得する
-                        $afterList = $this->documentRepository->getBeforOrAfterUpdateContract($requestContent);
+                        $afterList = $this->documentRepository->getBeforOrAfterUpdateContract(requestContent: $requestContent);
 
                         // ログ出力を行う
                         $this->documentRepository->getUpdateLog(
@@ -70,21 +65,21 @@ class DocumentSaveService
                     break;
 
                     // 取引書類の登録、更新
-                case Self::DOC_DEAL_TYPE:
+                case $this->docConst::DOCUMENT_DEAL:
                     // 新規登録
                     if (!$requestContent['document_id']) {
-                        $documentSaveResult = $this->documentRepository->dealInsert($requestContent);
+                        $documentSaveResult = $this->documentRepository->dealInsert(requestContent: $requestContent);
                     }
                     // 更新登録
                     if ($requestContent['document_id']) {
                         //更新前の情報を取得する
-                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateDeal($requestContent);
+                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateDeal(requestContent: $requestContent);
 
                         // 取引書類更新
-                        $documentSaveResult = $this->documentRepository->dealUpdate($requestContent);
+                        $documentSaveResult = $this->documentRepository->dealUpdate(requestContent: $requestContent);
 
                         // 更新後の情報を取得する
-                        $afterList = $this->documentRepository->getBeforOrAfterUpdateDeal($requestContent);
+                        $afterList = $this->documentRepository->getBeforOrAfterUpdateDeal(requestContent: $requestContent);
 
                         // ログ出力を行う
                         $this->documentRepository->getUpdateLog(
@@ -96,21 +91,21 @@ class DocumentSaveService
                     break;
 
                     // 社内書類の登録、更新
-                case Self::DOC_INTERNAL_TYPE:
+                case $this->docConst::DOCUMENT_INTERNAL:
                     // 新規登録
                     if (!$requestContent['document_id']) {
-                        $documentSaveResult = $this->documentRepository->internalInsert($requestContent);
+                        $documentSaveResult = $this->documentRepository->internalInsert(requestContent: $requestContent);
                     }
                     // 更新登録
                     if ($requestContent['document_id']) {
                         //更新前の情報を取得する
-                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateInternal($requestContent);
+                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateInternal(requestContent: $requestContent);
                         
                         // 社内書類更新
-                        $documentSaveResult = $this->documentRepository->internalUpdate($requestContent);
+                        $documentSaveResult = $this->documentRepository->internalUpdate(requestContent: $requestContent);
 
                         // 更新後の情報を取得する
-                        $afterList = $this->documentRepository->getBeforOrAfterUpdateInternal($requestContent);
+                        $afterList = $this->documentRepository->getBeforOrAfterUpdateInternal(requestContent: $requestContent);
 
                         // ログ出力を行う
                         $this->documentRepository->getUpdateLog(
@@ -122,21 +117,21 @@ class DocumentSaveService
                     break;
 
                     // 登録書類の登録、更新
-                case Self::DOC_ARCHIVE_TYPE:
+                case $this->docConst::DOCUMENT_ARCHIVE:
                     // 新規登録
                     if (!$requestContent['document_id']) {
-                        $documentSaveResult = $this->documentRepository->archiveInsert($requestContent);
+                        $documentSaveResult = $this->documentRepository->archiveInsert(requestContent: $requestContent);
                     }
                     // 更新登録
                     if ($requestContent['document_id']) {
                         //更新前の情報を取得する
-                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateARchive($requestContent);
+                        $beforeList = $this->documentRepository->getBeforOrAfterUpdateARchive(requestContent: $requestContent);
 
                         // 登録書類更新
-                        $documentSaveResult = $this->documentRepository->archiveUpdate($requestContent);
+                        $documentSaveResult = $this->documentRepository->archiveUpdate(requestContent: $requestContent);
 
                         // 更新後の情報を取得する
-                        $afterList = $this->documentRepository->getBeforOrAfterUpdateArchive($requestContent);
+                        $afterList = $this->documentRepository->getBeforOrAfterUpdateArchive(requestContent: $requestContent);
 
                         // ログ出力を行う
                         $this->documentRepository->getUpdateLog(

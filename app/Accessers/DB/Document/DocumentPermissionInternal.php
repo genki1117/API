@@ -60,7 +60,7 @@ class DocumentPermissionInternal extends FluentDatabase
             "create_user"     => $requestContent['m_user_id'],
             "create_datetime" => $requestContent['create_datetime'],
             "update_user"     => $requestContent['m_user_id'],
-            "update_datetime" => $requestContent['update_datetime'],
+            "update_datetime" => CarbonImmutable::now(),
             "delete_user"     => null,
             "delete_datetime" => null
         ];
@@ -73,9 +73,9 @@ class DocumentPermissionInternal extends FluentDatabase
      * -------------------------
      *
      * @param array $requestContent
-     * @return boolean
+     * @return boolean|Exception
      */
-    public function update(array $requestContent)
+    public function update(array $requestContent): ?bool
     {
         $deleteResult = DB::table('t_doc_permission_internal')
         ->where('document_id', $requestContent['document_id'])
@@ -88,9 +88,9 @@ class DocumentPermissionInternal extends FluentDatabase
                 "company_id"      => $requestContent['company_id'],
                 "user_id"         => $requestContent['m_user_id'],
                 "create_user"     => $requestContent['m_user_id'],
-                "create_datetime" => $requestContent['create_datetime'],
+                "create_datetime" => CarbonImmutable::now(),
                 "update_user"     => $requestContent['m_user_id'],
-                "update_datetime" => $requestContent['update_datetime'],
+                "update_datetime" => CarbonImmutable::now(),
                 "delete_user"     => null,
                 "delete_datetime" => null
             ];

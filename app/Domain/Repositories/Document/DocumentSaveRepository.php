@@ -131,13 +131,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function contractInsert(array $requestContent): ?bool
     {
         // 契約書類登録
-        $docInsertResult           = $this->docContract->insert($requestContent);
+        $docInsertResult           = $this->docContract->insert(requestContent: $requestContent);
 
         // 契約書類閲覧権限登録
-        $docPermissionInsertResult = $this->docPermissionContract->insert($requestContent) ;
+        $docPermissionInsertResult = $this->docPermissionContract->insert(requestContent: $requestContent) ;
 
         // 契約書類容量登録
-        $docStorageInsertResult    = $this->docStorageContract->insert($requestContent);
+        $docStorageInsertResult    = $this->docStorageContract->insert(requestContent: $requestContent);
 
         // ワークフローテーブル登録
         // ワークフローが起票者のみ
@@ -149,7 +149,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $userId     = $requestContent['m_user_id'];
             $createDate = $requestContent['create_datetime'];
 
-            $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+            $documentWorkFlowResult = $this->documentWorkFlow->insertContract(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
             if (!$documentWorkFlowResult) {
                 throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
                 exit;
@@ -166,7 +166,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertContract(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
                     exit;
@@ -182,7 +182,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insertContract($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertContract(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception(Self::CONTRACT_INSERT_ERROR_MESSAGE);
                     exit;
@@ -206,13 +206,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function contractUpdate(array $requestContent): ?bool
     {
         // 契約書類更新
-        $docUpdateResult           = $this->docContract->update($requestContent);
+        $docUpdateResult           = $this->docContract->update(requestContent: $requestContent);
 
         // 契約書類閲覧権限更新
-        $docPermissionUpdateResult = $this->docPermissionContract->update($requestContent);
+        $docPermissionUpdateResult = $this->docPermissionContract->update(requestContent: $requestContent);
 
         // 契約書類容量更新
-        $docStorageUpdateResult    = $this->docStorageContract->update($requestContent);
+        $docStorageUpdateResult    = $this->docStorageContract->update(requestContent: $requestContent);
 
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
@@ -233,13 +233,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function dealInsert(array $requestContent): ?bool
     {
         // 取引書類登録
-        $docInsertResult           = $this->docDeal->insert($requestContent);
+        $docInsertResult           = $this->docDeal->insert(requestContent: $requestContent);
 
         // 取引書類閲覧権限登録
-        $docPermissionInsertResult = $this->docPermissionTransaction->insert($requestContent) ;
+        $docPermissionInsertResult = $this->docPermissionTransaction->insert(requestContent: $requestContent) ;
 
         // 取引書類容量登録
-        $docStorageInsertResult    = $this->docStorageTransaction->insert($requestContent);
+        $docStorageInsertResult    = $this->docStorageTransaction->insert(requestContent: $requestContent);
 
         // ワークフローテーブル登録
         // ワークフローが起票者のみ
@@ -251,7 +251,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $userId     = $requestContent['m_user_id'];
             $createDate = $requestContent['create_datetime'];
 
-            $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+            $documentWorkFlowResult = $this->documentWorkFlow->insertDeal(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
             if (!$documentWorkFlowResult) {
                 throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
                 exit;
@@ -268,7 +268,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertDeal(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
                     exit;
@@ -284,7 +284,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insertDeal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertDeal(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception(Self::DEAL_INSERT_ERROR_MESSAGE);
                     exit;
@@ -307,13 +307,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function dealUpdate(array $requestContent): ?bool
     {
         // 取引書類更新
-        $docUpdateResult           = $this->docDeal->update($requestContent);
+        $docUpdateResult           = $this->docDeal->update(requestContent: $requestContent);
 
         // 取引書類閲覧権限更新
-        $docPermissionUpdateResult = $this->docPermissionTransaction->update($requestContent);
+        $docPermissionUpdateResult = $this->docPermissionTransaction->update(requestContent: $requestContent);
 
         // 取引書類容量更新
-        $docStorageUpdateResult    = $this->docStorageTransaction->update($requestContent);
+        $docStorageUpdateResult    = $this->docStorageTransaction->update(requestContent: $requestContent);
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
             throw new Exception(Self::DEAL_UPDATE_ERROR_MESSAGE);
@@ -332,13 +332,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function internalInsert(array $requestContent): ?bool
     {
         // 社内書類登録
-        $docInsertResult           = $this->docInternal->insert($requestContent);
+        $docInsertResult           = $this->docInternal->insert(requestContent: $requestContent);
 
         // 社内書類閲覧権限登録
-        $docPermissionInsertResult = $this->docPermissionInternal->insert($requestContent) ;
+        $docPermissionInsertResult = $this->docPermissionInternal->insert(requestContent: $requestContent) ;
 
         // 社内書類容量登録
-        $docStorageInsertResult    = $this->docStorageInternal->insert($requestContent);
+        $docStorageInsertResult    = $this->docStorageInternal->insert(requestContent: $requestContent);
 
         // ワークフローテーブル登録
         // ワークフローが起票者のみ
@@ -350,7 +350,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $userId     = $requestContent['m_user_id'];
             $createDate = $requestContent['create_datetime'];
 
-            $documentWorkFlowResult = $this->documentWorkFlow->insertInternal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+            $documentWorkFlowResult = $this->documentWorkFlow->insertInternal(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
             if (!$documentWorkFlowResult) {
                 throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
                 exit;
@@ -367,7 +367,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insertInternal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertInternal(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
                     exit;
@@ -383,7 +383,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insertInternal($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertInternal(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
                     exit;
@@ -406,13 +406,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function InternalUpdate(array $requestContent): ?bool
     {
         // 社内書類更新
-        $docUpdateResult           = $this->docInternal->update($requestContent);
+        $docUpdateResult           = $this->docInternal->update(requestContent: $requestContent);
 
         // 社内書類閲覧権限更新
-        $docPermissionUpdateResult = $this->docPermissionInternal->update($requestContent);
+        $docPermissionUpdateResult = $this->docPermissionInternal->update(requestContent: $requestContent);
 
         // 社内書類容量更新
-        $docStorageUpdateResult    = $this->docStorageInternal->update($requestContent);
+        $docStorageUpdateResult    = $this->docStorageInternal->update(requestContent: $requestContent);
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
             throw new Exception(Self::INTERNAL_UPDATE_ERROR_MESSAGE);
@@ -432,13 +432,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function archiveInsert(array $requestContent): ?bool
     {
         // 取引書類登録
-        $docInsertResult           = $this->docArchive->insert($requestContent);
+        $docInsertResult           = $this->docArchive->insert(requestContent: $requestContent);
 
         // 取引書類閲覧権限登録
-        $docPermissionInsertResult = $this->docPermissionArchive->insert($requestContent) ;
+        $docPermissionInsertResult = $this->docPermissionArchive->insert(requestContent: $requestContent) ;
 
         // 取引書類容量登録
-        $docStorageInsertResult    = $this->docStorageArchive->insert($requestContent);
+        $docStorageInsertResult    = $this->docStorageArchive->insert(requestContent: $requestContent);
 
         // ワークフローテーブル登録
         // ワークフローが起票者のみ
@@ -450,7 +450,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $userId     = $requestContent['m_user_id'];
             $createDate = $requestContent['create_datetime'];
 
-            $documentWorkFlowResult = $this->documentWorkFlow->insertArchive($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+            $documentWorkFlowResult = $this->documentWorkFlow->insertArchive(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
             if (!$documentWorkFlowResult) {
                 throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
                 exit;
@@ -467,7 +467,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insertArchive($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertArchive(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
                     exit;
@@ -483,7 +483,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 $userId                 = $requestContent['m_user_id'];
                 $createDate             = $requestContent['create_datetime'];
 
-                $documentWorkFlowResult = $this->documentWorkFlow->insertArchive($companyId, $categoryId, $appUserId, $wfSort, $userId, $createDate);
+                $documentWorkFlowResult = $this->documentWorkFlow->insertArchive(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                 if (!$documentWorkFlowResult) {
                     throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
                     exit;
@@ -506,13 +506,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function archiveUpdate(array $requestContent): ?bool
     {
         // 契約書類更新
-        $docUpdateResult           = $this->docArchive->update($requestContent);
+        $docUpdateResult           = $this->docArchive->update(requestContent: $requestContent);
 
         // 契約書類閲覧権限更新
-        $docPermissionUpdateResult = $this->docPermissionArchive->update($requestContent);
+        $docPermissionUpdateResult = $this->docPermissionArchive->update(requestContent: $requestContent);
 
         // 契約書類容量更新
-        $docStorageUpdateResult    = $this->docStorageArchive->update($requestContent);
+        $docStorageUpdateResult    = $this->docStorageArchive->update(requestContent: $requestContent);
 
         if (!$docUpdateResult === 1 || !$docPermissionUpdateResult === 1 || !$docStorageUpdateResult === 1) {
             throw new Exception(Self::ARCHIVE_UPDATE_ERROR_MESSAGE);
@@ -530,9 +530,9 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      */
     public function getBeforOrAfterUpdateContract(array $requestContent): DocumentUpdateEntity
     {
-        $contract    = $this->docContract->getBeforeOrAfterUpdateData($requestContent);
-        $perContract = $this->docPermissionContract->getBeforeOrAfterUpdateData($requestContent);
-        $stoContract = $this->docStorageContract->getBeforeOrAfterUpdateData($requestContent);
+        $contract    = $this->docContract->getBeforeOrAfterUpdateData(requestContent: $requestContent);
+        $perContract = $this->docPermissionContract->getBeforeOrAfterUpdateData(requestContent: $requestContent);
+        $stoContract = $this->docStorageContract->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         if (empty($contract) && empty($perContract) && empty($stoContract)) {
             return new DocumentUpdateEntity();
         }
@@ -549,9 +549,9 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      */
     public function getBeforOrAfterUpdateDeal(array $requestContent): DocumentUpdateEntity
     {
-        $deal = $this->docDeal->getBeforeOrAfterUpdateData($requestContent);
-        $perDeal = $this->docDeal->getBeforeOrAfterUpdateData($requestContent);
-        $stoDeal = $this->docDeal->getBeforeOrAfterUpdateData($requestContent);
+        $deal = $this->docDeal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
+        $perDeal = $this->docDeal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
+        $stoDeal = $this->docDeal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         if (empty($dela) && empty($perDeal) && empty($stoDeal)) {
             return new DocumentUpdateEntity();
         }
@@ -568,9 +568,9 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      */
     public function getBeforOrAfterUpdateInternal(array $requestContent): DocumentUpdateEntity
     {
-        $internal = $this->docInternal->getBeforeOrAfterUpdateData($requestContent);
-        $perInternal = $this->docInternal->getBeforeOrAfterUpdateData($requestContent);
-        $stoInternal = $this->docInternal->getBeforeOrAfterUpdateData($requestContent);
+        $internal = $this->docInternal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
+        $perInternal = $this->docInternal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
+        $stoInternal = $this->docInternal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         if (empty($internal) && empty($perInternal) && empty($stoInternal)) {
             return new DocumentUpdateEntity();
         }
@@ -587,9 +587,9 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      */
     public function getBeforOrAfterUpdateArchive(array $requestContent): DocumentUpdateEntity
     {
-        $archive = $this->docArchive->getBeforeOrAfterUpdateData($requestContent);
-        $perArchive = $this->docArchive->getBeforeOrAfterUpdateData($requestContent);
-        $stoArchive = $this->docArchive->getBeforeOrAfterUpdateData($requestContent);
+        $archive = $this->docArchive->getBeforeOrAfterUpdateData(requestContent: $requestContent);
+        $perArchive = $this->docArchive->getBeforeOrAfterUpdateData(requestContent: $requestContent);
+        $stoArchive = $this->docArchive->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         if (empty($archive) && empty($perArchive) && empty($stoArchive)) {
             return new DocumentUpdateEntity();
         }
@@ -617,10 +617,10 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         $accessContent = $requestContent['access_content'];
 
         //アクセスログに登録
-        $accessLogResult    = $this->logDocAccess->insert($companyId, $categoryId, $documentId, $userId, $userType, $ipAddress, $accessContent);
+        $accessLogResult    = $this->logDocAccess->insert(companyId: $companyId, categoryId: $categoryId, documentId: $documentId, userId: $userId, userType: $userType, ipAddress: $ipAddress, accessContent: $accessContent);
 
         // 操作ログに登録
-        $operationLogResutl = $this->logDocOperation->insert($companyId, $categoryId, $documentId, $userId, $beforeContent, $afterContet, $ipAddress);
+        $operationLogResutl = $this->logDocOperation->insert(companyId: $companyId, categoryId: $categoryId, documentId: $documentId, userId: $userId, beforeContent: $beforeContent, afterContet: $afterContet, ipAddress: $ipAddress);
 
         if (!$accessLogResult || !$operationLogResutl) {
             throw new Exception(Self::LOG_ERROR_MESSAGE);

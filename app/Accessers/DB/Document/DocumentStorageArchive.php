@@ -45,9 +45,9 @@ class DocumentStorageArchive extends FluentDatabase
             'sign_position'         => json_encode($requestContent['sign_position']),
             'total_pages'           => $requestContent['total_pages'],
             'create_user'           => $requestContent['m_user_id'],
-            'create_datetime'       => $requestContent['create_datetime'],
+            'create_datetime'       => CarbonImmutable::now(),
             'update_user'           => $requestContent['m_user_id'],
-            'update_datetime'       => $requestContent['update_datetime'],
+            'update_datetime'       => CarbonImmutable::now(),
             'delete_user'           => null,
             'delete_datetime'       => null
         ]);
@@ -59,9 +59,9 @@ class DocumentStorageArchive extends FluentDatabase
      * -------------------------
      *
      * @param array $requestContent
-     * @return boolean
+     * @return boolean|Exception
      */
-    public function update(array $requestContent)
+    public function update(array $requestContent): ?bool
     {
         $deleteResult = DB::table('t_doc_storage_archive')
         ->where('document_id', $requestContent['document_id'])
@@ -90,9 +90,9 @@ class DocumentStorageArchive extends FluentDatabase
                 'sign_position'         => json_encode($requestContent['sign_position']),
                 'total_pages'           => $requestContent['total_pages'],
                 'create_user'           => $requestContent['m_user_id'],
-                'create_datetime'       => $requestContent['create_datetime'],
+                'create_datetime'       => CarbonImmutable::now(),
                 'update_user'           => $requestContent['m_user_id'],
-                'update_datetime'       => $requestContent['update_datetime'],
+                'update_datetime'       => CarbonImmutable::now(),
                 'delete_user'           => null,
                 'delete_datetime'       => null
                 ]);

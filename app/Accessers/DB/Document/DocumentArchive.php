@@ -114,7 +114,7 @@ class DocumentArchive extends FluentDatabase
    * @param array $requestContent
    * @return boolean
    */
-  public function insert(array $requestContent)
+  public function insert(array $requestContent): bool
   {
       return $this->builder($this->table)->insert([
           'company_id'       => $requestContent['company_id'],
@@ -138,9 +138,9 @@ class DocumentArchive extends FluentDatabase
           'sign_level'       => $requestContent['sign_level'],
           'timestamp_user'   => $requestContent['timestamp_user'],
           'create_user'      => $requestContent['m_user_id'],
-          'create_datetime'  => $requestContent['create_datetime'],
+          'create_datetime'  => CarbonImmutable::now(),
           'update_user'      => $requestContent['m_user_id'],
-          'update_datetime'  => $requestContent['update_datetime']
+          'update_datetime'  => CarbonImmutable::now()
       ]);
   }
 
@@ -150,9 +150,9 @@ class DocumentArchive extends FluentDatabase
    * -------------------------
    *
    * @param array $requestContent
-   * @return boolean
+   * @return int
    */
-  public function update(array $requestContent)
+  public function update(array $requestContent): int
   {
       return $this->builder($this->table)
           ->where('document_id', $requestContent['document_id'])
@@ -179,7 +179,7 @@ class DocumentArchive extends FluentDatabase
               'sign_level'       => $requestContent['sign_level'],
               'timestamp_user'   => $requestContent['timestamp_user'],
               'update_user'      => $requestContent['m_user_id'],
-              'update_datetime'  => $requestContent['update_datetime']
+              'update_datetime'  => CarbonImmutable::now()
       ]);
   }
 

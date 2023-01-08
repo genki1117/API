@@ -49,7 +49,7 @@ class DocumentPermissionTransaction extends FluentDatabase
      * @param array $requestContent
      * @return boolean
      */
-    public function insert(array $requestContent)
+    public function insert(array $requestContent): bool
     {
         $LastdocumentId = DB::table('t_document_deal')->select(["document_id"])
         ->orderByDesc('document_id')->limit(1)->first();
@@ -58,9 +58,9 @@ class DocumentPermissionTransaction extends FluentDatabase
             "company_id"      => $requestContent['company_id'],
             "user_id"         => $requestContent['m_user_id'],
             "create_user"     => $requestContent['m_user_id'],
-            "create_datetime" => $requestContent['create_datetime'],
+            "create_datetime" => CarbonImmutable::now(),
             "update_user"     => $requestContent['m_user_id'],
-            "update_datetime" => $requestContent['update_datetime'],
+            "update_datetime" => CarbonImmutable::now(),
         ];
         return $this->builder($this->table)->insert($data);
     }
@@ -71,9 +71,9 @@ class DocumentPermissionTransaction extends FluentDatabase
      * -------------------------
      *
      * @param array $requestContent
-     * @return boolean
+     * @return boolean|Exception
      */
-    public function update(array $requestContent)
+    public function update(array $requestContent): ?bool
     {
         $deleteResult = DB::table('t_doc_permission_transaction')
         ->where('document_id', $requestContent['document_id'])
@@ -86,9 +86,9 @@ class DocumentPermissionTransaction extends FluentDatabase
                 "company_id"      => $requestContent['company_id'],
                 "user_id"         => $requestContent['m_user_id'],
                 "create_user"     => $requestContent['m_user_id'],
-                "create_datetime" => $requestContent['create_datetime'],
+                "create_datetime" => CarbonImmutable::now(),
                 "update_user"     => $requestContent['m_user_id'],
-                "update_datetime" => $requestContent['update_datetime'],
+                "update_datetime" => CarbonImmutable::now(),
                 "delete_user"     => null,
                 "delete_datetime" => null
             ];
@@ -108,7 +108,7 @@ class DocumentPermissionTransaction extends FluentDatabase
      * @param int $documentId
      * @return bool
      */
-    public function getDelete(int $userId, int $companyId, int $documentId)
+    public function getDelete(int $userId, int $companyId, int $documentId): bool
     {
         return $this->builder($this->table)
             ->whereNull("delete_datetime")

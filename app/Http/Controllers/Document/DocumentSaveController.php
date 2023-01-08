@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Document;
 
+use App\Domain\Consts\DocumentConst;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Document\DocumentSaveRequest;
 use App\Domain\Services\Document\DocumentSaveService;
@@ -15,14 +16,8 @@ use Illuminate\Http\JsonResponse;
 
 class DocumentSaveController extends Controller
 {
-    /** @var */
-    protected const DOC_CONTRACT_TYPE = 0;
-    /** @var */
-    protected const DOC_DEAL_TYPE     = 1;
-    /** @var */
-    protected const DOC_INTERNAL_TYPE = 2;
-    /** @var */
-    protected const DOC_ARCHIVE_TYPE  = 3;
+    /** @var DocumentConst */
+    private DocumentConst $docConst;
 
     /** @var DocumentSaveService */
     private DocumentSaveService $documentService;
@@ -32,9 +27,11 @@ class DocumentSaveController extends Controller
     public function __construct(
         DocumentSaveService $documentSaveService,
         Carbon $carbon,
+        DocumentConst $docConst
     ) {
         $this->documentSaveService = $documentSaveService;
         $this->carbon              = $carbon;
+        $this->docConst            = $docConst;
     }
 
     /**
@@ -49,7 +46,7 @@ class DocumentSaveController extends Controller
         try {
             switch ($request->category_id) {
                 // 契約書類処理
-                case Self::DOC_CONTRACT_TYPE:
+                case $this->docConst::DOCUMENT_CONTRACT:
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
                     $requestContent['m_user_company_id']       = $request->m_user['company_id'];
                     $requestContent['m_user_type_id']          = $request->m_user['user_type'];
@@ -92,7 +89,7 @@ class DocumentSaveController extends Controller
                     $this->documentSaveService->saveDocument($requestContent);
                     break;
 
-                case Self::DOC_DEAL_TYPE:
+                case $this->docConst::DOCUMENT_DEAL:
                     // 取引書類処理
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
                     $requestContent['m_user_company_id']       = $request->m_user['company_id'];
@@ -135,7 +132,7 @@ class DocumentSaveController extends Controller
                     $this->documentSaveService->saveDocument($requestContent);
                     break;
 
-                case Self::DOC_INTERNAL_TYPE:
+                case $this->docConst::DOCUMENT_INTERNAL::
                     // 社内書類処理
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
                     $requestContent['m_user_company_id']       = $request->m_user['company_id'];
@@ -175,7 +172,7 @@ class DocumentSaveController extends Controller
                     $this->documentSaveService->saveDocument($requestContent);
                     break;
 
-                case Self::DOC_ARCHIVE_TYPE:
+                case $this->docConst::DOCUMENT_ARCHIVE:
                     // 登録書類処理
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
                     $requestContent['m_user_company_id']       = $request->m_user['company_id'];

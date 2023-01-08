@@ -138,9 +138,9 @@ class DocumentContract extends FluentDatabase
             'doc_info'         => json_encode($requestContent['doc_info'], JSON_UNESCAPED_UNICODE),
             'sign_level'       => $requestContent['sign_level'],
             'create_user'      => $requestContent['m_user_id'],
-            'create_datetime'  => $requestContent['create_datetime'],
+            'create_datetime'  => CarbonImmutable::now(),
             'update_user'      => $requestContent['m_user_id'],
-            'update_datetime'  => $requestContent['update_datetime']
+            'update_datetime'  => CarbonImmutable::now()
             
         ]);
     }
@@ -180,7 +180,7 @@ class DocumentContract extends FluentDatabase
                 'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
                 'sign_level'       => $requestContent['sign_level'],
                 'update_user'      => $requestContent['m_user_id'],
-                'update_datetime'  => $requestContent['update_datetime']
+                'update_datetime'  => CarbonImmutable::now()
         ]);
     }
 

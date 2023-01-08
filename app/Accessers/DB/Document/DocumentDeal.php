@@ -108,7 +108,7 @@ class DocumentDeal extends FluentDatabase
    * @param array $requestContent
    * @return boolean
    */
-    public function insert(array $requestContent)
+    public function insert(array $requestContent): bool
     {
         return $this->builder($this->table)->insert([
             'company_id'       => $requestContent['company_id'],
@@ -132,9 +132,9 @@ class DocumentDeal extends FluentDatabase
             'doc_info'         => json_encode($requestContent['doc_info'], JSON_UNESCAPED_UNICODE),
             'sign_level'       => $requestContent['sign_level'],
             'create_user'      => $requestContent['m_user_id'],
-            'create_datetime'  => $requestContent['create_datetime'],
+            'create_datetime'  => CarbonImmutable::now(),
             'update_user'      => $requestContent['m_user_id'],
-            'update_datetime'  => $requestContent['update_datetime']
+            'update_datetime'  => CarbonImmutable::now()
             
         ]);
     }
@@ -145,9 +145,9 @@ class DocumentDeal extends FluentDatabase
      * -------------------------
      *
      * @param array $requestContent
-     * @return boolean
+     * @return int
      */
-    public function update(array $requestContent)
+    public function update(array $requestContent): int
     {
         return $this->builder($this->table)
             ->where('document_id', $requestContent['document_id'])
@@ -174,7 +174,7 @@ class DocumentDeal extends FluentDatabase
                 'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
                 'sign_level'       => $requestContent['sign_level'],
                 'update_user'      => $requestContent['m_user_id'],
-                'update_datetime'  => $requestContent['update_datetime']
+                'update_datetime'  => CarbonImmutable::now()
         ]);
     }
 
