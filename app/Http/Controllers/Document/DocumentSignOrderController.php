@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Document;
 
+use App\Http\Requests\Document\DocumentSignOrderRequest;
 use App\Http\Responses\Document\DocumentSignOrderRespons;
 use App\Domain\Services\Document\DocumentSignOrderService;
 use App\Http\Controllers\Controller;
@@ -23,7 +24,7 @@ class DocumentSignOrderController extends Controller
      * @param Request $request
      * @return void
      */
-    public function documentSignOrder(Request $request)
+    public function documentSignOrder(DocumentSignOrderRequest $request)
     {
         try {
             $mUserId        = $request->m_user['user_id'];
@@ -39,7 +40,7 @@ class DocumentSignOrderController extends Controller
             if ($documentSignOrderResult === false) {
                 throw new Exception ("署名依頼に失敗しました。");
             }
-            
+
             return (new DocumentSignOrderRespons)->successSignOrder();
 
         } catch (Exception $e) {
