@@ -6,7 +6,7 @@ namespace App\Domain\Entities\Document;
 class DocumentSaveOrder
 {
     /** @var \stdClass|null */
-    private ?\stdClass $signDocument;
+    private ?\stdClass $signDoc;
     private ?\stdClass $nextSignUser;
     private ?\stdClass $issueUser;
 
