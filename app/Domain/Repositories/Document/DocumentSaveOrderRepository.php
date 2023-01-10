@@ -46,7 +46,6 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
     public function getLoginUserWorkflow (int $mUserId, int $mUserCompanyId): ?\stdClass
     {
         $loginUserWorkflow = $this->mUser->getLoginUserWorkflow(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId); 
-        var_dump($loginUserWorkflow);
         return $loginUserWorkflow;
     }
 
@@ -63,9 +62,9 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
     {
         try {
             $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
-            var_dump($signDocContract);
             $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, loginUserWorkFlowSort: $loginUserWorkFlowSort);
             $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser(documentId: $documentId, categoryId: $categoryId);
+            var_export($contractIsseuUser);
         } catch (Exception $e) {
             throw new Exception("契約書類の署名依頼は失敗しました");
         }
