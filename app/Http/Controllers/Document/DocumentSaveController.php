@@ -40,7 +40,7 @@ class DocumentSaveController extends Controller
      * @param Request $request
      * @return DocumentSaveResponse
      */
-    public function saveDocument(Request $request): JsonResponse
+    public function saveDocument(Request $request): JsonResponse // TODO:リクエストクラスに変更し、確認
     {
         DB::beginTransaction($request);
         try {
@@ -132,7 +132,7 @@ class DocumentSaveController extends Controller
                     $this->documentSaveService->saveDocument($requestContent);
                     break;
 
-                case $this->docConst::DOCUMENT_INTERNAL::
+                case $this->docConst::DOCUMENT_INTERNAL:
                     // 社内書類処理
                     $requestContent['m_user_id']               = $request->m_user['user_id'];
                     $requestContent['m_user_company_id']       = $request->m_user['company_id'];
@@ -151,7 +151,7 @@ class DocumentSaveController extends Controller
                     $requestContent['ref_doc_no']              = $request->input('ref_doc_no') ?? null;
                     $requestContent['product_name']            = $request->product_name ?? null;
                     $requestContent['select_sign_user']        = $request->input('select_sign_user') ?? null;
-                    $requestContent['select_sign_guest_user']  = $request->input('select_sign_guest_user') ?? null;
+                    // $requestContent['select_sign_guest_user']  = $request->input('select_sign_guest_user') ?? null;
                     $requestContent['title']                   = $request->title ?? null;
                     $requestContent['amount']                  = $request->amount ?? null;
                     $requestContent['currency_id']             = $request->currency_id ?? null;
@@ -193,7 +193,7 @@ class DocumentSaveController extends Controller
                     $requestContent['ref_doc_no']              = $request->input('ref_doc_no') ?? null;
                     $requestContent['product_name']            = $request->product_name ?? null;
                     $requestContent['select_sign_user']        = $request->input('select_sign_user') ?? null;
-                    $requestContent['select_sign_guest_user']  = $request->input('select_sign_guest_user') ?? null;
+                    // $requestContent['select_sign_guest_user']  = $request->input('select_sign_guest_user') ?? null;
                     $requestContent['title']                   = $request->title ?? null;
                     $requestContent['amount']                  = $request->amount ?? null;
                     $requestContent['currency_id']             = $request->currency_id ?? null;
