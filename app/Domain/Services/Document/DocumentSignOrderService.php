@@ -39,8 +39,6 @@ class DocumentSignOrderService
     public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId)
     {
         try {
-            // ログインユーザのワークフローソート取得
-            $loginUserWorkFlowSort = $this->documentSignOrderRepositoryInterface->getLoginUserWorkflow(mUserId: $mUserId, mUserCompanyId :$mUserCompanyId);
             // 書類詳細エンドポイント作成
             $documentDetailendPoint = '/document/detail/';
 
@@ -54,10 +52,10 @@ class DocumentSignOrderService
                     // 次の署名書類と送信者取得と起票者を取得
                     $contractIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
                                                         ->getContractIsseuAndNextSignUserInfo(
-                                                            documentId: $documentId, categoryId: $categoryId, loginUserWorkFlowSort: $loginUserWorkFlowSort->wf_sort
+                                                            documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId
                                                         );
 
-                                                        // var_export($contractIsseuAndNextSignUser);
+                                                        //var_export($contractIsseuAndNextSignUser);
                                                         
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
@@ -116,7 +114,7 @@ class DocumentSignOrderService
                     // 次の送信者取得と起票者を取得
                     $dealIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
                                                         ->getDealIsseuAndNextSignUserInfo(
-                                                            $documentId, $categoryId, $loginUserWorkFlowSort->wf_sort
+                                                            documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId
                                                         );
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($dealIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {

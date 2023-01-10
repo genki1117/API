@@ -10,11 +10,11 @@ use App\Accessers\DB\Document\DocumentDeal;
 use App\Accessers\DB\Document\DocumentInternal;
 use App\Accessers\DB\Document\DocumentArchive;
 use App\Accessers\DB\Document\DocumentWorkFlow;
-use App\Domain\Entities\Document\DocumentSaveOrder;
+use App\Domain\Entities\Document\DocumentSignOrder;
 use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterface;
 use Exception;
 
-class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterface
+class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterface
 {
 
     public function __construct(
@@ -56,16 +56,16 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $loginUserWorkFlowSort
-     * @return DocumentSaveOrder|null
+     * @return DocumentSignOrder|null
      */
-    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort): ?DocumentSaveOrder
+    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId): ?DocumentSignOrder
     {
         try {
             $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
             if (!$signDocContract) {
                 throw new Exception("契約書類の署名依頼は失敗しました");
             }
-            $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, loginUserWorkFlowSort: $loginUserWorkFlowSort);
+            $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
             if (!$contractNextSignUser) {
                 throw new Exception("契約書類の署名依頼は失敗しました");
             }
@@ -76,7 +76,7 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
         } catch (Exception $e) {
             throw new Exception("契約書類の署名依頼は失敗しました");
         }
-        return new DocumentSaveOrder($signDocContract, $contractNextSignUser, $contractIsseuUser);
+        return new DocumentSignOrder($signDocContract, $contractNextSignUser, $contractIsseuUser);
     }
 
 
@@ -86,16 +86,16 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $loginUserWorkFlowSort
-     * @return DocumentSaveOrder|null
+     * @return DocumentSignOrder|null
      */
-    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort)
+    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId)
     {
         try{
             $signDocDeal      = $this->documentDeal->getSignDocument(documentId: $documentId, categoryId: $categoryId);
             if (!$signDocDeal) {
                 throw new Exception("取引書類の署名依頼は失敗しました");
             }
-            $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser(documentId: $documentId, categoryId: $categoryId, loginUserWorkFlowSort: $loginUserWorkFlowSort);
+            $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
             if (!$dealNextSignUser) {
                 throw new Exception("取引書類の署名依頼は失敗しました");
             }
@@ -106,7 +106,7 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
         } catch (Exception $e) {
             throw new Exception("取引書類の署名依頼は失敗しました");
         }
-        return new DocumentSaveOrder($signDocDeal, $dealNextSignUser, $dealIsseuUser);
+        return new DocumentSignOrder($signDocDeal, $dealNextSignUser, $dealIsseuUser);
     }
 
 
@@ -116,9 +116,9 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return DocumentSaveOrder|null
+     * @return DocumentSignOrder|null
      */
-    public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId): ?DocumentSaveOrder
+    public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId): ?DocumentSignOrder
     {
         try {
             $signDocInternal      = $this->documentInternal->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
@@ -137,7 +137,7 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
         } catch (Exception $e) {
             throw new Exception("社内書類の署名依頼は失敗しました");
         }
-        return new DocumentSaveOrder($signDocInternal, $internalSignUserList, $internalIsseuUser);
+        return new DocumentSignOrder($signDocInternal, $internalSignUserList, $internalIsseuUser);
     }
 
 
@@ -147,9 +147,9 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return DocumentSaveOrder|null
+     * @return DocumentSignOrder|null
      */
-    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId): ?DocumentSaveOrder
+    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId): ?DocumentSignOrder
     {
         try {
             $signDocArchive      = $this->documentArchive->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
@@ -167,7 +167,8 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
         }catch (Exception $e) {
             throw new Exception("登録書類の署名依頼は失敗しました");
         }
-        return new DocumentSaveOrder($signDocArchive, $archiveNextSignUser, $archiveIsseuUser);
+        return new DocumentSignOrder
+        ($signDocArchive, $archiveNextSignUser, $archiveIsseuUser);
     }
 
     /**

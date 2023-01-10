@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace App\Domain\Entities\Document;
 
-class DocumentSaveOrder
+class DocumentSignOrder
 {
     /** @var \stdClass|null */
     private ?\stdClass $signDoc;

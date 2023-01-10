@@ -23,9 +23,9 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $doctypeId
      * @param integer $$loginUserWorkFlowSort
-     * @return DocumentSaveOrder|null
+     * @return DocumentSignOrder|null
      */
-    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort);
+    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId);
 
 
     /**
@@ -34,9 +34,9 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $loginUserWorkFlowSort
-     * @return DocumentSaveOrder|null
+     * @return DocumentSignOrder|null
      */
-    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort);
+    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId);
 
 
     /**
@@ -45,7 +45,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return DocumentSaveOrder|null
+     * @return DocumentSignOrder|null
      */
     public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId);
 
@@ -56,7 +56,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return DocumentSaveOrder|null
+     * @return DocumentSignOrder|null
      */
     public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId);
 

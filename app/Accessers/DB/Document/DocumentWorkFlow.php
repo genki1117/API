@@ -52,7 +52,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @param integer $loginUserWorkFlowSort
      * @return \stdClass|null
      */
-    public function getContractNextSignUser(int $documentId, int $categoryId, int $loginUserWorkFlowSort): ?\stdClass
+    public function getContractNextSignUser(int $documentId, int $categoryId, int $mUserId): ?\stdClass
     { 
         return $this->builder($this->table)
             ->select([
@@ -74,7 +74,7 @@ class DocumentWorkFlow extends FluentDatabase
                 return $query->on("m_company_counter_party.company_id", "t_document_workflow.company_id")
                              ->whereNull("m_company_counter_party.delete_datetime");
             })
-            ->where("t_document_workflow.wf_sort", ">", $loginUserWorkFlowSort)
+            ->where("t_document_workflow.app_user_id", ">", $mUserId)
             ->where("t_document_workflow.document_id", "=", $documentId)
             ->where("t_document_workflow.category_id", "=", $categoryId)
             ->orderBy("t_document_workflow.wf_sort", "ASC")
@@ -122,7 +122,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @param integer $loginUserWorkFlowSort
      * @return \stdClass|null
      */
-    public function getDealNextSignUser(int $documentId, int $categoryId, int $loginUserWorkFlowSort): ?\stdClass
+    public function getDealNextSignUser(int $documentId, int $categoryId, int $mUserId): ?\stdClass
     { 
         
         return $this->builder($this->table)
@@ -145,7 +145,7 @@ class DocumentWorkFlow extends FluentDatabase
                 return $query->on("m_company_counter_party.company_id", "t_document_workflow.company_id")
                              ->whereNull("m_company_counter_party.delete_datetime");
             })
-            ->where("t_document_workflow.wf_sort", ">", $loginUserWorkFlowSort)
+            ->where("t_document_workflow.app_user_id", ">", $mUserId)
             ->where("t_document_workflow.document_id", "=", $documentId)
             ->where("t_document_workflow.category_id", "=", $categoryId)
             ->orderBy("t_document_workflow.wf_sort", "ASC")

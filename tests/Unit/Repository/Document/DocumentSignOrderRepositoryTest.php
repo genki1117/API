@@ -3,7 +3,7 @@
 namespace Tests\Unit\Repository\Document;
 
 use Exception;
-use App\Domain\Repositories\Document\DocumentSaveOrderRepository;
+use App\Domain\Repositories\Document\DocumentSignOrderRepository;
 use App\Accessers\DB\Log\System\LogDocOperation;
 use App\Accessers\DB\Document\DocumentArchive;
 use App\Accessers\DB\Document\DocumentContract;
@@ -107,7 +107,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->once()
         ->andReturn($issueUser);
 
-        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, loginUserWorkFlowSort: 0);
+        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
         $this->assertEquals($result->getSignDoc()->document_id, 1);
         $this->assertEquals($result->getSignDoc()->title, '契約書類テストタイトル');
         $this->assertEquals($result->getSignDoc()->file_prot_pw_flg, 1);
@@ -172,7 +172,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->andReturn($issueUser);
 
         $this->expectException(Exception::class);
-        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, loginUserWorkFlowSort: 0);
+        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
     }
     /**
      * @test
@@ -220,7 +220,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->andReturn($issueUser);
 
         $this->expectException(Exception::class);
-        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, loginUserWorkFlowSort: 0);
+        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
     }
     /**
      * @test
@@ -268,7 +268,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->andReturn(null);
 
         $this->expectException(Exception::class);
-        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, loginUserWorkFlowSort: 0);
+        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
     }
 
      /**
@@ -316,7 +316,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->once()
         ->andReturn($issueUser);
 
-        $result = $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, loginUserWorkFlowSort: 0);
+        $result = $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
         $this->assertEquals($result->getSignDoc()->document_id, 1);
         $this->assertEquals($result->getSignDoc()->title, '取引書類テストタイトル');
         $this->assertEquals($result->getSignDoc()->file_prot_pw_flg, 1);
@@ -381,7 +381,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->andReturn($issueUser);
 
         $this->expectException(Exception::class);
-        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, loginUserWorkFlowSort: 0);
+        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
         
     }
     /**
@@ -430,7 +430,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->andReturn($issueUser);
 
         $this->expectException(Exception::class);
-        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, loginUserWorkFlowSort: 0);
+        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
         
     }
     /**
@@ -479,7 +479,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->andReturn(null);
 
         $this->expectException(Exception::class);
-        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, loginUserWorkFlowSort: 0);
+        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
         
     }
 
@@ -951,7 +951,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
 
     public function getObject()
     {
-        return new DocumentSaveOrderRepository(
+        return new DocumentSignOrderRepository(
             $this->tempTokenMock,
             $this->mUserMock,
             $this->docContractMock,

@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Providers;
 
-use App\Domain\Repositories\Document\DocumentSaveOrderRepository;
+use App\Domain\Repositories\Document\DocumentSignOrderRepository;
 use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterface;
 use App\Domain\Repositories\Document\DocumentDetailRepository;
 use App\Domain\Repositories\Interface\Document\DocumentDetailRepositoryInterface;
@@ -35,7 +35,7 @@ class RepositoryServiceProvider extends ServiceProvider
         DocumentListRepositoryInterface::class => DocumentListRepository::class,
         DocumentDetailRepositoryInterface::class => DocumentDetailRepository::class,
         DocumentGetListRepositoryInterface::class => DocumentGetListRepository::class,
-        DocumentSignOrderRepositoryInterface::class => DocumentSaveOrderRepository::class,
+        DocumentSignOrderRepositoryInterface::class => DocumentSignOrderRepository::class,
     ];
 
     /**
