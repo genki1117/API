@@ -36,17 +36,16 @@ class DocumentSignOrderService
     }
     
 
-    public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId, string $updateDatetime)
+    public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId)
     {
         try {
-                    // ログインユーザのワークフローソート取得
+            // ログインユーザのワークフローソート取得
             $loginUserWorkFlowSort = $this->documentSignOrderRepositoryInterface->getLoginUserWorkflow(mUserId: $mUserId, mUserCompanyId :$mUserCompanyId);
-
             // 書類詳細エンドポイント作成
             $documentDetailendPoint = '/document/detail/';
 
             // システムURL取得
-            $systemUrl = url('');
+            $systemUrl = 'test';
 
             switch($categoryId) {
                 
@@ -57,6 +56,8 @@ class DocumentSignOrderService
                                                         ->getContractIsseuAndNextSignUserInfo(
                                                             documentId: $documentId, categoryId: $categoryId, loginUserWorkFlowSort: $loginUserWorkFlowSort->wf_sort
                                                         );
+
+                                                        // var_export($contractIsseuAndNextSignUser);
                                                         
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
