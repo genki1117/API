@@ -61,7 +61,7 @@ class DocumentSignOrderServiceTest extends TestCase
     }
 
     /**
-     * @test
+     * 
      * 次の署名者がゲストの場合
      * @return void
      */
@@ -75,9 +75,9 @@ class DocumentSignOrderServiceTest extends TestCase
 
 
 
-        // $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo->getSignDoc')
-        // ->once()
-        // ->andReturn((object)['file_prot_pw_flg' => 1]);
+        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn(['getSignDoc'=>(object)['file_prot_pw_flg' => 1]]);
         
 
 

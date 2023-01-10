@@ -45,7 +45,9 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      */
     public function getLoginUserWorkflow (int $mUserId, int $mUserCompanyId): ?\stdClass
     {
-        return $loginUserWorkflow = $this->mUser->getLoginUserWorkflow(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId);  
+        $loginUserWorkflow = $this->mUser->getLoginUserWorkflow(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId); 
+        var_dump($loginUserWorkflow);
+        return $loginUserWorkflow;
     }
 
 
@@ -59,12 +61,18 @@ class DocumentSaveOrderRepository implements DocumentSignOrderRepositoryInterfac
      */
     public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $loginUserWorkFlowSort): ?DocumentSaveOrder
     {
-        $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
-        $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, loginUserWorkFlowSort: $loginUserWorkFlowSort);
-        $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser(documentId: $documentId, categoryId: $categoryId);
-        if (empty($signDocContract) && empty($contractNextSignUser) && empty($contractIsseuUser)) {
+        try {
+            $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
+            var_dump($signDocContract);
+            $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, loginUserWorkFlowSort: $loginUserWorkFlowSort);
+            $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser(documentId: $documentId, categoryId: $categoryId);
+        } catch (Exception $e) {
             throw new Exception("契約書類の署名依頼は失敗しました");
         }
+        
+        // if (empty($signDocContract) && empty($contractNextSignUser) && empty($contractIsseuUser)) {
+        //     throw new Exception("契約書類の署名依頼は失敗しました");
+        // }
         return new DocumentSaveOrder($signDocContract, $contractNextSignUser, $contractIsseuUser);
     }
 
