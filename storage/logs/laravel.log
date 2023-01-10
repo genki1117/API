@@ -4456,3 +4456,51 @@ Stack trace:
 #11 /home/shoutasudo/work/production/github/DTG-API/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #12 {main}
 "} 
+[2023-01-10 15:17:52] local.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php:220)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(147): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Command/Command.php(267): Symfony\\Component\\Console\\Input\\Input->bind()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Console/Command.php(124): Symfony\\Component\\Console\\Command\\Command->run()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(1002): Illuminate\\Console\\Command->run()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun()
+#9 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#10 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
+#11 /home/shoutasudo/work/production/github/DTG-API/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#12 {main}
+"} 
+[2023-01-10 15:17:54] local.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php:220)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(147): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Command/Command.php(267): Symfony\\Component\\Console\\Input\\Input->bind()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Console/Command.php(124): Symfony\\Component\\Console\\Command\\Command->run()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(1002): Illuminate\\Console\\Command->run()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun()
+#9 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#10 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
+#11 /home/shoutasudo/work/production/github/DTG-API/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#12 {main}
+"} 
+[2023-01-10 15:17:56] local.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php:220)
+[stacktrace]
+#0 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(147): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption()
+#1 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption()
+#2 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#3 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Input/Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Command/Command.php(267): Symfony\\Component\\Console\\Input\\Input->bind()
+#5 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Console/Command.php(124): Symfony\\Component\\Console\\Command\\Command->run()
+#6 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(1002): Illuminate\\Console\\Command->run()
+#7 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(299): Symfony\\Component\\Console\\Application->doRunCommand()
+#8 /home/shoutasudo/work/production/github/DTG-API/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun()
+#9 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#10 /home/shoutasudo/work/production/github/DTG-API/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
+#11 /home/shoutasudo/work/production/github/DTG-API/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#12 {main}
+"} 
