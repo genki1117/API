@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Service\Document;
 
-use App\Domain\Consts\QueueConst;
-use App\Accessers\Queue\QueueUtility;
+//use App\Domain\Consts\QueueConst;
+// use App\Accessers\Queue\QueueUtility;
 use App\Domain\Entities\Document\DocumentSignOrder;
 use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterface;
 use App\Domain\Services\Document\DocumentSignOrderService;
@@ -21,8 +21,6 @@ class DocumentSignOrderServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->queueConst             = new QueueConst;
-        $this->queue                  = new QueueUtility;
         $this->userConst              = new UserTypeConst;
         $this->docConst               = new DocumentConst;
         $this->documentRepositoryMock = \Mockery::mock(DocumentSignOrderRepositoryInterface::class);
@@ -40,7 +38,7 @@ class DocumentSignOrderServiceTest extends TestCase
             'document_id' => 1,
             'title' => '契約書類テストタイトル',
             'file_prot_pw_flg' => 0
-    ];
+        ];
         $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo->getSignDoc')
         ->once()
         ->andReturn($dataDoc);
@@ -310,7 +308,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $docEntiry = new DocumentSignOrder($dataDoc, $dataSign, $dataIssue);
 
-        $result111 = $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
         ->once()
         ->andReturn($docEntiry);
 
@@ -367,7 +365,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $docEntiry = new DocumentSignOrder($dataDoc, $dataSign, $dataIssue);
 
-        $result111 = $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
+        $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
         ->once()
         ->andReturn($docEntiry);
 
@@ -414,7 +412,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $docEntiry = new DocumentSignOrder($dataDoc, $dataSign, $dataIssue);
 
-        $result111 = $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
         ->once()
         ->andReturn($docEntiry);
 
@@ -426,6 +424,6 @@ class DocumentSignOrderServiceTest extends TestCase
 
     private function getObject()
     {
-        return new DocumentSignOrderService($this->queueConst, $this->queue, $this->userConst, $this->docConst, $this->documentRepositoryMock);
-    }   
+        return new DocumentSignOrderService($this->userConst, $this->docConst, $this->documentRepositoryMock);
+    }
 }

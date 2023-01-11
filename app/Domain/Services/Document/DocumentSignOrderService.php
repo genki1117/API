@@ -2,8 +2,8 @@
 declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
-use App\Domain\Consts\QueueConst;
-use App\Accessers\Queue\QueueUtility;
+// use App\Domain\Consts\QueueConst;
+// use App\Accessers\Queue\QueueUtility;
 use Exception;
 use App\Domain\Consts\UserTypeConst;
 use App\Domain\Consts\DocumentConst;
@@ -16,11 +16,11 @@ class DocumentSignOrderService
     private $emailTitle;
     private $emailContent;
 
-    /** @var UserTypeConst */
-    private QueueConst $queueConst;
+    // /** @var QueueConst */
+    // private QueueConst $queueConst;
 
-    /** @var UserTypeConst */
-    private QueueUtility $queueUtility;
+    // /** @var QueueUtility */
+    // private QueueUtility $queueUtility;
 
     /** @var UserTypeConst */
     private UserTypeConst $userTypeConst;
@@ -32,15 +32,15 @@ class DocumentSignOrderService
     private DocumentSignOrderRepositoryInterface $documentSignOrderRepositoryInterface;
 
     public function __construct(
-        QueueConst $queueConst,
-        QueueUtility $queueUtility,
+        // QueueConst $queueConst,
+        // QueueUtility $queueUtility,
         UserTypeConst $userTypeConst,
         DocumentConst $docConst,
         DocumentSignOrderRepositoryInterface $documentSignOrderRepositoryInterface
     )
     {
-        $this->queueConst    = $queueConst;
-        $this->queue         = $queueUtility;
+        // $this->queueConst    = $queueConst;
+        // $this->queue         = $queueUtility;
         $this->userTypeConst = $userTypeConst;
         $this->docConst      = $docConst;
         $this->documentSignOrderRepositoryInterface = $documentSignOrderRepositoryInterface;
@@ -55,6 +55,8 @@ class DocumentSignOrderService
 
             // システムURL取得
             $systemUrl = 'test';
+            // $systemUrl = url('');
+
 
             switch($categoryId) {
                 // 契約書類
@@ -218,7 +220,7 @@ class DocumentSignOrderService
                         $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
                         
                         // キューを書き込み
-                        $ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
+                        //$ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
                     }
                     return true;
                     exit;
@@ -269,7 +271,7 @@ class DocumentSignOrderService
             $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
             
             // キューを書き込み
-            $ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
+            // $ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
 
             return true;
         } catch (Exception $e) {
