@@ -6,7 +6,7 @@
 
 #### composer installができる場合
 ##### [ローカル]
- - cp .env.develop .env
+ - cp .env.develop .env (envファイルの内容は、バックエンドチャネル>(PHP).env情報)
  - composer install
  - ./vendor/bin/sail up or cd ./vendor/bin sail up
    └コンテナ構築のログが流れる  
@@ -48,6 +48,11 @@ dockerコンテナを抜ける
 
 ## サンプルコード確認
 ### サンプルコードを実行するためのテーブル追加
+
+##### [sql文から取り込む場合]
+テーブル作成：バックエンドチャネル>SQL>create_table.sql<br>
+初期データインサート文：バックエンドチャネル>SQL>init_data.sql
+
 ##### [dockerコンテナ]
  - php artisan migrate:fresh --seed  
    DBにサンプル用のテーブルが追加される
@@ -57,54 +62,9 @@ dockerコンテナを抜ける
 Request Url  
   http://localhost/sample-login
 
-##### 成功パターン    
-Request Body  
-```json
-{
-    "mail_address": "sample@sample.com",
-    "password" : "password"
-}
-```
-Response  
-```json
-{
-    "status": "200",
-    "message": "login_ok"
-}
-```
+### レスポンスパターン
 
-##### NGパターン①ログインエラー
-Request Body  
-```json
-{
-    "mail_address": "test@test.com",
-    "password" : "password"
-}
-```
-Response  
-```json
-{
-    "status": "200",
-    "message": "login_ng"
-}
-```
-
-##### NGパターン②バリデーションエラー
-Request Body
-```json
-{
-    "mail_address": "test@test.com",
-    "password" : ""
-}
-```
-Response
-```json
-{
-    "validation_msg": "ng"
-}
-```
-
-
+チケット参照(https://redmine.shibuyalabo.com/issues/165934)
 
 # Q&A
 ### クリーンインストールするには？
@@ -115,4 +75,4 @@ Response
    下記volume nameを削除する
    ・{プロジェクトフォルダ名}_sail-minio  
    ・{プロジェクトフォルダ名}_sail-mysql  
-   ・{プロジェクトフォルダ名}_sail-redis  
+   ・{プロジェクトフォルダ名}_sail-redis
