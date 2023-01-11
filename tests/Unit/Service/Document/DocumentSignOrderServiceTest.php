@@ -2,6 +2,8 @@
 
 namespace Tests\Unit\Service\Document;
 
+use App\Domain\Consts\QueueConst;
+use App\Accessers\Queue\QueueUtility;
 use App\Domain\Entities\Document\DocumentSignOrder;
 use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterface;
 use App\Domain\Services\Document\DocumentSignOrderService;
@@ -19,6 +21,8 @@ class DocumentSignOrderServiceTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->queueConst             = new QueueConst;
+        $this->queue                  = new QueueUtility;
         $this->userConst              = new UserTypeConst;
         $this->docConst               = new DocumentConst;
         $this->documentRepositoryMock = \Mockery::mock(DocumentSignOrderRepositoryInterface::class);
@@ -420,23 +424,8 @@ class DocumentSignOrderServiceTest extends TestCase
         
     }
 
-
-
-
-
-
-
-
-
-
-
-
     private function getObject()
     {
-        return new DocumentSignOrderService($this->userConst, $this->docConst, $this->documentRepositoryMock);
-    }
-
-    
-
-
+        return new DocumentSignOrderService($this->queueConst, $this->queue, $this->userConst, $this->docConst, $this->documentRepositoryMock);
+    }   
 }
