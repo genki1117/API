@@ -231,7 +231,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             if (!$docStorageUpdateResult) {
                 throw new Exception(Self::CONTRACT_UPDATE_ERROR_MESSAGE);
             }
-
         } catch (Exception $e) {
             throw new Exception(Self::CONTRACT_UPDATE_ERROR_MESSAGE);
             return false;
@@ -333,7 +332,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      */
     public function dealUpdate(array $requestContent): ?bool
     {
-
         try {
             // 取引書類更新
             $docUpdateResult           = $this->docDeal->update(requestContent: $requestContent);
@@ -352,7 +350,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             if (!$docStorageUpdateResult) {
                 throw new Exception(Self::DEAL_UPDATE_ERROR_MESSAGE);
             }
-
         } catch (Exception $e) {
             throw new Exception(Self::DEAL_UPDATE_ERROR_MESSAGE);
             return false;
@@ -405,7 +402,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                     throw new Exception(Self::INTERNAL_INSERT_ERROR_MESSAGE);
                     exit;
                 }
-
             } else {
                 $selectSignUserList = $requestContent['select_sign_user'];
                 foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
@@ -457,7 +453,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             if (!$docStorageUpdateResult) {
                 throw new Exception(Self::INTERNAL_UPDATE_ERROR_MESSAGE);
             }
-
         } catch (Exception $e) {
             throw new Exception(Self::INTERNAL_UPDATE_ERROR_MESSAGE);
             return false;
@@ -477,62 +472,60 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
     public function archiveInsert(array $requestContent): ?bool
     {
         try {
-                // 登録書類登録
-                $docInsertResult           = $this->docArchive->insert(requestContent: $requestContent);
-                if (!$docInsertResult) {
-                    throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
-                }
+            // 登録書類登録
+            $docInsertResult           = $this->docArchive->insert(requestContent: $requestContent);
+            if (!$docInsertResult) {
+                throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
+            }
 
-                // 登録書類閲覧権限登録
-                $docPermissionInsertResult = $this->docPermissionArchive->insert(requestContent: $requestContent) ;
-                if (!$docPermissionInsertResult) {
-                    throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
-                }
+            // 登録書類閲覧権限登録
+            $docPermissionInsertResult = $this->docPermissionArchive->insert(requestContent: $requestContent) ;
+            if (!$docPermissionInsertResult) {
+                throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
+            }
 
-                // 登録書類容量登録
-                $docStorageInsertResult    = $this->docStorageArchive->insert(requestContent: $requestContent);
-                if (!$docStorageInsertResult) {
-                    throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
-                }
+            // 登録書類容量登録
+            $docStorageInsertResult    = $this->docStorageArchive->insert(requestContent: $requestContent);
+            if (!$docStorageInsertResult) {
+                throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
+            }
 
-                // ワークフローテーブル登録
-                // ワークフローが起票者のみ
-                if (count($requestContent['select_sign_user']) === 1) {
-                    $companyId  = $requestContent['company_id'];
-                    $categoryId = $requestContent['category_id'];
-                    $appUserId  = $requestContent['select_sign_user'][0]['user_id'];
-                    $wfSort     = Self::ISSUE_USER_WF_SORT;
-                    $userId     = $requestContent['m_user_id'];
-                    $createDate = $requestContent['create_datetime'];
+            // ワークフローテーブル登録
+            // ワークフローが起票者のみ
+            if (count($requestContent['select_sign_user']) === 1) {
+                $companyId  = $requestContent['company_id'];
+                $categoryId = $requestContent['category_id'];
+                $appUserId  = $requestContent['select_sign_user'][0]['user_id'];
+                $wfSort     = Self::ISSUE_USER_WF_SORT;
+                $userId     = $requestContent['m_user_id'];
+                $createDate = $requestContent['create_datetime'];
+
+                $documentWorkFlowResult = $this->documentWorkFlow->insertArchive(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
+                if (!$documentWorkFlowResult) {
+                    throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
+                    exit;
+                }
+            } else {
+                $selectSignUserList = $requestContent['select_sign_user'];
+                foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
+                    $companyId              = $requestContent['company_id'];
+                    $categoryId             = $requestContent['category_id'];
+                    $appUserId              = $selectSignUser['user_id'];
+                    $wfSort                 = $selectSignUser['wf_sort'];
+                    $userId                 = $requestContent['m_user_id'];
+                    $createDate             = $requestContent['create_datetime'];
 
                     $documentWorkFlowResult = $this->documentWorkFlow->insertArchive(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                     if (!$documentWorkFlowResult) {
                         throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
                         exit;
                     }
-
-                
-                } else {
-                    $selectSignUserList = $requestContent['select_sign_user'];
-                    foreach ($selectSignUserList as $wf_sort => $selectSignUser) {
-                        $companyId              = $requestContent['company_id'];
-                        $categoryId             = $requestContent['category_id'];
-                        $appUserId              = $selectSignUser['user_id'];
-                        $wfSort                 = $selectSignUser['wf_sort'];
-                        $userId                 = $requestContent['m_user_id'];
-                        $createDate             = $requestContent['create_datetime'];
-
-                        $documentWorkFlowResult = $this->documentWorkFlow->insertArchive(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
-                        if (!$documentWorkFlowResult) {
-                            throw new Exception(Self::ARCHIVE_INSERT_ERROR_MESSAGE);
-                            exit;
-                        }
-                    }
                 }
-            } catch (Exception $e) {
-                throw new Exception((Self::ARCHIVE_INSERT_ERROR_MESSAGE));
             }
-            return true;
+        } catch (Exception $e) {
+            throw new Exception((Self::ARCHIVE_INSERT_ERROR_MESSAGE));
+        }
+        return true;
     }
     /**
      * -------------------------
@@ -562,7 +555,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             if (!$docStorageUpdateResult) {
                 throw new Exception(Self::ARCHIVE_UPDATE_ERROR_MESSAGE);
             }
-
         } catch (Exception $e) {
             throw new Exception(Self::ARCHIVE_UPDATE_ERROR_MESSAGE);
             return false;

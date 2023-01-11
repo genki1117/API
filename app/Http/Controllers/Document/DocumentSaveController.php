@@ -40,7 +40,7 @@ class DocumentSaveController extends Controller
      * @param Request $request
      * @return DocumentSaveResponse
      */
-    public function saveDocument(DocumentSaveRequest $request): JsonResponse 
+    public function saveDocument(DocumentSaveRequest $request): JsonResponse
     {
         DB::beginTransaction($request);
         try {
