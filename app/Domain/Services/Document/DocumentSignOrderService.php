@@ -16,12 +16,6 @@ class DocumentSignOrderService
     private $emailTitle;
     private $emailContent;
 
-    // /** @var QueueConst */
-    // private QueueConst $queueConst;
-
-    // /** @var QueueUtility */
-    // private QueueUtility $queueUtility;
-
     /** @var UserTypeConst */
     private UserTypeConst $userTypeConst;
 
@@ -32,15 +26,11 @@ class DocumentSignOrderService
     private DocumentSignOrderRepositoryInterface $documentSignOrderRepositoryInterface;
 
     public function __construct(
-        // QueueConst $queueConst,
-        // QueueUtility $queueUtility,
         UserTypeConst $userTypeConst,
         DocumentConst $docConst,
         DocumentSignOrderRepositoryInterface $documentSignOrderRepositoryInterface
     )
     {
-        // $this->queueConst    = $queueConst;
-        // $this->queue         = $queueUtility;
         $this->userTypeConst = $userTypeConst;
         $this->docConst      = $docConst;
         $this->documentSignOrderRepositoryInterface = $documentSignOrderRepositoryInterface;
@@ -106,7 +96,7 @@ class DocumentSignOrderService
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
                             // 
                     } else if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
-                         // 次の署名者がホストの場合 user_type_idが1の場合
+                        // 次の署名者がホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
                         $emailUrl = $systemUrl . $documentDetailendPoint . $contractIsseuAndNextSignUser->getSignDoc()->document_id;
 
@@ -215,12 +205,17 @@ class DocumentSignOrderService
                         $paramdata['email']   = $emailAddress;
                         $paramdata['title']   = $emailTitle;
                         $paramdata['content'] = $emailContent;
+                        
+                        // キューを書き込み
+                        // $queue = new QueueUtility();
 
                         // キューをJSON形式に返却
                         $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-                        
-                        // キューを書き込み
-                        //$ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
+
+                        // $ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
+                        // if (!$ret) {
+                        //     throw new Exception('メールを送信できませんでした。');
+                        // }
                     }
                     return true;
                     exit;
@@ -259,20 +254,23 @@ class DocumentSignOrderService
                 break;
             }
 
-            // return var_dump($emailAddress, $emailTitle, $emailContent); // 確認用
-
             $paramdata = [];
                         
             $paramdata['email']   = $emailAddress;
             $paramdata['title']   = $emailTitle;
             $paramdata['content'] = $emailContent;
 
-            // キューをJSON形式に返却
-            $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-            
-            // キューを書き込み
-            // $ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
+           // キューを書き込み
+        //    $queue = new QueueUtility();
 
+           // キューをJSON形式に返却
+           $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+
+        //    $ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
+        //    if (!$ret) {
+        //        throw new Exception('メールを送信できませんでした。');
+        //    }
+           
             return true;
         } catch (Exception $e) {
             throw $e;
