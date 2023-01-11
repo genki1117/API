@@ -46,7 +46,6 @@ class DocumentSignOrderService
             $systemUrl = 'test';
 
             switch($categoryId) {
-                
                 // 契約書類
                 case $this->docConst::DOCUMENT_CONTRACT:
                     // 次の署名書類と送信者取得と起票者を取得
@@ -54,8 +53,6 @@ class DocumentSignOrderService
                                                         ->getContractIsseuAndNextSignUserInfo(
                                                             documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId
                                                         );
-
-                                                        //var_export($contractIsseuAndNextSignUser);
                                                         
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
@@ -69,7 +66,8 @@ class DocumentSignOrderService
                     // メールタイトル作成
                     $emailTitle = "[KOT電子契約]「{$contractIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
 
-                    if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) { // ゲストの場合 user_type_idが1の場合
+                    // 次の署名者がゲストの場合 user_type_idが1の場合
+                    if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) { 
                         // メールアドレスからハッシュ作成 
                         $token = hash("sha256", $contractIsseuAndNextSignUser->getNextSignUser()->email);
 
@@ -94,7 +92,8 @@ class DocumentSignOrderService
                             このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
                             // 
-                    } else if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) { // ホストの場合 user_type_idが1の場合
+                    } else if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
+                         // 次の署名者がホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
                         $emailUrl = $systemUrl . $documentDetailendPoint . $contractIsseuAndNextSignUser->getSignDoc()->document_id;
 
@@ -175,7 +174,6 @@ class DocumentSignOrderService
                                                         ->getInternalSignUserListInfo(
                                                             documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId
                                                         );
-
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($internalIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("メールを送信しません");
@@ -213,7 +211,8 @@ class DocumentSignOrderService
                         // $ret = $queueUtility->createMessage(QueueUtility::QUEUE_NAME_SIGN, $param);
                         // var_dump($emailAddress, $emailTitle, $emailContent); // 確認用
                     }
-                exit;
+                    return true;
+                    exit;
                 break;
 
                 // 登録書類
@@ -223,7 +222,6 @@ class DocumentSignOrderService
                                                         ->getArchiveIsseuAndNextSignUserInfo(
                                                             documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId
                                                         );
-                                                        
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($archiveIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("メールを送信しません");

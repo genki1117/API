@@ -24,7 +24,7 @@ class DocumentSignOrderController extends Controller
      * @param Request $request
      * @return void
      */
-    public function documentSignOrder(DocumentSignOrderRequest $request): JsonResponse
+    public function documentSignOrder(DocumentSignOrderRequest $request)
     {
         try {
             $mUserId        = $request->m_user['user_id'];
@@ -35,7 +35,7 @@ class DocumentSignOrderController extends Controller
             $categoryId     = $request->category_id;
             $updateDatetime = $request->update_datetime;
 
-            $documentSignOrderResult = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
+            return $documentSignOrderResult = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
 
             if ($documentSignOrderResult === false) {
                 throw new Exception ("署名依頼に失敗しました。");

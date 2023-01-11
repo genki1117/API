@@ -62,6 +62,7 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
     {
         try {
             $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
+            // var_export($signDocContract);
             if (!$signDocContract) {
                 throw new Exception("契約書類の署名依頼は失敗しました");
             }
