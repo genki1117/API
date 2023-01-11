@@ -40,6 +40,7 @@ class DocumentSaveController extends Controller
      * @param Request $request
      * @return DocumentSaveResponse
      */
+    
     public function saveDocument(DocumentSaveRequest $request): JsonResponse
     {
         DB::beginTransaction($request);
@@ -80,9 +81,9 @@ class DocumentSaveController extends Controller
                     $requestContent['sign_position']           = $request->input('sign_position') ?? null;
                     $requestContent['total_pages']             = $request->total_pages ?? null;
                     $requestContent['create_user']             = $request->m_user['user_id'] ?? null;
-                    $requestContent['create_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['create_datetime']         = date('Y-m-d H:i:s', $request->create_datetime);
                     $requestContent['update_user']             = $request->m_user['user_id'] ?? null;
-                    $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['update_datetime']         = date('Y-m-d H:i:s', $request->update_datetime);
 
                     // 書類の保存を実行
                     $this->documentSaveService->saveDocument($requestContent);
@@ -122,9 +123,9 @@ class DocumentSaveController extends Controller
                     $requestContent['sign_position']           = $request->input('sign_position') ?? null;
                     $requestContent['total_pages']             = $request->total_pages ?? null;
                     $requestContent['create_user']             = $request->m_user['user_id'] ?? null;
-                    $requestContent['create_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['create_datetime']         = date('Y-m-d H:i:s', $request->create_datetime);
                     $requestContent['update_user']             = $request->m_user['user_id'] ?? null;
-                    $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['update_datetime']         = date('Y-m-d H:i:s', $request->update_datetime);
 
                     // 書類保存の実行
                     $this->documentSaveService->saveDocument($requestContent);
@@ -161,9 +162,9 @@ class DocumentSaveController extends Controller
                     $requestContent['sign_position']           = $request->input('sign_position') ?? null;
                     $requestContent['total_pages']             = $request->total_pages ?? null;
                     $requestContent['create_user']             = $request->m_user['user_id'] ?? null;
-                    $requestContent['create_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['create_datetime']         = date('Y-m-d H:i:s', $request->create_datetime);
                     $requestContent['update_user']             = $request->m_user['user_id'] ?? null;
-                    $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['update_datetime']         = date('Y-m-d H:i:s', $request->update_datetime);
 
                     // 書類保存の実行
                     $this->documentSaveService->saveDocument($requestContent);
@@ -203,9 +204,10 @@ class DocumentSaveController extends Controller
                     $requestContent['total_pages']             = $request->total_pages ?? null;
                     $requestContent['timestamp_user']          = $request->timestamp_user ?? null;
                     $requestContent['create_user']             = $request->m_user['user_id'] ?? null;
-                    $requestContent['create_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['create_datetime']         = date('Y-m-d H:i:s', $request->create_datetime);
                     $requestContent['update_user']             = $request->m_user['user_id'] ?? null;
-                    $requestContent['update_datetime']         = $this->carbon->format('Y-m-d') ?? null;
+                    $requestContent['update_datetime']         = date('Y-m-d H:i:s', $request->update_datetime);
+
                     // 書類保存の実行
                     $result = $this->documentSaveService->saveDocument($requestContent);
                     break;

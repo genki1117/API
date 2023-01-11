@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use App\Accessers\DB\FluentDatabase;
+use Exception;
 
 class DocumentContract extends FluentDatabase
 {
@@ -140,8 +141,7 @@ class DocumentContract extends FluentDatabase
             'create_user'      => $requestContent['m_user_id'],
             'create_datetime'  => CarbonImmutable::now(),
             'update_user'      => $requestContent['m_user_id'],
-            'update_datetime'  => CarbonImmutable::now()
-            
+            'update_datetime'  => CarbonImmutable::now(),
         ]);
     }
 
@@ -153,9 +153,11 @@ class DocumentContract extends FluentDatabase
      * @param array $requestContent
      * @return boolean
      */
-    public function update(array $requestContent): int
+    public function update(array $requestContent): ?int
     {
-        return $this->builder($this->table)
+        try {
+            return $this->builder($this->table)
+            ->where('update_datetime', '=', $requestContent['update_datetime'])
             ->where('document_id', $requestContent['document_id'])
             ->where('company_id', $requestContent['company_id'])
             ->where('category_id', $requestContent['category_id'])
@@ -181,7 +183,11 @@ class DocumentContract extends FluentDatabase
                 'sign_level'       => $requestContent['sign_level'],
                 'update_user'      => $requestContent['m_user_id'],
                 'update_datetime'  => CarbonImmutable::now()
-        ]);
+            ]);
+        } catch (Exception $e) {
+            throw new Exception('他のユーザが更新しました。もう一度やり直してください。');
+        }
+        
     }
 
     /**

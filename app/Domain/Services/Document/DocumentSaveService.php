@@ -76,7 +76,7 @@ class DocumentSaveService
                         $beforeList = $this->documentRepository->getBeforOrAfterUpdateDeal(requestContent: $requestContent);
 
                         // 取引書類更新
-                        $documentSaveResult = $this->documentRepository->dealUpdate(requestContent: $requestContent);
+                       return $documentSaveResult = $this->documentRepository->dealUpdate(requestContent: $requestContent);
 
                         // 更新後の情報を取得する
                         $afterList = $this->documentRepository->getBeforOrAfterUpdateDeal(requestContent: $requestContent);
