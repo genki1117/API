@@ -40,7 +40,7 @@ class DocumentSaveController extends Controller
      * @param Request $request
      * @return DocumentSaveResponse
      */
-    public function saveDocument(Request $request): JsonResponse // TODO:リクエストクラスに変更し、確認
+    public function saveDocument(DocumentSaveRequest $request): JsonResponse 
     {
         DB::beginTransaction($request);
         try {
@@ -52,7 +52,6 @@ class DocumentSaveController extends Controller
                     $requestContent['m_user_type_id']          = $request->m_user['user_type'];
                     $requestContent['ip_address']              = $request->ip_address;
                     $requestContent['access_content']          = $request->access_content;
-
                     $requestContent['document_id']             = $request->document_id ?? null;
                     $requestContent['company_id']              = $request->company_id;
                     $requestContent['category_id']             = $request->category_id;
@@ -96,7 +95,6 @@ class DocumentSaveController extends Controller
                     $requestContent['m_user_type_id']          = $request->m_user['user_type'];
                     $requestContent['ip_address']              = $request->ip_address;
                     $requestContent['access_content']          = $request->access_content;
-
                     $requestContent['document_id']             = $request->document_id ?? null;
                     $requestContent['company_id']              = $request->company_id;
                     $requestContent['category_id']             = $request->category_id;
@@ -151,7 +149,6 @@ class DocumentSaveController extends Controller
                     $requestContent['ref_doc_no']              = $request->input('ref_doc_no') ?? null;
                     $requestContent['product_name']            = $request->product_name ?? null;
                     $requestContent['select_sign_user']        = $request->input('select_sign_user') ?? null;
-                    // $requestContent['select_sign_guest_user']  = $request->input('select_sign_guest_user') ?? null;
                     $requestContent['title']                   = $request->title ?? null;
                     $requestContent['amount']                  = $request->amount ?? null;
                     $requestContent['currency_id']             = $request->currency_id ?? null;
@@ -193,7 +190,6 @@ class DocumentSaveController extends Controller
                     $requestContent['ref_doc_no']              = $request->input('ref_doc_no') ?? null;
                     $requestContent['product_name']            = $request->product_name ?? null;
                     $requestContent['select_sign_user']        = $request->input('select_sign_user') ?? null;
-                    // $requestContent['select_sign_guest_user']  = $request->input('select_sign_guest_user') ?? null;
                     $requestContent['title']                   = $request->title ?? null;
                     $requestContent['amount']                  = $request->amount ?? null;
                     $requestContent['currency_id']             = $request->currency_id ?? null;

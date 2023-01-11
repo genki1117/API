@@ -225,9 +225,110 @@ class DcoumentSaveRequestTest extends TestCase
                 false
             ],
             
-            
+            //archive
+            'OK' => [
+                ['document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level', 'scan_doc_flg', 'issue_date', 'expiry_date', 'transaction_date', 'timestamp_user'],
+                [1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, 1, '2022-10-10', '2022-10-10', '2022-10-10', 1],
+                true
+            ],
+            'scan_doc_flg_number' => [
+                ['document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level', 'scan_doc_flg', 'issue_date', 'expiry_date', 'transaction_date', 'timestamp_user'],
+                [1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, 'testtest', '2022-10-10', '2022-10-10', '2022-10-10', 1],
+                false
+            ],
+            'issue_date_date' => [
+                ['document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level', 'scan_doc_flg', 'issue_date', 'expiry_date', 'transaction_date', 'timestamp_user'],
+                [1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, 1, 111111, '2022-10-10', '2022-10-10', 1],
+                false
+            ],
+            'expiry_date_date' => [
+                ['document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level', 'scan_doc_flg', 'issue_date', 'expiry_date', 'transaction_date', 'timestamp_user'],
+                [1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, 1, '2022-10-10', 1111111, '2022-10-10', 1],
+                false
+            ],
+            'transacition_date_date' => [
+                ['document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level', 'scan_doc_flg', 'issue_date', 'expiry_date', 'transaction_date', 'timestamp_user'],
+                [1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, 1, '2022-10-10', '2022-10-10', 'testtesttest ', 1],
+                false
+            ],
+            'timestamp_user_id' => [
+                ['document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level', 'scan_doc_flg', 'issue_date', 'expiry_date', 'transaction_date', 'timestamp_user'],
+                [1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, 1, '2022-10-10', '2022-10-10', '2022-10-10', 'testtest'],
+                false
+            ],
 
             
+            //storage
+            'file_name_string' => [
+                ['file_name', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                [1, 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'file_path_string' => [
+                ['file_path', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                [1, 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'file_hash_string' => [
+                ['file_hash', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                [1, 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'file_prot_flg_number' => [
+                ['file_prot_flg', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['hohohhohoho', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'file_prot_pw_flg_number' => [
+                ['file_prot_pw_flg', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['hohohhohoho', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'file_timestamp_flg_number' => [
+                ['file_timestamp_flg', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['hohohhohoho', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'file_sign_number' => [
+                ['file_sign', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['hohohhohoho', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'width_number' => [
+                ['width', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['hohohhohoho', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'height_number' => [
+                ['height', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['hohohhohoho', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'dpi_number' => [
+                ['dpi', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['hohohhohoho', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'color_depth_number' => [
+                ['color_depth', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['hohohhohoho', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'pdf_type_string' => [
+                ['pdf_type', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                [1, 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'pdf_version_string' => [
+                ['pdf_version', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                [1, 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],
+            'toral_pages_number' => [
+                ['pdf_version', 'document_id', 'company_id','category_id','template_id','doc_type_id','status_id','doc_no', 'product_name','title', 'amount', 'currency_id', 'counter_party_id', 'sign_level','cont_start_date', 'cont_end_date', 'conc_date', 'effective_date','cancel_date','expiry_date'],
+                ['testtest', 1, 1, 0, 1, 1, 1, 'test', 'test', 'test', 12345, 1, 1, 1, '2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10','2022-10-10'],
+                false
+            ],            
         ];
     }  
 }

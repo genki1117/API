@@ -89,7 +89,6 @@ class DocumentSaveRequest extends FormRequest
             'color_depth'        => 'numeric',
             'pdf_type'           => 'string | max:5',
             'pdf_version'        => 'string | max:4',
-            'sign_position'      => 'json',
             'total_pages'        => 'numeric'
         ];
     }
