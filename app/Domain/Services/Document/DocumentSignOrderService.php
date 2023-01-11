@@ -2,8 +2,8 @@
 declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
-// use App\Domain\Consts\QueueConst;
-// use App\Accessers\Queue\QueueUtility;
+use App\Domain\Consts\QueueConst as QueueConstant;
+use App\Accessers\Queue\QueueUtility;
 use Exception;
 use App\Domain\Consts\UserTypeConst;
 use App\Domain\Consts\DocumentConst;
@@ -16,6 +16,9 @@ class DocumentSignOrderService
     private $emailTitle;
     private $emailContent;
 
+    /** @var QueueUtility */
+    private QueueUtility $queueUtility;
+
     /** @var UserTypeConst */
     private UserTypeConst $userTypeConst;
 
@@ -26,11 +29,13 @@ class DocumentSignOrderService
     private DocumentSignOrderRepositoryInterface $documentSignOrderRepositoryInterface;
 
     public function __construct(
+        QueueUtility $queueUtility,
         UserTypeConst $userTypeConst,
         DocumentConst $docConst,
         DocumentSignOrderRepositoryInterface $documentSignOrderRepositoryInterface
     )
     {
+        $this->queueUtility  = $queueUtility;
         $this->userTypeConst = $userTypeConst;
         $this->docConst      = $docConst;
         $this->documentSignOrderRepositoryInterface = $documentSignOrderRepositoryInterface;
@@ -47,7 +52,6 @@ class DocumentSignOrderService
             $systemUrl = 'test';
             // $systemUrl = url('');
 
-
             switch($categoryId) {
                 // 契約書類
                 case $this->docConst::DOCUMENT_CONTRACT:
@@ -56,7 +60,6 @@ class DocumentSignOrderService
                                                         ->getContractIsseuAndNextSignUserInfo(
                                                             documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId
                                                         );
-                                                        
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("メールを送信しません");
@@ -198,24 +201,22 @@ class DocumentSignOrderService
                         {$emailUrl}\n
                         このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
                         お手数ですが support@huubhr.comまでご連絡をお願い致します。";
-                        
-                        // キューパラメータを作成
+
                         $paramdata = [];
-                        
-                        $paramdata['email']   = $emailAddress;
-                        $paramdata['title']   = $emailTitle;
-                        $paramdata['content'] = $emailContent;
-                        
-                        // キューを書き込み
-                        // $queue = new QueueUtility();
+            
+                        $paramdata['company_id']          = $mUserCompanyId;
+                        $paramdata['user_id']             = $mUserId;
+                        $paramdata['email']['address']    = $emailAddress;
+                        $paramdata['email']['title']      = $emailTitle;
+                        $paramdata['email']['content']    = $emailContent;
 
                         // キューをJSON形式に返却
                         $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-
-                        // $ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
-                        // if (!$ret) {
-                        //     throw new Exception('メールを送信できませんでした。');
-                        // }
+                        // キューへ登録 
+                        $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
+                        if ($ret === -1) {
+                            throw new Exception('送信メールの登録に失敗しました');
+                       }
                     }
                     return true;
                     exit;
@@ -255,23 +256,22 @@ class DocumentSignOrderService
             }
 
             $paramdata = [];
-                        
-            $paramdata['email']   = $emailAddress;
-            $paramdata['title']   = $emailTitle;
-            $paramdata['content'] = $emailContent;
-
-           // キューを書き込み
-        //    $queue = new QueueUtility();
+            
+            $paramdata['company_id']          = $mUserCompanyId;
+            $paramdata['user_id']             = $mUserId;
+            $paramdata['email']['address']    = $emailAddress;
+            $paramdata['email']['title']      = $emailTitle;
+            $paramdata['email']['content']    = $emailContent;
 
            // キューをJSON形式に返却
            $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-
-        //    $ret = $this->queue->createMessage($this->queueConst::QUEUE_NAME_SENDMAIL, $param);
-        //    if (!$ret) {
-        //        throw new Exception('メールを送信できませんでした。');
-        //    }
+           // キューへ登録 
+           $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
+           if ($ret === -1) {
+                throw new Exception('送信メールの登録に失敗しました');
+           }
+           return true;
            
-            return true;
         } catch (Exception $e) {
             throw $e;
             return false;

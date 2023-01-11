@@ -9,6 +9,7 @@ use Tests\TestCase;
 class DocumentSignOrderRequestTest extends TestCase
 {
      /**
+      * 
      * バリデーションテスト（ホスト、ゲスト共通）
      * @param array 項目名の配列
      * @param array 値の配列
@@ -16,7 +17,7 @@ class DocumentSignOrderRequestTest extends TestCase
      * このアノテーションに、下のメソッド名を記載
      * @dataProvider dataSignOrderRequest
      */
-    public function testDocumentTransferRequestTest1(array $keys, array $values, bool $expect)
+    public function DocumentTransferRequestTest1(array $keys, array $values, bool $expect)
     {
         //入力項目の配列（$keys）と値の配列($values)から、連想配列を生成する
         $dataList = array_combine($keys, $values);
