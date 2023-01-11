@@ -76,9 +76,9 @@ class QueueUtility
      */
     private function getConnectionString(): string
     {
-        $accountName = env("AZURE_ACCOUNT_NAME");
-        $accountKey = env("AZURE_ACCOUNT_KEY");
-        $queueEndpoint = env("AZURE_STORAGE_QUEUE_ENDPOINT");
+        $accountName = config('app.azure_queue_account_name');
+        $accountKey = config('app.azure_queue_account_key');
+        $queueEndpoint = config("app.azure_queue_endpoint");
         $connectionString = sprintf("DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s;QueueEndpoint=%s", $accountName, $accountKey, $queueEndpoint);
 
         return $connectionString;

@@ -60,6 +60,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Front URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL is the root of Front Screen
+    |
+    */
+
+    'front_url' => env('SMP_FRONT_URL', 'http://localhost'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Azure Storage Queue
+    |--------------------------------------------------------------------------
+    |
+    | This is azure queue connection information
+    |
+    */
+
+    'azure_queue_account_name' => env('AZURE_STORAGE_QUEUE_ACCOUNT_NAME', 'exampleAcount'),
+    'azure_queue_account_key' => env('AZURE_STORAGE_QUEUE_ACCOUNT_KEY', 'exampleKey'),
+    'azure_queue_endpoint' => env('AZURE_STORAGE_QUEUE_ENDPOINT', 'exampleEndpoint'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
