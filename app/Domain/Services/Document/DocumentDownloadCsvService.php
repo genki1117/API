@@ -33,16 +33,27 @@ class DocumentDownloadCsvService
      * @param string  $fileName
      * @return bool
      */
-    public function downloadCsv(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $categoryId, string $fileName): ?bool
+    public function downloadCsv(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $categoryId, string $fileName)
     {
         try {
             // パス取得
             $csvStoragePath = 'Storage/UploadCsvFile/'; //TODO:定義する場所確認
             $useCsvStoragePath = $csvStoragePath . $mUserCompanyId . '/' . $mUserId . '/' . $fileName;
-
+            $test = '../test2.csv';
+            
             // csvヘッダー定義
-
-            // ダウンロード処理
+            header('Content-Type: application/octet-stream');
+            header("Content-Disposition: attachment; filename={$fileName}");
+            header('Content-Transfer-Encoding: binary');
+            
+            // ファイル出力
+            // $result = readfile($useCsvStoragePath);
+            $result = readfile($test);
+            
+            // /home/shoutasudo/work/production/github/DTG-API/test/test.csv
+            // if ($result === false) {
+            //     throw new Exception('CSVファイルのダウンロードに失敗しました。');
+            // }
 
             return true;
         } catch (Exception $e) {

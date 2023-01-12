@@ -25,7 +25,7 @@ class DocumentBulkCreateController extends Controller
      * @param DocumentCsvDownloadRequest $request
      * @return JsonResponse
      */
-    public function dlTmpCsv(DocumentCsvDownloadRequest $request): JsonResponse
+    public function dlTmpCsv(DocumentCsvDownloadRequest $request)
     {
         try {
             $mUserId        = $request->m_user['user_id'] ?? null;
@@ -44,7 +44,7 @@ class DocumentBulkCreateController extends Controller
                 throw new Exception('ユーザ情報、または書類情報が取得出来ませんでした。');
             }
 
-            $this->documentDownloadCsvService->downloadCsv(
+           return $this->documentDownloadCsvService->downloadCsv(
                 mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, mUserTypeId: $mUserTypeId, categoryId: $categoryId, fileName: $fileName
             );
             
