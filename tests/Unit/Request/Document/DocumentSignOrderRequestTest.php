@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Service\Document;
+namespace Tests\Unit\Request\Document;
 
 use App\Http\Requests\Document\DocumentSignOrderRequest;
 use Illuminate\Support\Facades\Validator;
@@ -9,7 +9,7 @@ use Tests\TestCase;
 class DocumentSignOrderRequestTest extends TestCase
 {
      /**
-      * @test
+      * 
      * バリデーションテスト（ホスト、ゲスト共通）
      * @param array 項目名の配列
      * @param array 値の配列

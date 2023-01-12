@@ -35,7 +35,7 @@ class DocumentSignOrderController extends Controller
             $categoryId     = $request->category_id;
             $updateDatetime = $request->update_datetime;
             
-            return $documentSignOrderResult = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
+            $documentSignOrderResult = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
             
             if ($documentSignOrderResult === false) {
                 throw new Exception("署名依頼に失敗しました。");

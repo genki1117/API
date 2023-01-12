@@ -11,8 +11,16 @@ use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterf
 
 class DocumentSignOrderService
 {
+    /** @var DocumentSignOrder */
+    private $contractIsseuAndNextSignUser;
+
+    /** @var string */
     private $emailAddress;
+
+    /** @var string */
     private $emailTitle;
+
+    /** @var string */
     private $emailContent;
 
     /** @var QueueUtility */
@@ -260,8 +268,12 @@ class DocumentSignOrderService
                     break;
             }
 
-            $paramdata = [];
-            
+            if (empty($emailAddress) || empty($emailTitle) || empty($emailContent)) {
+                throw new Exception('送信メールの登録に失敗しました');
+            }
+
+            // キューの設定
+            $paramdata = []; 
             $paramdata['company_id']          = $mUserCompanyId;
             $paramdata['user_id']             = $mUserId;
             $paramdata['email']['address']    = $emailAddress;
@@ -270,11 +282,13 @@ class DocumentSignOrderService
 
             // キューをJSON形式に返却
             $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+
             // キューへ登録
             $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
             if ($ret === -1) {
                 throw new Exception('送信メールの登録に失敗しました');
             }
+
             return true;
         } catch (Exception $e) {
             throw $e;
