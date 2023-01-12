@@ -19,8 +19,7 @@ class DocumentSignOrder
         ?\stdClass $signDocument = null,
         ?\stdClass $nextSignUser = null,
         ?\stdClass $issueUser    = null
-    ) 
-    {
+    ) {
         $this->signDoc      = $signDocument;
         $this->nextSignUser = $nextSignUser;
         $this->issueUser    = $issueUser;
@@ -43,5 +42,4 @@ class DocumentSignOrder
     {
         return $this->issueUser;
     }
-
 }

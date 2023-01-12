@@ -9,7 +9,6 @@ use App\Domain\Consts\UserTypeConst;
 use App\Domain\Consts\DocumentConst;
 use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterface;
 
-
 class DocumentSignOrderService
 {
     private $emailAddress;
@@ -33,8 +32,7 @@ class DocumentSignOrderService
         UserTypeConst $userTypeConst,
         DocumentConst $docConst,
         DocumentSignOrderRepositoryInterface $documentSignOrderRepositoryInterface
-    )
-    {
+    ) {
         $this->queueUtility  = $queueUtility;
         $this->userTypeConst = $userTypeConst;
         $this->docConst      = $docConst;
@@ -58,7 +56,9 @@ class DocumentSignOrderService
                     // 次の署名書類と送信者取得と起票者を取得
                     $contractIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
                                                         ->getContractIsseuAndNextSignUserInfo(
-                                                            documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId
+                                                            documentId: $documentId,
+                                                            categoryId: $categoryId,
+                                                            mUserId: $mUserId
                                                         );
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
@@ -73,8 +73,8 @@ class DocumentSignOrderService
                     $emailTitle = "[KOT電子契約]「{$contractIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
 
                     // 次の署名者がゲストの場合 user_type_idが1の場合
-                    if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) { 
-                        // メールアドレスからハッシュ作成 
+                    if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) {
+                        // メールアドレスからハッシュ作成
                         $token = hash("sha256", $contractIsseuAndNextSignUser->getNextSignUser()->email);
 
                         // トークン情報を取得
@@ -90,21 +90,21 @@ class DocumentSignOrderService
                         $emailUrl = $systemUrl . $documentDetailendPoint . $contractIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
 
                         // メール本文作成
-                        $emailContent = 
+                        $emailContent =
                             "{$contractIsseuAndNextSignUser->getNextSignUser()->counter_party_name} {$contractIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
                             {$contractIsseuAndNextSignUser->getIssueUser()->full_name} 様から契約書類の署名依頼が送信されました。\n
                             以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
                             {$emailUrl}\n
                             このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
-                            // 
-                    } else if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
+                            //
+                    } elseif ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
                         // 次の署名者がホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
                         $emailUrl = $systemUrl . $documentDetailendPoint . $contractIsseuAndNextSignUser->getSignDoc()->document_id;
 
                         // メール本文作成
-                        $emailContent = 
+                        $emailContent =
                             "{$contractIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
                             {$contractIsseuAndNextSignUser->getIssueUser()->full_name} 様から契約書類の署名依頼が送信されました。\n
                             以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
@@ -112,14 +112,16 @@ class DocumentSignOrderService
                             このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
                     }
-                break;
+                    break;
                 
-                // 取引書類
+                    // 取引書類
                 case $this->docConst::DOCUMENT_DEAL:
                     // 次の送信者取得と起票者を取得
                     $dealIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
                                                         ->getDealIsseuAndNextSignUserInfo(
-                                                            documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId
+                                                            documentId: $documentId,
+                                                            categoryId: $categoryId,
+                                                            mUserId: $mUserId
                                                         );
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($dealIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
@@ -134,7 +136,7 @@ class DocumentSignOrderService
                     $emailTitle = "[KOT電子契約]「{$dealIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
                     
                     if ($dealIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) { // ゲストの場合 user_type_idが1の場合
-                        // メールアドレスからハッシュ作成 
+                        // メールアドレスからハッシュ作成
                         $token = hash("sha256", $dealIsseuAndNextSignUser->getNextSignUser()->email);
 
                         // トークン情報を取得
@@ -150,20 +152,19 @@ class DocumentSignOrderService
                         $emailUrl = $systemUrl . $documentDetailendPoint . $dealIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
 
                         // メール本文作成
-                        $emailContent = 
+                        $emailContent =
                             "{$dealIsseuAndNextSignUser->getNextSignUser()->counter_party_name} {$dealIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
                             {$dealIsseuAndNextSignUser->getIssueUser()->full_name} 様から取引書類の署名依頼が送信されました。\n
                             以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
                             {$emailUrl}\n
                             このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
-                            
-                    } else if ($dealIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) { // ホストの場合 user_type_idが1の場合
+                    } elseif ($dealIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) { // ホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
                         $emailUrl = $systemUrl . $documentDetailendPoint . $dealIsseuAndNextSignUser->getSignDoc()->document_id;
 
                         // メール本文作成
-                        $emailContent = 
+                        $emailContent =
                             "{$dealIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
                             {$dealIsseuAndNextSignUser->getIssueUser()->full_name} 様から取引書類の署名依頼が送信されました。\n
                             以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
@@ -171,14 +172,16 @@ class DocumentSignOrderService
                             このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
                     }
-                break;
+                    break;
 
-                // 社内書類
+                    // 社内書類
                 case $this->docConst::DOCUMENT_INTERNAL:
                     // 次の署名書類と送信者取得と起票者を取得
                     $internalIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
                                                         ->getInternalSignUserListInfo(
-                                                            documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId
+                                                            documentId: $documentId,
+                                                            categoryId: $categoryId,
+                                                            mUserCompanyId: $mUserCompanyId
                                                         );
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($internalIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
@@ -212,22 +215,24 @@ class DocumentSignOrderService
 
                         // キューをJSON形式に返却
                         $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-                        // キューへ登録 
+                        // キューへ登録
                         $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
                         if ($ret === -1) {
                             throw new Exception('送信メールの登録に失敗しました');
-                       }
+                        }
                     }
                     return true;
                     exit;
-                break;
+                    break;
 
-                // 登録書類
+                    // 登録書類
                 case $this->docConst::DOCUMENT_ARCHIVE:
                     // 次の署名書類と送信者取得と起票者を取得
                     $archiveIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
                                                         ->getArchiveIsseuAndNextSignUserInfo(
-                                                            documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId
+                                                            documentId: $documentId,
+                                                            categoryId: $categoryId,
+                                                            mUserCompanyId: $mUserCompanyId
                                                         );
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($archiveIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
@@ -245,14 +250,14 @@ class DocumentSignOrderService
                     $emailUrl = $systemUrl . $documentDetailendPoint . $archiveIsseuAndNextSignUser->getSignDoc()->document_id;
 
                     // メール本文作成
-                    $emailContent = 
+                    $emailContent =
                         "{$archiveIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
                         {$archiveIsseuAndNextSignUser->getIssueUser()->full_name} 様から登録書類の署名依頼が送信されました。\n
                         以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
                         {$emailUrl}\n
                         このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
                         お手数ですが support@huubhr.comまでご連絡をお願い致します。";
-                break;
+                    break;
             }
 
             $paramdata = [];
@@ -263,21 +268,17 @@ class DocumentSignOrderService
             $paramdata['email']['title']      = $emailTitle;
             $paramdata['email']['content']    = $emailContent;
 
-           // キューをJSON形式に返却
-           $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-           // キューへ登録 
-           $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
-           if ($ret === -1) {
+            // キューをJSON形式に返却
+            $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+            // キューへ登録
+            $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
+            if ($ret === -1) {
                 throw new Exception('送信メールの登録に失敗しました');
-           }
-           return true;
-           
+            }
+            return true;
         } catch (Exception $e) {
             throw $e;
             return false;
-            
         }
-
     }
-
 }

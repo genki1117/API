@@ -53,7 +53,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @return \stdClass|null
      */
     public function getContractNextSignUser(int $documentId, int $categoryId, int $mUserId): ?\stdClass
-    { 
+    {
         return $this->builder($this->table)
             ->select([
                 "m_user.user_id",
@@ -70,7 +70,7 @@ class DocumentWorkFlow extends FluentDatabase
                              ->on("m_user.company_id", "t_document_workflow.company_id")
                              ->where("m_user.delete_datetime", null);
             })
-            ->leftjoin("m_company_counter_party", function($query) {
+            ->leftjoin("m_company_counter_party", function ($query) {
                 return $query->on("m_company_counter_party.company_id", "t_document_workflow.company_id")
                              ->whereNull("m_company_counter_party.delete_datetime");
             })
@@ -123,8 +123,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @return \stdClass|null
      */
     public function getDealNextSignUser(int $documentId, int $categoryId, int $mUserId): ?\stdClass
-    { 
-        
+    {
         return $this->builder($this->table)
             ->select([
                 "m_user.user_id",
@@ -141,7 +140,7 @@ class DocumentWorkFlow extends FluentDatabase
                              ->on("m_user.company_id", "t_document_workflow.company_id")
                              ->where("m_user.delete_datetime", null);
             })
-            ->leftjoin("m_company_counter_party", function($query) {
+            ->leftjoin("m_company_counter_party", function ($query) {
                 return $query->on("m_company_counter_party.company_id", "t_document_workflow.company_id")
                              ->whereNull("m_company_counter_party.delete_datetime");
             })
@@ -156,7 +155,7 @@ class DocumentWorkFlow extends FluentDatabase
       * ------------------------------------
      * 起票者の取得（取引書類）
     　* ------------------------------------
-     * 
+     *
      *
      * @param integer $documentId
      * @param integer $categoryId

@@ -12,11 +12,11 @@ use Exception;
 
 class DocumentSignOrderController extends Controller
 {
-
     /** @var DocumentSignOrderService  */
     private DocumentSignOrderService $documentService;
 
-    public function __construct (DocumentSignOrderService $documentService) {
+    public function __construct(DocumentSignOrderService $documentService)
+    {
         $this->documentSignOrderService = $documentService;
     }
 
@@ -38,16 +38,12 @@ class DocumentSignOrderController extends Controller
             return $documentSignOrderResult = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
             
             if ($documentSignOrderResult === false) {
-                throw new Exception ("署名依頼に失敗しました。");
+                throw new Exception("署名依頼に失敗しました。");
             }
 
             return (new DocumentSignOrderRespons)->successSignOrder();
-
         } catch (Exception $e) {
-
             return (new DocumentSignOrderRespons)->faildSignOrder($e->getMessage());
         }
-
-        
     }
 }

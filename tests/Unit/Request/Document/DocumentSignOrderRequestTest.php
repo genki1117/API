@@ -9,7 +9,7 @@ use Tests\TestCase;
 class DocumentSignOrderRequestTest extends TestCase
 {
      /**
-      * 
+      * @test
      * バリデーションテスト（ホスト、ゲスト共通）
      * @param array 項目名の配列
      * @param array 値の配列

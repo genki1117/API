@@ -568,8 +568,8 @@ class DocumentArchive extends FluentDatabase
                 't_doc_storage_archive.file_prot_pw_flg',
             ])
             ->join("t_doc_storage_archive", function ($query) {
-                 return $query->on("t_doc_storage_archive.document_id", "t_document_archive.document_id")
-                             ->whereNull("t_doc_storage_archive.delete_datetime");
+                return $query->on("t_doc_storage_archive.document_id", "t_document_archive.document_id")
+                            ->whereNull("t_doc_storage_archive.delete_datetime");
             })
             ->where('t_document_archive.document_id', '=', $documentId)
             ->where('t_document_archive.category_id', '=', $categoryId)

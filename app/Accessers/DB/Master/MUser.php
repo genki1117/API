@@ -34,7 +34,7 @@ class MUser extends FluentDatabase
      * @param integer $mUserCompanyId
      * @return \stdClass|null
      */
-    public function getLoginUserWorkflow (int $mUserId, int $mUserCompanyId): ?\stdClass
+    public function getLoginUserWorkflow(int $mUserId, int $mUserCompanyId): ?\stdClass
     {
         return $this->builder($this->table)
                     ->join('t_document_workflow', function ($join) {

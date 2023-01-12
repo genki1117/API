@@ -46,8 +46,7 @@ class TempToken extends FluentDatabase
             "type" => "承認依頼",
             "data" => json_encode($dataContent, JSON_UNESCAPED_UNICODE),
             "expiry_date" => $carbon->addDays(32)
-        ]; 
+        ];
         return $this->builder()->insert($data);
-            
     }
 }

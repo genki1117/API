@@ -2,8 +2,6 @@
 declare(strict_types=1);
 namespace App\Domain\Repositories\Interface\Document;
 
-
-
 interface DocumentSignOrderRepositoryInterface
 {
     /**
@@ -69,5 +67,4 @@ interface DocumentSignOrderRepositoryInterface
      * @return void
      */
     public function insertToken(string $token, array $dataContent);
-    
 }

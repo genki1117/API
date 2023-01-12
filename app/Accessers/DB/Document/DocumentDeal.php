@@ -578,8 +578,8 @@ class DocumentDeal extends FluentDatabase
                 't_doc_storage_transaction.file_prot_pw_flg',
             ])
             ->join("t_doc_storage_transaction", function ($query) {
-                 return $query->on("t_doc_storage_transaction.document_id", "t_document_deal.document_id")
-                             ->whereNull("t_doc_storage_transaction.delete_datetime");
+                return $query->on("t_doc_storage_transaction.document_id", "t_document_deal.document_id")
+                            ->whereNull("t_doc_storage_transaction.delete_datetime");
             })
             ->where('t_document_deal.document_id', '=', $documentId)
             ->where('t_document_deal.category_id', '=', $categoryId)
