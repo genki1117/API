@@ -24,7 +24,7 @@ class DocumentConst
     const DOCUMENT_INTERNAL = 2;
 
     /** @var string */
-    const DOCUMENT_INTERNAL_NAME = '社員書類';
+    const DOCUMENT_INTERNAL_NAME = '社内書類';
 
     /** @var int */
     const DOCUMENT_ARCHIVE = 3;
