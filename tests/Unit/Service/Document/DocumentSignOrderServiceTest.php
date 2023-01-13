@@ -439,7 +439,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * $emailAddressが空だったらException 
+     * $emailTitleが空だったらException 
      * @return void
      */
     public function emailTitlePropatymptyTest()
@@ -469,10 +469,10 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * $emailAddressが空だったらException 
+     * $emailContentが空だったらException 
      * @return void
      */
-    public function emailemailContentPropatymptyTest()
+    public function emailContentPropatymptyTest()
     {
         $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
@@ -499,10 +499,10 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * $emailAddressが空だったらException 
+     * $contractIsseuAndNextSignUserが空だったらException 
      * @return void
      */
-    public function emailemailContentPropatymptyTest2()
+    public function contractIsseuAndNextSignUserTest()
     {
         $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
@@ -521,6 +521,111 @@ class DocumentSignOrderServiceTest extends TestCase
         $reflectionClass = new ReflectionClass($resutl);
 
         $this->assertInstanceOf($resutl->contractIsseuAndNextSignUser, $docEntiry);
+
+        $property = $reflectionClass->getProperty('contractIsseuAndNextSignUser');
+
+        $property->setAccessible(true);
+
+        $propety->setValue($result, null);
+
+    }
+
+    /**
+     * @test
+     * $dealIsseuAndNextSignUserが空だったらException 
+     * @return void
+     */
+    public function dealIsseuAndNextSignUserTest()
+    {
+        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->queueUtilityMock->shouldReceive('createMessage')
+        ->once()
+        ->andReturn(0);
+
+        $this->expectException(Exception::class);
+        
+        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+
+        $reflectionClass = new ReflectionClass($resutl);
+
+        $this->assertInstanceOf($resutl->dealIsseuAndNextSignUser, $docEntiry);
+
+        $property = $reflectionClass->getProperty('dealIsseuAndNextSignUser');
+
+        $property->setAccessible(true);
+
+        $propety->setValue($result, null);
+    }
+
+    /**
+     * @test
+     * $internalIsseuAndNextSignUserが空だったらException 
+     * @return void
+     */
+    public function internalIsseuAndNextSignUserTest()
+    {
+        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->queueUtilityMock->shouldReceive('createMessage')
+        ->once()
+        ->andReturn(0);
+
+        $this->expectException(Exception::class);
+        
+        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+
+        $reflectionClass = new ReflectionClass($resutl);
+
+        $this->assertInstanceOf($resutl->internalIsseuAndNextSignUser, $docEntiry);
+
+        $property = $reflectionClass->getProperty('internalIsseuAndNextSignUser');
+
+        $property->setAccessible(true);
+
+        $propety->setValue($result, null);
+
+    }
+
+    /**
+     * @test
+     * $archiveIsseuAndNextSignUserが空だったらException 
+     * @return void
+     */
+    public function archiveIsseuAndNextSignUserTest()
+    {
+        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->queueUtilityMock->shouldReceive('createMessage')
+        ->once()
+        ->andReturn(0);
+
+        $this->expectException(Exception::class);
+        
+        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+
+        $reflectionClass = new ReflectionClass($resutl);
+
+        $this->assertInstanceOf($resutl->archiveIsseuAndNextSignUser, $docEntiry);
+
+        $property = $reflectionClass->getProperty('archiveIsseuAndNextSignUser');
+
+        $property->setAccessible(true);
+
+        $propety->setValue($result, null);
+
     }
 
     

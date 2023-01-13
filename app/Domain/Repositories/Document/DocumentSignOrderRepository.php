@@ -64,14 +64,17 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
             if (!$signDocContract) {
                 throw new Exception("契約書類の署名依頼は失敗しました");
             }
+
             $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
             if (!$contractNextSignUser) {
                 throw new Exception("契約書類の署名依頼は失敗しました");
             }
+
             $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser(documentId: $documentId, categoryId: $categoryId);
             if (!$contractIsseuUser) {
                 throw new Exception("契約書類の署名依頼は失敗しました");
             }
+
         } catch (Exception $e) {
             throw new Exception("契約書類の署名依頼は失敗しました");
         }
@@ -94,14 +97,17 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
             if (!$signDocDeal) {
                 throw new Exception("取引書類の署名依頼は失敗しました");
             }
+
             $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
             if (!$dealNextSignUser) {
                 throw new Exception("取引書類の署名依頼は失敗しました");
             }
+
             $dealIsseuUser    = $this->documentWorkFlow->getDealIsseuUser(documentId: $documentId, categoryId: $categoryId);
             if (!$dealIsseuUser) {
                 throw new Exception("取引書類の署名依頼は失敗しました");
             }
+
         } catch (Exception $e) {
             throw new Exception("取引書類の署名依頼は失敗しました");
         }
@@ -122,19 +128,21 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         try {
             $signDocInternal      = $this->documentInternal->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$signDocInternal) {
-                throw new Exception("社内書類の署名依頼は失敗しました");
+                throw new Exception("社内書類の署名依頼は失敗しました1");
             }
 
             $internalSignUserList = (object)$this->documentWorkFlow->getInternalSignUserList(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
-            if (!$internalSignUserList) {
-                throw new Exception("社内書類の署名依頼は失敗しました");
+            if (count(get_object_vars($internalSignUserList)) === 0) {
+                throw new Exception("社内書類の署名依頼は失敗しました2");
             }
+
             $internalIsseuUser    = $this->documentWorkFlow->getInternalIsseuUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$internalIsseuUser) {
-                throw new Exception("社内書類の署名依頼は失敗しました");
+                throw new Exception("社内書類の署名依頼は失敗しました3");
             }
+
         } catch (Exception $e) {
-            throw new Exception("社内書類の署名依頼は失敗しました");
+            throw $e;
         }
         return new DocumentSignOrder($signDocInternal, $internalSignUserList, $internalIsseuUser);
     }
@@ -155,14 +163,17 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
             if (!$signDocArchive) {
                 throw new Exception("登録書類の署名依頼は失敗しました");
             }
+
             $archiveNextSignUser = $this->documentWorkFlow->getArchiveNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$archiveNextSignUser) {
                 throw new Exception("登録書類の署名依頼は失敗しました");
             }
+
             $archiveIsseuUser    = $this->documentWorkFlow->getArchiveIsseuUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$archiveIsseuUser) {
                 throw new Exception("登録書類の署名依頼は失敗しました");
             }
+            
         } catch (Exception $e) {
             throw new Exception("登録書類の署名依頼は失敗しました");
         }

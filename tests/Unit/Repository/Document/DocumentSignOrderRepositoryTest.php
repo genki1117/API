@@ -69,43 +69,17 @@ class DocumentSignOrderRepositoryTest extends TestCase
      */
     public function getContractIsseuAndNextSignUserInfo_test_1 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '契約書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser =(object)[
-            'user_id' => 3,
-            'full_name' => '佐藤　次郎',
-            'email' => 'testsato@test.jp',
-            'user_type_id' => 0,
-            'wf_sort' => 2,
-            'category_id' => 0,
-            'counter_party_id' => NULL,
-            'counter_party_name' => NULL,
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 0,
-        ];
-
-
         $this->docContractMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDocContract());
 
         $this->documentWorkFlowMock->shouldReceive('getContractNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserContract());
 
         $this->documentWorkFlowMock->shouldReceive('getContractIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserContract());
 
         $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
         $this->assertEquals($result->getSignDoc()->document_id, 1);
@@ -128,88 +102,38 @@ class DocumentSignOrderRepositoryTest extends TestCase
 
     /**
      * @test
-     * 契約書類以上テスト
+     * 契約書類異常テスト
+     * 書類取得不可
      * @return void
      */
     public function getContractIsseuAndNextSignUserInfo_test_2 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '契約書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser =(object)[
-            'user_id' => 3,
-            'full_name' => '佐藤　次郎',
-            'email' => 'testsato@test.jp',
-            'user_type_id' => 0,
-            'wf_sort' => 2,
-            'category_id' => 0,
-            'counter_party_id' => NULL,
-            'counter_party_name' => NULL,
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 0,
-        ];
-
-
         $this->docContractMock->shouldReceive('getSignDocument')
         ->once()
         ->andReturn(null);
 
         $this->documentWorkFlowMock->shouldReceive('getContractNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserContract());
 
         $this->documentWorkFlowMock->shouldReceive('getContractIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserContract());
 
         $this->expectException(Exception::class);
         $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
     }
     /**
      * @test
-     * 契約書類以上テスト
+     * 契約書類異常テスト
+     * 署名者取得不可
      * @return void
      */
     public function getContractIsseuAndNextSignUserInfo_test_3 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '契約書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser =(object)[
-            'user_id' => 3,
-            'full_name' => '佐藤　次郎',
-            'email' => 'testsato@test.jp',
-            'user_type_id' => 0,
-            'wf_sort' => 2,
-            'category_id' => 0,
-            'counter_party_id' => NULL,
-            'counter_party_name' => NULL,
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 0,
-        ];
-
-
         $this->docContractMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDocContract());
 
         $this->documentWorkFlowMock->shouldReceive('getContractNextSignUser')
         ->once()
@@ -217,51 +141,26 @@ class DocumentSignOrderRepositoryTest extends TestCase
 
         $this->documentWorkFlowMock->shouldReceive('getContractIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserContract());
 
         $this->expectException(Exception::class);
         $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
     }
     /**
      * @test
-     * 契約書類以上テスト
+     * 契約書類異常テスト
+     * 起票者取得不可
      * @return void
      */
     public function getContractIsseuAndNextSignUserInfo_test_4 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '契約書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser =(object)[
-            'user_id' => 3,
-            'full_name' => '佐藤　次郎',
-            'email' => 'testsato@test.jp',
-            'user_type_id' => 0,
-            'wf_sort' => 2,
-            'category_id' => 0,
-            'counter_party_id' => NULL,
-            'counter_party_name' => NULL,
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 0,
-        ];
-
-
         $this->docContractMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDocContract());
 
         $this->documentWorkFlowMock->shouldReceive('getContractNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserContract());
 
         $this->documentWorkFlowMock->shouldReceive('getContractIsseuUser')
         ->once()
@@ -278,43 +177,17 @@ class DocumentSignOrderRepositoryTest extends TestCase
      */
     public function getDealIsseuAndNextSignUserInfo_test_1 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '取引書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser =(object)[
-            'user_id' => 3,
-            'full_name' => '佐藤　次郎',
-            'email' => 'testsato@test.jp',
-            'user_type_id' => 0,
-            'wf_sort' => 2,
-            'category_id' => 1,
-            'counter_party_id' => NULL,
-            'counter_party_name' => NULL,
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 1,
-        ];
-
-
         $this->docDealMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDocDeal());
 
         $this->documentWorkFlowMock->shouldReceive('getDealNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserDeal());
 
         $this->documentWorkFlowMock->shouldReceive('getDealIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserDeal());
 
         $result = $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
         $this->assertEquals($result->getSignDoc()->document_id, 1);
@@ -338,47 +211,22 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 取引書類異常テスト
+     * 書類取得不可
      * @return void
      */
     public function getDealIsseuAndNextSignUserInfo_test_2 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '取引書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser =(object)[
-            'user_id' => 3,
-            'full_name' => '佐藤　次郎',
-            'email' => 'testsato@test.jp',
-            'user_type_id' => 0,
-            'wf_sort' => 2,
-            'category_id' => 0,
-            'counter_party_id' => NULL,
-            'counter_party_name' => NULL,
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 0,
-        ];
-
-
         $this->docDealMock->shouldReceive('getSignDocument')
         ->once()
         ->andReturn(null);
 
         $this->documentWorkFlowMock->shouldReceive('getDealNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserDeal());
 
         $this->documentWorkFlowMock->shouldReceive('getDealIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserDeal());
 
         $this->expectException(Exception::class);
         $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
@@ -387,39 +235,14 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 取引書類異常テスト
+     * 署名者取得不可
      * @return void
      */
     public function getDealIsseuAndNextSignUserInfo_test_3 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '取引書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser =(object)[
-            'user_id' => 3,
-            'full_name' => '佐藤　次郎',
-            'email' => 'testsato@test.jp',
-            'user_type_id' => 0,
-            'wf_sort' => 2,
-            'category_id' => 0,
-            'counter_party_id' => NULL,
-            'counter_party_name' => NULL,
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 0,
-        ];
-
-
         $this->docDealMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDocDeal());
 
         $this->documentWorkFlowMock->shouldReceive('getDealNextSignUser')
         ->once()
@@ -427,7 +250,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
 
         $this->documentWorkFlowMock->shouldReceive('getDealIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserDeal());
 
         $this->expectException(Exception::class);
         $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
@@ -436,43 +259,18 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 取引書類異常テスト
+     * 起票者取得不可
      * @return void
      */
     public function getDealIsseuAndNextSignUserInfo_test_4 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '取引書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser =(object)[
-            'user_id' => 3,
-            'full_name' => '佐藤　次郎',
-            'email' => 'testsato@test.jp',
-            'user_type_id' => 0,
-            'wf_sort' => 2,
-            'category_id' => 0,
-            'counter_party_id' => NULL,
-            'counter_party_name' => NULL,
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 0,
-        ];
-
-
         $this->docDealMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDocDeal());
 
         $this->documentWorkFlowMock->shouldReceive('getDealNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserDeal());
 
         $this->documentWorkFlowMock->shouldReceive('getDealIsseuUser')
         ->once()
@@ -490,53 +288,17 @@ class DocumentSignOrderRepositoryTest extends TestCase
      */
     public function getInternalIsseuAndNextSignUserInfo_test_1 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '社内書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser = [
-            'signUser1' =>
-                (object) array(
-                'full_name' => '加藤　三郎',
-                'family_name' => '加藤',
-                'first_name' => '三郎',
-                'email' => 'testkatou@test.jp',
-                'wf_sort' => 1,
-                'category_id' => 2,
-                ),
-            'signUser2' =>
-                (object) array(
-                'full_name' => '木村　史郎',
-                'family_name' => '木村',
-                'first_name' => '史郎',
-                'email' => 'testkimura@test.jp',
-                'wf_sort' => 2,
-                'category_id' => 2,
-                ),
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 2,
-        ];
-
-
         $this->docInternalMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDocInternal());
 
         $this->documentWorkFlowMock->shouldReceive('getInternalSignUserList')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserInternal());
 
         $this->documentWorkFlowMock->shouldReceive('getInternalIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserInternal());
         
         $result = $this->getObject()->getInternalSignUserListInfo(documentId: 1, categoryId: 2, mUserCompanyId: 0);
 
@@ -565,57 +327,22 @@ class DocumentSignOrderRepositoryTest extends TestCase
      /**
      * @test
      * 社内書類異常テスト
+     * 書類取得不可
      * @return void
      */
     public function getInternalIsseuAndNextSignUserInfo_test_2 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '社内書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser = [
-            'signUser1' =>
-                (object) array(
-                'full_name' => '加藤　三郎',
-                'family_name' => '加藤',
-                'first_name' => '三郎',
-                'email' => 'testkatou@test.jp',
-                'wf_sort' => 1,
-                'category_id' => 2,
-                ),
-            'signUser2' =>
-                (object) array(
-                'full_name' => '木村　史郎',
-                'family_name' => '木村',
-                'first_name' => '史郎',
-                'email' => 'testkimura@test.jp',
-                'wf_sort' => 2,
-                'category_id' => 2,
-                ),
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 2,
-        ];
-
-
         $this->docInternalMock->shouldReceive('getSignDocument')
         ->once()
         ->andReturn(null);
 
         $this->documentWorkFlowMock->shouldReceive('getInternalSignUserList')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getInternalIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserInternal());
         
         $this->expectException(Exception::class);
         $result = $this->getObject()->getInternalSignUserListInfo(documentId: 1, categoryId: 2, mUserCompanyId: 0);
@@ -624,57 +351,22 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 社内書類異常テスト
+     * 署名者取得不可
      * @return void
      */
     public function getInternalIsseuAndNextSignUserInfo_test_3 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '社内書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser = [
-            'signUser1' =>
-                (object) array(
-                'full_name' => '加藤　三郎',
-                'family_name' => '加藤',
-                'first_name' => '三郎',
-                'email' => 'testkatou@test.jp',
-                'wf_sort' => 1,
-                'category_id' => 2,
-                ),
-            'signUser2' =>
-                (object) array(
-                'full_name' => '木村　史郎',
-                'family_name' => '木村',
-                'first_name' => '史郎',
-                'email' => 'testkimura@test.jp',
-                'wf_sort' => 2,
-                'category_id' => 2,
-                ),
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 2,
-        ];
-
-
         $this->docInternalMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn(null);
+        ->andReturn($this->getSignDocInternal());
 
         $this->documentWorkFlowMock->shouldReceive('getInternalSignUserList')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn(null);
 
         $this->documentWorkFlowMock->shouldReceive('getInternalIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserInternal());
         
         $this->expectException(Exception::class);
         $result = $this->getObject()->getInternalSignUserListInfo(documentId: 1, categoryId: 2, mUserCompanyId: 0);
@@ -682,53 +374,18 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 社内書類異常テスト
+     * 起票者取得不可
      * @return void
      */
     public function getInternalIsseuAndNextSignUserInfo_test_4 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '社内書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser = [
-            'signUser1' =>
-                (object) array(
-                'full_name' => '加藤　三郎',
-                'family_name' => '加藤',
-                'first_name' => '三郎',
-                'email' => 'testkatou@test.jp',
-                'wf_sort' => 1,
-                'category_id' => 2,
-                ),
-            'signUser2' =>
-                (object) array(
-                'full_name' => '木村　史郎',
-                'family_name' => '木村',
-                'first_name' => '史郎',
-                'email' => 'testkimura@test.jp',
-                'wf_sort' => 2,
-                'category_id' => 2,
-                ),
-        ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 2,
-        ];
-
-
         $this->docInternalMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDocInternal());
 
         $this->documentWorkFlowMock->shouldReceive('getInternalSignUserList')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserInternal());
 
         $this->documentWorkFlowMock->shouldReceive('getInternalIsseuUser')
         ->once()
@@ -745,42 +402,17 @@ class DocumentSignOrderRepositoryTest extends TestCase
      */
     public function getArchiveIsseuAndNextSignUserInfo_test_1 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '登録書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser = 
-                (object) [
-                'full_name' => '加藤　三郎',
-                'family_name' => '加藤',
-                'first_name' => '三郎',
-                'email' => 'testkatou@test.jp',
-                'wf_sort' => 1,
-                'category_id' => 3,
-                ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 3,
-        ];
-
-
         $this->docArchiveMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDogArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserArchive());
         
 
         $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);
@@ -804,46 +436,22 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 登録書類異常テスト
+     * 書類取得不可
      * @return void
      */
     public function getArchiveIsseuAndNextSignUserInfo_test_2 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '登録書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser = 
-                (object) [
-                'full_name' => '加藤　三郎',
-                'family_name' => '加藤',
-                'first_name' => '三郎',
-                'email' => 'testkatou@test.jp',
-                'wf_sort' => 1,
-                'category_id' => 3,
-                ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 3,
-        ];
-
-
         $this->docArchiveMock->shouldReceive('getSignDocument')
         ->once()
         ->andReturn(null);
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserArchive());
         
         $this->expectException(Exception::class);
         $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);
@@ -852,38 +460,14 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 登録書類異常テスト
+     * 署名者取得不可
      * @return void
      */
     public function getArchiveIsseuAndNextSignUserInfo_test_3 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '登録書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser = 
-                (object) [
-                'full_name' => '加藤　三郎',
-                'family_name' => '加藤',
-                'first_name' => '三郎',
-                'email' => 'testkatou@test.jp',
-                'wf_sort' => 1,
-                'category_id' => 3,
-                ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 3,
-        ];
-
-
         $this->docArchiveMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDogArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveNextSignUser')
         ->once()
@@ -891,7 +475,7 @@ class DocumentSignOrderRepositoryTest extends TestCase
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveIsseuUser')
         ->once()
-        ->andReturn($issueUser);
+        ->andReturn($this->getIssueUserArchive());
         
         $this->expectException(Exception::class);
         $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);
@@ -900,42 +484,18 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 登録書類異常テスト
+     * 起票者取得不可
      * @return void
      */
     public function getArchiveIsseuAndNextSignUserInfo_test_4 ()
     {
-        $signDoc = (object)[
-            'document_id' => 1,
-            'title' => '登録書類テストタイトル',
-            'file_prot_pw_flg' => 1,
-        ];
-
-        $nextSignUser = 
-                (object) [
-                'full_name' => '加藤　三郎',
-                'family_name' => '加藤',
-                'first_name' => '三郎',
-                'email' => 'testkatou@test.jp',
-                'wf_sort' => 1,
-                'category_id' => 3,
-                ];
-
-        $issueUser = (object)[
-            'full_name' => '大化　テスト',
-            'family_name' => '大化',
-            'first_name' => 'テスト',
-            'wf_sort' => 0,
-            'category_id' => 3,
-        ];
-
-
         $this->docArchiveMock->shouldReceive('getSignDocument')
         ->once()
-        ->andReturn($signDoc);
+        ->andReturn($this->getSignDogArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveNextSignUser')
         ->once()
-        ->andReturn($nextSignUser);
+        ->andReturn($this->getSignUserArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveIsseuUser')
         ->once()
@@ -944,10 +504,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->expectException(Exception::class);
         $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);
     }
-
-
-
-
 
     public function getObject()
     {
@@ -960,6 +516,162 @@ class DocumentSignOrderRepositoryTest extends TestCase
             $this->docArchiveMock,
             $this->documentWorkFlowMock,
         );
+    }
+
+    public function getSignDocContract()
+    {
+        $signDoc = (object)[
+            'document_id' => 1,
+            'title' => '契約書類テストタイトル',
+            'file_prot_pw_flg' => 1,
+        ];
+        return $signDoc;
+    }
+
+    public function getSignUserContract()
+    {
+        $nextSignUser =(object)[
+            'user_id' => 3,
+            'full_name' => '佐藤　次郎',
+            'email' => 'testsato@test.jp',
+            'user_type_id' => 0,
+            'wf_sort' => 2,
+            'category_id' => 0,
+            'counter_party_id' => NULL,
+            'counter_party_name' => NULL,
+        ];
+        return $nextSignUser;
+    }
+
+    public function getIssueUserContract()
+    {
+        $issueUser = (object)[
+            'full_name' => '大化　テスト',
+            'family_name' => '大化',
+            'first_name' => 'テスト',
+            'wf_sort' => 0,
+            'category_id' => 0,
+        ];
+        return $issueUser;
+    }
+
+    public function getSignDocDeal()
+    {
+        $signDoc = (object)[
+            'document_id' => 1,
+            'title' => '取引書類テストタイトル',
+            'file_prot_pw_flg' => 1,
+        ];
+        return $signDoc;
+    }
+
+    public function getSignUserDeal()
+    {
+        $nextSignUser =(object)[
+            'user_id' => 3,
+            'full_name' => '佐藤　次郎',
+            'email' => 'testsato@test.jp',
+            'user_type_id' => 0,
+            'wf_sort' => 2,
+            'category_id' => 1,
+            'counter_party_id' => NULL,
+            'counter_party_name' => NULL,
+        ];
+        return $nextSignUser;
+    }
+
+    public function getIssueUserDeal()
+    {
+        $issueUser = (object)[
+            'full_name' => '大化　テスト',
+            'family_name' => '大化',
+            'first_name' => 'テスト',
+            'wf_sort' => 0,
+            'category_id' => 1,
+        ];
+        return $issueUser;
+    }
+
+    public function getSignDocInternal()
+    {
+        $signDoc = (object)[
+            'document_id' => 1,
+            'title' => '社内書類テストタイトル',
+            'file_prot_pw_flg' => 1,
+        ];
+        return $signDoc;
+    }
+
+    public function getSignUserInternal()
+    {
+        $nextSignUser = [
+            'signUser1' =>
+                (object) [
+                'full_name' => '加藤　三郎',
+                'family_name' => '加藤',
+                'first_name' => '三郎',
+                'email' => 'testkatou@test.jp',
+                'wf_sort' => 1,
+                'category_id' => 2,
+                ],
+            'signUser2' =>
+                (object)[
+                'full_name' => '木村　史郎',
+                'family_name' => '木村',
+                'first_name' => '史郎',
+                'email' => 'testkimura@test.jp',
+                'wf_sort' => 2,
+                'category_id' => 2,
+                ],
+        ];
+        return $nextSignUser;
+    }
+
+    public function getIssueUserInternal()
+    {
+        $issueUser = (object)[
+            'full_name' => '大化　テスト',
+            'family_name' => '大化',
+            'first_name' => 'テスト',
+            'wf_sort' => 0,
+            'category_id' => 2,
+        ];
+        return $issueUser;
+    }
+
+    public function getSignDogArchive()
+    {
+        $signDoc = (object)[
+            'document_id' => 1,
+            'title' => '登録書類テストタイトル',
+            'file_prot_pw_flg' => 1,
+        ];
+        return $signDoc;
+    }
+
+    public function getSignUserArchive()
+    {
+        $nextSignUser = (object) [
+            'full_name' => '加藤　三郎',
+            'family_name' => '加藤',
+            'first_name' => '三郎',
+            'email' => 'testkatou@test.jp',
+            'wf_sort' => 1,
+            'category_id' => 3,
+        ];
+        return $nextSignUser;
+    }
+
+    public function getIssueUserArchive()
+    {
+        $issueUser = (object)[
+            'full_name' => '大化　テスト',
+            'family_name' => '大化',
+            'first_name' => 'テスト',
+            'wf_sort' => 0,
+            'category_id' => 3,
+        ];
+        return $issueUser;
     }
 
 }

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
+use Illuminate\Support\Facades\Log;
 use App\Domain\Consts\QueueConst as QueueConstant;
 use App\Accessers\Queue\QueueUtility;
 use Exception;
@@ -14,9 +15,18 @@ class DocumentSignOrderService
     /** @var DocumentSignOrder */
     private $contractIsseuAndNextSignUser;
 
+    /** @var DocumentSignOrder */
+    private $dealIsseuAndNextSignUser;
+
+    /** @var DocumentSignOrder */
+    private $internalIsseuAndNextSignUser;
+
+    /** @var DocumentSignOrder */
+    private $archiveIsseuAndNextSignUser;
+
     /** @var string */
     private $emailAddress;
-
+    
     /** @var string */
     private $emailTitle;
 
@@ -40,7 +50,8 @@ class DocumentSignOrderService
         UserTypeConst $userTypeConst,
         DocumentConst $docConst,
         DocumentSignOrderRepositoryInterface $documentSignOrderRepositoryInterface
-    ) {
+    )
+    {
         $this->queueUtility  = $queueUtility;
         $this->userTypeConst = $userTypeConst;
         $this->docConst      = $docConst;
@@ -191,13 +202,10 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserCompanyId: $mUserCompanyId
                                                         );
+                                                        //var_export($internalIsseuAndNextSignUser);
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
-                    if ($internalIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
-                        throw new Exception("メールを送信しません");
-                        exit;
-                    }
-
                     foreach ($internalIsseuAndNextSignUser->getNextSignUser() as $signUser) {
+                        
                         // 次の署名者のメールアドレス取得
                         $emailUrl = $systemUrl . $documentDetailendPoint . $internalIsseuAndNextSignUser->getSignDoc()->document_id;
 
@@ -292,6 +300,7 @@ class DocumentSignOrderService
             return true;
         } catch (Exception $e) {
             throw $e;
+            Log::error($e);
             return false;
         }
     }
