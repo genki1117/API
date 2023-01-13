@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Http\Requests\Document;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
@@ -20,7 +21,7 @@ class DocumentCsvDownloadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'required | numeric'
+            'category_id' => ['required', 'numeric', 'in:0,1,2,3']
         ];
     }
 
@@ -29,10 +30,10 @@ class DocumentCsvDownloadRequest extends FormRequest
      */
     public function messages()
     {
-        // TODO:存在チェック error.message.document_exist 0,1,2,3以外のリクエストならエラー
         return [
             'category_id.required' => 'error.message.required',
-            'category_id.numeriv'  => 'error.message.number'
+            'category_id.numeric'  => 'error.message.number',
+            'category_id.in'       => 'error.message.exists'
         ];
     }
 

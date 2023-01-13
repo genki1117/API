@@ -44,7 +44,7 @@ class DocumentBulkCreateController extends Controller
                 throw new Exception('ユーザ情報、または書類情報が取得出来ませんでした。');
             }
 
-           return $this->documentDownloadCsvService->downloadCsv(
+                $this->documentDownloadCsvService->downloadCsv(
                 mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, mUserTypeId: $mUserTypeId, categoryId: $categoryId, fileName: $fileName
             );
             

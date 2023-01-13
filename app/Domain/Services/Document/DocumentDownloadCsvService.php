@@ -12,15 +12,13 @@ use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
 
 class DocumentDownloadCsvService
 {
-    /** @var DocumentListRepositoryInterface */
-    private DocumentListRepositoryInterface $documentRepository;
+    /** @var string */
+    private $csvStoragePath;
 
-    /**
-     * @param DocumentListRepositoryInterface $documentRepository
-     */
-    public function __construct(DocumentListRepositoryInterface $documentRepository)
+
+    public function __construct()
     {
-        $this->documentRepository = $documentRepository;
+        $this->csvStoragePath = 'Storage/UploadCsvFile/';
     }
 
     /**
@@ -36,32 +34,23 @@ class DocumentDownloadCsvService
     public function downloadCsv(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $categoryId, string $fileName)
     {
         try {
-            // パス取得
-            $csvStoragePath = 'Storage/UploadCsvFile/'; //TODO:定義する場所確認
-            $useCsvStoragePath = $csvStoragePath . $mUserCompanyId . '/' . $mUserId . '/' . $fileName;
-            $test = '../test2.csv';
-            
-            // csvヘッダー定義
+            // 保存場所
+             // ユーザ単位のパス
+            $userCsvStoragePath = $this->csvStoragePath . $mUserCompanyId . '/' . $mUserId . '/';
+
+            // csvヘッダー定義      
             header('Content-Type: application/octet-stream');
             header("Content-Disposition: attachment; filename={$fileName}");
             header('Content-Transfer-Encoding: binary');
-            
+
             // ファイル出力
-            // $result = readfile($useCsvStoragePath);
-            $result = readfile($test);
-            
-            // /home/shoutasudo/work/production/github/DTG-API/test/test.csv
-            // if ($result === false) {
-            //     throw new Exception('CSVファイルのダウンロードに失敗しました。');
-            // }
+            $downloadRsult = readfile($userCsvStoragePath . $fileName);
 
             return true;
+            
         } catch (Exception $e) {
-            throw $e;
+            throw new Exception('CSVダウンロードに失敗しました。');
             return false;
         }
-        
-
-
     }
 }

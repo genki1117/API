@@ -31,6 +31,9 @@ class DocumentConst
     /** @var string */
     const DOCUMENT_ARCHIVE_NAME = '登録書類';
 
+    /** @var string */
+    const CSV_DOWNLOAD_PASS = 'Storage/UploadCsvFile/';
+
     const DOCUMENT_TYPE_LIST = [
         self::DOCUMENT_CONTRACT => self::DOCUMENT_CONTRACT_NAME,
         self::DOCUMENT_DEAL => self::DOCUMENT_DEAL_NAME,

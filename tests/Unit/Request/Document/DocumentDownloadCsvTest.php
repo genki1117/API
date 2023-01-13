@@ -50,6 +50,9 @@ class DocumentDownloadCsvTest extends TestCase
             'category_id_number' => [
                 ['category_id'],['test'],false
             ],
+            'category_id_exists' => [
+                ['category_id'],[4],false
+            ]
         ];
     }
 }
