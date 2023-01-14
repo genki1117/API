@@ -31,7 +31,7 @@ class DocumentDownloadCsvService
      * @param string  $fileName
      * @return bool
      */
-    public function downloadCsv(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $categoryId, string $fileName)
+    public function downloadCsv(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $categoryId, string $fileName): ?bool
     {
         try {
             // 保存場所
