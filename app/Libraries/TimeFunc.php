@@ -22,6 +22,4 @@ trait TimeFunc
         }
         return $date->format($format);
     }
-
 }
-
