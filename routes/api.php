@@ -24,4 +24,4 @@ $router->post('/sample-login', [UseSampleController::class, 'login']);
 $router->post('/document/detail', [DocumentDetailController::class, 'getDetail']);
 $router->post('/document/list', [DocumentGetListController::class, 'getList']);
 
-$router->post('/download/test', [DownloadManagerController::class, 'fileDownload']);
+$router->get('/files/dl-data/{temp_token}', [DownloadManagerController::class, 'fileDownload']);

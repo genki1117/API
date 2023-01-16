@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Download;
 
+use App\Http\Requests\Download\DownloadManagerTokenRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DownloadManagerController extends Controller
 {
-    public function fileDownload (Request $request)
+    public function fileDownload(Request $request)
     {
-        return 'tewst';
+        return $request;
     }
 }
