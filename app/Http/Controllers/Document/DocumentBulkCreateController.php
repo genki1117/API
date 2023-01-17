@@ -36,12 +36,12 @@ class DocumentBulkCreateController extends Controller
 
             // ユーザタイプがゲストの場合、エラー
             if ($mUserTypeId === UserConstain::USER_TYPE_GUEST) {
-                throw new Exception('ゲストユーザは取得できません。');
+                throw new Exception('common.message.expired');
             }
 
             // ユーザID、ユーザタイプID、書類カテゴリIDが取得出来ない場合は、エラー
             if ($mUserId === null || $mUserCompanyId === null || $mUserTypeId === null || $categoryId === null || $fileName === null) {
-                throw new Exception('ユーザ情報、または書類情報が取得出来ませんでした。');
+                throw new Exception('common.message.not-found');
             }
 
                 $this->documentDownloadCsvService->downloadCsv(

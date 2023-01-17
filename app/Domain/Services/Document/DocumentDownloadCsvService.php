@@ -49,7 +49,7 @@ class DocumentDownloadCsvService
             return true;
             
         } catch (Exception $e) {
-            throw new Exception('CSVダウンロードに失敗しました。');
+            throw new Exception('common.message.not-found');
             return false;
         }
     }
