@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Providers;
 
+use App\Domain\Repositories\Download\DownloadFileRepository;
+use App\Domain\Repositories\Interface\Download\DownloadFileServiceInterface;
 use App\Domain\Repositories\Document\DocumentDetailRepository;
 use App\Domain\Repositories\Interface\Document\DocumentDetailRepositoryInterface;
 use App\Domain\Repositories\Interface\Document\DocumentGetListRepositoryInterface;
@@ -27,6 +29,7 @@ class RepositoryServiceProvider extends ServiceProvider
      * @var array
      */
     public array $bindings = [
+        DownloadFileServiceInterface::class=> DownloadFileRepository::class,
         UserRepositoryInterface::class => UserRepository::class,
         LoginUserRepositoryInterface::class => LoginUserRepository::class,
         SystemAccessLogRepositoryInterface::class => SystemAccessLogRepository::class,

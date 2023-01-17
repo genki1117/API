@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Accessers\DB;
 
+use Carbon\CarbonImmutable;
 use App\Accessers\DB\FluentDatabase;
 
 class TempToken extends FluentDatabase
@@ -27,4 +28,18 @@ class TempToken extends FluentDatabase
             })
             ->first();
     }
+
+    public function getTokenData(string $token): ?\stdClass
+    {
+        return $this->builder()
+            ->select([
+                "data",
+                "expiry_date"
+            ])
+            ->where("token", $token)
+            ->where('expiry_date', '>=', CarbonImmutable::now())
+            ->whereNull('delete_datetime')
+            ->first();
+    }
+
 }

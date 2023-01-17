@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             // SampleUserSeeder::class,
             UserSeeder::class,
             TempTokenSeeder::class,
+            DownloadFileSeeder::class,
         ]);
     }
 }

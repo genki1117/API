@@ -20,6 +20,7 @@ class TempTokenSeeder extends Seeder
             [
                 'token'           => 'test-token-1',
                 'type'            => 'test-type-1',
+                'data'            => json_encode(['dl_file_id' => 1,]),
                 'expiry_date'     => '2023-10-10',
                 'delete_user'     => null,
                 'delete_datetime' => null
