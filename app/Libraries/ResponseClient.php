@@ -86,6 +86,7 @@ trait ResponseClient
                 $adjustErrors[$key][$index]['message_key'] = $errorMessage;
                 
                 // $errorsTableから該当するパラメタとエラー要因を検索して、'message'に設定する。
+                $adjustErrors[$key][$index]['messages'] = [];
                 foreach ($errorsTable as $tableKey => $errorFactors) {
                     if (preg_match('/'. $tableKey .'/', $key) === 1) {
                         foreach ($errorFactors as $factorKey => $factorValues) {
