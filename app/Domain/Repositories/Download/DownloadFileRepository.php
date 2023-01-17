@@ -59,7 +59,7 @@ class DownloadFileRepository implements DownloadFileServiceInterface
             $getDlFileResult = $this->dlFile->getPath(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, getTokenDlFileId: $getTokenDlFileId);
             // return var_export($getDlFileResult);
             if (empty($getDlFileResult)) {
-                throw new Exception('ファイル情報が取得できませんでした。');
+                throw new Exception('common.message.not-found');
             }
 
             return new DownloadFileEntity($getDlFileResult);

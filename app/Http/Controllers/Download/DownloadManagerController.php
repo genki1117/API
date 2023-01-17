@@ -21,18 +21,17 @@ class DownloadManagerController extends Controller
     }
 
 
-    public function fileDownload(Request $reqeust, string $token)
+    public function fileDownload(string $token)
     {
         try {
-            // $mUserId        = $request->m_user['user_id'];    //TODO: 要確認 
-            // $mUserCompanyId = $request->m_user['company_id']; //TODO: 要確認
-            $mUserId        = 1; // 仮データ
-            $mUserCompanyId = 1; // 仮データ
+            if (empty($token)) {
+                throw new Exception('common.message.not-found');
+            }
             $nowDate        = CarbonImmutable::now();
-            return $downloadDocumentResult = $this->downloadManagerService->getFile(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, token: $token, nowDate: $nowDate);    
+            $downloadDocumentResult = $this->downloadManagerService->getFile(token: $token, nowDate: $nowDate);    
 
             if (!$downloadDocumentResult) {
-                throw new Exception('ダウンロードに失敗しました。');
+                throw new Exception('common.messate.permission');
             }
 
             return (new DownloadFileResponse)->successDownload();
