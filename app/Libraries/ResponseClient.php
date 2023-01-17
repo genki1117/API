@@ -60,8 +60,18 @@ trait ResponseClient
                     if (preg_match('/'. $tableKey .'/', $key) === 1) {
                         foreach ($errorFactors as $factorKey => $factorValues) {
                             if (array_key_exists($factorKey, $failed[$key])) {
-                                $adjustErrors[$key][$index]['messages'] = $factorValues;
-
+                                foreach ($factorValues as $value) {
+                                    if ($value['content'] instanceof \Closure) {
+                                        // $errorsTableにて、無名関数を設定している場合は、該当するfailed情報を引数として無名関数を呼び出す。
+                                        $failParam = [
+                                            'key' => $key,
+                                            'failed' => [$factorKey => $failed[$key][$factorKey]]
+                                        ];
+                                        $result = $value['content']($failParam);
+                                        $value['content'] = $result;
+                                    }
+                                    $adjustErrors[$key][$index]['messages'][] = $value;
+                                }
                                 // 調整済の[パラメタ][factorKey]を$failedから削除して、以降の検索対象から外す。
                                 unset($failed[$key][$factorKey]);
                                 break;
