@@ -27,8 +27,8 @@ class DownloadManagerController extends Controller
             if (empty($token)) {
                 throw new Exception('common.message.not-found');
             }
-            $nowDate        = CarbonImmutable::now();
-            $downloadDocumentResult = $this->downloadManagerService->getFile(token: $token, nowDate: $nowDate);    
+            $nowDate = CarbonImmutable::now();
+            return $downloadDocumentResult = $this->downloadManagerService->getFile(token: $token, nowDate: $nowDate);    
 
             if (!$downloadDocumentResult) {
                 throw new Exception('common.messate.permission');

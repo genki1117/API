@@ -14,6 +14,12 @@ use App\Domain\Repositories\Interface\Download\DownloadFileServiceInterface;
 
 class DownloadManagerService
 {
+    /** @var */
+    private const DownloadExtension     = '.zip';
+
+    /** @var */
+    // 一時保存ファイル
+    private const DownloadTmpFilePath   = '/var/www/html/storage/zipTmp';
 
     /** @var DownloadFileServiceInterface */
     private DownloadFileServiceInterface $documentRepository;
@@ -26,8 +32,14 @@ class DownloadManagerService
         $this->documentRepository = $documentRepository;
     }
 
-    
-    public function getFile(string $token, string $nowDate)
+    /**
+     * ダウンロード処理
+     *
+     * @param string $token
+     * @param string $nowDate
+     * @return boolean
+     */
+    public function getFile(string $token, string $nowDate): ?bool
     {
         try {
             // トークンデータオブジェクト取得
@@ -55,30 +67,44 @@ class DownloadManagerService
                 throw new Exception('common.message.not-found');
             }
 
+            // zipファイル処理
             $zip = new ZipArchive();
 
-            $zipFileName   = $getDlFileResult->getData()->dl_file_name . '.zip';
+            // ダウンロードするファイルの名前
+            $zipFileName   = $getDlFileResult->getData()->dl_file_name . Self::DownloadExtension;
 
-            $zipFilePath   = '/var/www/html/testImageFile/testZip';
+            // ダウンロードする為の一時保存ディレクトリ
+            $zipFilePath   = Self::DownloadTmpFilePath;
 
+            // zipファイルオープン
             $result        = $zip->open($zipFilePath.$zipFileName, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 
+            // falseの場合エラー
+            if ($result === false) {
+                throw new Exception('common.messate.permission');
+            }
+
+            // データベースから取得したファイルパスで画像を取得
             $accept_data   = file_get_contents($getDlFileResult->getData()->dl_file_path);
             
+            // ダウンロードするファイル名を取得
             $filename      = $getDlFileResult->getData()->dl_file_name;
 
+            // zipファイルに格納
             $zip->addFromString($filename , $accept_data);
 
+            // zipファイルを閉じる
             $zip->close();
-
 
             // ヘッダー定義      
             header('Content-Type: application/zip; name="' . $zipFileName . '"');
             header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
             header('Content-Length: '.filesize($zipFilePath.$zipFileName));
-            echo file_get_contents($zipFilePath.$zipFileName);
 
-
+            // zipファイルをダウンロード
+            $resutl = readfile($zipFilePath.$zipFileName);
+            
+            // 一時フォルダのファイルを削除
             unlink($zipFilePath.$zipFileName);
             
             return true;
