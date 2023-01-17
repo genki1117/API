@@ -96,9 +96,7 @@ trait ResponseClient
     private function createValidatorWithMessages(array $messages): Validator
     {
         $validator = ValidatorFacades::make([], []);
-        foreach ($messages as $key => $error) {
-            $validator->errors()->add($key, $error);
-        }
+        $validator->errors()->merge($messages);
         return $validator;
     }
 }
