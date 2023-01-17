@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use App\Exceptions\AuthenticateException;
 use App\Exceptions\ConflictException;
-use App\Exceptions\ValidationCustomException;
 use PDOException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
@@ -119,12 +118,7 @@ class Handler extends ExceptionHandler
             // ----------------------------------------------------------------
 
             // バリデーションエラーの情報を取得する
-            if ($e instanceof ValidationCustomException) {
-                $origin_errors = $e->getAdjustErrors();
-            } else {
-                // TODO 　基本ここは通らないので、のちほど削除予定
-                $origin_errors = $e->errors();
-            }
+            $origin_errors = $e->errors();
 
             // 同じキー名がまとまった順番で来ないケースがあるかもしれないので、念の為にKeyでソートしておく
             // 例 host.0.user  document_id  host.1.user

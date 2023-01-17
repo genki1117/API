@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Libraries;
 
+use Illuminate\Support\Facades\Validator as ValidatorFacades;
 use Illuminate\Contracts\Validation\Validator;
 
 /**
@@ -13,9 +14,9 @@ trait ResponseClient
      * 　バリデーション情報をフロント用に加工する
      *
      * @param Validator $validator
-     * @return void
+     * @return Validator
      */
-    private function adjustValidator(Validator &$validator): void
+    private function adjustValidator(Validator $validator): Validator
     {
         // フロント用に調整したValidator::errors()を格納する変数
         $adjustErrors = [];
@@ -59,7 +60,7 @@ trait ResponseClient
                     if (preg_match('/'. $tableKey .'/', $key) === 1) {
                         foreach ($errorFactors as $factorKey => $factorValues) {
                             if (array_key_exists($factorKey, $failed[$key])) {
-                                $adjustErrors[$key][$index]['message'] = $factorValues;
+                                $adjustErrors[$key][$index]['messages'] = $factorValues;
 
                                 // 調整済の[パラメタ][factorKey]を$failedから削除して、以降の検索対象から外す。
                                 unset($failed[$key][$factorKey]);
@@ -72,7 +73,22 @@ trait ResponseClient
             }
         }
 
-        // 調整したエラー情報をバリデータに追加する。
-        $validator->adjustErrors = $adjustErrors;
+        // 調整したバリデータ情報を返却する。
+        return $this->createValidatorWithMessages(messages:$adjustErrors);
+    }
+
+    /**
+     * 引数のメッセージでバリデーションを生成する
+     *
+     * @param array $messages
+     * @return Validator
+     */
+    private function createValidatorWithMessages(array $messages): Validator
+    {
+        $validator = ValidatorFacades::make([], []);
+        foreach ($messages as $key => $error) {
+            $validator->errors()->add($key, $error);
+        }
+        return $validator;
     }
 }
