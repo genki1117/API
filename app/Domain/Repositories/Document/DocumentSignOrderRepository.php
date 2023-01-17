@@ -62,21 +62,21 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
             $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
             // var_export($signDocContract);
             if (!$signDocContract) {
-                throw new Exception("契約書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
 
             $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
             if (!$contractNextSignUser) {
-                throw new Exception("契約書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
 
             $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser(documentId: $documentId, categoryId: $categoryId);
             if (!$contractIsseuUser) {
-                throw new Exception("契約書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
 
         } catch (Exception $e) {
-            throw new Exception("契約書類の署名依頼は失敗しました");
+            throw new Exception("common.messate.permission");
         }
         return new DocumentSignOrder($signDocContract, $contractNextSignUser, $contractIsseuUser);
     }
@@ -95,21 +95,21 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         try {
             $signDocDeal      = $this->documentDeal->getSignDocument(documentId: $documentId, categoryId: $categoryId);
             if (!$signDocDeal) {
-                throw new Exception("取引書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
 
             $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
             if (!$dealNextSignUser) {
-                throw new Exception("取引書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
 
             $dealIsseuUser    = $this->documentWorkFlow->getDealIsseuUser(documentId: $documentId, categoryId: $categoryId);
             if (!$dealIsseuUser) {
-                throw new Exception("取引書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
 
         } catch (Exception $e) {
-            throw new Exception("取引書類の署名依頼は失敗しました");
+            throw new Exception("common.messate.permission");
         }
         return new DocumentSignOrder($signDocDeal, $dealNextSignUser, $dealIsseuUser);
     }
@@ -128,17 +128,17 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         try {
             $signDocInternal      = $this->documentInternal->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$signDocInternal) {
-                throw new Exception("社内書類の署名依頼は失敗しました1");
+                throw new Exception("common.messate.permission");
             }
 
             $internalSignUserList = (object)$this->documentWorkFlow->getInternalSignUserList(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (count(get_object_vars($internalSignUserList)) === 0) {
-                throw new Exception("社内書類の署名依頼は失敗しました2");
+                throw new Exception("common.messate.permission");
             }
 
             $internalIsseuUser    = $this->documentWorkFlow->getInternalIsseuUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$internalIsseuUser) {
-                throw new Exception("社内書類の署名依頼は失敗しました3");
+                throw new Exception("common.messate.permission");
             }
 
         } catch (Exception $e) {
@@ -161,21 +161,21 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         try {
             $signDocArchive      = $this->documentArchive->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$signDocArchive) {
-                throw new Exception("登録書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
 
             $archiveNextSignUser = $this->documentWorkFlow->getArchiveNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$archiveNextSignUser) {
-                throw new Exception("登録書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
 
             $archiveIsseuUser    = $this->documentWorkFlow->getArchiveIsseuUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$archiveIsseuUser) {
-                throw new Exception("登録書類の署名依頼は失敗しました");
+                throw new Exception("common.messate.permission");
             }
             
         } catch (Exception $e) {
-            throw new Exception("登録書類の署名依頼は失敗しました");
+            throw new Exception("common.messate.permission");
         }
         return new DocumentSignOrder($signDocArchive, $archiveNextSignUser, $archiveIsseuUser);
     }
