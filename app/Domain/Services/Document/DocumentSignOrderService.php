@@ -66,8 +66,8 @@ class DocumentSignOrderService
             $documentDetailendPoint = '/document/detail/';
 
             // システムURL取得
-            $systemUrl = 'test';
-            // $systemUrl = url('');
+            //$systemUrl = 'test';
+            $systemUrl = url('');
 
             switch($categoryId) {
                 // 契約書類
@@ -302,7 +302,16 @@ class DocumentSignOrderService
         }
     }
 
-    public function getContractMailContent ($counterPartyName = null, $nextSignUserName, $issueUserName, $emailUrl)
+    /**
+     * 契約書類メール内容
+     *
+     * @param string|null $counterPartyName
+     * @param string $nextSignUserName
+     * @param string $issueUserName
+     * @param string $emailUrl
+     * @return string
+     */
+    public function getContractMailContent (string $counterPartyName = null, string $nextSignUserName, string $issueUserName, string $emailUrl): string
     {
         return $emailContent =
                             "{$counterPartyName} {$nextSignUserName} 様\n
@@ -313,7 +322,16 @@ class DocumentSignOrderService
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
     }
 
-    public function getDealMailContent ($counterPartyName = null, $nextSignUserName, $issueUserName, $emailUrl)
+    /**
+     * 取引書類メール内容
+     *
+     * @param string|null $counterPartyName
+     * @param string $nextSignUserName
+     * @param string $issueUserName
+     * @param string $emailUrl
+     * @return string
+     */
+    public function getDealMailContent (string $counterPartyName = null, string $nextSignUserName, string $issueUserName, string $emailUrl): string
     {
         return $emailContent =
                             "{$counterPartyName} {$nextSignUserName} 様\n
@@ -324,7 +342,15 @@ class DocumentSignOrderService
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
     }
 
-    public function getInternalMailContent ($nextSignUserName, $issueUserName, $emailUrl)
+    /**
+     * 社内書類メール内容
+     *
+     * @param string $nextSignUserName
+     * @param string $issueUserName
+     * @param string $emailUrl
+     * @return string
+     */
+    public function getInternalMailContent (string $nextSignUserName, string $issueUserName, string $emailUrl): string
     {
         return $emailContent =
                             "{$nextSignUserName} 様\n
@@ -335,7 +361,15 @@ class DocumentSignOrderService
                             お手数ですが support@huubhr.comまでご連絡をお願い致します。";
     }
 
-    public function getArchiveMailContent ($nextSignUserName, $issueUserName, $emailUrl)
+    /**
+     * 登録書類メール内容
+     *
+     * @param string $nextSignUserName
+     * @param string $issueUserName
+     * @param string $emailUrl
+     * @return string
+     */
+    public function getArchiveMailContent (string $nextSignUserName, string $issueUserName, string $emailUrl): string
     {
         return $emailContent =
                             "{$nextSignUserName} 様\n
