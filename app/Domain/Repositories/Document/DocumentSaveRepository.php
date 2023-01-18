@@ -279,7 +279,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
                     $documentWorkFlowResult = $this->documentWorkFlow->insertDeal(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                     if (!$documentWorkFlowResult) {
-                        throw new Exception('common.messate.permission');
+                        throw new Exception('common.message.permission');
                     }
                 }
             } else {
@@ -294,7 +294,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
                     $documentWorkFlowResult = $this->documentWorkFlow->insertDeal(companyId: $companyId, categoryId: $categoryId, appUserId: $appUserId, wfSort: $wfSort, userId: $userId, createDate: $createDate);
                     if (!$documentWorkFlowResult) {
-                        throw new Exception('common.messate.permission');
+                        throw new Exception('common.message.permission');
                     }
                 }
             }
@@ -319,19 +319,19 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             // 取引書類更新
             $docUpdateResult           = $this->docDeal->update(requestContent: $requestContent);
             if (!$docUpdateResult) {
-                throw new Exception('common.message.save-conflict');
+                throw new Exception('common.message.save-conflict1');
             }
             
             // 取引書類閲覧権限更新
             $docPermissionUpdateResult = $this->docPermissionTransaction->update(requestContent: $requestContent);
             if (!$docPermissionUpdateResult) {
-                throw new Exception('common.message.save-conflict');
+                throw new Exception('common.message.save-conflict2');
             }
 
             // 取引書類容量更新
             $docStorageUpdateResult    = $this->docStorageTransaction->update(requestContent: $requestContent);
             if (!$docStorageUpdateResult) {
-                throw new Exception('common.message.save-conflict');
+                throw new Exception('common.message.save-conflict3');
             }
         } catch (Exception $e) {
             throw $e;
