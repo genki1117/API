@@ -7635,3 +7635,695 @@ Stack trace:
 #11 /home/shoutasudo/work/production/github/DTG-API/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #12 {main}
 "} 
+[2023-01-18 11:03:42] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:03:42] local.DEBUG: insert into `t_document_contract` (`company_id`, `category_id`, `template_id`, `doc_type_id`, `status_id`, `cont_start_date`, `cont_end_date`, `conc_date`, `effective_date`, `cancel_date`, `expiry_date`, `doc_no`, `ref_doc_no`, `product_name`, `title`, `amount`, `currency_id`, `counter_party_id`, `remarks`, `doc_info`, `sign_level`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 0, 1, 1, 0, '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '1', '[{"no":"1"}]', 'テストプロダクト', 'テストタイトル', 12345, 1, 1, 'テスト備考', '[{"title":"摘要タイトル","content":"摘要内容"}]', 1, 1, '2023-01-18 11:03:42', 1, '2023-01-18 11:03:42') {"time":"60.4ms"} 
+[2023-01-18 11:03:42] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"8.44ms"} 
+[2023-01-18 11:03:42] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (1, 1, 1, 1, '2023-01-18 11:03:42', 1, '2023-01-18 11:03:42', NULL, NULL) {"time":"5.24ms"} 
+[2023-01-18 11:03:42] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.67ms"} 
+[2023-01-18 11:03:42] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (1, 1, 1, 1, 'test_file.pdf', 1000, '/test/test/test', 'testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 1, '2023-01-18 11:03:42', 1, '2023-01-18 11:03:42', NULL, NULL) {"time":"6.6ms"} 
+[2023-01-18 11:03:42] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.84ms"} 
+[2023-01-18 11:03:42] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 1, 1, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"4.39ms"} 
+[2023-01-18 11:03:42] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.7ms"} 
+[2023-01-18 11:03:42] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 2, 2, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.79ms"} 
+[2023-01-18 11:03:42] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.62ms"} 
+[2023-01-18 11:03:42] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 3, 3, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.66ms"} 
+[2023-01-18 11:03:42] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.78ms"} 
+[2023-01-18 11:03:42] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 4, 4, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.9ms"} 
+[2023-01-18 11:03:42] local.DEBUG: COMMIT  
+[2023-01-18 11:03:44] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:03:44] local.DEBUG: insert into `t_document_contract` (`company_id`, `category_id`, `template_id`, `doc_type_id`, `status_id`, `cont_start_date`, `cont_end_date`, `conc_date`, `effective_date`, `cancel_date`, `expiry_date`, `doc_no`, `ref_doc_no`, `product_name`, `title`, `amount`, `currency_id`, `counter_party_id`, `remarks`, `doc_info`, `sign_level`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 0, 1, 1, 0, '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '1', '[{"no":"1"}]', 'テストプロダクト', 'テストタイトル', 12345, 1, 1, 'テスト備考', '[{"title":"摘要タイトル","content":"摘要内容"}]', 1, 1, '2023-01-18 11:03:44', 1, '2023-01-18 11:03:44') {"time":"1.3ms"} 
+[2023-01-18 11:03:44] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.74ms"} 
+[2023-01-18 11:03:44] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 1, 1, '2023-01-18 11:03:44', 1, '2023-01-18 11:03:44', NULL, NULL) {"time":"1.53ms"} 
+[2023-01-18 11:03:44] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.79ms"} 
+[2023-01-18 11:03:44] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 1, 1, 'test_file.pdf', 1000, '/test/test/test', 'testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 1, '2023-01-18 11:03:44', 1, '2023-01-18 11:03:44', NULL, NULL) {"time":"1.15ms"} 
+[2023-01-18 11:03:44] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.69ms"} 
+[2023-01-18 11:03:44] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 1, 1, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.85ms"} 
+[2023-01-18 11:03:44] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.72ms"} 
+[2023-01-18 11:03:44] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 2, 2, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.76ms"} 
+[2023-01-18 11:03:44] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.93ms"} 
+[2023-01-18 11:03:44] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 3, 3, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.86ms"} 
+[2023-01-18 11:03:44] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.61ms"} 
+[2023-01-18 11:03:44] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 4, 4, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.7ms"} 
+[2023-01-18 11:03:44] local.DEBUG: COMMIT  
+[2023-01-18 11:03:57] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:03:57] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"5.49ms"} 
+[2023-01-18 11:03:57] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"2.97ms"} 
+[2023-01-18 11:03:57] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"1.21ms"} 
+[2023-01-18 11:03:57] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:03:57' where `update_datetime` = '2023-01-11 22:03:06' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"2.15ms"} 
+[2023-01-18 11:03:57] local.DEBUG: ROLLBACK  
+[2023-01-18 11:03:57] local.ERROR: Exception: common.messate.permission in /var/www/html/app/Domain/Repositories/Document/DocumentSaveRepository.php:201
+Stack trace:
+#0 /var/www/html/app/Domain/Services/Document/DocumentSaveService.php(53): App\Domain\Repositories\Document\DocumentSaveRepository->contractUpdate()
+#1 /var/www/html/app/Http/Controllers/Document/DocumentSaveController.php(89): App\Domain\Services\Document\DocumentSaveService->saveDocument()
+#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\Http\Controllers\Document\DocumentSaveController->saveDocument()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(261): Illuminate\Routing\ControllerDispatcher->dispatch()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(204): Illuminate\Routing\Route->runController()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(725): Illuminate\Routing\Route->run()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(102): Illuminate\Routing\Middleware\ThrottleRequests->handleRequest()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(54): Illuminate\Routing\Middleware\ThrottleRequests->handleRequestUsingNamedLimiter()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\ThrottleRequests->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(703): Illuminate\Routing\Router->runRouteWithinStack()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(667): Illuminate\Routing\Router->runRoute()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(656): Illuminate\Routing\Router->dispatchToRoute()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(167): Illuminate\Routing\Router->dispatch()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#23 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#24 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#25 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#26 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#27 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#28 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle()
+#29 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#30 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#31 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#32 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\HandleCors->handle()
+#33 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#34 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\TrustProxies->handle()
+#35 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#36 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\Pipeline\Pipeline->then()
+#37 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
+#39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
+#40 {main}  
+[2023-01-18 11:03:59] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:03:59] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"1.06ms"} 
+[2023-01-18 11:03:59] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.79ms"} 
+[2023-01-18 11:03:59] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.85ms"} 
+[2023-01-18 11:03:59] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:03:59' where `update_datetime` = '2023-01-11 22:03:06' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"2.18ms"} 
+[2023-01-18 11:03:59] local.DEBUG: ROLLBACK  
+[2023-01-18 11:03:59] local.ERROR: Exception: common.messate.permission in /var/www/html/app/Domain/Repositories/Document/DocumentSaveRepository.php:201
+Stack trace:
+#0 /var/www/html/app/Domain/Services/Document/DocumentSaveService.php(53): App\Domain\Repositories\Document\DocumentSaveRepository->contractUpdate()
+#1 /var/www/html/app/Http/Controllers/Document/DocumentSaveController.php(89): App\Domain\Services\Document\DocumentSaveService->saveDocument()
+#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\Http\Controllers\Document\DocumentSaveController->saveDocument()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(261): Illuminate\Routing\ControllerDispatcher->dispatch()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(204): Illuminate\Routing\Route->runController()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(725): Illuminate\Routing\Route->run()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(102): Illuminate\Routing\Middleware\ThrottleRequests->handleRequest()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(54): Illuminate\Routing\Middleware\ThrottleRequests->handleRequestUsingNamedLimiter()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\ThrottleRequests->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(703): Illuminate\Routing\Router->runRouteWithinStack()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(667): Illuminate\Routing\Router->runRoute()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(656): Illuminate\Routing\Router->dispatchToRoute()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(167): Illuminate\Routing\Router->dispatch()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#23 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#24 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#25 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#26 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#27 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#28 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle()
+#29 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#30 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#31 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#32 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\HandleCors->handle()
+#33 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#34 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\TrustProxies->handle()
+#35 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#36 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\Pipeline\Pipeline->then()
+#37 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
+#39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
+#40 {main}  
+[2023-01-18 11:04:55] local.DEBUG: SHOW FULL TABLES WHERE table_type = 'BASE TABLE' {"time":"25.81ms"} 
+[2023-01-18 11:04:55] local.DEBUG: SET FOREIGN_KEY_CHECKS=0; {"time":"0.88ms"} 
+[2023-01-18 11:04:55] local.DEBUG: drop table `m_certificate_files`,`m_certificate_files_hist`,`m_company_counter_party`,`m_company_counter_party_hist`,`m_company_department`,`m_company_department_hist`,`m_company_info`,`m_company_info_hist`,`m_iden_veri_document`,`m_iden_veri_document_hist`,`m_user`,`m_user_hist`,`m_user_role`,`m_user_role_hist`,`migrations`,`personal_access_tokens`,`t_cert_application`,`t_cert_upload_file`,`t_doc_permission_archive`,`t_doc_permission_contract`,`t_doc_permission_internal`,`t_doc_permission_transaction`,`t_doc_storage_archive`,`t_doc_storage_contract`,`t_doc_storage_internal`,`t_doc_storage_transaction`,`t_doc_verification`,`t_doc_verification_file`,`t_document_archive`,`t_document_contract`,`t_document_deal`,`t_document_internal`,`t_document_workflow`,`t_download_file`,`t_log_doc_access`,`t_log_doc_operation`,`t_log_system_access`,`t_notice`,`t_system_mail`,`t_system_notice`,`temp_token`,`user` {"time":"428.7ms"} 
+[2023-01-18 11:04:55] local.DEBUG: SET FOREIGN_KEY_CHECKS=1; {"time":"0.43ms"} 
+[2023-01-18 11:04:55] local.DEBUG: select * from information_schema.tables where table_schema = 'laravel' and table_name = 'migrations' and table_type = 'BASE TABLE' {"time":"3.25ms"} 
+[2023-01-18 11:04:55] local.DEBUG: create table `migrations` (`id` int unsigned not null auto_increment primary key, `migration` varchar(255) not null, `batch` int not null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' {"time":"37.79ms"} 
+[2023-01-18 11:04:55] local.DEBUG: select * from information_schema.tables where table_schema = 'laravel' and table_name = 'migrations' and table_type = 'BASE TABLE' {"time":"5.82ms"} 
+[2023-01-18 11:04:55] local.DEBUG: select `migration` from `migrations` order by `batch` asc, `migration` asc {"time":"1.58ms"} 
+[2023-01-18 11:04:55] local.DEBUG: select `migration` from `migrations` order by `batch` asc, `migration` asc {"time":"0.91ms"} 
+[2023-01-18 11:04:55] local.DEBUG: select max(`batch`) as aggregate from `migrations` {"time":"1.83ms"} 
+[2023-01-18 11:04:55] local.DEBUG: create table `personal_access_tokens` (`id` bigint unsigned not null auto_increment primary key, `tokenable_type` varchar(255) not null, `tokenable_id` bigint unsigned not null, `name` varchar(255) not null, `token` varchar(64) not null, `abilities` text null, `last_used_at` timestamp null, `expires_at` timestamp null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' {"time":"35.63ms"} 
+[2023-01-18 11:04:55] local.DEBUG: alter table `personal_access_tokens` add index `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type`, `tokenable_id`) {"time":"38.63ms"} 
+[2023-01-18 11:04:55] local.DEBUG: alter table `personal_access_tokens` add unique `personal_access_tokens_token_unique`(`token`) {"time":"27.15ms"} 
+[2023-01-18 11:04:55] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2019_12_14_000001_create_personal_access_tokens_table', 1) {"time":"6.49ms"} 
+[2023-01-18 11:04:55] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_10_14_103251_sample_create_user', 1) {"time":"7.6ms"} 
+[2023-01-18 11:04:55] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141012_create_m_certificate_files_tables', 1) {"time":"5.53ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141227_create_m_certificate_files_hist_tables', 1) {"time":"5.67ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141433_create_m_company_counter_party_tables', 1) {"time":"6.31ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141612_create_m_company_counter_party_hist_tables', 1) {"time":"5.97ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_142957_create_m_company_department_tables', 1) {"time":"6.51ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143718_create_m_company_department_hist_tables', 1) {"time":"4.6ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143744_create_m_company_info_tables', 1) {"time":"7.26ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143808_create_m_company_info_hist_tables', 1) {"time":"5.49ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144257_create_m_iden_veri_document_tables', 1) {"time":"6.36ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144314_create_m_iden_veri_document_hist_tables', 1) {"time":"6.16ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144409_create_m_user_role_tables', 1) {"time":"6.93ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144424_create_m_user_role_hist_tables', 1) {"time":"7.06ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144626_create_t_cert_upload_file_tables', 1) {"time":"5.65ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144639_create_t_document_contract_tables', 1) {"time":"5.81ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144653_create_t_document_deal_tables', 1) {"time":"8.85ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144707_create_t_document_internal_tables', 1) {"time":"7.18ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144720_create_t_document_archive_tables', 1) {"time":"5.97ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144738_create_t_doc_permission_contract_tables', 1) {"time":"6.04ms"} 
+[2023-01-18 11:04:56] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144753_create_t_doc_permission_transaction_tables', 1) {"time":"4.8ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144808_create_t_doc_permission_internal_tables', 1) {"time":"5.1ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144827_create_t_doc_permission_archive_tables', 1) {"time":"3.96ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144841_create_t_doc_storage_contract_tables', 1) {"time":"7.19ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144904_create_t_doc_storage_transaction_tables', 1) {"time":"4.83ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144921_create_t_doc_storage_internal_tables', 1) {"time":"5.65ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144935_create_t_doc_storage_archive_tables', 1) {"time":"5.31ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144947_create_t_doc_verification_tables', 1) {"time":"5.37ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145001_create_t_doc_verification_file_tables', 1) {"time":"5.69ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145027_create_t_log_doc_access_tables', 1) {"time":"5.21ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145041_create_t_log_doc_operation_tables', 1) {"time":"4.97ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145057_create_t_log_system_access_tables', 1) {"time":"7.33ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145108_create_t_notice_tables', 1) {"time":"5.65ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145121_create_t_system_notice_tables', 1) {"time":"6.59ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145133_create_t_system_mail_tables', 1) {"time":"5.63ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145146_create_t_download_file_tables', 1) {"time":"5.83ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145157_create_temp_token_tables', 1) {"time":"5.78ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_08_163939_create_m_user_tables', 1) {"time":"5.71ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_08_164038_create_m_user_hist_tables', 1) {"time":"5.34ms"} 
+[2023-01-18 11:04:57] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_14_105734_create_t_document_workflow_tables', 1) {"time":"6.98ms"} 
+[2023-01-18 11:04:58] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_16_090520_create_t_cert_application_tables', 1) {"time":"5.87ms"} 
+[2023-01-18 11:04:58] local.DEBUG: insert into `m_company_department` (`company_id`, `create_datetime`, `create_user`, `delete_datetime`, `delete_user`, `department_id`, `department_name`, `effe_end_date`, `effe_start_date`, `parent_id`, `update_datetime`, `update_user`) values (1, NULL, 1, NULL, NULL, 1, '人事部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 2, '経理部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 3, '総務部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 4, '採用部', NULL, NULL, 1, NULL, NULL), (1, NULL, 1, NULL, NULL, 5, '研修部', NULL, NULL, 1, NULL, NULL), (1, NULL, 1, NULL, NULL, 6, '新人研修部', NULL, NULL, 5, NULL, NULL), (1, NULL, 1, NULL, NULL, 7, '経理部1課', NULL, NULL, 2, NULL, NULL), (1, NULL, 1, NULL, NULL, 8, '経理部2課', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 9, '総務部1', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 10, '総務部2', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 11, '総務部2-1', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 12, '総務部2-2', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 13, '総務部2-2-1', NULL, NULL, 12, NULL, NULL) {"time":"10.57ms"} 
+[2023-01-18 11:05:18] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:05:18] local.DEBUG: insert into `t_document_contract` (`company_id`, `category_id`, `template_id`, `doc_type_id`, `status_id`, `cont_start_date`, `cont_end_date`, `conc_date`, `effective_date`, `cancel_date`, `expiry_date`, `doc_no`, `ref_doc_no`, `product_name`, `title`, `amount`, `currency_id`, `counter_party_id`, `remarks`, `doc_info`, `sign_level`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 0, 1, 1, 0, '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '1', '[{"no":"1"}]', 'テストプロダクト', 'テストタイトル', 12345, 1, 1, 'テスト備考', '[{"title":"摘要タイトル","content":"摘要内容"}]', 1, 1, '2023-01-18 11:05:18', 1, '2023-01-18 11:05:18') {"time":"3.58ms"} 
+[2023-01-18 11:05:18] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.77ms"} 
+[2023-01-18 11:05:18] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (1, 1, 1, 1, '2023-01-18 11:05:18', 1, '2023-01-18 11:05:18', NULL, NULL) {"time":"1.52ms"} 
+[2023-01-18 11:05:18] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.65ms"} 
+[2023-01-18 11:05:18] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (1, 1, 1, 1, 'test_file.pdf', 1000, '/test/test/test', 'testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 1, '2023-01-18 11:05:18', 1, '2023-01-18 11:05:18', NULL, NULL) {"time":"2.07ms"} 
+[2023-01-18 11:05:18] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.69ms"} 
+[2023-01-18 11:05:18] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 1, 1, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"2.33ms"} 
+[2023-01-18 11:05:18] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.7ms"} 
+[2023-01-18 11:05:18] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 2, 2, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.74ms"} 
+[2023-01-18 11:05:18] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.68ms"} 
+[2023-01-18 11:05:18] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 3, 3, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.8ms"} 
+[2023-01-18 11:05:18] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.72ms"} 
+[2023-01-18 11:05:18] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 4, 4, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.81ms"} 
+[2023-01-18 11:05:18] local.DEBUG: COMMIT  
+[2023-01-18 11:05:19] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:05:19] local.DEBUG: insert into `t_document_contract` (`company_id`, `category_id`, `template_id`, `doc_type_id`, `status_id`, `cont_start_date`, `cont_end_date`, `conc_date`, `effective_date`, `cancel_date`, `expiry_date`, `doc_no`, `ref_doc_no`, `product_name`, `title`, `amount`, `currency_id`, `counter_party_id`, `remarks`, `doc_info`, `sign_level`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 0, 1, 1, 0, '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '1', '[{"no":"1"}]', 'テストプロダクト', 'テストタイトル', 12345, 1, 1, 'テスト備考', '[{"title":"摘要タイトル","content":"摘要内容"}]', 1, 1, '2023-01-18 11:05:19', 1, '2023-01-18 11:05:19') {"time":"1.29ms"} 
+[2023-01-18 11:05:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.7ms"} 
+[2023-01-18 11:05:19] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 1, 1, '2023-01-18 11:05:19', 1, '2023-01-18 11:05:19', NULL, NULL) {"time":"0.87ms"} 
+[2023-01-18 11:05:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.86ms"} 
+[2023-01-18 11:05:19] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 1, 1, 'test_file.pdf', 1000, '/test/test/test', 'testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 1, '2023-01-18 11:05:19', 1, '2023-01-18 11:05:19', NULL, NULL) {"time":"1.84ms"} 
+[2023-01-18 11:05:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.78ms"} 
+[2023-01-18 11:05:19] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 1, 1, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.97ms"} 
+[2023-01-18 11:05:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.7ms"} 
+[2023-01-18 11:05:19] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 2, 2, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.77ms"} 
+[2023-01-18 11:05:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.66ms"} 
+[2023-01-18 11:05:19] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 3, 3, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.68ms"} 
+[2023-01-18 11:05:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.63ms"} 
+[2023-01-18 11:05:19] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 4, 4, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"1.16ms"} 
+[2023-01-18 11:05:19] local.DEBUG: COMMIT  
+[2023-01-18 11:05:32] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:05:32] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"0.98ms"} 
+[2023-01-18 11:05:32] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.69ms"} 
+[2023-01-18 11:05:32] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.75ms"} 
+[2023-01-18 11:05:32] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:05:32' where `update_datetime` = '2023-01-11 22:03:06' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"1.21ms"} 
+[2023-01-18 11:05:32] local.DEBUG: ROLLBACK  
+[2023-01-18 11:05:32] local.ERROR: Exception: common.messate.permission in /var/www/html/app/Domain/Repositories/Document/DocumentSaveRepository.php:201
+Stack trace:
+#0 /var/www/html/app/Domain/Services/Document/DocumentSaveService.php(53): App\Domain\Repositories\Document\DocumentSaveRepository->contractUpdate()
+#1 /var/www/html/app/Http/Controllers/Document/DocumentSaveController.php(89): App\Domain\Services\Document\DocumentSaveService->saveDocument()
+#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\Http\Controllers\Document\DocumentSaveController->saveDocument()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(261): Illuminate\Routing\ControllerDispatcher->dispatch()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(204): Illuminate\Routing\Route->runController()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(725): Illuminate\Routing\Route->run()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(102): Illuminate\Routing\Middleware\ThrottleRequests->handleRequest()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(54): Illuminate\Routing\Middleware\ThrottleRequests->handleRequestUsingNamedLimiter()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\ThrottleRequests->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(703): Illuminate\Routing\Router->runRouteWithinStack()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(667): Illuminate\Routing\Router->runRoute()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(656): Illuminate\Routing\Router->dispatchToRoute()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(167): Illuminate\Routing\Router->dispatch()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#23 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#24 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#25 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#26 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#27 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#28 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle()
+#29 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#30 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#31 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#32 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\HandleCors->handle()
+#33 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#34 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\TrustProxies->handle()
+#35 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#36 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\Pipeline\Pipeline->then()
+#37 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
+#39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
+#40 {main}  
+[2023-01-18 11:06:40] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:06:40] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"1.53ms"} 
+[2023-01-18 11:06:40] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.8ms"} 
+[2023-01-18 11:06:40] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.83ms"} 
+[2023-01-18 11:06:40] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:06:40' where `update_datetime` = '2023-01-11 22:03:06' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"1.39ms"} 
+[2023-01-18 11:06:40] local.DEBUG: ROLLBACK  
+[2023-01-18 11:06:40] local.ERROR: Exception: common.messate.permission in /var/www/html/app/Domain/Repositories/Document/DocumentSaveRepository.php:201
+Stack trace:
+#0 /var/www/html/app/Domain/Services/Document/DocumentSaveService.php(53): App\Domain\Repositories\Document\DocumentSaveRepository->contractUpdate()
+#1 /var/www/html/app/Http/Controllers/Document/DocumentSaveController.php(89): App\Domain\Services\Document\DocumentSaveService->saveDocument()
+#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\Http\Controllers\Document\DocumentSaveController->saveDocument()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(261): Illuminate\Routing\ControllerDispatcher->dispatch()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(204): Illuminate\Routing\Route->runController()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(725): Illuminate\Routing\Route->run()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(102): Illuminate\Routing\Middleware\ThrottleRequests->handleRequest()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(54): Illuminate\Routing\Middleware\ThrottleRequests->handleRequestUsingNamedLimiter()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\ThrottleRequests->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(703): Illuminate\Routing\Router->runRouteWithinStack()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(667): Illuminate\Routing\Router->runRoute()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(656): Illuminate\Routing\Router->dispatchToRoute()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(167): Illuminate\Routing\Router->dispatch()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#23 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#24 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#25 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#26 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#27 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#28 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle()
+#29 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#30 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#31 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#32 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\HandleCors->handle()
+#33 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#34 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\TrustProxies->handle()
+#35 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#36 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\Pipeline\Pipeline->then()
+#37 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
+#39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
+#40 {main}  
+[2023-01-18 11:08:39] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:08:39] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"1.13ms"} 
+[2023-01-18 11:08:39] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.83ms"} 
+[2023-01-18 11:08:39] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.88ms"} 
+[2023-01-18 11:08:39] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:08:39' where `update_datetime` = '2023-01-11 22:03:06' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"1.73ms"} 
+[2023-01-18 11:08:39] local.DEBUG: ROLLBACK  
+[2023-01-18 11:08:39] local.ERROR: Exception: common.messate.permission1 in /var/www/html/app/Domain/Repositories/Document/DocumentSaveRepository.php:201
+Stack trace:
+#0 /var/www/html/app/Domain/Services/Document/DocumentSaveService.php(53): App\Domain\Repositories\Document\DocumentSaveRepository->contractUpdate()
+#1 /var/www/html/app/Http/Controllers/Document/DocumentSaveController.php(89): App\Domain\Services\Document\DocumentSaveService->saveDocument()
+#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\Http\Controllers\Document\DocumentSaveController->saveDocument()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(261): Illuminate\Routing\ControllerDispatcher->dispatch()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(204): Illuminate\Routing\Route->runController()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(725): Illuminate\Routing\Route->run()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(102): Illuminate\Routing\Middleware\ThrottleRequests->handleRequest()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(54): Illuminate\Routing\Middleware\ThrottleRequests->handleRequestUsingNamedLimiter()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\ThrottleRequests->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(703): Illuminate\Routing\Router->runRouteWithinStack()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(667): Illuminate\Routing\Router->runRoute()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(656): Illuminate\Routing\Router->dispatchToRoute()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(167): Illuminate\Routing\Router->dispatch()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#23 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#24 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#25 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#26 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#27 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#28 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle()
+#29 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#30 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#31 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#32 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\HandleCors->handle()
+#33 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#34 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\TrustProxies->handle()
+#35 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#36 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\Pipeline\Pipeline->then()
+#37 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
+#39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
+#40 {main}  
+[2023-01-18 11:09:09] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:09:09] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"1ms"} 
+[2023-01-18 11:09:09] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.9ms"} 
+[2023-01-18 11:09:09] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.82ms"} 
+[2023-01-18 11:09:09] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:09:09' where `update_datetime` = '2023-01-11 22:03:06' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"1.43ms"} 
+[2023-01-18 11:09:09] local.DEBUG: ROLLBACK  
+[2023-01-18 11:09:09] local.ERROR: Exception: common.messate.permission1 in /var/www/html/app/Domain/Repositories/Document/DocumentSaveRepository.php:202
+Stack trace:
+#0 /var/www/html/app/Domain/Services/Document/DocumentSaveService.php(53): App\Domain\Repositories\Document\DocumentSaveRepository->contractUpdate()
+#1 /var/www/html/app/Http/Controllers/Document/DocumentSaveController.php(89): App\Domain\Services\Document\DocumentSaveService->saveDocument()
+#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\Http\Controllers\Document\DocumentSaveController->saveDocument()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(261): Illuminate\Routing\ControllerDispatcher->dispatch()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(204): Illuminate\Routing\Route->runController()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(725): Illuminate\Routing\Route->run()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(102): Illuminate\Routing\Middleware\ThrottleRequests->handleRequest()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(54): Illuminate\Routing\Middleware\ThrottleRequests->handleRequestUsingNamedLimiter()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\ThrottleRequests->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(703): Illuminate\Routing\Router->runRouteWithinStack()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(667): Illuminate\Routing\Router->runRoute()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(656): Illuminate\Routing\Router->dispatchToRoute()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(167): Illuminate\Routing\Router->dispatch()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#23 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#24 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#25 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#26 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#27 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#28 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle()
+#29 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#30 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#31 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#32 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\HandleCors->handle()
+#33 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#34 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\TrustProxies->handle()
+#35 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#36 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\Pipeline\Pipeline->then()
+#37 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
+#39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
+#40 {main}  
+[2023-01-18 11:09:51] local.DEBUG: SHOW FULL TABLES WHERE table_type = 'BASE TABLE' {"time":"6.19ms"} 
+[2023-01-18 11:09:51] local.DEBUG: SET FOREIGN_KEY_CHECKS=0; {"time":"0.69ms"} 
+[2023-01-18 11:09:52] local.DEBUG: drop table `m_certificate_files`,`m_certificate_files_hist`,`m_company_counter_party`,`m_company_counter_party_hist`,`m_company_department`,`m_company_department_hist`,`m_company_info`,`m_company_info_hist`,`m_iden_veri_document`,`m_iden_veri_document_hist`,`m_user`,`m_user_hist`,`m_user_role`,`m_user_role_hist`,`migrations`,`personal_access_tokens`,`t_cert_application`,`t_cert_upload_file`,`t_doc_permission_archive`,`t_doc_permission_contract`,`t_doc_permission_internal`,`t_doc_permission_transaction`,`t_doc_storage_archive`,`t_doc_storage_contract`,`t_doc_storage_internal`,`t_doc_storage_transaction`,`t_doc_verification`,`t_doc_verification_file`,`t_document_archive`,`t_document_contract`,`t_document_deal`,`t_document_internal`,`t_document_workflow`,`t_download_file`,`t_log_doc_access`,`t_log_doc_operation`,`t_log_system_access`,`t_notice`,`t_system_mail`,`t_system_notice`,`temp_token`,`user` {"time":"386.16ms"} 
+[2023-01-18 11:09:52] local.DEBUG: SET FOREIGN_KEY_CHECKS=1; {"time":"0.49ms"} 
+[2023-01-18 11:09:52] local.DEBUG: select * from information_schema.tables where table_schema = 'laravel' and table_name = 'migrations' and table_type = 'BASE TABLE' {"time":"1.97ms"} 
+[2023-01-18 11:09:52] local.DEBUG: create table `migrations` (`id` int unsigned not null auto_increment primary key, `migration` varchar(255) not null, `batch` int not null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' {"time":"22.14ms"} 
+[2023-01-18 11:09:52] local.DEBUG: select * from information_schema.tables where table_schema = 'laravel' and table_name = 'migrations' and table_type = 'BASE TABLE' {"time":"6.07ms"} 
+[2023-01-18 11:09:52] local.DEBUG: select `migration` from `migrations` order by `batch` asc, `migration` asc {"time":"1.43ms"} 
+[2023-01-18 11:09:52] local.DEBUG: select `migration` from `migrations` order by `batch` asc, `migration` asc {"time":"0.6ms"} 
+[2023-01-18 11:09:52] local.DEBUG: select max(`batch`) as aggregate from `migrations` {"time":"0.76ms"} 
+[2023-01-18 11:09:52] local.DEBUG: create table `personal_access_tokens` (`id` bigint unsigned not null auto_increment primary key, `tokenable_type` varchar(255) not null, `tokenable_id` bigint unsigned not null, `name` varchar(255) not null, `token` varchar(64) not null, `abilities` text null, `last_used_at` timestamp null, `expires_at` timestamp null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' {"time":"43.98ms"} 
+[2023-01-18 11:09:52] local.DEBUG: alter table `personal_access_tokens` add index `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type`, `tokenable_id`) {"time":"20.29ms"} 
+[2023-01-18 11:09:52] local.DEBUG: alter table `personal_access_tokens` add unique `personal_access_tokens_token_unique`(`token`) {"time":"21.71ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2019_12_14_000001_create_personal_access_tokens_table', 1) {"time":"5.78ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_10_14_103251_sample_create_user', 1) {"time":"6.14ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141012_create_m_certificate_files_tables', 1) {"time":"5.73ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141227_create_m_certificate_files_hist_tables', 1) {"time":"7.25ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141433_create_m_company_counter_party_tables', 1) {"time":"4.36ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141612_create_m_company_counter_party_hist_tables', 1) {"time":"5.36ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_142957_create_m_company_department_tables', 1) {"time":"3.99ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143718_create_m_company_department_hist_tables', 1) {"time":"5.97ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143744_create_m_company_info_tables', 1) {"time":"7.12ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143808_create_m_company_info_hist_tables', 1) {"time":"5.86ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144257_create_m_iden_veri_document_tables', 1) {"time":"7.54ms"} 
+[2023-01-18 11:09:52] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144314_create_m_iden_veri_document_hist_tables', 1) {"time":"6.03ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144409_create_m_user_role_tables', 1) {"time":"4.88ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144424_create_m_user_role_hist_tables', 1) {"time":"6.18ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144626_create_t_cert_upload_file_tables', 1) {"time":"5.28ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144639_create_t_document_contract_tables', 1) {"time":"5.65ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144653_create_t_document_deal_tables', 1) {"time":"6.05ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144707_create_t_document_internal_tables', 1) {"time":"7.88ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144720_create_t_document_archive_tables', 1) {"time":"5.87ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144738_create_t_doc_permission_contract_tables', 1) {"time":"5.31ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144753_create_t_doc_permission_transaction_tables', 1) {"time":"6.32ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144808_create_t_doc_permission_internal_tables', 1) {"time":"5.1ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144827_create_t_doc_permission_archive_tables', 1) {"time":"7.04ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144841_create_t_doc_storage_contract_tables', 1) {"time":"5.8ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144904_create_t_doc_storage_transaction_tables', 1) {"time":"5.7ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144921_create_t_doc_storage_internal_tables', 1) {"time":"5.18ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144935_create_t_doc_storage_archive_tables', 1) {"time":"6.08ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144947_create_t_doc_verification_tables', 1) {"time":"7.16ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145001_create_t_doc_verification_file_tables', 1) {"time":"6.9ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145027_create_t_log_doc_access_tables', 1) {"time":"4.81ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145041_create_t_log_doc_operation_tables', 1) {"time":"5.24ms"} 
+[2023-01-18 11:09:53] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145057_create_t_log_system_access_tables', 1) {"time":"6.8ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145108_create_t_notice_tables', 1) {"time":"5.16ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145121_create_t_system_notice_tables', 1) {"time":"7.72ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145133_create_t_system_mail_tables', 1) {"time":"6.32ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145146_create_t_download_file_tables', 1) {"time":"6.25ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145157_create_temp_token_tables', 1) {"time":"5.45ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_08_163939_create_m_user_tables', 1) {"time":"5.52ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_08_164038_create_m_user_hist_tables', 1) {"time":"7.05ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_14_105734_create_t_document_workflow_tables', 1) {"time":"4.67ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_16_090520_create_t_cert_application_tables', 1) {"time":"7.99ms"} 
+[2023-01-18 11:09:54] local.DEBUG: insert into `m_company_department` (`company_id`, `create_datetime`, `create_user`, `delete_datetime`, `delete_user`, `department_id`, `department_name`, `effe_end_date`, `effe_start_date`, `parent_id`, `update_datetime`, `update_user`) values (1, NULL, 1, NULL, NULL, 1, '人事部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 2, '経理部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 3, '総務部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 4, '採用部', NULL, NULL, 1, NULL, NULL), (1, NULL, 1, NULL, NULL, 5, '研修部', NULL, NULL, 1, NULL, NULL), (1, NULL, 1, NULL, NULL, 6, '新人研修部', NULL, NULL, 5, NULL, NULL), (1, NULL, 1, NULL, NULL, 7, '経理部1課', NULL, NULL, 2, NULL, NULL), (1, NULL, 1, NULL, NULL, 8, '経理部2課', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 9, '総務部1', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 10, '総務部2', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 11, '総務部2-1', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 12, '総務部2-2', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 13, '総務部2-2-1', NULL, NULL, 12, NULL, NULL) {"time":"7.71ms"} 
+[2023-01-18 11:10:01] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:10:01] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"3.05ms"} 
+[2023-01-18 11:10:01] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"1.5ms"} 
+[2023-01-18 11:10:01] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"2.48ms"} 
+[2023-01-18 11:10:01] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:10:01' where `update_datetime` = '2023-01-11 22:03:06' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"1.42ms"} 
+[2023-01-18 11:10:01] local.DEBUG: ROLLBACK  
+[2023-01-18 11:10:01] local.ERROR: Exception: common.messate.permission1 in /var/www/html/app/Domain/Repositories/Document/DocumentSaveRepository.php:202
+Stack trace:
+#0 /var/www/html/app/Domain/Services/Document/DocumentSaveService.php(53): App\Domain\Repositories\Document\DocumentSaveRepository->contractUpdate()
+#1 /var/www/html/app/Http/Controllers/Document/DocumentSaveController.php(89): App\Domain\Services\Document\DocumentSaveService->saveDocument()
+#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\Http\Controllers\Document\DocumentSaveController->saveDocument()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(261): Illuminate\Routing\ControllerDispatcher->dispatch()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(204): Illuminate\Routing\Route->runController()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(725): Illuminate\Routing\Route->run()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(102): Illuminate\Routing\Middleware\ThrottleRequests->handleRequest()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(54): Illuminate\Routing\Middleware\ThrottleRequests->handleRequestUsingNamedLimiter()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\ThrottleRequests->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(703): Illuminate\Routing\Router->runRouteWithinStack()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(667): Illuminate\Routing\Router->runRoute()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(656): Illuminate\Routing\Router->dispatchToRoute()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(167): Illuminate\Routing\Router->dispatch()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#23 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#24 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#25 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#26 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#27 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#28 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle()
+#29 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#30 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#31 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#32 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\HandleCors->handle()
+#33 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#34 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\TrustProxies->handle()
+#35 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#36 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\Pipeline\Pipeline->then()
+#37 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
+#39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
+#40 {main}  
+[2023-01-18 11:10:06] local.DEBUG: SHOW FULL TABLES WHERE table_type = 'BASE TABLE' {"time":"6.52ms"} 
+[2023-01-18 11:10:06] local.DEBUG: SET FOREIGN_KEY_CHECKS=0; {"time":"0.65ms"} 
+[2023-01-18 11:10:07] local.DEBUG: drop table `m_certificate_files`,`m_certificate_files_hist`,`m_company_counter_party`,`m_company_counter_party_hist`,`m_company_department`,`m_company_department_hist`,`m_company_info`,`m_company_info_hist`,`m_iden_veri_document`,`m_iden_veri_document_hist`,`m_user`,`m_user_hist`,`m_user_role`,`m_user_role_hist`,`migrations`,`personal_access_tokens`,`t_cert_application`,`t_cert_upload_file`,`t_doc_permission_archive`,`t_doc_permission_contract`,`t_doc_permission_internal`,`t_doc_permission_transaction`,`t_doc_storage_archive`,`t_doc_storage_contract`,`t_doc_storage_internal`,`t_doc_storage_transaction`,`t_doc_verification`,`t_doc_verification_file`,`t_document_archive`,`t_document_contract`,`t_document_deal`,`t_document_internal`,`t_document_workflow`,`t_download_file`,`t_log_doc_access`,`t_log_doc_operation`,`t_log_system_access`,`t_notice`,`t_system_mail`,`t_system_notice`,`temp_token`,`user` {"time":"408.23ms"} 
+[2023-01-18 11:10:07] local.DEBUG: SET FOREIGN_KEY_CHECKS=1; {"time":"0.36ms"} 
+[2023-01-18 11:10:07] local.DEBUG: select * from information_schema.tables where table_schema = 'laravel' and table_name = 'migrations' and table_type = 'BASE TABLE' {"time":"1.85ms"} 
+[2023-01-18 11:10:07] local.DEBUG: create table `migrations` (`id` int unsigned not null auto_increment primary key, `migration` varchar(255) not null, `batch` int not null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' {"time":"33.55ms"} 
+[2023-01-18 11:10:07] local.DEBUG: select * from information_schema.tables where table_schema = 'laravel' and table_name = 'migrations' and table_type = 'BASE TABLE' {"time":"4.97ms"} 
+[2023-01-18 11:10:07] local.DEBUG: select `migration` from `migrations` order by `batch` asc, `migration` asc {"time":"1.43ms"} 
+[2023-01-18 11:10:07] local.DEBUG: select `migration` from `migrations` order by `batch` asc, `migration` asc {"time":"1.03ms"} 
+[2023-01-18 11:10:07] local.DEBUG: select max(`batch`) as aggregate from `migrations` {"time":"0.69ms"} 
+[2023-01-18 11:10:07] local.DEBUG: create table `personal_access_tokens` (`id` bigint unsigned not null auto_increment primary key, `tokenable_type` varchar(255) not null, `tokenable_id` bigint unsigned not null, `name` varchar(255) not null, `token` varchar(64) not null, `abilities` text null, `last_used_at` timestamp null, `expires_at` timestamp null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' {"time":"31.75ms"} 
+[2023-01-18 11:10:07] local.DEBUG: alter table `personal_access_tokens` add index `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type`, `tokenable_id`) {"time":"22.02ms"} 
+[2023-01-18 11:10:07] local.DEBUG: alter table `personal_access_tokens` add unique `personal_access_tokens_token_unique`(`token`) {"time":"18.94ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2019_12_14_000001_create_personal_access_tokens_table', 1) {"time":"5.73ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_10_14_103251_sample_create_user', 1) {"time":"5.4ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141012_create_m_certificate_files_tables', 1) {"time":"4.96ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141227_create_m_certificate_files_hist_tables', 1) {"time":"4.09ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141433_create_m_company_counter_party_tables', 1) {"time":"6.52ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_141612_create_m_company_counter_party_hist_tables', 1) {"time":"6.41ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_142957_create_m_company_department_tables', 1) {"time":"6.1ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143718_create_m_company_department_hist_tables', 1) {"time":"5.28ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143744_create_m_company_info_tables', 1) {"time":"5.59ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_143808_create_m_company_info_hist_tables', 1) {"time":"5.85ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144257_create_m_iden_veri_document_tables', 1) {"time":"5.42ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144314_create_m_iden_veri_document_hist_tables', 1) {"time":"6.35ms"} 
+[2023-01-18 11:10:07] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144409_create_m_user_role_tables', 1) {"time":"5.5ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144424_create_m_user_role_hist_tables', 1) {"time":"5.37ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144626_create_t_cert_upload_file_tables', 1) {"time":"6.03ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144639_create_t_document_contract_tables', 1) {"time":"6.29ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144653_create_t_document_deal_tables', 1) {"time":"6.7ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144707_create_t_document_internal_tables', 1) {"time":"5.37ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144720_create_t_document_archive_tables', 1) {"time":"5.7ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144738_create_t_doc_permission_contract_tables', 1) {"time":"5.44ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144753_create_t_doc_permission_transaction_tables', 1) {"time":"4.95ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144808_create_t_doc_permission_internal_tables', 1) {"time":"5.84ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144827_create_t_doc_permission_archive_tables', 1) {"time":"5.29ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144841_create_t_doc_storage_contract_tables', 1) {"time":"5.72ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144904_create_t_doc_storage_transaction_tables', 1) {"time":"7.16ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144921_create_t_doc_storage_internal_tables', 1) {"time":"5.93ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144935_create_t_doc_storage_archive_tables', 1) {"time":"6.48ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_144947_create_t_doc_verification_tables', 1) {"time":"5.26ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145001_create_t_doc_verification_file_tables', 1) {"time":"6.44ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145027_create_t_log_doc_access_tables', 1) {"time":"7.83ms"} 
+[2023-01-18 11:10:08] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145041_create_t_log_doc_operation_tables', 1) {"time":"3.7ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145057_create_t_log_system_access_tables', 1) {"time":"7.06ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145108_create_t_notice_tables', 1) {"time":"5.79ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145121_create_t_system_notice_tables', 1) {"time":"5.19ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145133_create_t_system_mail_tables', 1) {"time":"6.19ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145146_create_t_download_file_tables', 1) {"time":"6.23ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_07_145157_create_temp_token_tables', 1) {"time":"6ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_08_163939_create_m_user_tables', 1) {"time":"6.58ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_08_164038_create_m_user_hist_tables', 1) {"time":"6.07ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_14_105734_create_t_document_workflow_tables', 1) {"time":"5.67ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `migrations` (`migration`, `batch`) values ('2022_11_16_090520_create_t_cert_application_tables', 1) {"time":"6.59ms"} 
+[2023-01-18 11:10:09] local.DEBUG: insert into `m_company_department` (`company_id`, `create_datetime`, `create_user`, `delete_datetime`, `delete_user`, `department_id`, `department_name`, `effe_end_date`, `effe_start_date`, `parent_id`, `update_datetime`, `update_user`) values (1, NULL, 1, NULL, NULL, 1, '人事部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 2, '経理部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 3, '総務部', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 4, '採用部', NULL, NULL, 1, NULL, NULL), (1, NULL, 1, NULL, NULL, 5, '研修部', NULL, NULL, 1, NULL, NULL), (1, NULL, 1, NULL, NULL, 6, '新人研修部', NULL, NULL, 5, NULL, NULL), (1, NULL, 1, NULL, NULL, 7, '経理部1課', NULL, NULL, 2, NULL, NULL), (1, NULL, 1, NULL, NULL, 8, '経理部2課', NULL, NULL, NULL, NULL, NULL), (1, NULL, 1, NULL, NULL, 9, '総務部1', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 10, '総務部2', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 11, '総務部2-1', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 12, '総務部2-2', NULL, NULL, 3, NULL, NULL), (1, NULL, 1, NULL, NULL, 13, '総務部2-2-1', NULL, NULL, 12, NULL, NULL) {"time":"9.53ms"} 
+[2023-01-18 11:10:19] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:10:19] local.DEBUG: insert into `t_document_contract` (`company_id`, `category_id`, `template_id`, `doc_type_id`, `status_id`, `cont_start_date`, `cont_end_date`, `conc_date`, `effective_date`, `cancel_date`, `expiry_date`, `doc_no`, `ref_doc_no`, `product_name`, `title`, `amount`, `currency_id`, `counter_party_id`, `remarks`, `doc_info`, `sign_level`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 0, 1, 1, 0, '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '1', '[{"no":"1"}]', 'テストプロダクト', 'テストタイトル', 12345, 1, 1, 'テスト備考', '[{"title":"摘要タイトル","content":"摘要内容"}]', 1, 1, '2023-01-18 11:10:19', 1, '2023-01-18 11:10:19') {"time":"3.47ms"} 
+[2023-01-18 11:10:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"1.15ms"} 
+[2023-01-18 11:10:19] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (1, 1, 1, 1, '2023-01-18 11:10:19', 1, '2023-01-18 11:10:19', NULL, NULL) {"time":"1.63ms"} 
+[2023-01-18 11:10:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.71ms"} 
+[2023-01-18 11:10:19] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (1, 1, 1, 1, 'test_file.pdf', 1000, '/test/test/test', 'testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 1, '2023-01-18 11:10:19', 1, '2023-01-18 11:10:19', NULL, NULL) {"time":"2.39ms"} 
+[2023-01-18 11:10:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.69ms"} 
+[2023-01-18 11:10:19] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 1, 1, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"1.73ms"} 
+[2023-01-18 11:10:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.87ms"} 
+[2023-01-18 11:10:19] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 2, 2, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.74ms"} 
+[2023-01-18 11:10:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.71ms"} 
+[2023-01-18 11:10:19] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 3, 3, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.8ms"} 
+[2023-01-18 11:10:19] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.65ms"} 
+[2023-01-18 11:10:19] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 1, 0, 4, 4, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.67ms"} 
+[2023-01-18 11:10:19] local.DEBUG: COMMIT  
+[2023-01-18 11:10:20] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:10:20] local.DEBUG: insert into `t_document_contract` (`company_id`, `category_id`, `template_id`, `doc_type_id`, `status_id`, `cont_start_date`, `cont_end_date`, `conc_date`, `effective_date`, `cancel_date`, `expiry_date`, `doc_no`, `ref_doc_no`, `product_name`, `title`, `amount`, `currency_id`, `counter_party_id`, `remarks`, `doc_info`, `sign_level`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 0, 1, 1, 0, '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '1', '[{"no":"1"}]', 'テストプロダクト', 'テストタイトル', 12345, 1, 1, 'テスト備考', '[{"title":"摘要タイトル","content":"摘要内容"}]', 1, 1, '2023-01-18 11:10:20', 1, '2023-01-18 11:10:20') {"time":"1.26ms"} 
+[2023-01-18 11:10:20] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.72ms"} 
+[2023-01-18 11:10:20] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 1, 1, '2023-01-18 11:10:20', 1, '2023-01-18 11:10:20', NULL, NULL) {"time":"1.06ms"} 
+[2023-01-18 11:10:20] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.81ms"} 
+[2023-01-18 11:10:20] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 1, 1, 'test_file.pdf', 1000, '/test/test/test', 'testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 1, '2023-01-18 11:10:20', 1, '2023-01-18 11:10:20', NULL, NULL) {"time":"1.07ms"} 
+[2023-01-18 11:10:20] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.81ms"} 
+[2023-01-18 11:10:20] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 1, 1, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.79ms"} 
+[2023-01-18 11:10:20] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.67ms"} 
+[2023-01-18 11:10:20] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 2, 2, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.68ms"} 
+[2023-01-18 11:10:20] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.63ms"} 
+[2023-01-18 11:10:20] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 3, 3, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"1.01ms"} 
+[2023-01-18 11:10:20] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.66ms"} 
+[2023-01-18 11:10:20] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (2, 1, 0, 4, 4, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.86ms"} 
+[2023-01-18 11:10:20] local.DEBUG: COMMIT  
+[2023-01-18 11:10:21] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:10:21] local.DEBUG: insert into `t_document_contract` (`company_id`, `category_id`, `template_id`, `doc_type_id`, `status_id`, `cont_start_date`, `cont_end_date`, `conc_date`, `effective_date`, `cancel_date`, `expiry_date`, `doc_no`, `ref_doc_no`, `product_name`, `title`, `amount`, `currency_id`, `counter_party_id`, `remarks`, `doc_info`, `sign_level`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (1, 0, 1, 1, 0, '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '2022-10-1', '1', '[{"no":"1"}]', 'テストプロダクト', 'テストタイトル', 12345, 1, 1, 'テスト備考', '[{"title":"摘要タイトル","content":"摘要内容"}]', 1, 1, '2023-01-18 11:10:21', 1, '2023-01-18 11:10:21') {"time":"1.12ms"} 
+[2023-01-18 11:10:21] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.7ms"} 
+[2023-01-18 11:10:21] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (3, 1, 1, 1, '2023-01-18 11:10:21', 1, '2023-01-18 11:10:21', NULL, NULL) {"time":"0.82ms"} 
+[2023-01-18 11:10:21] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.65ms"} 
+[2023-01-18 11:10:21] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (3, 1, 1, 1, 'test_file.pdf', 1000, '/test/test/test', 'testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 1, '2023-01-18 11:10:21', 1, '2023-01-18 11:10:21', NULL, NULL) {"time":"1.24ms"} 
+[2023-01-18 11:10:21] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.63ms"} 
+[2023-01-18 11:10:21] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (3, 1, 0, 1, 1, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.71ms"} 
+[2023-01-18 11:10:21] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.63ms"} 
+[2023-01-18 11:10:21] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (3, 1, 0, 2, 2, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.78ms"} 
+[2023-01-18 11:10:21] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.65ms"} 
+[2023-01-18 11:10:21] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (3, 1, 0, 3, 3, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.69ms"} 
+[2023-01-18 11:10:21] local.DEBUG: select `document_id` from `t_document_contract` order by `document_id` desc limit 1 {"time":"0.64ms"} 
+[2023-01-18 11:10:21] local.DEBUG: insert into `t_document_workflow` (`document_id`, `company_id`, `category_id`, `app_user_id`, `wf_sort`, `create_user`, `create_datetime`, `update_user`, `update_datetime`) values (3, 1, 0, 4, 4, 1, '2023-01-11 22:03:06', 1, '2023-01-11 22:03:06') {"time":"0.88ms"} 
+[2023-01-18 11:10:21] local.DEBUG: COMMIT  
+[2023-01-18 11:13:09] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:13:09] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"1.24ms"} 
+[2023-01-18 11:13:09] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"1.09ms"} 
+[2023-01-18 11:13:09] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"1.13ms"} 
+[2023-01-18 11:13:09] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:13:09' where `update_datetime` = '2023-01-18 11:10:19' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"1.19ms"} 
+[2023-01-18 11:13:09] local.DEBUG: ROLLBACK  
+[2023-01-18 11:13:09] local.ERROR: Exception: common.messate.permission1 in /var/www/html/app/Domain/Repositories/Document/DocumentSaveRepository.php:202
+Stack trace:
+#0 /var/www/html/app/Domain/Services/Document/DocumentSaveService.php(53): App\Domain\Repositories\Document\DocumentSaveRepository->contractUpdate()
+#1 /var/www/html/app/Http/Controllers/Document/DocumentSaveController.php(89): App\Domain\Services\Document\DocumentSaveService->saveDocument()
+#2 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\Http\Controllers\Document\DocumentSaveController->saveDocument()
+#3 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction()
+#4 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(261): Illuminate\Routing\ControllerDispatcher->dispatch()
+#5 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Route.php(204): Illuminate\Routing\Route->runController()
+#6 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(725): Illuminate\Routing\Route->run()
+#7 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#9 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\SubstituteBindings->handle()
+#10 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(126): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#11 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(102): Illuminate\Routing\Middleware\ThrottleRequests->handleRequest()
+#12 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php(54): Illuminate\Routing\Middleware\ThrottleRequests->handleRequestUsingNamedLimiter()
+#13 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Routing\Middleware\ThrottleRequests->handle()
+#14 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#15 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then()
+#16 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(703): Illuminate\Routing\Router->runRouteWithinStack()
+#17 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(667): Illuminate\Routing\Router->runRoute()
+#18 /var/www/html/vendor/laravel/framework/src/Illuminate/Routing/Router.php(656): Illuminate\Routing\Router->dispatchToRoute()
+#19 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(167): Illuminate\Routing\Router->dispatch()
+#20 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(141): Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}()
+#21 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#22 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#23 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull->handle()
+#24 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#25 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\Foundation\Http\Middleware\TransformsRequest->handle()
+#26 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\TrimStrings->handle()
+#27 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#28 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\ValidatePostSize->handle()
+#29 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(86): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#30 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance->handle()
+#31 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#32 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\HandleCors->handle()
+#33 /var/www/html/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#34 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(180): Illuminate\Http\Middleware\TrustProxies->handle()
+#35 /var/www/html/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(116): Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}()
+#36 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(142): Illuminate\Pipeline\Pipeline->then()
+#37 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(111): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter()
+#38 /var/www/html/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle()
+#39 /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('...')
+#40 {main}  
+[2023-01-18 11:14:18] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:14:18] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"1.13ms"} 
+[2023-01-18 11:14:18] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.9ms"} 
+[2023-01-18 11:14:18] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.81ms"} 
+[2023-01-18 11:14:18] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:14:18' where `update_datetime` = '2023-01-18 11:10:20' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"1.86ms"} 
+[2023-01-18 11:14:18] local.DEBUG: delete from `t_doc_permission_contract` where `document_id` = 2 and `company_id` = 1 {"time":"1.16ms"} 
+[2023-01-18 11:14:18] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 100, 100, '2023-01-18 11:14:18', 100, '2023-01-18 11:14:18', NULL, NULL) {"time":"0.77ms"} 
+[2023-01-18 11:14:18] local.DEBUG: delete from `t_doc_storage_contract` where `document_id` = 2 and `company_id` = 1 {"time":"0.76ms"} 
+[2023-01-18 11:14:18] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 1, 1, 'up_test_file.pdf', 1000, '/up/test/test/test', 'up_testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 100, '2023-01-18 11:14:18', 100, '2023-01-18 11:14:18', NULL, NULL) {"time":"0.91ms"} 
+[2023-01-18 11:14:18] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"1.07ms"} 
+[2023-01-18 11:14:18] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.89ms"} 
+[2023-01-18 11:14:18] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.69ms"} 
+[2023-01-18 11:14:18] local.DEBUG: insert into `t_log_doc_access` (`company_id`, `category_id`, `document_id`, `access_user`, `user_type`, `ip_address`, `access_content`, `create_user`) values (1, 0, 2, 100, 0, NULL, NULL, 100) {"time":"2.27ms"} 
+[2023-01-18 11:14:18] local.DEBUG: insert into `t_log_doc_operation` (`company_id`, `category_id`, `document_id`, `operation_user_id`, `before_content`, `after_contet`, `ip_address`, `create_user`) values (1, 0, 2, 100, '{"update_user":1,"update_datetime":"2023-01-18 11:10:20"}', '{"update_user":100,"update_datetime":"2023-01-18 11:14:18"}', NULL, 100) {"time":"1.64ms"} 
+[2023-01-18 11:14:18] local.DEBUG: COMMIT  
+[2023-01-18 11:15:30] local.DEBUG: START TRANSACTION  
+[2023-01-18 11:15:30] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"1.13ms"} 
+[2023-01-18 11:15:30] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.83ms"} 
+[2023-01-18 11:15:30] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.67ms"} 
+[2023-01-18 11:15:30] local.DEBUG: update `t_document_contract` set `template_id` = 1, `doc_type_id` = 1, `status_id` = 0, `cont_start_date` = '2022-10-1', `cont_end_date` = '2022-10-1', `conc_date` = '2022-10-1', `effective_date` = '2022-10-1', `cancel_date` = '2022-10-1', `doc_no` = '1', `ref_doc_no` = '[{"no":"1"}]', `product_name` = 'upテストプロダクト', `title` = 'upテストタイトル', `amount` = 12345, `currency_id` = 1, `counter_party_id` = 1, `remarks` = 'upテスト備考', `doc_info` = '[{"title":"up\u6458\u8981\u30bf\u30a4\u30c8\u30eb","content":"up\u6458\u8981\u5185\u5bb9"}]', `sign_level` = 1, `update_user` = 100, `update_datetime` = '2023-01-18 11:15:30' where `update_datetime` = '2023-01-18 11:14:18' and `document_id` = 2 and `company_id` = 1 and `category_id` = 0 {"time":"1.39ms"} 
+[2023-01-18 11:15:30] local.DEBUG: delete from `t_doc_permission_contract` where `document_id` = 2 and `company_id` = 1 {"time":"1.05ms"} 
+[2023-01-18 11:15:30] local.DEBUG: insert into `t_doc_permission_contract` (`document_id`, `company_id`, `user_id`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 100, 100, '2023-01-18 11:15:30', 100, '2023-01-18 11:15:30', NULL, NULL) {"time":"0.99ms"} 
+[2023-01-18 11:15:30] local.DEBUG: delete from `t_doc_storage_contract` where `document_id` = 2 and `company_id` = 1 {"time":"0.7ms"} 
+[2023-01-18 11:15:30] local.DEBUG: insert into `t_doc_storage_contract` (`document_id`, `company_id`, `template_id`, `doc_type_id`, `file_name`, `file_size`, `file_path`, `file_hash`, `file_prot_flg`, `file_prot_pw_flg`, `file_timestamp_flg`, `file_sign`, `width`, `height`, `dpi`, `color_depth`, `pdf_type`, `pdf_version`, `sign_position`, `total_pages`, `create_user`, `create_datetime`, `update_user`, `update_datetime`, `delete_user`, `delete_datetime`) values (2, 1, 1, 1, 'up_test_file.pdf', 1000, '/up/test/test/test', 'up_testtesttest', 1, 1, 1, 0, 1000, 1000, 100, 100, 'pdf', 'pdf', '[{"user_id":1,"x":1,"y":200}]', 10, 100, '2023-01-18 11:15:30', 100, '2023-01-18 11:15:30', NULL, NULL) {"time":"0.94ms"} 
+[2023-01-18 11:15:30] local.DEBUG: select `update_user`, `update_datetime` from `t_document_contract` where `company_id` = 1 and `document_id` = 2 and `status_id` = 0 limit 1 {"time":"0.81ms"} 
+[2023-01-18 11:15:30] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_permission_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.77ms"} 
+[2023-01-18 11:15:30] local.DEBUG: select `update_user`, `update_datetime` from `t_doc_storage_contract` where `company_id` = 1 and `document_id` = 2 limit 1 {"time":"0.99ms"} 
+[2023-01-18 11:15:30] local.DEBUG: insert into `t_log_doc_access` (`company_id`, `category_id`, `document_id`, `access_user`, `user_type`, `ip_address`, `access_content`, `create_user`) values (1, 0, 2, 100, 0, NULL, NULL, 100) {"time":"1.07ms"} 
+[2023-01-18 11:15:30] local.DEBUG: insert into `t_log_doc_operation` (`company_id`, `category_id`, `document_id`, `operation_user_id`, `before_content`, `after_contet`, `ip_address`, `create_user`) values (1, 0, 2, 100, '{"update_user":100,"update_datetime":"2023-01-18 11:14:18"}', '{"update_user":100,"update_datetime":"2023-01-18 11:15:30"}', NULL, 100) {"time":"0.91ms"} 
+[2023-01-18 11:15:30] local.DEBUG: COMMIT  
