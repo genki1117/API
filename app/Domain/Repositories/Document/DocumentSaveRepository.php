@@ -197,7 +197,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
         try {
             // 契約書類更新
             $docUpdateResult           = $this->docContract->update(requestContent: $requestContent);
-            var_export($docUpdateResult);
             if (!$docUpdateResult) {
                 throw new Exception('common.message.save-conflict');
             }

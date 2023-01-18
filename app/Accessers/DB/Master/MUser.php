@@ -24,4 +24,21 @@ class MUser extends FluentDatabase
             ->whereNull("mu.delete_datetime")
             ->first();
     }
+
+    /**
+     * @param string $compnay_id
+     * @param string $email
+     * @return \stdClass|null
+     */
+    public function getUserFromEmail(string $compnay_id, string $email): ?\stdClass
+    {
+        return $this->builder("m_user as mu")
+            ->select([
+                "mu.*",
+            ])
+            ->where("mu.company_id", '=', $compnay_id)
+            ->where("mu.email", '=', $email)
+            ->whereNull("mu.delete_datetime")
+            ->first();
+    }
 }

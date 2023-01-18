@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests\Document;
 
+use Illuminate\Validation\ValidationException;
+
+use App\Libraries\ResponseClient;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -70,26 +73,7 @@ class DocumentSaveRequest extends FormRequest
 
             // 登録書類
             'scan_doc_flg'      => 'numeric',
-            'issue_date'        => 'date',
-            'expiry_date'       => 'date',
-            'transaction_date'  => 'date',
             'timestamp_user'    => 'numeric',
-
-            // 各書類容量
-            'file_name'          => 'string | max:255',
-            'file_path'          => 'string | max:255',
-            'file_hash'          => 'string | max:255',
-            'file_prot_flg'      => 'numeric',
-            'file_prot_pw_flg'   => 'numeric',
-            'file_timestamp_flg' => 'numeric',
-            'file_sign'          => 'numeric',
-            'width'              => 'numeric',
-            'height'             => 'numeric',
-            'dpi'                => 'numeric',
-            'color_depth'        => 'numeric',
-            'pdf_type'           => 'string | max:5',
-            'pdf_version'        => 'string | max:4',
-            'total_pages'        => 'numeric'
         ];
     }
     public function messages()
@@ -179,15 +163,201 @@ class DocumentSaveRequest extends FormRequest
          ];
     }
 
+    /**
+     * @return array
+     */
+    private function errorsTable():array
+    {
+        return [
+            'document_id' => [
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "common.label.item.document.id"],
+                ],
+            ],
+            'company_id' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "common.label.item.company.id"],
+                ],
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "common.label.item.company.id"],
+                ]
+            ],
+            'category_id' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "common.label.item.company.id"],
+                ],
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "common.label.item.company.id"],
+                ]
+            ],
+            'template_id' => [
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "admin-menu.label.template"],
+                ]
+            ],
+            'doc_type_id' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "document.label.item.document-type"],
+                ],
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "document.label.item.document-type"],
+                ]
+            ],
+            'status_id' => [
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "document.label.item.status"],
+                ]
+            ],
+            'doc_no' => [
+                "String" =>  [
+                    ["type" => "label", "content" => "document.label.item.document-number"],
+                ],
+                "Max" =>  [
+                    ["type" => "label", "content" => "document.label.item.document-number"],
+                    ["type" => "text", "content" => "20"],
+                ],
+            ],
+            'product_name' => [
+                "String" =>  [
+                    ["type" => "label", "content" => "document.label.item.product-name"],
+                ],
+                "Max" =>  [
+                    ["type" => "label", "content" => "document.label.item.product-name"],
+                    ["type" => "text", "content" => "20"],
+                ],
+            ],
+            'title' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "document.label.item.title"],
+                ],
+                "String" =>  [
+                    ["type" => "label", "content" => "document.label.item.title"],
+                ],
+                "Max" =>  [
+                    ["type" => "label", "content" => "document.label.item.title"],
+                    ["type" => "text", "content" => "20"],
+                ],
+            ],
+            'amount' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "document.label.item.amount"],
+                ],
+                "String" =>  [
+                    ["type" => "label", "content" => "document.label.item.amount"],
+                ]
+            ],
+            'currency_id' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "document.label.item.currency"],
+                ],
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "document.label.item.currency"],
+                ]
+            ],
+            'counte_party_id' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "document.label.item.currency"],
+                ],
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "document.label.item.currency"],
+                ]
+            ],
+            // TODO:[署名レベル]ラベル無し
+            'sign_level' => [
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "document.label.item.currency"],
+                ]
+            ],
+            'cont_start_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "company.label.item.contract.start-date"],
+                ]
+            ],
+            'cont_end_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "company.label.item.contract.end-date"],
+                ]
+            ],
+            'conc_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.conclusion-date"],
+                ]
+            ],
+            'effective_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.effective-date"],
+                ]
+            ],
+            'cancel_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.cancel-date"],
+                ]
+            ],
+            'expiry_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.expiry-date"],
+                ]
+            ],
+            'issue_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.issue-date"],
+                ]
+            ],
+            'payment_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.payment-date"],
+                ]
+            ],
+            'transaction_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.deal-date"],
+                ]
+            ],
+            'download_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.download-date"],
+                ]
+            ],
+            'doc_create_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.document-create-date"],
+                ]
+            ],
+            'sign_finish_date' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.sign-finish-date"],
+                ]
+            ],
+            'content' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.add-info.content"],
+                ]
+            ],
+            'scan_doc_flg' => [
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "document.label.item.scanned-document"],
+                ]
+            ],
+            'scan_doc_flg' => [
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "common.label.add-timestamp"],
+                ]
+            ],
+            'file_name' => [
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "common.label.add-timestamp"],
+                ]
+            ],
+        ];
+
+    }
 
     /**
      * @param Validator $validator
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws Illuminate\Validation\ValidationException
      */
     protected function failedValidation(Validator $validator)
     {
-        $response['errors']  = $validator->errors()->toArray();
-        $exception = new HttpResponseException(response()->json($response, 400));
-        throw $exception;
+        throw new ValidationException($this->adjustValidator($validator));
     }
 }
