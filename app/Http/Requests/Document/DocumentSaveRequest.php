@@ -11,6 +11,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class DocumentSaveRequest extends FormRequest
 {
+
+    use ResponseClient;
+
+    
     /**@var array */
     protected const tables = [
         "0" => "t_document_contract",
