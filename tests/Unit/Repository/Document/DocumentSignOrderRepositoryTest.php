@@ -17,6 +17,7 @@ use App\Domain\Entities\Common\TempToken as TempTokenEn;
 use Mockery\LegacyMockInterface;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+
 class DocumentSignOrderRepositoryTest extends TestCase
 {
 

@@ -79,6 +79,7 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserId: $mUserId
                                                         );
+
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
@@ -107,29 +108,27 @@ class DocumentSignOrderService
                         
                         // ユーザに送付するURL作成
                         $emailUrl = $systemUrl . $documentDetailendPoint . $contractIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
-
+                        
                         // メール本文作成
-                        $emailContent =
-                            "{$contractIsseuAndNextSignUser->getNextSignUser()->counter_party_name} {$contractIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
-                            {$contractIsseuAndNextSignUser->getIssueUser()->full_name} 様から契約書類の署名依頼が送信されました。\n
-                            以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
-                            {$emailUrl}\n
-                            このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
-                            お手数ですが support@huubhr.comまでご連絡をお願い致します。";
-                            //
+                        $emailContent = $this->getContractMailContent(
+                            $contractIsseuAndNextSignUser->getNextSignUser()->counter_party_name,
+                            $contractIsseuAndNextSignUser->getNextSignUser()->full_name,
+                            $contractIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $emailUrl
+                        );
+
                     } elseif ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
                         // 次の署名者がホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
                         $emailUrl = $systemUrl . $documentDetailendPoint . $contractIsseuAndNextSignUser->getSignDoc()->document_id;
 
                         // メール本文作成
-                        $emailContent =
-                            "{$contractIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
-                            {$contractIsseuAndNextSignUser->getIssueUser()->full_name} 様から契約書類の署名依頼が送信されました。\n
-                            以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
-                            {$emailUrl}\n
-                            このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
-                            お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+                        $emailContent = $this->getContractMailContent(
+                            $contractIsseuAndNextSignUser->getNextSignUser()->counter_party_name,
+                            $contractIsseuAndNextSignUser->getNextSignUser()->full_name,
+                            $contractIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $emailUrl
+                        );
                     }
                     break;
                 
@@ -142,6 +141,7 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserId: $mUserId
                                                         );
+
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($dealIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
@@ -171,25 +171,24 @@ class DocumentSignOrderService
                         $emailUrl = $systemUrl . $documentDetailendPoint . $dealIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
 
                         // メール本文作成
-                        $emailContent =
-                            "{$dealIsseuAndNextSignUser->getNextSignUser()->counter_party_name} {$dealIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
-                            {$dealIsseuAndNextSignUser->getIssueUser()->full_name} 様から取引書類の署名依頼が送信されました。\n
-                            以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
-                            {$emailUrl}\n
-                            このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
-                            お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+                        $emailContent = $this->getDealMailContent(
+                            $dealIsseuAndNextSignUser->getNextSignUser()->counter_party_name,
+                            $dealIsseuAndNextSignUser->getNextSignUser()->full_name,
+                            $dealIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $emailUrl
+                        );
+
                     } elseif ($dealIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) { // ホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
                         $emailUrl = $systemUrl . $documentDetailendPoint . $dealIsseuAndNextSignUser->getSignDoc()->document_id;
 
                         // メール本文作成
-                        $emailContent =
-                            "{$dealIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
-                            {$dealIsseuAndNextSignUser->getIssueUser()->full_name} 様から取引書類の署名依頼が送信されました。\n
-                            以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
-                            {$emailUrl}\n
-                            このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
-                            お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+                        $emailContent = $this->getDealMailContent(
+                            $dealIsseuAndNextSignUser->getNextSignUser()->counter_party_name,
+                            $dealIsseuAndNextSignUser->getNextSignUser()->full_name,
+                            $dealIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $emailUrl
+                        );
                     }
                     break;
 
@@ -202,7 +201,7 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserCompanyId: $mUserCompanyId
                                                         );
-                                                        //var_export($internalIsseuAndNextSignUser);
+
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     foreach ($internalIsseuAndNextSignUser->getNextSignUser() as $signUser) {
                         
@@ -213,13 +212,11 @@ class DocumentSignOrderService
                         // メールタイトル作成
                         $emailTitle = "[KOT電子契約]「{$internalIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
 
-                        $emailContent = "
-                        {$signUser->full_name} 様\n
-                        {$internalIsseuAndNextSignUser->getIssueUser()->full_name} 様から社内書類の署名依頼が送信されました。\n
-                        以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
-                        {$emailUrl}\n
-                        このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
-                        お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+                        $emailContent = $this->getInternalMailContent(
+                            $signUser->full_name,
+                            $internalIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $emailUrl
+                        );
 
                         $paramdata = [];
             
@@ -266,13 +263,12 @@ class DocumentSignOrderService
                     $emailUrl = $systemUrl . $documentDetailendPoint . $archiveIsseuAndNextSignUser->getSignDoc()->document_id;
 
                     // メール本文作成
-                    $emailContent =
-                        "{$archiveIsseuAndNextSignUser->getNextSignUser()->full_name} 様\n
-                        {$archiveIsseuAndNextSignUser->getIssueUser()->full_name} 様から登録書類の署名依頼が送信されました。\n
-                        以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
-                        {$emailUrl}\n
-                        このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
-                        お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+                    $emailContent = $this->getArchiveMailContent(
+                        $archiveIsseuAndNextSignUser->getNextSignUser()->full_name,
+                        $archiveIsseuAndNextSignUser->getIssueUser()->full_name,
+                        $emailUrl
+                    );
+
                     break;
             }
 
@@ -288,9 +284,6 @@ class DocumentSignOrderService
             $paramdata['email']['title']      = $emailTitle;
             $paramdata['email']['content']    = $emailContent;
 
-            
-            var_export($paramdata);
-            exit();
 
             // キューをJSON形式に返却
             $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
@@ -308,4 +301,49 @@ class DocumentSignOrderService
             return false;
         }
     }
+
+    public function getContractMailContent ($counterPartyName = null, $nextSignUserName, $issueUserName, $emailUrl)
+    {
+        return $emailContent =
+                            "{$counterPartyName} {$nextSignUserName} 様\n
+                            {$issueUserName} 様から契約書類の署名依頼が送信されました。\n
+                            以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
+                            {$emailUrl}\n
+                            このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
+                            お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+    }
+
+    public function getDealMailContent ($counterPartyName = null, $nextSignUserName, $issueUserName, $emailUrl)
+    {
+        return $emailContent =
+                            "{$counterPartyName} {$nextSignUserName} 様\n
+                            {$issueUserName} 様から取引書類の署名依頼が送信されました。\n
+                            以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
+                            {$emailUrl}\n
+                            このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
+                            お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+    }
+
+    public function getInternalMailContent ($nextSignUserName, $issueUserName, $emailUrl)
+    {
+        return $emailContent =
+                            "{$nextSignUserName} 様\n
+                            {$issueUserName} 様から 社内書類の署名依頼が送信されました。\n
+                            以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
+                            {$emailUrl}\n
+                            このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
+                            お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+    }
+
+    public function getArchiveMailContent ($nextSignUserName, $issueUserName, $emailUrl)
+    {
+        return $emailContent =
+                            "{$nextSignUserName} 様\n
+                            {$issueUserName} 様から 登録書類の署名依頼が送信されました。\n
+                            以下のURLをクリックして書類の詳細確認、および署名を行ってください。\n
+                            {$emailUrl}\n
+                            このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。\n
+                            お手数ですが support@huubhr.comまでご連絡をお願い致します。";
+    }
 }
+
