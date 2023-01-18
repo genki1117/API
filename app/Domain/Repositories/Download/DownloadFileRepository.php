@@ -53,7 +53,7 @@ class DownloadFileRepository implements DownloadFileServiceInterface
         }
     }
 
-    public function getDlFilePath(int $mUserId, int $mUserCompanyId, int $getTokenDlFileId): ?DownloadFileEntity
+    public function getDlFileData(int $mUserId, int $mUserCompanyId, int $getTokenDlFileId): ?DownloadFileEntity
     {
         try {
             $getDlFileResult = $this->dlFile->getPath(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, getTokenDlFileId: $getTokenDlFileId);

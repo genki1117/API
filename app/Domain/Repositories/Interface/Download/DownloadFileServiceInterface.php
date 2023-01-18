@@ -8,6 +8,6 @@ interface DownloadFileServiceInterface
 {
     public function getToken(string $token): ?DownloadFileEntity;
 
-    public function getDlFilePath(int $mUserId, int $mUserCompanyId, int $getTokenDlFileId): ?DownloadFileEntity;
+    public function getDlFileData(int $mUserId, int $mUserCompanyId, int $getTokenDlFileId): ?DownloadFileEntity;
     
 }

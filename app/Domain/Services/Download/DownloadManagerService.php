@@ -21,6 +21,12 @@ class DownloadManagerService
     // 一時保存ファイル
     private const DownloadTmpFilePath   = '/var/www/html/storage/zipTmp';
 
+    /** @var */
+    private $getTokenResult;
+
+    /** @var */
+    private $getDlFileResult;
+
     /** @var DownloadFileServiceInterface */
     private DownloadFileServiceInterface $documentRepository;
 
@@ -44,24 +50,31 @@ class DownloadManagerService
         try {
             // トークンデータオブジェクト取得
             $getTokenResult = $this->documentRepository->getToken(token: $token);
+            // var_export($getTokenResult->getData()->expiry_date);
+            // exit();
+            // トークンオブジェクトが取得出来なかった場合
+            if (empty($getTokenResult)) {
+                throw new Exception('common.messate.permission');
+            }
+
             // return var_export($getTokenResult);
             // トークンデータのuser_idを取得
-            $mUserId = json_decode($getTokenResult->getData()->data)->user_id;
+            $mUserId          = json_decode($getTokenResult->getData()->data)->user_id;
 
             // トークンデータのcompany_idを取得
-            $mUserCompanyId = json_decode($getTokenResult->getData()->data)->company_id;
+            $mUserCompanyId   = json_decode($getTokenResult->getData()->data)->company_id;
 
             // トークンデータのdl_file_idを取得
             $getTokenDlFileId = json_decode($getTokenResult->getData()->data)->dl_file_id;
             
             // 取得したトークンの有効期限のチェック
-            if ($getTokenResult > CarbonImmutable::now()) {
+            if ($getTokenResult->getData()->expiry_date > CarbonImmutable::now()) {
                 throw new Exception('common.messate.permission');
             }
 
-            // ダウンロードパスオブジェクト取得
-            $getDlFileResult = $this->documentRepository->getDlFilePath(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, getTokenDlFileId: $getTokenDlFileId);
-            // return var_export($getDlFileResult->getData());
+            // ダウンロードファイルオブジェクト取得
+            $getDlFileResult = $this->documentRepository->getDlFileData(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, getTokenDlFileId: $getTokenDlFileId);
+           // return var_export($getDlFileResult->getData());
 
             if (empty($getDlFileResult)) {
                 throw new Exception('common.message.not-found');
