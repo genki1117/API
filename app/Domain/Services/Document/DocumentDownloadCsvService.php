@@ -18,7 +18,8 @@ class DocumentDownloadCsvService
 
     public function __construct()
     {
-        $this->csvStoragePath = 'Storage/UploadCsvFile/';
+        $this->csvStoragePath = '/var/www/html/testCsv/';
+        // $this->csvStoragePath = 'Storage/UploadCsvFile/';
     }
 
     /**
@@ -42,14 +43,14 @@ class DocumentDownloadCsvService
             header('Content-Type: application/octet-stream');
             header("Content-Disposition: attachment; filename={$fileName}");
             header('Content-Transfer-Encoding: binary');
-
+            
             // ファイル出力
             $downloadRsult = readfile($userCsvStoragePath . $fileName);
 
             return true;
             
         } catch (Exception $e) {
-            throw new Exception('common.message.not-found');
+            throw new Exception('common.message.not-found11');
             return false;
         }
     }
