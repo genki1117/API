@@ -38,7 +38,7 @@ class DocumentSignOrderController extends Controller
             $documentSignOrderResult = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
             
             if ($documentSignOrderResult === false) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
             return (new DocumentSignOrderRespons)->successSignOrder();

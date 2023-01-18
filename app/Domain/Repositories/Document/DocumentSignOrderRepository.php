@@ -60,9 +60,9 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
     {
         try {
             $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
-            // var_export($signDocContract);
+
             if (!$signDocContract) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
             $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
@@ -72,11 +72,11 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
 
             $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser(documentId: $documentId, categoryId: $categoryId);
             if (!$contractIsseuUser) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
         } catch (Exception $e) {
-            throw new Exception("common.messate.permission");
+            throw new Exception("common.message.permission");
         }
         return new DocumentSignOrder($signDocContract, $contractNextSignUser, $contractIsseuUser);
     }
@@ -95,21 +95,21 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         try {
             $signDocDeal      = $this->documentDeal->getSignDocument(documentId: $documentId, categoryId: $categoryId);
             if (!$signDocDeal) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
             $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
             if (!$dealNextSignUser) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
             $dealIsseuUser    = $this->documentWorkFlow->getDealIsseuUser(documentId: $documentId, categoryId: $categoryId);
             if (!$dealIsseuUser) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
         } catch (Exception $e) {
-            throw new Exception("common.messate.permission");
+            throw new Exception("common.message.permission");
         }
         return new DocumentSignOrder($signDocDeal, $dealNextSignUser, $dealIsseuUser);
     }
@@ -128,17 +128,17 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         try {
             $signDocInternal      = $this->documentInternal->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$signDocInternal) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
             $internalSignUserList = (object)$this->documentWorkFlow->getInternalSignUserList(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (count(get_object_vars($internalSignUserList)) === 0) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
             $internalIsseuUser    = $this->documentWorkFlow->getInternalIsseuUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$internalIsseuUser) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
         } catch (Exception $e) {
@@ -161,21 +161,21 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         try {
             $signDocArchive      = $this->documentArchive->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$signDocArchive) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
             $archiveNextSignUser = $this->documentWorkFlow->getArchiveNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$archiveNextSignUser) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
 
             $archiveIsseuUser    = $this->documentWorkFlow->getArchiveIsseuUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             if (!$archiveIsseuUser) {
-                throw new Exception("common.messate.permission");
+                throw new Exception("common.message.permission");
             }
             
         } catch (Exception $e) {
-            throw new Exception("common.messate.permission");
+            throw $e;
         }
         return new DocumentSignOrder($signDocArchive, $archiveNextSignUser, $archiveIsseuUser);
     }

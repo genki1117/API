@@ -81,7 +81,7 @@ class DocumentSignOrderService
                                                         );
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
-                        throw new Exception("common.messate.permission");
+                        throw new Exception("common.message.permission");
                         exit;
                     }
                     
@@ -144,7 +144,7 @@ class DocumentSignOrderService
                                                         );
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($dealIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
-                        throw new Exception("common.messate.permission");
+                        throw new Exception("common.message.permission");
                         exit;
                     }
                     
@@ -234,7 +234,7 @@ class DocumentSignOrderService
                         // キューへ登録
                         $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
                         if ($ret === -1) {
-                            throw new Exception('common.messate.permission');
+                            throw new Exception('common.message.permission');
                         }
                     }
                     return true;
@@ -252,7 +252,7 @@ class DocumentSignOrderService
                                                         );
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($archiveIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
-                        throw new Exception("common.messate.permission");
+                        throw new Exception("common.message.permission");
                         exit;
                     }
                     
@@ -277,7 +277,7 @@ class DocumentSignOrderService
             }
 
             if (empty($emailAddress) || empty($emailTitle) || empty($emailContent)) {
-                throw new Exception('common.messate.permission');
+                throw new Exception('common.message.permission');
             }
 
             // キューの設定
@@ -294,7 +294,7 @@ class DocumentSignOrderService
             // キューへ登録
             $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
             if ($ret === -1) {
-                throw new Exception('common.messate.permission');
+                throw new Exception('common.message.permission');
             }
 
             return true;
