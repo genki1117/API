@@ -42,9 +42,13 @@ class AppServiceProvider extends ServiceProvider
                         $binding = "'{$binding}'";
                     } elseif (is_int($binding)) {
                         $binding = (string)$binding;
+                    } elseif (is_bool($binding)) {
+                        $binding = $binding ? 'true':'false';
                     } elseif ($binding === null) {
                         $binding = 'NULL';
                     } elseif ($binding instanceof Carbon || $binding instanceof CarbonImmutable) {
+                        $binding = "'{$binding->toDateTimeString()}'";
+                    } elseif ($binding instanceof CarbonImmutable) {
                         $binding = "'{$binding->toDateTimeString()}'";
                     }
                     $sql = preg_replace("/\?/", $binding, $sql, 1);

@@ -2,12 +2,16 @@
 
 namespace App\Http\Requests\Document;
 
+use App\Libraries\ResponseClient;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class DocumentSignOrderRequest extends FormRequest
 {
+
+    use ResponseClient;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -49,13 +53,44 @@ class DocumentSignOrderRequest extends FormRequest
     }
 
      /**
+     * @return array
+     */
+    private function errorsTable():array
+    {
+        return [
+            'document_id' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "common.label.item.document.id"],
+                ],
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "common.label.item.document.id"],
+                ],
+            ],
+            'doc_type_id' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "common.label.item.doc.type.id"],
+                ],
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "common.label.item.doc.type.id"],
+                ],
+            ],
+            'category_id' => [
+                "Required" =>  [
+                    ["type" => "label", "content" => "common.label.item.category.id"],
+                ],
+                "Numeric" =>  [
+                    ["type" => "label", "content" => "common.label.item.category.id"],
+                ],
+            ],
+        ];
+    }
+
+    /**
      * @param Validator $validator
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws Illuminate\Validation\ValidationException
      */
     protected function failedValidation(Validator $validator)
     {
-        $response['errors']  = $validator->errors()->toArray();
-        $exception = new HttpResponseException(response()->json($response, 400));
-        throw $exception;
+        throw new ValidationException($this->adjustValidator($validator));
     }
 }

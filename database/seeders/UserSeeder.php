@@ -254,5 +254,37 @@ class UserSeeder extends Seeder
                 'delete_datetime' => null,
             ],
         ]);
+        \DB::table('m_user')->insert([
+            [
+                'company_id' => 1,
+                'user_id' => 7,
+                'user_type_id' => 0,
+                'email' => 'host1@email.com',
+                'family_name' => '木村',
+                'first_name' => '史郎',
+                'full_name' => '木村　史郎',
+                'family_name_kana' => 'キムラ',
+                'first_name_kana' => 'シロウ',
+                'full_name_kana' => 'キムラ　シロウ',
+                'tel' => '0123456789',
+                'mobile_number' => '0123456789',
+                'language' => 'ja',
+                'profile_image' => null,
+                'company_counter_party_id' => null,
+                'group_array' => '[1]',
+                'position' => '社員',
+                'active_flg' => 1,
+                'active_date' => null,
+                'password' => Hash::make('taika'),
+                'effe_start_date' => null,
+                'effe_end_date' => null,
+                'create_user' => 1,
+                'create_datetime' => CarbonImmutable::now(),
+                'update_user' => 1,
+                'update_datetime' => CarbonImmutable::now(),
+                'delete_user' => null,
+                'delete_datetime' => null,
+            ],
+        ]);
     }
 }

@@ -288,9 +288,13 @@ class DocumentSignOrderService
             $paramdata['email']['title']      = $emailTitle;
             $paramdata['email']['content']    = $emailContent;
 
+            
+            var_export($paramdata);
+            exit();
+
             // キューをJSON形式に返却
             $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-
+            
             // キューへ登録
             $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
             if ($ret === -1) {

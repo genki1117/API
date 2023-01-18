@@ -26,27 +26,19 @@ class MUser extends FluentDatabase
     }
 
     /**
-     * ------------------------------------
-     * ログインユーザーのワークフローを取得
-     * ------------------------------------
-     *
-     * @param integer $mUserId
-     * @param integer $mUserCompanyId
+     * @param string $compnay_id
+     * @param string $email
      * @return \stdClass|null
      */
-    public function getLoginUserWorkflow(int $mUserId, int $mUserCompanyId): ?\stdClass
+    public function getUserFromEmail(string $compnay_id, string $email): ?\stdClass
     {
-        return $this->builder($this->table)
-                    ->join('t_document_workflow', function ($join) {
-                        $join->on('user_id', '=', 't_document_workflow.app_user_id')
-                             ->whereNull('t_document_workflow.delete_datetime');
-                    })
-                    ->where('m_user.company_id', '=', $mUserCompanyId)
-                    ->where('m_user.user_id', '=', $mUserId)
-                    ->select([
-                        't_document_workflow.wf_sort',
-                        'm_user.full_name'
-                    ])
-                    ->first();
+        return $this->builder("m_user as mu")
+            ->select([
+                "mu.*",
+            ])
+            ->where("mu.company_id", '=', $compnay_id)
+            ->where("mu.email", '=', $email)
+            ->whereNull("mu.delete_datetime")
+            ->first();
     }
 }

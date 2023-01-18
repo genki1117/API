@@ -56,15 +56,16 @@ class LoginUserRepository implements LoginUserRepositoryInterface
 
     /**
      * @param string $compnayId
-     * @param string $userId
+     * @param string $email
      * @return UserEntity
      */
-    public function getUser(string $compnayId, string $userId): UserEntity
+    public function getUser(string $compnayId, string $email): UserEntity
     {
-        $user = $this->mUser->getUser($compnayId, $userId);
-        $userRole = $this->mUserRole->getUserRole($compnayId, $userId);
-
-        if (empty($user)) {
+        $userRole = null;
+        $user = $this->mUser->getUserFromEmail($compnayId, $email);
+        if (!empty($user)) {
+            $userRole = $this->mUserRole->getUserRole($compnayId, (string)$user->user_id);
+        } else {
             return new UserEntity();
         }
 
