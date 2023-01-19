@@ -62,7 +62,7 @@ class DocumentSaveService
                         $afterList = $this->documentRepository->getBeforOrAfterUpdateContract(requestContent: $requestContent);
 
                         // ログ出力を行う
-                        $this->documentRepository->getUpdateLogContract(
+                        $result = $this->documentRepository->getUpdateLogContract(
                             $requestContent,
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),

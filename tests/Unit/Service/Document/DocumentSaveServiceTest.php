@@ -21,6 +21,12 @@ class DocumentSaveServiceTest extends TestCase
         $this->docConst = new DocumentConst;
     }
 
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        \Mockery::close();
+    }
+
     /**
      * @test
      * 契約書類登録正常テスト
@@ -60,10 +66,11 @@ class DocumentSaveServiceTest extends TestCase
         ->once()->andReturn(true);
 
         $this->documentRepositoryMock->shouldReceive('getBeforOrAfterUpdateContract')
-        ->once()->andReturn(new DocumentUpdate());
+        ->twice()->andReturn(new DocumentUpdate());
         
         $this->documentRepositoryMock->shouldReceive('getUpdateLogContract')
-        ->once()->andReturn(true);
+        ->once()
+        ->andReturn(true);
 
         $result = $this->getObject()->saveDocument($this->contractUpdateData());
         $this->assertTrue($result);
@@ -76,14 +83,12 @@ class DocumentSaveServiceTest extends TestCase
      */
     public function contractUpdateFaildTest()
     {
-        $this->documentRepositoryMock->shouldReceive('contractUpdate')
-        ->once()->andReturn(false);
 
         $this->documentRepositoryMock->shouldReceive('getBeforOrAfterUpdateContract')
         ->once()->andReturn(new DocumentUpdate());
-        
-        $this->documentRepositoryMock->shouldReceive('getUpdateLogContract')
-        ->once()->andReturn(true);
+
+        $this->documentRepositoryMock->shouldReceive('contractUpdate')
+        ->once()->andReturn(false);
 
         $this->expectException(Exception::class);
         $result = $this->getObject()->saveDocument($this->contractUpdateData());
@@ -105,12 +110,12 @@ class DocumentSaveServiceTest extends TestCase
 
     /**
      * @test
-     * 取引書類登録正常テスト
+     * 取引書類登録異常テスト
      * @return void
      */
     public function dealInsertFaildTest()
     {
-        $this->documentRepositoryMock->shouldReceive('dealUpdate')
+        $this->documentRepositoryMock->shouldReceive('dealInsert')
         ->once()->andReturn(false);
 
         $this->expectException(Exception::class);
@@ -128,7 +133,7 @@ class DocumentSaveServiceTest extends TestCase
         ->once()->andReturn(true);
 
         $this->documentRepositoryMock->shouldReceive('getBeforOrAfterUpdateDeal')
-        ->once()->andReturn(new DocumentUpdate());
+        ->twice()->andReturn(new DocumentUpdate());
         
         $this->documentRepositoryMock->shouldReceive('getUpdateLogDeal')
         ->once()->andReturn(true);
@@ -144,14 +149,11 @@ class DocumentSaveServiceTest extends TestCase
      */
     public function dealUpdateFaildTest()
     {
-        $this->documentRepositoryMock->shouldReceive('dealUpdate')
-        ->once()->andReturn(false);
-
         $this->documentRepositoryMock->shouldReceive('getBeforOrAfterUpdateDeal')
         ->once()->andReturn(new DocumentUpdate());
-        
-        $this->documentRepositoryMock->shouldReceive('getUpdateLogDeal')
-        ->once()->andReturn(true);
+
+        $this->documentRepositoryMock->shouldReceive('dealUpdate')
+        ->once()->andReturn(false);
 
         $this->expectException(Exception::class);
         $result = $this->getObject()->saveDocument($this->dealUpdateData());
@@ -178,7 +180,7 @@ class DocumentSaveServiceTest extends TestCase
      */
     public function internalInsertFaildTest()
     {
-        $this->documentRepositoryMock->shouldReceive('internalUpdate')
+        $this->documentRepositoryMock->shouldReceive('internalInsert')
         ->once()->andReturn(false);
 
         $this->expectException(Exception::class);
@@ -196,7 +198,7 @@ class DocumentSaveServiceTest extends TestCase
         ->once()->andReturn(true);
 
         $this->documentRepositoryMock->shouldReceive('getBeforOrAfterUpdateInternal')
-        ->once()->andReturn(new DocumentUpdate());
+        ->twice()->andReturn(new DocumentUpdate());
         
         $this->documentRepositoryMock->shouldReceive('getUpdateLogInternal')
         ->once()->andReturn(true);
@@ -212,14 +214,11 @@ class DocumentSaveServiceTest extends TestCase
      */
     public function internalUpdateFaildTest()
     {
-        $this->documentRepositoryMock->shouldReceive('internalUpdate')
-        ->once()->andReturn(false);
-
         $this->documentRepositoryMock->shouldReceive('getBeforOrAfterUpdateInternal')
         ->once()->andReturn(new DocumentUpdate());
-        
-        $this->documentRepositoryMock->shouldReceive('getUpdateLogInternal')
-        ->once()->andReturn(true);
+
+        $this->documentRepositoryMock->shouldReceive('internalUpdate')
+        ->once()->andReturn(false);
 
         $this->expectException(Exception::class);
         $result = $this->getObject()->saveDocument($this->internalUpdateData());
@@ -246,7 +245,7 @@ class DocumentSaveServiceTest extends TestCase
      */
     public function archiveInsertFaildTest()
     {
-        $this->documentRepositoryMock->shouldReceive('archiveUpdate')
+        $this->documentRepositoryMock->shouldReceive('archiveInsert')
         ->once()->andReturn(false);
 
         $this->expectException(Exception::class);
@@ -264,7 +263,7 @@ class DocumentSaveServiceTest extends TestCase
         ->once()->andReturn(true);
 
         $this->documentRepositoryMock->shouldReceive('getBeforOrAfterUpdateArchive')
-        ->once()->andReturn(new DocumentUpdate());
+        ->twice()->andReturn(new DocumentUpdate());
         
         $this->documentRepositoryMock->shouldReceive('getUpdateLogArchive')
         ->once()->andReturn(true);
@@ -280,14 +279,11 @@ class DocumentSaveServiceTest extends TestCase
      */
     public function archiveUpdateFaildTest()
     {
-        $this->documentRepositoryMock->shouldReceive('archiveUpdate')
-        ->once()->andReturn(false);
-
         $this->documentRepositoryMock->shouldReceive('getBeforOrAfterUpdateArchive')
         ->once()->andReturn(new DocumentUpdate());
-        
-        $this->documentRepositoryMock->shouldReceive('getUpdateLogArchive')
-        ->once()->andReturn(true);
+
+        $this->documentRepositoryMock->shouldReceive('archiveUpdate')
+        ->once()->andReturn(false);
 
         $this->expectException(Exception::class);
         $result = $this->getObject()->saveDocument($this->archiveUpdateData());
