@@ -59,22 +59,28 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->logDocAccessMock             = \Mockery::mock(LogDocAccess::class);
         $this->logDocOperationMock          = \Mockery::mock(logDocOperation::class);
         $this->documentSaveRepository       = new DocumentSaveRepository(
-                                                                        $this-> docContractMock,
-                                                                        $this-> docDealMock,
-                                                                        $this-> docInternalMock,
-                                                                        $this-> docArchiveMock,
-                                                                        $this-> docPermissionContractMock,
-                                                                        $this-> docPermissionTransactionMock,
-                                                                        $this-> docPermissionInternalMock,
-                                                                        $this-> docPermissionArchiveMock,
-                                                                        $this-> docStorageContractMock,
-                                                                        $this-> docStorageTransactionMock,
-                                                                        $this-> docStorageInternalMock,
-                                                                        $this-> docStorageArchiveMock,
-                                                                        $this->documentWorkFlowMock,
-                                                                        $this->logDocAccessMock,
-                                                                        $this->logDocOperationMock
-                                                                        );
+
+            $this-> docContractMock,
+            $this-> docDealMock,
+            $this-> docInternalMock,
+            $this-> docArchiveMock,
+            $this-> docPermissionContractMock,
+            $this-> docPermissionTransactionMock,
+            $this-> docPermissionInternalMock,
+            $this-> docPermissionArchiveMock,
+            $this-> docStorageContractMock,
+            $this-> docStorageTransactionMock,
+            $this-> docStorageInternalMock,
+            $this-> docStorageArchiveMock,
+            $this->documentWorkFlowMock,
+            $this->logDocAccessMock,
+            $this->logDocOperationMock
+        );
+    }
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        \Mockery::close();
     }
 
     /**
@@ -143,7 +149,7 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docContractMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionContractMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageContractMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertContract')->once()->AndReturn(4);
+        $this->documentWorkFlowMock->shouldReceive('insertContract')->times(4)->AndReturn(4);
 
         $this->assertTrue($this->documentSaveRepository->contractInsert($dataContract_2_2));
 
@@ -369,7 +375,7 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docContractMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionContractMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageContractMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertContract')->once()->AndReturn(2);
+        $this->documentWorkFlowMock->shouldReceive('insertContract')->twice()->AndReturn(2);
 
         $this->assertTrue($this->documentSaveRepository->contractInsert($dataContract_2_0));
 
@@ -478,9 +484,6 @@ class DocumentSaveRepositoryTest extends TestCase
         ];
         
         $this->docContractMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->docPermissionContractMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->docStorageContractMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertContract')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->contractInsert($dataContract_2_0));
@@ -534,8 +537,6 @@ class DocumentSaveRepositoryTest extends TestCase
         
         $this->docContractMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionContractMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->docStorageContractMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertContract')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->contractInsert($dataContract_2_0));
