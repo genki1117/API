@@ -157,7 +157,7 @@ class DocumentArchive extends FluentDatabase
   {
     try {
         return $this->builder($this->table)
-          ->where('update_datetime', '=', $requestContent['update_datetime'])  
+          // ->where('update_datetime', '=', $requestContent['update_datetime'])  
           ->where('document_id', $requestContent['document_id'])
           ->where('company_id', $requestContent['company_id'])
           ->where('category_id', $requestContent['category_id'])
@@ -178,7 +178,6 @@ class DocumentArchive extends FluentDatabase
                 'counter_party_id' => $requestContent['counter_party_id'],
                 'remarks'          => $requestContent['remarks'],
                 'doc_info'         => $requestContent['doc_info'],
-                'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
                 'sign_level'       => $requestContent['sign_level'],
                 'timestamp_user'   => $requestContent['timestamp_user'],
                 'update_user'      => $requestContent['m_user_id'],
@@ -644,8 +643,21 @@ class DocumentArchive extends FluentDatabase
     {
         return $this->builder()
             ->select([
-                'update_user',
-                'update_datetime',
+                'template_id',
+                'doc_type_id',
+                'issue_date',
+                'expiry_date',
+                'transaction_date',
+                'doc_no',
+                'ref_doc_no',
+                'product_name',
+                'title',
+                'amount',
+                'currency_id',
+                'counter_party_id',
+                'remarks',
+                'doc_info',
+                'sign_level'
             ])
             ->where('company_id', '=', $requestContent['company_id'])
             ->where('document_id', '=', $requestContent['document_id'])

@@ -56,7 +56,7 @@ class DocumentSaveService
                         $afterList = $this->documentRepository->getBeforOrAfterUpdateContract(requestContent: $requestContent);
 
                         // ログ出力を行う
-                        $this->documentRepository->getUpdateLog(
+                        $this->documentRepository->getUpdateLogContract(
                             $requestContent,
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),
@@ -76,13 +76,13 @@ class DocumentSaveService
                         $beforeList = $this->documentRepository->getBeforOrAfterUpdateDeal(requestContent: $requestContent);
 
                         // 取引書類更新
-                       return $documentSaveResult = $this->documentRepository->dealUpdate(requestContent: $requestContent);
+                       $documentSaveResult = $this->documentRepository->dealUpdate(requestContent: $requestContent);
 
                         // 更新後の情報を取得する
                         $afterList = $this->documentRepository->getBeforOrAfterUpdateDeal(requestContent: $requestContent);
 
                         // ログ出力を行う
-                        $this->documentRepository->getUpdateLog(
+                        $this->documentRepository->getUpdateLogDeal(
                             $requestContent,
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),
@@ -108,7 +108,7 @@ class DocumentSaveService
                         $afterList = $this->documentRepository->getBeforOrAfterUpdateInternal(requestContent: $requestContent);
 
                         // ログ出力を行う
-                        $this->documentRepository->getUpdateLog(
+                        $this->documentRepository->getUpdateLogInternal(
                             $requestContent,
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),
@@ -134,7 +134,7 @@ class DocumentSaveService
                         $afterList = $this->documentRepository->getBeforOrAfterUpdateArchive(requestContent: $requestContent);
 
                         // ログ出力を行う
-                        $this->documentRepository->getUpdateLog(
+                        $this->documentRepository->getUpdateLogArchive(
                             $requestContent,
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),

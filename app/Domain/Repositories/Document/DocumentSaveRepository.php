@@ -318,19 +318,19 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             // 取引書類更新
             $docUpdateResult           = $this->docDeal->update(requestContent: $requestContent);
             if (!$docUpdateResult) {
-                throw new Exception('common.message.save-conflict1');
+                throw new Exception('common.message.save-conflict');
             }
             
             // 取引書類閲覧権限更新
             $docPermissionUpdateResult = $this->docPermissionTransaction->update(requestContent: $requestContent);
             if (!$docPermissionUpdateResult) {
-                throw new Exception('common.message.save-conflict2');
+                throw new Exception('common.message.save-conflict');
             }
 
             // 取引書類容量更新
             $docStorageUpdateResult    = $this->docStorageTransaction->update(requestContent: $requestContent);
             if (!$docStorageUpdateResult) {
-                throw new Exception('common.message.save-conflict3');
+                throw new Exception('common.message.save-conflict');
             }
         } catch (Exception $e) {
             throw $e;
@@ -622,7 +622,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
 
     /**
      * -------------------------
-     * ログ登録
+     * 契約書類ログ登録
      * -------------------------
      *
      * @param array $requestContent
@@ -630,7 +630,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param [type] $afterContet
      * @return boolean
      */
-    public function getUpdateLog(array $requestContent, $beforeContent, $afterContet): ?bool
+    public function getUpdateLogContract(array $requestContent, $beforeContent, $afterContent): ?bool
     {
         try {
             $companyId     = $requestContent['m_user_company_id'];
@@ -641,11 +641,32 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $ipAddress     = $requestContent['ip_address'];
             $accessContent = $requestContent['access_content'];
 
-            //アクセスログに登録
-            $accessLogResult    = $this->logDocAccess->insert(companyId: $companyId, categoryId: $categoryId, documentId: $documentId, userId: $userId, userType: $userType, ipAddress: $ipAddress, accessContent: $accessContent);
+            $beforeContentArray = $this->beforeContetArrayContract($beforeContent, $afterContent);
 
-            // 操作ログに登録
-            $operationLogResutl = $this->logDocOperation->insert(companyId: $companyId, categoryId: $categoryId, documentId: $documentId, userId: $userId, beforeContent: $beforeContent, afterContet: $afterContet, ipAddress: $ipAddress);
+            $afterContentArray = $this->afterContentArrayContract($beforeContent, $afterContent);
+
+            //アクセスログに登録
+            $accessLogResult    = $this->logDocAccess->insert(
+                companyId: $companyId,
+                categoryId: $categoryId,
+                documentId: $documentId,
+                userId: $userId,
+                userType: $userType,
+                ipAddress: $ipAddress,
+                accessContent: $accessContent
+            );
+
+
+            $operationLogResutl = $this->logDocOperation->insert(
+                companyId: $companyId,
+                categoryId: $categoryId,
+                documentId: $documentId,
+                userId: $userId,
+                beforeContentArray: $beforeContentArray,
+                afterContentArray: $afterContentArray,
+                ipAddress: $ipAddress
+            );
+
 
             if (!$accessLogResult || !$operationLogResutl) {
                 throw new Exception('common.message.permission');
@@ -656,5 +677,1247 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             return false;
         }
         
+    }
+
+    /**
+     * -------------------------
+     * 取引書類ログ登録
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @param [type] $beforeContent
+     * @param [type] $afterContet
+     * @return boolean
+     */
+    public function getUpdateLogDeal(array $requestContent, $beforeContent, $afterContent): ?bool
+    {
+        try {
+            $companyId     = $requestContent['m_user_company_id'];
+            $categoryId    = $requestContent['category_id'];
+            $documentId    = $requestContent['document_id'];
+            $userId        = $requestContent['m_user_id'];
+            $userType      = $requestContent['m_user_type_id'];
+            $ipAddress     = $requestContent['ip_address'];
+            $accessContent = $requestContent['access_content'];
+
+            $beforeContentArray = $this->beforeContetArrayDeal($beforeContent, $afterContent);
+
+            $afterContentArray = $this->afterContentArrayDeal($beforeContent, $afterContent);
+
+
+            //アクセスログに登録
+            $accessLogResult    = $this->logDocAccess->insert(
+                companyId: $companyId,
+                categoryId: $categoryId,
+                documentId: $documentId,
+                userId: $userId,
+                userType: $userType,
+                ipAddress: $ipAddress,
+                accessContent: $accessContent
+            );
+
+            // 操作ログ出力
+            $operationLogResutl = $this->logDocOperation->insert(
+                companyId: $companyId,
+                categoryId: $categoryId,
+                documentId: $documentId,
+                userId: $userId,
+                beforeContentArray: $beforeContentArray,
+                afterContentArray: $afterContentArray,
+                ipAddress: $ipAddress
+            );
+
+            $a;
+            if (!$accessLogResult || !$operationLogResutl) {
+                throw new Exception('common.message.permission');
+            }
+            return true;
+        } catch (Exception $e) {
+            throw $e;
+            return false;
+        }
+        
+    }
+
+    /**
+     * -------------------------
+     * 社内書類ログ登録
+     * -------------------------
+     *
+     * @param array $requestContent
+     * @param [type] $beforeContent
+     * @param [type] $afterContet
+     * @return boolean
+     */
+    public function getUpdateLogInternal(array $requestContent, $beforeContent, $afterContent): ?bool
+    {
+        try {
+            $companyId     = $requestContent['m_user_company_id'];
+            $categoryId    = $requestContent['category_id'];
+            $documentId    = $requestContent['document_id'];
+            $userId        = $requestContent['m_user_id'];
+            $userType      = $requestContent['m_user_type_id'];
+            $ipAddress     = $requestContent['ip_address'];
+            $accessContent = $requestContent['access_content'];
+
+            // var_export($beforeContent);
+            // var_export($afterContent);
+            // exit();
+
+            // beforeContent取得
+            $beforeContentArray = $this->beforeContetArrayInternal($beforeContent, $afterContent);
+
+            // afterContent取得
+            $afterContentArray = $this->afterContentArrayInternal($beforeContent, $afterContent);
+
+            //アクセスログに登録
+            $accessLogResult    = $this->logDocAccess->insert(
+                companyId: $companyId,
+                categoryId: $categoryId,
+                documentId: $documentId,
+                userId: $userId,
+                userType: $userType,
+                ipAddress: $ipAddress,
+                accessContent: $accessContent
+            );
+
+            // 操作ログ出力
+            $operationLogResutl = $this->logDocOperation->insert(
+                companyId: $companyId,
+                categoryId: $categoryId,
+                documentId: $documentId,
+                userId: $userId,
+                beforeContentArray: $beforeContentArray,
+                afterContentArray: $afterContentArray,
+                ipAddress: $ipAddress
+            );
+
+            $a;
+            if (!$accessLogResult || !$operationLogResutl) {
+                throw new Exception('common.message.permission');
+            }
+            return true;
+        } catch (Exception $e) {
+            throw $e;
+            return false;
+        }
+    }
+
+    public function getUpdateLogArchive(array $requestContent, $beforeContent, $afterContent): ?bool
+    {
+        try {
+            $companyId     = $requestContent['m_user_company_id'];
+            $categoryId    = $requestContent['category_id'];
+            $documentId    = $requestContent['document_id'];
+            $userId        = $requestContent['m_user_id'];
+            $userType      = $requestContent['m_user_type_id'];
+            $ipAddress     = $requestContent['ip_address'];
+            $accessContent = $requestContent['access_content'];
+
+            // var_export($beforeContent);
+            // var_export($afterContent);
+            // exit();
+
+            // beforeContent取得
+            $beforeContentArray = $this->beforeContentArrayArchive($beforeContent, $afterContent);
+
+            // afterContent取得
+            $afterContentArray = $this->afterContentArrayArchive($beforeContent, $afterContent);
+
+            var_export($beforeContentArray);
+            var_export($afterContentArray);
+            exit();
+
+            //アクセスログに登録
+            $accessLogResult    = $this->logDocAccess->insert(
+                companyId: $companyId,
+                categoryId: $categoryId,
+                documentId: $documentId,
+                userId: $userId,
+                userType: $userType,
+                ipAddress: $ipAddress,
+                accessContent: $accessContent
+            );
+
+            // 操作ログ出力
+            $operationLogResutl = $this->logDocOperation->insert(
+                companyId: $companyId,
+                categoryId: $categoryId,
+                documentId: $documentId,
+                userId: $userId,
+                beforeContentArray: $beforeContentArray,
+                afterContentArray: $afterContentArray,
+                ipAddress: $ipAddress
+            );
+
+            if (!$accessLogResult || !$operationLogResutl) {
+                throw new Exception('common.message.permission');
+            }
+            return true;
+        } catch (Exception $e) {
+            throw $e;
+            return false;
+        }
+    }
+
+
+/**
+     * 登録書類更新beforeContent取得
+     *
+     * @param object $beforeContent
+     * @param object $afterContet
+     * @return array
+     */
+    public function beforeContentArrayArchive(object $beforeContent, object $afterContet): array
+    {
+        $beforeContentArray = json_decode(json_encode($beforeContent), true);
+        $afterContentArray   = json_decode(json_encode($afterContet), true);
+
+        $returnBeforeArchiveArray['operation'] = [];
+
+        if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.template',
+                'target_param_content' => $beforeContentArray['template_id']
+            ]);    
+        }
+        if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document-type',
+                'target_param_content' => $beforeContentArray['doc_type_id']
+            ]);    
+        }
+        if ($beforeContentArray['issue_date'] !== $afterContentArray['issue_date']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.issue-date',
+                'target_param_content' => $beforeContentArray['issue_date']
+            ]);    
+        }
+        if ($beforeContentArray['expiry_date'] !== $afterContentArray['expiry_date']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.expiry-date',
+                'target_param_content' => $beforeContentArray['expiry_date']
+            ]);    
+        }
+        if ($beforeContentArray['transaction_date'] !== $afterContentArray['transaction_date']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.deal-date',
+                'target_param_content' => $beforeContentArray['transaction_date']
+            ]);    
+        }
+        if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document-number',
+                'target_param_content' => $beforeContentArray['doc_no']
+            ]);    
+        }
+        if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.ref-document.no',
+                'target_param_content' => $beforeContentArray['ref_doc_no']
+            ]);    
+        }
+        if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.product-name',
+                'target_param_content' => $beforeContentArray['product_name']
+            ]);    
+        }
+        if ($beforeContentArray['title'] !== $afterContentArray['title']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.title',
+                'target_param_content' => $beforeContentArray['title']
+            ]);    
+        }
+        if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.amount',
+                'target_param_content' => $beforeContentArray['amount']
+            ]);    
+        }
+        if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.currency',
+                'target_param_content' => $beforeContentArray['currency_id']
+            ]); 
+        }
+        if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.common.label.item.counter-party.id',
+                'target_param_content' => $beforeContentArray['counter_party_id']
+            ]);    
+        }
+        if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.common.label.item.remark',
+                'target_param_content' => $beforeContentArray['remarks']
+            ]);    
+        }
+        if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.description',
+                'target_param_content' => $beforeContentArray['doc_info']
+            ]);    
+        }
+        if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
+            array_push($returnBeforeArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.sign-level',
+                'target_param_content' => $beforeContentArray['sign_level']
+            ]);    
+        }
+        return $returnBeforeArchiveArray;
+    }
+
+    /**
+     * 登録書類更新afterContent取得
+     *
+     * @param object $beforeContent
+     * @param object $afterContet
+     * @return array
+     */
+    public function afterContentArrayArchive(object $beforeContent, object $afterContet): array
+    {
+        $beforeContentArray = json_decode(json_encode($beforeContent), true);
+        $afterContentArray   = json_decode(json_encode($afterContet), true);
+
+        $returnAfterArchiveArray['operation'] = [];
+
+        if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.template',
+                'target_param_content' => $afterContentArray['template_id']
+            ]);    
+        }
+        if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document-type',
+                'target_param_content' => $afterContentArray['doc_type_id']
+            ]);    
+        }
+        if ($beforeContentArray['issue_date'] !== $afterContentArray['issue_date']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.issue-date',
+                'target_param_content' => $afterContentArray['issue_date']
+            ]);    
+        }
+        if ($beforeContentArray['expiry_date'] !== $afterContentArray['expiry_date']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.expiry-date',
+                'target_param_content' => $afterContentArray['expiry_date']
+            ]);    
+        }
+        if ($beforeContentArray['transaction_date'] !== $afterContentArray['transaction_date']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.deal-date',
+                'target_param_content' => $afterContentArray['transaction_date']
+            ]);    
+        }
+        if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document-number',
+                'target_param_content' => $afterContentArray['doc_no']
+            ]);    
+        }
+        if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.ref-document.no',
+                'target_param_content' => $afterContentArray['ref_doc_no']
+            ]);    
+        }
+        if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.product-name',
+                'target_param_content' => $afterContentArray['product_name']
+            ]);    
+        }
+        if ($beforeContentArray['title'] !== $afterContentArray['title']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.title',
+                'target_param_content' => $afterContentArray['title']
+            ]);    
+        }
+        if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.amount',
+                'target_param_content' => $afterContentArray['amount']
+            ]);    
+        }
+        if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.currency',
+                'target_param_content' => $afterContentArray['currency_id']
+            ]); 
+        }
+        if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.common.label.item.counter-party.id',
+                'target_param_content' => $afterContentArray['counter_party_id']
+            ]);    
+        }
+        if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.common.label.item.remark',
+                'target_param_content' => $afterContentArray['remarks']
+            ]);    
+        }
+        if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.description',
+                'target_param_content' => $afterContentArray['doc_info']
+            ]);    
+        }
+        if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
+            array_push($returnAfterArchiveArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.sign-level',
+                'target_param_content' => $afterContentArray['sign_level']
+            ]);    
+        }
+        return $returnAfterArchiveArray;
+    }
+
+    /**
+     * 取引書類更新beforeContent取得
+     *
+     * @param object $beforeContent
+     * @param object $afterContet
+     * @return array
+     */
+    public function beforeContetArrayInternal(object $beforeContent, object $afterContet): array
+    {
+        $beforeContentArray = json_decode(json_encode($beforeContent), true);
+        $afterContentArray   = json_decode(json_encode($afterContet), true);
+        // var_export($beforeContentArray['product_name']);
+        // exit();
+        $returnBeforeInternalArray['operation'] = [];
+
+        if ($beforeContentArray['content'] !== $afterContentArray['content']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.content',
+                'target_param_content' => $afterContentArray['content']
+            ]);    
+        }
+
+        if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.template',
+                'target_param_content' => $afterContentArray['template_id']
+            ]);    
+        }
+        if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document-type',
+                'target_param_content' => $afterContentArray['doc_type_id']
+            ]);    
+        }
+        if ($beforeContentArray['doc_create_date'] !== $afterContentArray['doc_create_date']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document-create-date',
+                'target_param_content' => $afterContentArray['doc_create_date']
+            ]);    
+        }
+        if ($beforeContentArray['sign_finish_date'] !== $afterContentArray['sign_finish_date']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.sign-finish-date',
+                'target_param_content' => $afterContentArray['sign_finish_date']
+            ]);    
+        }
+        if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document.no',
+                'target_param_content' => $afterContentArray['doc_no']
+            ]);    
+        }
+        if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.ref-document.no',
+                'target_param_content' => $afterContentArray['ref_doc_no']
+            ]);    
+        }
+        if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.ref-document.no',
+                'target_param_content' => $afterContentArray['product_name']
+            ]);    
+        }
+        if ($beforeContentArray['title'] !== $afterContentArray['title']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.title',
+                'target_param_content' => $afterContentArray['title']
+            ]);    
+        }
+        if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.amount',
+                'target_param_content' => $afterContentArray['amount']
+            ]);    
+        }
+        if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.currency',
+                'target_param_content' => $afterContentArray['currency_id']
+            ]);    
+        }
+        if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.counter-party.id',
+                'target_param_content' => $afterContentArray['counter_party_id']
+            ]);    
+        }
+        if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.remarks',
+                'target_param_content' => $afterContentArray['remarks']
+            ]);    
+        }
+        if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.description',
+                'target_param_content' => $afterContentArray['doc_info']
+            ]); 
+        }
+        if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
+            array_push($returnBeforeInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.sign-level',
+                'target_param_content' => $afterContentArray['sign_level']
+            ]);    
+        }
+
+        return $returnBeforeInternalArray;
+    }
+
+    /**
+     * 社内書類更新afterContent取得
+     *
+     * @param object $beforeContent
+     * @param object $afterContet
+     * @return array
+     */
+    public function afterContentArrayInternal(object $beforeContent, object $afterContet): array
+    {
+        $beforeContentArray = json_decode(json_encode($beforeContent), true);
+        $afterContentArray   = json_decode(json_encode($afterContet), true);
+
+        $returnAfterInternalArray['operation'] = [];
+
+        if ($beforeContentArray['content'] !== $afterContentArray['content']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.template',
+                'target_param_content' => $beforeContentArray['content']
+            ]);    
+        }
+        if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.template',
+                'target_param_content' => $beforeContentArray['template_id']
+            ]);    
+        }
+        if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document-type',
+                'target_param_content' => $beforeContentArray['doc_type_id']
+            ]);    
+        }
+        if ($beforeContentArray['doc_create_date'] !== $afterContentArray['doc_create_date']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document-create-date',
+                'target_param_content' => $beforeContentArray['doc_create_date']
+            ]);    
+        }
+        if ($beforeContentArray['sign_finish_date'] !== $afterContentArray['sign_finish_date']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.sign-finish-date',
+                'target_param_content' => $beforeContentArray['sign_finish_date']
+            ]);    
+        }
+        if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.document.no',
+                'target_param_content' => $beforeContentArray['doc_no']
+            ]);    
+        }
+        if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.ref-document.no',
+                'target_param_content' => $beforeContentArray['ref_doc_no']
+            ]);    
+        }
+        if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.product-name',
+                'target_param_content' => $beforeContentArray['product_name']
+            ]);    
+        }
+        if ($beforeContentArray['title'] !== $afterContentArray['title']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.title',
+                'target_param_content' => $beforeContentArray['title']
+            ]);    
+        }
+        if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.amount',
+                'target_param_content' => $beforeContentArray['amount']
+            ]);    
+        }
+        if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.currency',
+                'target_param_content' => $beforeContentArray['currency_id']
+            ]);    
+        }
+        if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.counter-party.id',
+                'target_param_content' => $beforeContentArray['counter_party_id']
+            ]);    
+        }
+        if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.remarks',
+                'target_param_content' => $beforeContentArray['remarks']
+            ]);    
+        }
+        if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.description',
+                'target_param_content' => $beforeContentArray['doc_info']
+            ]); 
+        }
+        if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
+            array_push($returnAfterInternalArray['operation'], [
+                'message_key' => 'common.message.document.operation-history',
+                'operation_label' => 'document.label.item.sign-level',
+                'target_param_content' => $beforeContentArray['sign_level']
+            ]);    
+        }
+
+        return $returnAfterInternalArray;
+    }
+
+
+    /**
+     * 取引書類更新beforeContent取得
+     *
+     * @param object $beforeContent
+     * @param object $afterContet
+     * @return array
+     */
+    public function beforeContetArrayDeal(object $beforeContent, object $afterContet): array
+    {
+            $beforeContentArray = json_decode(json_encode($beforeContent), true);
+            $afterContentArray   = json_decode(json_encode($afterContet), true);
+
+            $returnBeforeDealArray['operation'] = [];
+
+            if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.template',
+                    'target_param_content' => $beforeContentArray['template_id']
+                ]);    
+            }
+            if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
+                
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.document-type',
+                    'target_param_content' => $beforeContentArray['doc_type_id']
+                ]);    
+            }
+            if ($beforeContentArray['issue_date'] !== $afterContentArray['issue_date']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.issue-date',
+                    'target_param_content' => $beforeContentArray['issue_date']
+                ]);    
+            }
+            if ($beforeContentArray['expiry_date'] !== $afterContentArray['expiry_date']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.expiry-date',
+                    'target_param_content' => $beforeContentArray['expiry_date']
+                ]);    
+            }
+            // TODO: ラベル無し
+            if ($beforeContentArray['payment_date'] !== $afterContentArray['payment_date']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.payment-date',
+                    'target_param_content' => $beforeContentArray['payment_date']
+                ]);    
+            }
+            if ($beforeContentArray['transaction_date'] !== $afterContentArray['transaction_date']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.deal-date',
+                    'target_param_content' => $beforeContentArray['transaction_date']
+                ]);    
+            }
+            if ($beforeContentArray['download_date'] !== $afterContentArray['download_date']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.download-date',
+                    'target_param_content' => $beforeContentArray['download_date']
+                ]);    
+            }
+            if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.document.no',
+                    'target_param_content' => $beforeContentArray['doc_no']
+                ]);    
+            }
+            if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.ref-document.no',
+                    'target_param_content' => $beforeContentArray['ref_doc_no']
+                ]);    
+            }
+            if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.product-name',
+                    'target_param_content' => $beforeContentArray['product_name']
+                ]);    
+            }
+            if ($beforeContentArray['title'] !== $afterContentArray['title']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.title',
+                    'target_param_content' => $beforeContentArray['title']
+                ]);    
+            }
+            if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.amount',
+                    'target_param_content' => $beforeContentArray['amount']
+                ]);    
+            }
+            if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.currency',
+                    'target_param_content' => $beforeContentArray['currency_id']
+                ]);    
+            }
+            if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.counter-party.id',
+                    'target_param_content' => $beforeContentArray['counter_party_id']
+                ]);    
+            }
+            if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.remarks',
+                    'target_param_content' => $beforeContentArray['remarks']
+                ]);    
+            }
+            if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.description',
+                    'target_param_content' => $beforeContentArray['doc_info']
+                ]);    
+            }
+            if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
+                array_push($returnBeforeDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.sign-level',
+                    'target_param_content' => $beforeContentArray['sign_level']
+                ]);    
+            }
+
+            return $returnBeforeDealArray;
+    }
+
+    /**
+     * 取引書類更新afterContent取得
+     *
+     * @param object $beforeContent
+     * @param object $afterContet
+     * @return array
+     */
+    public function afterContentArrayDeal(object $beforeContent, object $afterContet): array
+    {
+            $beforeContentArray = json_decode(json_encode($beforeContent), true);
+            $afterContentArray   = json_decode(json_encode($afterContet), true);
+
+            $returnAfterDealArray['operation'] = [];
+
+            if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.template',
+                    'target_param_content' => $afterContentArray['template_id']
+                ]);    
+            }
+            if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
+                
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.document-type',
+                    'target_param_content' => $afterContentArray['doc_type_id']
+                ]);    
+            }
+            if ($beforeContentArray['issue_date'] !== $afterContentArray['issue_date']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.issue-date',
+                    'target_param_content' => $afterContentArray['issue_date']
+                ]);    
+            }
+            if ($beforeContentArray['expiry_date'] !== $afterContentArray['expiry_date']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.expiry-date',
+                    'target_param_content' => $afterContentArray['expiry_date']
+                ]);    
+            }
+            // TODO: ラベル無し
+            if ($beforeContentArray['payment_date'] !== $afterContentArray['payment_date']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.payment-date',
+                    'target_param_content' => $afterContentArray['payment_date']
+                ]);    
+            }
+            if ($beforeContentArray['transaction_date'] !== $afterContentArray['transaction_date']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.deal-date',
+                    'target_param_content' => $afterContentArray['transaction_date']
+                ]);    
+            }
+            if ($beforeContentArray['download_date'] !== $afterContentArray['download_date']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.download-date',
+                    'target_param_content' => $afterContentArray['download_date']
+                ]);    
+            }
+            if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.document.no',
+                    'target_param_content' => $afterContentArray['doc_no']
+                ]);    
+            }
+            if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.ref-document.no',
+                    'target_param_content' => $afterContentArray['ref_doc_no']
+                ]);    
+            }
+            if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.product-name',
+                    'target_param_content' => $afterContentArray['product_name']
+                ]);    
+            }
+            if ($beforeContentArray['title'] !== $afterContentArray['title']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.title',
+                    'target_param_content' => $afterContentArray['title']
+                ]);    
+            }
+            if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.amount',
+                    'target_param_content' => $afterContentArray['amount']
+                ]);    
+            }
+            if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.currency',
+                    'target_param_content' => $afterContentArray['currency_id']
+                ]);    
+            }
+            if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.counter-party.id',
+                    'target_param_content' => $afterContentArray['counter_party_id']
+                ]);    
+            }
+            if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.remarks',
+                    'target_param_content' => $afterContentArray['remarks']
+                ]);    
+            }
+            if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.description',
+                    'target_param_content' => $afterContentArray['doc_info']
+                ]);    
+            }
+            if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
+                array_push($returnAfterDealArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.sign-level',
+                    'target_param_content' => $afterContentArray['sign_level']
+                ]);    
+            }
+
+            return $returnAfterDealArray;
+    }
+
+    /**
+     * 契約書類更新beforeContent
+     *
+     * @param object $beforeContent
+     * @param object $afterContet
+     * @return array
+     */
+    public function beforeContetArrayContract(object $beforeContent, object $afterContet): array
+    {
+            $beforeContentArray = json_decode(json_encode($beforeContent), true);
+            $afterContentArray   = json_decode(json_encode($afterContet), true);
+
+            $returnBeforeContetArray['operation'] = [];
+
+            if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.template',
+                    'target_param_content' => $beforeContentArray['template_id']
+                ]);    
+            }
+            if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
+                
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.document-type',
+                    'target_param_content' => $beforeContentArray['doc_type_id']
+                ]);    
+            }
+            if ($beforeContentArray['cont_start_date'] !== $afterContentArray['cont_start_date']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.contract-date.start',
+                    'target_param_content' => $beforeContentArray['cont_start_date']
+                ]);    
+            }
+            if ($beforeContentArray['cont_end_date'] !== $afterContentArray['cont_end_date']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.contract-date.end',
+                    'target_param_content' => $beforeContentArray['cont_end_date']
+                ]);    
+            }
+            if ($beforeContentArray['conc_date'] !== $afterContentArray['conc_date']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.conclusion-date',
+                    'target_param_content' => $beforeContentArray['conc_date']
+                ]);    
+            }
+            if ($beforeContentArray['effective_date'] !== $afterContentArray['effective_date']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.effective-date',
+                    'target_param_content' => $beforeContentArray['effective_date']
+                ]);    
+            }
+            if ($beforeContentArray['cancel_date'] !== $afterContentArray['cancel_date']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.cancel-date',
+                    'target_param_content' => $beforeContentArray['cancel_date']
+                ]);    
+            }
+            if ($beforeContentArray['expiry_date'] !== $afterContentArray['expiry_date']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.expiry-date',
+                    'target_param_content' => $beforeContentArray['expiry_date']
+                ]);    
+            }
+            if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.document.no',
+                    'target_param_content' => $beforeContentArray['doc_no']
+                ]);    
+            }
+            if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.ref-document.no',
+                    'target_param_content' => $beforeContentArray['ref_doc_no']
+                ]);    
+            }
+            if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.product-name',
+                    'target_param_content' => $beforeContentArray['product_name']
+                ]);    
+            }
+            if ($beforeContentArray['title'] !== $afterContentArray['title']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.title',
+                    'target_param_content' => $beforeContentArray['title']
+                ]);    
+            }
+            if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.amount',
+                    'target_param_content' => $beforeContentArray['amount']
+                ]);    
+            }
+            if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.currency',
+                    'target_param_content' => $beforeContentArray['currency_id']
+                ]);    
+            }
+            if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.counter-party.id',
+                    'target_param_content' => $beforeContentArray['counter_party_id']
+                ]);    
+            }
+            if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.remarks',
+                    'target_param_content' => $beforeContentArray['remarks']
+                ]);    
+            }
+            if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.description',
+                    'target_param_content' => $beforeContentArray['doc_info']
+                ]);    
+            }
+            if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
+                array_push($returnBeforeContetArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.sign-level',
+                    'target_param_content' => $beforeContentArray['sign_level']
+                ]);    
+            }
+
+            return $returnBeforeContetArray;
+    }
+
+    /**
+     * 契約書類更新aftercontent
+     *
+     * @param object $beforeContent
+     * @param object $afterContet
+     * @return array
+     */    
+    public function afterContentArrayContract(object $beforeContent, object $afterContet): array
+    {
+            $beforeContentArray = json_decode(json_encode($beforeContent), true);
+            $afterContentArray   = json_decode(json_encode($afterContet), true);
+
+            $returnAfterContentArray['operation'] = [];
+
+            if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.template',
+                    'target_param_content' => $afterContentArray['template_id']
+                ]);    
+            }
+            if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.document-type',
+                    'target_param_content' => $afterContentArray['doc_type_id']
+                ]);    
+            }
+            if ($beforeContentArray['cont_start_date'] !== $afterContentArray['cont_start_date']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.contract-date.start',
+                    'target_param_content' => $afterContentArray['cont_start_date']
+                ]);    
+            }
+            if ($beforeContentArray['cont_end_date'] !== $afterContentArray['cont_end_date']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.contract-date.end',
+                    'target_param_content' => $afterContentArray['cont_end_date']
+                ]);    
+            }
+            if ($beforeContentArray['conc_date'] !== $afterContentArray['conc_date']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.conclusion-date',
+                    'target_param_content' => $afterContentArray['conc_date']
+                ]);    
+            }
+            if ($beforeContentArray['effective_date'] !== $afterContentArray['effective_date']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.effective-date',
+                    'target_param_content' => $afterContentArray['effective_date']
+                ]);    
+            }
+            if ($beforeContentArray['cancel_date'] !== $afterContentArray['cancel_date']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.cancel-date',
+                    'target_param_content' => $afterContentArray['cancel_date']
+                ]);    
+            }
+            if ($beforeContentArray['expiry_date'] !== $afterContentArray['expiry_date']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.expiry-date',
+                    'target_param_content' => $afterContentArray['expiry_date']
+                ]);    
+            }
+            if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.document.no',
+                    'target_param_content' => $afterContentArray['doc_no']
+                ]);    
+            }
+            if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.ref-document.no',
+                    'target_param_content' => $afterContentArray['ref_doc_no']
+                ]);    
+            }
+            if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.product-name',
+                    'target_param_content' => $afterContentArray['product_name']
+                ]);    
+            }
+            if ($beforeContentArray['title'] !== $afterContentArray['title']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.title',
+                    'target_param_content' => $afterContentArray['title']
+                ]);    
+            }
+            if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.amount',
+                    'target_param_content' => $afterContentArray['amount']
+                ]);    
+            }
+            if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.currency',
+                    'target_param_content' => $afterContentArray['currency_id']
+                ]);    
+            }
+            if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.counter-party.id',
+                    'target_param_content' => $afterContentArray['counter_party_id']
+                ]);    
+            }
+            if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.remarks',
+                    'target_param_content' => $afterContentArray['remarks']
+                ]);    
+            }
+            if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.description',
+                    'target_param_content' => $afterContentArray['doc_info']
+                ]);    
+            }
+            if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
+                array_push($returnAfterContentArray['operation'], [
+                    'message_key' => 'common.message.document.operation-history',
+                    'operation_label' => 'document.label.item.sign-level',
+                    'target_param_content' => $afterContentArray['sign_level']
+                ]);    
+            }
+
+            return $returnAfterContentArray;
     }
 }

@@ -47,6 +47,16 @@ interface DocumentSaveRepositoryInterface
     // 登録書類のログ取得
     public function getBeforOrAfterUpdateArchive(array $requestContent);
 
-    // ログ登録
-    public function getUpdateLog(array $requestContent, $beforeList, $afterList): ?bool;
+
+    // 契約書類ログ登録
+    public function getUpdateLogContract(array $requestContent, $beforeList, $afterList): ?bool;
+
+    // 登録書類ログ登録
+    public function getUpdateLogDeal(array $requestContent, $beforeList, $afterList): ?bool;
+
+    //  社内書類ログ登録
+    public function getUpdateLogInternal(array $requestContent, $beforeList, $afterList): ?bool;
+
+    // 登録書類ログ登録
+    public function getUpdateLogArchive(array $requestContent, $beforeList, $afterList): ?bool;
 }

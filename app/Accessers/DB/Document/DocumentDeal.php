@@ -159,7 +159,6 @@ class DocumentDeal extends FluentDatabase
             ->update([
                 'template_id'      => $requestContent['template_id'],
                 'doc_type_id'      => $requestContent['doc_type_id'],
-                'status_id'        => $requestContent['status_id'],
                 'issue_date'       => $requestContent['issue_date'],
                 'expiry_date'      => $requestContent['expiry_date'],
                 'payment_date'     => $requestContent['payment_date'],
@@ -656,8 +655,24 @@ class DocumentDeal extends FluentDatabase
     {
         return $this->builder()
             ->select([
-                'update_user',
-                'update_datetime',
+                'template_id',
+                'doc_type_id',
+                'issue_date',
+                'expiry_date',
+                'payment_date',
+                'transaction_date',
+                'download_date',
+                'doc_no',
+                'ref_doc_no',
+                'product_name',
+                'title',
+                'amount',
+                'currency_id',
+                'counter_party_id',
+                'remarks',
+                'doc_info',
+                'ref_doc_no',
+                'sign_level',
             ])
             ->where('company_id', '=', $requestContent['company_id'])
             ->where('document_id', '=', $requestContent['document_id'])

@@ -170,6 +170,7 @@ class DocumentContract extends FluentDatabase
                 'conc_date'        => $requestContent['conc_date'],
                 'effective_date'   => $requestContent['effective_date'],
                 'cancel_date'      => $requestContent['cancel_date'],
+                'expiry_date'      => $requestContent['expiry_date'],
                 'doc_no'           => $requestContent['doc_no'],
                 'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
                 'product_name'     => $requestContent['product_name'],
@@ -687,8 +688,25 @@ class DocumentContract extends FluentDatabase
     {
         return $this->builder()
             ->select([
-                'update_user',
-                'update_datetime',
+                'template_id',
+                'doc_type_id',
+                'status_id',
+                'cont_start_date',
+                'cont_end_date',
+                'conc_date',
+                'effective_date',
+                'cancel_date',
+                "expiry_date",
+                'doc_no',
+                'ref_doc_no',
+                'product_name',
+                'title',
+                'amount',
+                'currency_id',
+                'counter_party_id',
+                'remarks',
+                'doc_info',
+                'sign_level'
             ])
             ->where('company_id', '=', $requestContent['company_id'])
             ->where('document_id', '=', $requestContent['document_id'])
