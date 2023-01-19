@@ -10,9 +10,7 @@ interface DocumentSaveRepositoryInterface
     public function contractInsert(array $requestContent): ?bool;
 
     // 契約書類更新
-    //: ?bool
-    public function contractUpdate(array $requestContent);
-
+    public function contractUpdate(array $requestContent): ?bool;
 
     // 取引書類登録
     public function dealInsert(array $requestContent): ?bool;
