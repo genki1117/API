@@ -16,8 +16,8 @@ interface LoginUserRepositoryInterface
 
     /**
      * @param string $compnayId
-     * @param string $userId
+     * @param string $email
      * @return User
      */
-    public function getUser(string $compnayId, string $userId): User;
+    public function getUser(string $compnayId, string $email): User;
 }

@@ -1,15 +1,14 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Http\Middleware;
 
+use App\Domain\Consts\UserConst;
 use App\Domain\Entities\Users\User;
 use App\Domain\Repositories\Interface\Common\LoginUserRepositoryInterface;
 use App\Foundations\Context\LoggedInUserContext;
 use App\Exceptions\AuthenticateException;
-use Carbon\CarbonImmutable;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 
 class AuthorizationToken
 {
@@ -40,55 +39,57 @@ class AuthorizationToken
      */
     public function handle(Request $request, Closure $next)
     {
-        $date = new CarbonImmutable();
         $token = $request->header(self::KOTSMP_TOKEN_NAME);
         if ($token === null) {
             // トークンなし
             throw new AuthenticateException(
-                Lang::get("message.common.message.expired"),
+                "common.message.expired",
                 401
             );
-            // return (new TokenResponse())->faildNoToken();
         }
 
-        $data = $this->loginUserRepositoryInterface->getToken($token);
-        if ($data === null) {
-            // トークン存在しない場合
-            // Lang::get("common.message.expired", null, "ja"),
-            throw new AuthenticateException(
-                Lang::get("common.message.expired"),
-                401
-            );
-        // return (new TokenResponse())->faildNoToken();
-        } elseif ($data->getExpiryDate() !== null && $data->getExpiryDate() <= $date) {
-            // 期限切れ
-            throw new AuthenticateException(
-                Lang::get("common.message.expired"),
-                401
-            );
-            // return (new TokenResponse())->faildNoToken();
-        }
+        //TODO　AzureADとの認証処理の設計が確定次第、実装する.
+        // 旧設計方式(temp_tokenテーブル使用)の処理は一旦、コメント化
 
-        $tokenData = json_decode($data->getData());
-        $user = $this->loginUserRepositoryInterface->getUser($tokenData->company_id, $tokenData->user_id);
-        if ($user === null) {
+        // $data = $this->loginUserRepositoryInterface->getToken($token);
+        // if ($data->getToken() === null) {
+        //     // トークン存在しない場合
+        //     // Lang::get("common.message.expired", null, "ja"),
+        //     throw new AuthenticateException(
+        //         "common.message.expired",
+        //         401
+        //     );
+        // // return (new TokenResponse())->faildNoToken();
+        // } elseif ($data->getExpiryDate() !== null && $data->getExpiryDate() <= $date) {
+        //     // 期限切れ
+        //     throw new AuthenticateException(
+        //         "common.message.expired",
+        //         401
+        //     );
+        //     // return (new TokenResponse())->faildNoToken();
+        // }
+
+        // $tokenData = json_decode($data->getData());
+
+        // $user = $this->loginUserRepositoryInterface->getUser($tokenData->company_id, $tokenData->user_id);
+
+        //TODO 仮でAzureADとの認証処理で、compnayId=1 userId=1のユーザを取得したとしておく
+        // テストDBにcompnayId=1 userId=1  email="host1@email.com"で登録していること前提
+        $user = $this->loginUserRepositoryInterface->getUser(compnayId:"1", email:"host1@email.com");
+        if ($user->getUser() === null) {
             // ユーザー存在しない場合
             throw new AuthenticateException(
-                Lang::get("common.message.permission"),
+                "common.message.permission",
                 403
             );
-        // return (new TokenResponse())->faildNoToken();
         } elseif (!$this->checkAuth($request->getPathInfo(), $user)) {
             // 権限チェック
             throw new AuthenticateException(
-                Lang::get("common.message.permission"),
+                "common.message.permission",
                 403
             );
-        // return (new TokenResponse())->faildNoToken();
         } else {
             $this->loggedInUserContext->set($user);
-            // $request['m_user'] = $user->getUser();
-            // $request['m_user_role'] = $user->getUserRole();
         }
 
         return $next($request);
@@ -103,59 +104,66 @@ class AuthorizationToken
     {
         $ret = false;
 
-        if (array_key_exists($requestUri, config('aut_list'))) {
-            $ret = false;
+        //全体共通のミドルウェア（Kernel.phpの$middleware）は、ルート存在チェックより先に動作するため
+        if (!array_key_exists($requestUri, config('auth_list'))) {
+            return true;
         }
 
-        $auth = config('aut_list')[$requestUri];
-        if ($auth === null) {
-            $ret = false;
-        } elseif ($user->getUser()->user_type_id === 1) {
+        $auth = config('auth_list')[$requestUri];
+
+        // 申込者については、該当するAPIがPHP側にはないため、考慮不要
+        if ($user->getUser()->user_type_id === UserConst::USER_TYPE_GUEST) {
             $ret = $auth['guest_user_role'];
-        } elseif ($user->getUser()->user_type_id === 99) {
+        } elseif ($user->getUser()->user_type_id === UserConst::USER_TYPE_SYSTEMMANAGER) {
             $ret = $auth['system_administrator_role'];
-        } else {
-            switch(true) {
-                case $user->getUserRole()->admin_role:
-                    $ret = $auth['reader_role']['admin_role'];
-                    break;
-                case $user->getUserRole()->template_set_role:
-                    $ret = $auth['reader_role']['template_set_role'];
-                    break;
-                case $user->getUserRole()->workflow_set_role:
-                    $ret = $auth['reader_role']['workflow_set_role'];
-                    break;
-                case $user->getUserRole()->master_set_role:
-                    $ret = $auth['reader_role']['workflow_set_role'];
-                    break;
-                case $user->getUserRole()->archive_func_role:
-                    $ret = $auth['reader_role']['archive_func_role'];
-                    break;
-                case $user->getUserRole()->ts_role:
-                    $ret = $auth['reader_role']['ts_role'];
-                    break;
-                case $user->getUserRole()->bulk_ts_role:
-                    $ret = $auth['reader_role']['bulk_ts_role'];
-                    break;
-                case $user->getUserRole()->cont_doc_app_role:
-                    $ret = $auth['reader_role']['cont_doc_app_role'];
-                    break;
-                case $user->getUserRole()->deal_doc_app_role:
-                    $ret = $auth['reader_role']['deal_doc_app_role'];
-                    break;
-                case $user->getUserRole()->int_doc_app_role:
-                    $ret = $auth['reader_role']['int_doc_app_role'];
-                    break;
-                case $user->getUserRole()->arch_doc_app_role:
-                    $ret = $auth['reader_role']['arch_doc_app_role'];
-                    break;
-                case $user->getUserRole()->use_cert_role:
-                    $ret = $auth['reader_role']['use_cert_role'];
-                    break;
-                default:
-                    $ret = false;
+        } elseif ($user->getUser()->user_type_id === UserConst::USER_TYPE_HOST) {
+            $ret = $auth['reader_role'];
+            if (!empty($user->getUserRole())) {
+                if ($ret === false && $user->getUserRole()->admin_role) {
+                    $ret = $auth['admin_role'];
+                }
+                if ($ret === false && $user->getUserRole()->template_set_role) {
+                    $ret = $auth['template_set_role'];
+                }
+                if ($ret === false && $user->getUserRole()->workflow_set_role) {
+                    $ret = $auth['workflow_set_role'];
+                }
+                if ($ret === false && $user->getUserRole()->master_set_role) {
+                    $ret = $auth['master_set_role'];
+                }
+                if ($ret === false && $user->getUserRole()->archive_func_role) {
+                    $ret = $auth['archive_func_role'];
+                }
+                if ($ret === false && $user->getUserRole()->template_rgst_role) {
+                    $ret = $auth['template_rgst_role'];
+                }
+                if ($ret === false && $user->getUserRole()->ts_role) {
+                    $ret = $auth['ts_role'];
+                }
+                if ($ret === false && $user->getUserRole()->bulk_ts_role) {
+                    $ret = $auth['bulk_ts_role'];
+                }
+                if ($ret === false && $user->getUserRole()->bulk_veri_func_role) {
+                    $ret = $auth['bulk_veri_func_role'];
+                }
+                if ($ret === false && $user->getUserRole()->cont_doc_app_role) {
+                    $ret = $auth['cont_doc_app_role'];
+                }
+                if ($ret === false && $user->getUserRole()->deal_doc_app_role) {
+                    $ret = $auth['deal_doc_app_role'];
+                }
+                if ($ret === false && $user->getUserRole()->int_doc_app_role) {
+                    $ret = $auth['int_doc_app_role'];
+                }
+                if ($ret === false && $user->getUserRole()->arch_doc_app_role) {
+                    $ret = $auth['arch_doc_app_role'];
+                }
+                if ($ret === false && $user->getUserRole()->use_cert_role) {
+                    $ret = $auth['use_cert_role'];
+                }
             }
         }
+
         return $ret;
     }
 }
