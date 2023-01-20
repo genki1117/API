@@ -591,7 +591,7 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docContractMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionContractMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageContractMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->documentWorkFlowMock->shouldReceive('insertContract')->once()->AndReturn(2);
+        
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->contractInsert($dataContract_2_0));
@@ -666,7 +666,7 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docDealMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionTransactionMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageTransactionMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertDeal')->once()->AndReturn(4);
+        $this->documentWorkFlowMock->shouldReceive('insertDeal')->times(4)->AndReturn(4);
 
         $this->assertTrue($this->documentSaveRepository->dealInsert($dataDeal_2_2));
 
@@ -892,7 +892,7 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docDealMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionTransactionMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageTransactionMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertDeal')->once()->AndReturn(2);
+        $this->documentWorkFlowMock->shouldReceive('insertDeal')->twice()->AndReturn(2);
 
         $this->assertTrue($this->documentSaveRepository->DealInsert($dataDeal_2_0));
 
@@ -948,7 +948,6 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docDealMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionTransactionMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageTransactionMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('inserDeal')->once()->AndReturn(0);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->dealInsert($dataDeal_2_0));
@@ -1001,9 +1000,6 @@ class DocumentSaveRepositoryTest extends TestCase
         ];
         
         $this->docDealMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->docPermissionTransactionMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->docStorageTransactionMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertDeal')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->dealInsert($dataDeal_2_0));
@@ -1057,8 +1053,6 @@ class DocumentSaveRepositoryTest extends TestCase
         
         $this->docDealMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionTransactionMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->docStorageTransactionMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertDeal')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->dealInsert($dataDeal_2_0));
@@ -1113,7 +1107,6 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docDealMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionTransactionMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageTransactionMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->documentWorkFlowMock->shouldReceive('insertDeal')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->dealInsert($dataDeal_2_0));
@@ -1266,7 +1259,7 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docInternalMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionInternalMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageInternalMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertInternal')->once()->AndReturn(2);
+        $this->documentWorkFlowMock->shouldReceive('insertInternal')->twice()->AndReturn(2);
 
         $this->assertTrue($this->documentSaveRepository->internalInsert($dataInternal_2_0));
 
@@ -1374,9 +1367,6 @@ class DocumentSaveRepositoryTest extends TestCase
         ];
         
         $this->docInternalMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->docPermissionInternalMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->docStorageInternalMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertInternal')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->internalInsert($dataInternal_2_0));
@@ -1430,8 +1420,6 @@ class DocumentSaveRepositoryTest extends TestCase
         
         $this->docInternalMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionInternalMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->docStorageInternalMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertInternal')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->internalInsert($dataInternal_2_0));
@@ -1486,7 +1474,6 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docInternalMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionInternalMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageInternalMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->documentWorkFlowMock->shouldReceive('insertInternal')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->internalInsert($dataInternal_2_0));
@@ -1640,7 +1627,7 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docArchiveMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionArchiveMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageArchiveMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertArchive')->once()->AndReturn(2);
+        $this->documentWorkFlowMock->shouldReceive('insertArchive')->twice()->AndReturn(2);
 
         $this->assertTrue($this->documentSaveRepository->archiveInsert($dataArchive_2_0));
 
@@ -1748,9 +1735,6 @@ class DocumentSaveRepositoryTest extends TestCase
         ];
         
         $this->docArchiveMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->docPermissionArchiveMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->docStorageArchiveMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertArchive')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->archiveInsert($dataArchive_2_0));
@@ -1804,8 +1788,6 @@ class DocumentSaveRepositoryTest extends TestCase
         
         $this->docArchiveMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionArchiveMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->docStorageArchiveMock->shouldReceive('insert')->once()->andReturn(1);
-        $this->documentWorkFlowMock->shouldReceive('insertArchive')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->archiveInsert($dataArchive_2_0));
@@ -1860,7 +1842,6 @@ class DocumentSaveRepositoryTest extends TestCase
         $this->docArchiveMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docPermissionArchiveMock->shouldReceive('insert')->once()->andReturn(1);
         $this->docStorageArchiveMock->shouldReceive('insert')->once()->andReturn(0);
-        $this->documentWorkFlowMock->shouldReceive('insertArchive')->once()->AndReturn(2);
 
         $this->expectException(Exception::class);
         $this->assertTrue($this->documentSaveRepository->archiveInsert($dataArchive_2_0));
@@ -1926,8 +1907,6 @@ class DocumentSaveRepositoryTest extends TestCase
             "update_datetime" => "2022-10-10"
         ];
         $this->docContractMock->shouldReceive('update')->once()->andReturn(0);
-        $this->docPermissionContractMock->shouldReceive('update')->once()->andReturn(1);
-        $this->docStorageContractMock->shouldReceive('update')->once()->andReturn(1);
 
         $this->expectException(Exception::class);
         $this->documentSaveRepository->contractUpdate($dataContractUpdate);
@@ -1959,7 +1938,6 @@ class DocumentSaveRepositoryTest extends TestCase
         ];
         $this->docContractMock->shouldReceive('update')->once()->andReturn(1);
         $this->docPermissionContractMock->shouldReceive('update')->once()->andReturn(0);
-        $this->docStorageContractMock->shouldReceive('update')->once()->andReturn(1);
 
         $this->expectException(Exception::class);
         $this->documentSaveRepository->contractUpdate($dataContractUpdate);
@@ -2052,8 +2030,6 @@ class DocumentSaveRepositoryTest extends TestCase
             "update_datetime" => "2022-10-10"
         ];
         $this->docDealMock->shouldReceive('update')->once()->andReturn(0);
-        $this->docPermissionTransactionMock->shouldReceive('update')->once()->andReturn(1);
-        $this->docStorageTransactionMock->shouldReceive('update')->once()->andReturn(1);
 
         $this->expectException(Exception::class);
         $this->documentSaveRepository->dealUpdate($dataDealUpdate);
@@ -2085,7 +2061,6 @@ class DocumentSaveRepositoryTest extends TestCase
         ];
         $this->docDealMock->shouldReceive('update')->once()->andReturn(1);
         $this->docPermissionTransactionMock->shouldReceive('update')->once()->andReturn(0);
-        $this->docStorageTransactionMock->shouldReceive('update')->once()->andReturn(1);
 
         $this->expectException(Exception::class);
         $this->documentSaveRepository->dealUpdate($dataDealUpdate);
@@ -2179,8 +2154,6 @@ class DocumentSaveRepositoryTest extends TestCase
             "update_datetime" => "2022-10-10"
         ];
         $this->docInternalMock->shouldReceive('update')->once()->andReturn(0);
-        $this->docPermissionInternalMock->shouldReceive('update')->once()->andReturn(1);
-        $this->docStorageInternalMock->shouldReceive('update')->once()->andReturn(1);
 
         $this->expectException(Exception::class);
         $this->documentSaveRepository->internalUpdate($dataInternalUpdate);
@@ -2212,8 +2185,6 @@ class DocumentSaveRepositoryTest extends TestCase
         ];
         $this->docInternalMock->shouldReceive('update')->once()->andReturn(1);
         $this->docPermissionInternalMock->shouldReceive('update')->once()->andReturn(0);
-        $this->docStorageInternalMock->shouldReceive('update')->once()->andReturn(1);
-
         $this->expectException(Exception::class);
         $this->documentSaveRepository->internalUpdate($dataInternalUpdate);
     }
@@ -2306,8 +2277,6 @@ class DocumentSaveRepositoryTest extends TestCase
             "update_datetime" => "2022-10-10"
         ];
         $this->docArchiveMock->shouldReceive('update')->once()->andReturn(0);
-        $this->docPermissionArchiveMock->shouldReceive('update')->once()->andReturn(1);
-        $this->docStorageArchiveMock->shouldReceive('update')->once()->andReturn(1);
 
         $this->expectException(Exception::class);
         $this->documentSaveRepository->archiveUpdate($dataArchiveUpdate);
@@ -2339,7 +2308,6 @@ class DocumentSaveRepositoryTest extends TestCase
         ];
         $this->docArchiveMock->shouldReceive('update')->once()->andReturn(1);
         $this->docPermissionArchiveMock->shouldReceive('update')->once()->andReturn(0);
-        $this->docStorageArchiveMock->shouldReceive('update')->once()->andReturn(1);
 
         $this->expectException(Exception::class);
         $this->documentSaveRepository->archiveUpdate($dataArchiveUpdate);
