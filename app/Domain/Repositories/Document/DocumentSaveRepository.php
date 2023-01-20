@@ -760,10 +760,6 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $ipAddress     = $requestContent['ip_address'];
             $accessContent = $requestContent['access_content'];
 
-            // var_export($beforeContent);
-            // var_export($afterContent);
-            // exit();
-
             // beforeContent取得
             $beforeContentArray = $this->beforeContetArrayInternal($beforeContent, $afterContent);
 
@@ -814,19 +810,11 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $ipAddress     = $requestContent['ip_address'];
             $accessContent = $requestContent['access_content'];
 
-            // var_export($beforeContent);
-            // var_export($afterContent);
-            // exit();
-
             // beforeContent取得
             $beforeContentArray = $this->beforeContentArrayArchive($beforeContent, $afterContent);
 
             // afterContent取得
             $afterContentArray = $this->afterContentArrayArchive($beforeContent, $afterContent);
-
-            var_export($beforeContentArray);
-            var_export($afterContentArray);
-            exit();
 
             //アクセスログに登録
             $accessLogResult    = $this->logDocAccess->insert(

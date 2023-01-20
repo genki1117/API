@@ -6,55 +6,140 @@ use App\Domain\Entities\Document\DocumentUpdate as DocumentUpdateEntity;
 
 interface DocumentSaveRepositoryInterface
 {
-    // 契約書類登録
+    /**
+     * 契約書類登録
+     *
+     * @param array $requestContent
+     * @return boolean|null
+     */
     public function contractInsert(array $requestContent): ?bool;
 
-    // 契約書類更新
+    /**
+     * 契約書類更新
+     *
+     * @param array $requestContent
+     * @return boolean|null
+     */
     public function contractUpdate(array $requestContent): ?bool;
 
-    // 取引書類登録
+    
+    /**
+     * 取引書類登録
+     *
+     * @param array $requestContent
+     * @return boolean|null
+     */
     public function dealInsert(array $requestContent): ?bool;
 
-    // 取引書類更新
+    /**
+     * 取引書類更新
+     *
+     * @param array $requestContent
+     * @return boolean|null
+     */
     public function dealUpdate(array $requestContent): ?bool;
 
-
-    // 社内書類登録
+    /**
+     * 社内書類登録
+     *
+     * @param array $requestContent
+     * @return boolean|null
+     */
     public function internalInsert(array $requestContent): ?bool;
 
-    // 社内書類更新
+    /**
+     * 社内書類更新
+     *
+     * @param array $requestContent
+     * @return boolean|null
+     */
     public function internalUpdate(array $requestContent): ?bool;
 
-
-    // 登録書類登録
+    /**
+     * 登録書類登録
+     *
+     * @param array $requestContent
+     * @return boolean|null
+     */
     public function archiveInsert(array $requestContent): ?bool;
 
-    // 登録書類更新
+    /**
+     * 登録書類更新
+     *
+     * @param array $requestContent
+     * @return boolean|null
+     */
     public function archiveUpdate(array $requestContent): ?bool;
 
+    /**
+     * 契約書類ログ取得
+     *
+     * @param array $requestContent
+     * @return DocumentUpdateEntity
+     */
+    public function getBeforOrAfterUpdateContract(array $requestContent): DocumentUpdateEntity;
 
-    // 契約書類ログ取得
-    public function getBeforOrAfterUpdateContract(array $requestContent);
+    /**
+     * 取引書類ログ取得
+     *
+     * @param array $requestContent
+     * @return DocumentUpdateEntity
+     */
+    public function getBeforOrAfterUpdateDeal(array $requestContent): DocumentUpdateEntity;
 
-    // 取引書類ログ取得
-    public function getBeforOrAfterUpdateDeal(array $requestContent);
+    /**
+     * 社内書類のログ取得
+     *
+     * @param array $requestContent
+     * @return DocumentUpdateEntity
+     */
+    public function getBeforOrAfterUpdateInternal(array $requestContent): DocumentUpdateEntity;
 
-    // 社内書類のログ取得
-    public function getBeforOrAfterUpdateInternal(array $requestContent);
+    /**
+     * 登録書類ログ取得
+     *
+     * @param array $requestContent
+     * @return DocumentUpdateEntity
+     */
+    public function getBeforOrAfterUpdateArchive(array $requestContent): DocumentUpdateEntity;
 
-    // 登録書類のログ取得
-    public function getBeforOrAfterUpdateArchive(array $requestContent);
-
-
-    // 契約書類ログ登録
+    /**
+     * 契約書類ログ登録
+     *
+     * @param array $requestContent
+     * @param [type] $beforeList
+     * @param [type] $afterList
+     * @return boolean|null
+     */
     public function getUpdateLogContract(array $requestContent, $beforeList, $afterList): ?bool;
 
-    // 登録書類ログ登録
+    /**
+     * 取引書類ログ登録
+     *
+     * @param array $requestContent
+     * @param [type] $beforeList
+     * @param [type] $afterList
+     * @return boolean|null
+     */
     public function getUpdateLogDeal(array $requestContent, $beforeList, $afterList): ?bool;
 
-    //  社内書類ログ登録
+    /**
+     * 社内書類ログ登録
+     *
+     * @param array $requestContent
+     * @param [type] $beforeList
+     * @param [type] $afterList
+     * @return boolean|null
+     */
     public function getUpdateLogInternal(array $requestContent, $beforeList, $afterList): ?bool;
 
-    // 登録書類ログ登録
+    /**
+     * 登録書類ログ登録
+     *
+     * @param array $requestContent
+     * @param [type] $beforeList
+     * @param [type] $afterList
+     * @return boolean|null
+     */
     public function getUpdateLogArchive(array $requestContent, $beforeList, $afterList): ?bool;
 }
