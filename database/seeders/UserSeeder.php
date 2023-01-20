@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
                 'company_id' => 1,
                 'user_id' => 1,
                 'user_type_id' => 0,
-                'email' => 'test@test.jp',
+                'email' => 'host1@email.com',
                 'family_name' => '大化',
                 'first_name' => 'テスト',
                 'full_name' => '大化　テスト',

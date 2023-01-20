@@ -57,7 +57,6 @@ class DownloadFileRepository implements DownloadFileServiceInterface
     {
         try {
             $getDlFileResult = $this->dlFile->getPath(mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, getTokenDlFileId: $getTokenDlFileId);
-            // return var_export($getDlFileResult);
             if (empty($getDlFileResult)) {
                 throw new Exception('common.message.not-found');
             }
@@ -67,6 +66,11 @@ class DownloadFileRepository implements DownloadFileServiceInterface
             throw $e;
             
         }
+        
+    }
+
+    public function getDlFileDataForId(int $DlfileId)
+    {
         
     }
 }

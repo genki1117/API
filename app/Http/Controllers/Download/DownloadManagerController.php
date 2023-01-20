@@ -20,15 +20,20 @@ class DownloadManagerController extends Controller
         $this->downloadManagerService = $downloadManagerService;
     }
 
+    //string $token, int $dlFileId
 
-    public function fileDownload(string $token)
+    public function fileDownload(Request $request)
     {
+        // var_export($request->hash);
+        // var_export($request->dl_file_id);
+        $nowDate = CarbonImmutable::now();
         try {
-            if (empty($token)) {
-                throw new Exception('common.message.not-found');
-            }
-            $nowDate = CarbonImmutable::now();
-            return $downloadDocumentResult = $this->downloadManagerService->getFile(token: $token, nowDate: $nowDate);    
+            if ($request->hash && $request->dl_file_id === null) {
+
+                $downloadDocumentResult = $this->downloadManagerService->getFile($request->hash, $request->dl_file_id, $nowDate);
+                return (new DownloadFileResponse)->successDownload();
+            }  
+            
 
             if (!$downloadDocumentResult) {
                 throw new Exception('common.messate.permission');
@@ -39,7 +44,7 @@ class DownloadManagerController extends Controller
 
             return (new DownloadFileResponse)->faildDownload($e->getMessage());
         }
-        
+    
         
     }
 }

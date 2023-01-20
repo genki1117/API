@@ -21,6 +21,12 @@ class DownloadFileServiceTest extends TestCase
         $this->downloadRepositoryMock = \Mockery::mock(DownloadFileServiceInterface::class);
     }
 
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        \Mockery::close();
+    }
+
     /**
      * @test
      * 正常処理
@@ -54,19 +60,34 @@ class DownloadFileServiceTest extends TestCase
         ->once()
         ->andreturn(null);
 
-        $this->downloadRepositoryMock->shouldReceive('getDlFileData')
-        ->once()
-        ->andReturn(new DownloadFile($this->getTestFile()));
-
         $this->expectException(Exception::class);
 
         $result = $this->getObject()->getFile('test-token-1', "2023-01-17T08:23:39.915853Z");
     }
 
-
-    private function getObject()
+    /**
+     * @test
+     * トークン有効期限チェックテスト
+     * @return void
+     */
+    public function tokenExpiryTest()
     {
-        return new DownloadManagerService($this->downloadRepositoryMock);
+        $this->downloadRepositoryMock->shouldReceive('getToken')
+        ->once()
+        ->andreturn(new DownloadFile($this->getTestTokenExpiry()));
+
+        $this->expectException(Exception::class);
+
+        $this->getObject()->getFile('test-token-1', "2023-01-20T08:23:39.915853Z");
+
+    }
+
+    public function getTestTokenExpiry()
+    {
+        return $testTokenData = (object)[
+            'data' => '{"user_id": 1, "company_id": 1, "dl_file_id": 1}',
+            'expiry_date' => '"2023-01-20T08:23:39.915853Z"',
+        ];
     }
 
     public function getTestToken()
@@ -84,5 +105,12 @@ class DownloadFileServiceTest extends TestCase
             'dl_file_name' => '8a1182c882b5fe86af15c61bba718eea_t.jpg',
         ];
     }
+
+    private function getObject()
+    {
+        return new DownloadManagerService($this->downloadRepositoryMock);
+    }
+
+    
 
 }
