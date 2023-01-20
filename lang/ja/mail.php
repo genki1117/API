@@ -1,4 +1,8 @@
 <?php
+use App\Domain\Consts\MailConst;
+
+$support = MailConst::MAIL_SUPPORT_ADDRESS;
+$commonSubject = "[KOT電子契約]";
 
 return [
 
@@ -11,7 +15,8 @@ return [
     |
     */
 
-    'forward.contract.title' => '[KOT電子契約]転送された「:title」の署名依頼',
+    // -------- 転送（契約書類） --------
+    'forward.contract.title' => $commonSubject.'転送された「:title」の署名依頼',
     'forward.contract.content' => <<<EOF
         :toUser 様
 
@@ -25,10 +30,11 @@ return [
 
         このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。
 
-        お手数ですが support@huubhr.comまでご連絡をお願い致します。
+        お手数ですが {$support}までご連絡をお願い致します。
         EOF,
 
-    'forward.deal.title' => '[KOT電子契約]転送された「:title」の署名依頼',
+    // -------- 転送（取引書類） --------
+    'forward.deal.title' => $commonSubject.'転送された「:title」の署名依頼',
     'forward.deal.content' => <<<EOF
         :toUser 様
 
@@ -42,10 +48,11 @@ return [
 
         このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。
 
-        お手数ですが support@huubhr.comまでご連絡をお願い致します。
+        お手数ですが {$support}までご連絡をお願い致します。
         EOF,
 
-    'forward.internal.title' => '[KOT電子契約]転送された「:title」の署名依頼',
+    // -------- 転送（社内書類） --------
+    'forward.internal.title' => $commonSubject.'転送された「:title」の署名依頼',
     'forward.internal.content' => <<<EOF
         :toUser 様
 
@@ -59,10 +66,11 @@ return [
 
         このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。
 
-        お手数ですが support@huubhr.comまでご連絡をお願い致します。
+        お手数ですが {$support}までご連絡をお願い致します。
         EOF,
 
-    'forward.archive.title' => '[KOT電子契約]転送された「:title」の署名依頼',
+    // -------- 転送（登録書類） --------
+    'forward.archive.title' => $commonSubject.'転送された「:title」の署名依頼',
     'forward.archive.content' => <<<EOF
         :toUser 様
 
@@ -76,7 +84,7 @@ return [
 
         このメールにお心当たりがない場合は、誤ってメールが送信された可能性があります。
 
-        お手数ですが support@huubhr.comまでご連絡をお願い致します。
+        お手数ですが {$support}までご連絡をお願い致します。
         EOF,
 
 ];
