@@ -41,6 +41,12 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->documentWorkFlowMock = \Mockery::mock(DocumentWorkFlow::class);
     }
 
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        \Mockery::close();
+    }
+
     /**
      * @test
      * ワークフローの取得のテスト
@@ -113,14 +119,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->once()
         ->andReturn(null);
 
-        $this->documentWorkFlowMock->shouldReceive('getContractNextSignUser')
-        ->once()
-        ->andReturn($this->getSignUserContract());
-
-        $this->documentWorkFlowMock->shouldReceive('getContractIsseuUser')
-        ->once()
-        ->andReturn($this->getIssueUserContract());
-
         $this->expectException(Exception::class);
         $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
     }
@@ -139,10 +137,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->documentWorkFlowMock->shouldReceive('getContractNextSignUser')
         ->once()
         ->andReturn(null);
-
-        $this->documentWorkFlowMock->shouldReceive('getContractIsseuUser')
-        ->once()
-        ->andReturn($this->getIssueUserContract());
 
         $this->expectException(Exception::class);
         $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
@@ -221,14 +215,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->once()
         ->andReturn(null);
 
-        $this->documentWorkFlowMock->shouldReceive('getDealNextSignUser')
-        ->once()
-        ->andReturn($this->getSignUserDeal());
-
-        $this->documentWorkFlowMock->shouldReceive('getDealIsseuUser')
-        ->once()
-        ->andReturn($this->getIssueUserDeal());
-
         $this->expectException(Exception::class);
         $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
         
@@ -248,10 +234,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->documentWorkFlowMock->shouldReceive('getDealNextSignUser')
         ->once()
         ->andReturn(null);
-
-        $this->documentWorkFlowMock->shouldReceive('getDealIsseuUser')
-        ->once()
-        ->andReturn($this->getIssueUserDeal());
 
         $this->expectException(Exception::class);
         $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
@@ -336,14 +318,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->docInternalMock->shouldReceive('getSignDocument')
         ->once()
         ->andReturn(null);
-
-        $this->documentWorkFlowMock->shouldReceive('getInternalSignUserList')
-        ->once()
-        ->andReturn($this->getSignUserArchive());
-
-        $this->documentWorkFlowMock->shouldReceive('getInternalIsseuUser')
-        ->once()
-        ->andReturn($this->getIssueUserInternal());
         
         $this->expectException(Exception::class);
         $result = $this->getObject()->getInternalSignUserListInfo(documentId: 1, categoryId: 2, mUserCompanyId: 0);
@@ -364,10 +338,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->documentWorkFlowMock->shouldReceive('getInternalSignUserList')
         ->once()
         ->andReturn(null);
-
-        $this->documentWorkFlowMock->shouldReceive('getInternalIsseuUser')
-        ->once()
-        ->andReturn($this->getIssueUserInternal());
         
         $this->expectException(Exception::class);
         $result = $this->getObject()->getInternalSignUserListInfo(documentId: 1, categoryId: 2, mUserCompanyId: 0);
@@ -445,14 +415,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->docArchiveMock->shouldReceive('getSignDocument')
         ->once()
         ->andReturn(null);
-
-        $this->documentWorkFlowMock->shouldReceive('getArchiveNextSignUser')
-        ->once()
-        ->andReturn($this->getSignUserArchive());
-
-        $this->documentWorkFlowMock->shouldReceive('getArchiveIsseuUser')
-        ->once()
-        ->andReturn($this->getIssueUserArchive());
         
         $this->expectException(Exception::class);
         $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);
@@ -473,10 +435,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->documentWorkFlowMock->shouldReceive('getArchiveNextSignUser')
         ->once()
         ->andReturn(null);
-
-        $this->documentWorkFlowMock->shouldReceive('getArchiveIsseuUser')
-        ->once()
-        ->andReturn($this->getIssueUserArchive());
         
         $this->expectException(Exception::class);
         $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);

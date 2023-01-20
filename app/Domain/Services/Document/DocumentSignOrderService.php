@@ -66,8 +66,8 @@ class DocumentSignOrderService
             $documentDetailendPoint = '/document/detail/';
 
             // システムURL取得
-            //$systemUrl = 'test';
-            $systemUrl = url('');
+            $systemUrl = 'test';
+            //$systemUrl = url('');
 
             switch($categoryId) {
                 // 契約書類
@@ -79,10 +79,9 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserId: $mUserId
                                                         );
-
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
-                        throw new Exception("common.message.permission");
+                        throw new Exception("common.message.permission1");
                         exit;
                     }
                     
@@ -201,8 +200,13 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserCompanyId: $mUserCompanyId
                                                         );
+                                                        //var_export($internalIsseuAndNextSignUser);
+                    // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 false
+                    if ($internalIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
+                        throw new Exception("common.message.permission");
+                        exit;
+                    }
 
-                    // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     foreach ($internalIsseuAndNextSignUser->getNextSignUser() as $signUser) {
                         
                         // 次の署名者のメールアドレス取得

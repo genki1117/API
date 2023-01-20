@@ -28,6 +28,12 @@ class DocumentSignOrderServiceTest extends TestCase
         $this->documentRepositoryMock = \Mockery::mock(DocumentSignOrderRepositoryInterface::class);
     }
 
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        \Mockery::close();
+    }
+
     /**
      * @test
      * 契約書類
@@ -62,7 +68,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * 社内書類
+     * 登録書類
      *  file_prot_pw_flgがtrueだった場合エラー
      * @return void
      */
@@ -84,7 +90,7 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderInternalFileProtPwFlgTrueTest()
     {
-        $this->documentRepositoryMock->shouldReceive('getInternalIsseuAndNextSignUserInfo->getSignDoc')
+        $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo->getSignDoc')
         ->once()
         ->andReturn($this->getTestDataDocFlg_0());
         
@@ -307,13 +313,14 @@ class DocumentSignOrderServiceTest extends TestCase
             ];
 
         $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $dataSign, $this->getTestDataIssueUser());
+        
 
         $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
         ->once()
         ->andReturn($docEntiry);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
-        ->once()
+        ->twice()
         ->andReturn(0);
 
         $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2);
