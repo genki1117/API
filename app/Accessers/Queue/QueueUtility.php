@@ -12,7 +12,7 @@ class QueueUtility
     /**
      * Azure Queue storageのキューへメッセージを追加する
      * @param string $queName
-     * @param array $param
+     * @param string $param
      * @return int
      */
     public function createMessage(string $queName, string $param): int
@@ -26,11 +26,12 @@ class QueueUtility
 
         try {
             // Create Message.
-            $queueClient->createMessage($queName, $param);
+            $param64 = base64_encode($param);
+            $queueClient->createMessage($queName, $param64);
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());
-            $ret = -1;
+            throw $e;
         }
 
         return $ret;
@@ -63,7 +64,7 @@ class QueueUtility
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());
-            $ret = -1;
+            throw $e;
         }
 
         return $ret;
@@ -76,9 +77,9 @@ class QueueUtility
      */
     private function getConnectionString(): string
     {
-        $accountName = env("AZURE_ACCOUNT_NAME");
-        $accountKey = env("AZURE_ACCOUNT_KEY");
-        $queueEndpoint = env("AZURE_STORAGE_QUEUE_ENDPOINT");
+        $accountName = config('app.azure_queue_account_name');
+        $accountKey = config('app.azure_queue_account_key');
+        $queueEndpoint = config("app.azure_queue_endpoint");
         $connectionString = sprintf("DefaultEndpointsProtocol=http;AccountName=%s;AccountKey=%s;QueueEndpoint=%s", $accountName, $accountKey, $queueEndpoint);
 
         return $connectionString;
