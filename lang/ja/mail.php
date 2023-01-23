@@ -1,7 +1,6 @@
 <?php
-use App\Domain\Consts\MailConst;
 
-$support = MailConst::MAIL_SUPPORT_ADDRESS;
+$support = config('services.support.email');
 $commonSubject = "[KOT電子契約]";
 
 return [
