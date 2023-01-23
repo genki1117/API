@@ -31,7 +31,7 @@ class QueueUtility
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());
-            $ret = -1;
+            throw $e;
         }
 
         return $ret;
@@ -64,7 +64,7 @@ class QueueUtility
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());
-            $ret = -1;
+            throw $e;
         }
 
         return $ret;
