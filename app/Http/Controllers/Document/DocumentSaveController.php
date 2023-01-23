@@ -20,17 +20,18 @@ class DocumentSaveController extends Controller
     private DocumentConst $docConst;
 
     /** @var DocumentSaveService */
-    private DocumentSaveService $documentService;
+    private DocumentSaveService $documentSaveService;
 
-    /** @param DocumentSaveService $documentService */
-
+    /**
+     * @param DocumentSaveService $documentSaveService
+     * @param Carbon $carbon
+     * @param DocumentConst $docConst
+     */
     public function __construct(
         DocumentSaveService $documentSaveService,
-        Carbon $carbon,
         DocumentConst $docConst
     ) {
         $this->documentSaveService = $documentSaveService;
-        $this->carbon              = $carbon;
         $this->docConst            = $docConst;
     }
 
@@ -209,7 +210,7 @@ class DocumentSaveController extends Controller
                     $requestContent['update_datetime']         = date('Y-m-d H:i:s', $request->update_datetime);
 
                     // 書類保存の実行
-                    $result = $this->documentSaveService->saveDocument($requestContent);
+                    $this->documentSaveService->saveDocument($requestContent);
                     break;
             }
             DB::commit();

@@ -107,39 +107,39 @@ interface DocumentSaveRepositoryInterface
      * 契約書類ログ登録
      *
      * @param array $requestContent
-     * @param [type] $beforeList
-     * @param [type] $afterList
+     * @param object $beforeList
+     * @param object $afterList
      * @return boolean|null
      */
-    public function getUpdateLogContract(array $requestContent, $beforeList, $afterList): ?bool;
+    public function getUpdateLogContract(array $requestContent, object $beforeList, object $afterList): ?bool;
 
     /**
      * 取引書類ログ登録
      *
      * @param array $requestContent
-     * @param [type] $beforeList
-     * @param [type] $afterList
+     * @param object $beforeList
+     * @param object $afterList
      * @return boolean|null
      */
-    public function getUpdateLogDeal(array $requestContent, $beforeList, $afterList): ?bool;
+    public function getUpdateLogDeal(array $requestContent, object $beforeList, object $afterList): ?bool;
 
     /**
      * 社内書類ログ登録
      *
      * @param array $requestContent
-     * @param [type] $beforeList
-     * @param [type] $afterList
+     * @param object $beforeList
+     * @param object $afterList
      * @return boolean|null
      */
-    public function getUpdateLogInternal(array $requestContent, $beforeList, $afterList): ?bool;
+    public function getUpdateLogInternal(array $requestContent, object $beforeList, object $afterList): ?bool;
 
     /**
      * 登録書類ログ登録
      *
      * @param array $requestContent
-     * @param [type] $beforeList
-     * @param [type] $afterList
+     * @param object $beforeList
+     * @param object $afterList
      * @return boolean|null
      */
-    public function getUpdateLogArchive(array $requestContent, $beforeList, $afterList): ?bool;
+    public function getUpdateLogArchive(array $requestContent, object $beforeList, object $afterList): ?bool;
 }

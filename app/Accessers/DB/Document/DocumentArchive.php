@@ -155,38 +155,34 @@ class DocumentArchive extends FluentDatabase
    */
   public function update(array $requestContent): ?int
   {
-    try {
-        return $this->builder($this->table)
-          // ->where('update_datetime', '=', $requestContent['update_datetime'])  
-          ->where('document_id', $requestContent['document_id'])
-          ->where('company_id', $requestContent['company_id'])
-          ->where('category_id', $requestContent['category_id'])
-          ->update([
-                'template_id'      => $requestContent['template_id'],
-                'doc_type_id'      => $requestContent['doc_type_id'],
-                'scan_doc_flg'     => $requestContent['scan_doc_flg'],
-                'status_id'        => $requestContent['status_id'],
-                'issue_date'       => $requestContent['issue_date'],
-                'expiry_date'      => $requestContent['expiry_date'],
-                'transaction_date' => $requestContent['transaction_date'],
-                'doc_no'           => $requestContent['doc_no'],
-                'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
-                'product_name'     => $requestContent['product_name'],
-                'title'            => $requestContent['title'],
-                'amount'           => $requestContent['amount'],
-                'currency_id'      => $requestContent['currency_id'],
-                'counter_party_id' => $requestContent['counter_party_id'],
-                'remarks'          => $requestContent['remarks'],
-                'doc_info'         => $requestContent['doc_info'],
-                'sign_level'       => $requestContent['sign_level'],
-                'timestamp_user'   => $requestContent['timestamp_user'],
-                'update_user'      => $requestContent['m_user_id'],
-                'update_datetime'  => CarbonImmutable::now()
-        ]);
-    } catch (Exception $e) {
-        throw new Exception('他のユーザが更新しました。もう一度やり直してください。');
-    }
-      
+    $data =[
+        'template_id'      => $requestContent['template_id'],
+        'doc_type_id'      => $requestContent['doc_type_id'],
+        'scan_doc_flg'     => $requestContent['scan_doc_flg'],
+        'status_id'        => $requestContent['status_id'],
+        'issue_date'       => $requestContent['issue_date'],
+        'expiry_date'      => $requestContent['expiry_date'],
+        'transaction_date' => $requestContent['transaction_date'],
+        'doc_no'           => $requestContent['doc_no'],
+        'ref_doc_no'       => json_encode($requestContent['ref_doc_no'], JSON_UNESCAPED_UNICODE),
+        'product_name'     => $requestContent['product_name'],
+        'title'            => $requestContent['title'],
+        'amount'           => $requestContent['amount'],
+        'currency_id'      => $requestContent['currency_id'],
+        'counter_party_id' => $requestContent['counter_party_id'],
+        'remarks'          => $requestContent['remarks'],
+        'doc_info'         => $requestContent['doc_info'],
+        'sign_level'       => $requestContent['sign_level'],
+        'timestamp_user'   => $requestContent['timestamp_user'],
+        'update_user'      => $requestContent['m_user_id'],
+        'update_datetime'  => CarbonImmutable::now()
+    ];
+    return $this->builder($this->table)
+        ->where('update_datetime', '=', $requestContent['update_datetime'])  
+        ->where('document_id', $requestContent['document_id'])
+        ->where('company_id', $requestContent['company_id'])
+        ->where('category_id', $requestContent['category_id'])
+        ->update($data);
   }
 
     /**

@@ -22,7 +22,10 @@ class DocumentSaveService
      * @param DocumentConst $docConst
      * @param DocumentSaveRepositoryInterface $documentRepository
      */
-    public function __construct(DocumentSaveRepositoryInterface $documentRepository, DocumentConst $docConst)
+    public function __construct(
+            DocumentSaveRepositoryInterface $documentRepository,
+            DocumentConst $docConst
+        )
     {
         $this->docConst           = $docConst;
         $this->documentRepository = $documentRepository;
@@ -62,7 +65,7 @@ class DocumentSaveService
                         $afterList = $this->documentRepository->getBeforOrAfterUpdateContract(requestContent: $requestContent);
 
                         // ログ出力を行う
-                        $result = $this->documentRepository->getUpdateLogContract(
+                        $this->documentRepository->getUpdateLogContract(
                             $requestContent,
                             $beforeList->getUpdateDocument(),
                             $afterList->getUpdateDocument(),
