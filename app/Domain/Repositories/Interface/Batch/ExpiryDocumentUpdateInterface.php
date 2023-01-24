@@ -8,7 +8,42 @@ use App\Domain\Entities\Users\User;
 
 interface ExpiryDocumentUpdateInterface
 {
+    /**
+     * 期限切れトークン取得
+     *
+     * @return collection
+     */
     public function getExpiryTokenData(): collection;
 
-    public function expriyUpdateContract($data);
+    /**
+     * 契約書類期限切れ更新
+     *
+     * @param object $data
+     * @return boolean
+     */
+    public function expriyUpdateContract(object $data): bool;
+
+    /**
+     * 取引書類期限切れ更新
+     *
+     * @param object $data
+     * @return boolean
+     */
+    public function expriyUpdateDeal(object $data): bool;
+
+    /**
+     * 社内書類期限切れ更新
+     *
+     * @param object $data
+     * @return boolean
+     */
+    public function expriyUpdateInternal(object $data): bool;
+
+    /**
+     * 登録書類期限切れ更新
+     *
+     * @param object $data
+     * @return boolean
+     */
+    public function expriyUpdateArchive(object $data): bool;
 }

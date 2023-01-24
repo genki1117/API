@@ -32,6 +32,11 @@ class TempToken extends FluentDatabase
             ->first();
     }
 
+    /**
+     * 期限切れトークン取得
+     *
+     * @return Collection
+     */
     public function getExpiryToken(): Collection
     {
         return $this->builder($this->table)
@@ -45,5 +50,21 @@ class TempToken extends FluentDatabase
                     ->where('expiry_date', '<', CarbonImmutable::now())
                     ->where('type', '=', '承諾依頼')
                     ->get();
+    }
+
+    /**
+     * トークン削除更新
+     *
+     * @param object $data
+     * @return integer
+     */
+    public function deleteUpdate(object $data): int
+    {
+        return $this->builder($this->table)
+                    ->where('token', '=', $data->t_token)
+                    ->update([
+                        'delete_user' => 0,
+                        'delete_datetime' => CarbonImmutable::now()
+                    ]);
     }
 }

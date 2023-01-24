@@ -2,13 +2,13 @@
 declare(strict_types=1);
 namespace App\Console\Commands\Document;
 
-use App\Domain\Services\Batch\ExpiryDocumentUpdateBatch;
+use App\Domain\Services\Batch\ExpiryDocumentUpdateBatchService;
 use Illuminate\Console\Command;
 
 class ExpiryDocumentUpdateCommand extends Command
 {
     /**  */
-    private ExpiryDocumentUpdateBatch $batchService;
+    private ExpiryDocumentUpdateBatchService $batchService;
     /**
      * The name and signature of the console command.
      *
@@ -24,7 +24,7 @@ class ExpiryDocumentUpdateCommand extends Command
     protected $description = 'Command expiryDcoumentUpdate';
 
 
-    public function __construct(ExpiryDocumentUpdateBatch $batchService)
+    public function __construct(ExpiryDocumentUpdateBatchService $batchService)
     {  
         parent::__construct();
         $this->batchService = $batchService;

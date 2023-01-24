@@ -45,14 +45,94 @@ class ExpiryDocumentUpdateRepository implements ExpiryDocumentUpdateInterface
         $this->tempToken   = $tempToken;
     }
 
-    
+    /**
+     * 期限切れトークン取得
+     *
+     * @return collection
+     */
     public function getExpiryTokenData(): collection
     {
         return  $this->tempToken->getExpiryToken();        
     }
 
-    public function expriyUpdateContract($data)
+    /**
+     * 契約書類期限切れ更新
+     *
+     * @param object $data
+     * @return boolean
+     */
+    public function expriyUpdateContract(object $data): bool
     {
-        $this->docContract->expiryUpdate($data);
+        // 期限切れ更新（契約書類）
+        $updateDocumentResult = $this->docContract->expiryUpdate(data: $data);
+
+        // トークン削除更新
+        $deleteTokenResult = $this->tempToken->deleteUpdate(data: $data);
+
+        if (empty($updateDocumentResult) && empty($deleteTokenResult)) {
+            return false;
+        }
+        return true;
     }
+
+    /**
+     * 取引書類期限切れ更新
+     *
+     * @param object $data
+     * @return boolean
+     */
+    public function expriyUpdateDeal(object $data): bool
+    {
+        // 期限切れ更新（取引書類）
+        $updateDocumentResult = $this->docDeal->expiryUpdate(data: $data);
+
+        // トークン削除更新
+        $deleteTokenResult = $this->tempToken->deleteUpdate(data: $data);
+
+        if (empty($updateDocumentResult) && empty($deleteTokenResult)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 社内書類期限切れ更新
+     *
+     * @param object $data
+     * @return boolean
+     */
+    public function expriyUpdateInternal(object $data): bool
+    {
+        // 期限切れ更新（社内書類）
+        $updateDocumentResult = $this->docInternal->expiryUpdate(data: $data);
+        
+        // トークン削除更新
+        $deleteTokenResult    = $this->tempToken->deleteUpdate(data: $data);
+
+        if (empty($updateDocumentResult) && empty($deleteTokenResult)){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 登録書類期限切れ更新
+     *
+     * @param object $data
+     * @return boolean
+     */
+    public function expriyUpdateArchive(object $data): bool
+    {
+        // 期限切れ更新（登録書類）
+        $updateDocumentResult = $this->docArchive->expiryUpdate(data: $data);
+
+        // トークン削除更新
+        $deleteTokenResult    = $this->tempToken->deleteUpdate(data: $data);
+
+        if (empty($updateDocumentResult) && empty($deleteTokenResult)){
+            return false;
+        }
+        return true;
+    }
+    
 }

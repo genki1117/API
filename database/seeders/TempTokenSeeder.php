@@ -30,7 +30,7 @@ class TempTokenSeeder extends Seeder
 
         DB::table('temp_token')->insert([
             'token' => 'test-token-2',
-            'type' => 'test-type2',
+            'type' => '承諾依頼',
             'data' => json_encode([
                 'document_id' => 2,
                 'category_id' => 0,
@@ -52,7 +52,7 @@ class TempTokenSeeder extends Seeder
 
         DB::table('temp_token')->insert([
             'token' => 'test-token-4',
-            'type' => 'test-type4',
+            'type' => '承諾依頼',
             'data' => json_encode([
                 'document_id' => 4,
                 'category_id' => 1,
@@ -63,13 +63,13 @@ class TempTokenSeeder extends Seeder
 
         DB::table('temp_token')->insert([
             'token' => 'test-token-5',
-            'type' => 'test-type5',
+            'type' => '承諾依頼',
             'data' => json_encode([
                 'document_id' => 5,
                 'category_id' => 2,
                 'company_id' => 1
             ]),
-            'expiry_date' => '2023-01-24 00:00:00'
+            'expiry_date' => '2023-01-23 00:00:00'
         ]);
 
         DB::table('temp_token')->insert([
@@ -80,29 +80,29 @@ class TempTokenSeeder extends Seeder
                 'category_id' => 3,
                 'company_id' => 1
             ]),
-            'expiry_date' => '2023-01-25 00:00:00'
+            'expiry_date' => '2023-01-23 00:00:00'
         ]);
 
         DB::table('temp_token')->insert([
             'token' => 'test-token-7',
-            'type' => 'test-type7',
+            'type' => '承諾依頼',
             'data' => json_encode([
                 'document_id' => 7,
                 'category_id' => 0,
                 'company_id' => 1
             ]),
-            'expiry_date' => '2023-01-26 00:00:00'
+            'expiry_date' => '2023-01-23 00:00:00'
         ]);
 
         DB::table('temp_token')->insert([
             'token' => 'test-token-8',
-            'type' => 'test-type8',
+            'type' => '承諾依頼',
             'data' => json_encode([
                 'document_id' => 8,
                 'category_id' => 1,
                 'company_id' => 1
             ]),
-            'expiry_date' => '2023-01-27 00:00:00'
+            'expiry_date' => '2023-01-23 00:00:00'
         ]);
 
         DB::table('temp_token')->insert([
@@ -113,7 +113,7 @@ class TempTokenSeeder extends Seeder
                 'category_id' => 2,
                 'company_id' => 1
             ]),
-            'expiry_date' => '2023-01-28 00:00:00'
+            'expiry_date' => '2023-01-23 00:00:00'
         ]);
 
         DB::table('temp_token')->insert([
@@ -124,7 +124,7 @@ class TempTokenSeeder extends Seeder
                 'category_id' => 3,
                 'company_id' => 1
             ]),
-            'expiry_date' => '2023-01-29 00:00:00'
+            'expiry_date' => '2023-01-23 00:00:00'
         ]);
     }
 }

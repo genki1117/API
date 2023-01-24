@@ -591,7 +591,13 @@ class DocumentContract extends FluentDatabase
             ->first();
     }
 
-    public function expiryUpdate($data)
+    /**
+     * 期限切れ更新
+     *
+     * @param object $data
+     * @return integer
+     */
+    public function expiryUpdate(object $data): int
     {
         return $this->builder($this->table)
                     ->where('document_id', $data->document_id)
@@ -599,7 +605,7 @@ class DocumentContract extends FluentDatabase
                     ->where('company_id', $data->company_id)
                     ->update([
                         'status_id' => 13,
-                        'update_user' => 99,
+                        'update_user' => 0,
                         'update_datetime' => CarbonImmutable::now()
                     ]);
     }
