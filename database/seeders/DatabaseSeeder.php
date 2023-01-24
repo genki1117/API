@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // SampleUserSeeder::class,
             UserSeeder::class,
-            TempTokenSeeder::class
+            TempTokenSeeder::class,
+            DocumentSeeder::class
         ]);
     }
 }

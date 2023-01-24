@@ -27,7 +27,13 @@ class ExpiryDocumentUpdateBatch
         // ※更新内容は、データ更新を参照。
 
         foreach($expiryTokenData as $data) {
-            var_dump($data);
+
+            switch ($data->category_id) {
+                case 0:
+                    $this->ExpiryDocumentUpdateRepository->expriyUpdateContract($data);
+
+
+            }
     
         }
 

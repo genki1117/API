@@ -590,4 +590,17 @@ class DocumentContract extends FluentDatabase
             ->where('status_id', '=', 0)
             ->first();
     }
+
+    public function expiryUpdate($data)
+    {
+        return $this->builder($this->table)
+                    ->where('document_id', $data->document_id)
+                    ->where('category_id', $data->category_id)
+                    ->where('company_id', $data->company_id)
+                    ->update([
+                        'status_id' => 13,
+                        'update_user' => 99,
+                        'update_datetime' => CarbonImmutable::now()
+                    ]);
+    }
 }
