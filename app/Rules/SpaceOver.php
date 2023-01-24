@@ -13,7 +13,7 @@ class SpaceOver implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value):bool
     {
         $ret = false;
         $parts = explode("　", $value);
@@ -31,7 +31,7 @@ class SpaceOver implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message():string
     {
         return 'error.message.space.over';
     }
