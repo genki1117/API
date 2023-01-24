@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Providers;
 
+use App\Domain\Repositories\Batch\ExpiryDocumentUpdateRepository;
+use App\Domain\Repositories\Interface\Batch\ExpiryDocumentUpdateInterface;
 use App\Domain\Repositories\Document\DocumentDetailRepository;
 use App\Domain\Repositories\Interface\Document\DocumentDetailRepositoryInterface;
 use App\Domain\Repositories\Interface\Document\DocumentGetListRepositoryInterface;
@@ -27,6 +29,7 @@ class RepositoryServiceProvider extends ServiceProvider
      * @var array
      */
     public array $bindings = [
+        ExpiryDocumentUpdateInterface::class => ExpiryDocumentUpdateRepository::class,
         UserRepositoryInterface::class => UserRepository::class,
         LoginUserRepositoryInterface::class => LoginUserRepository::class,
         SystemAccessLogRepositoryInterface::class => SystemAccessLogRepository::class,
