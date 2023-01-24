@@ -19,13 +19,12 @@ class ExpiryDocumentUpdateBatchService
 
     public function expiryDcoumentUpdate()
     {
-        // 各書類の期限切れ状態のデータを取得する。
+        // 各書類の期限切れ状態のデータを取得
         $expiryTokenData = $this->ExpiryDocumentUpdateRepository->getExpiryTokenData();
 
-        // 取得件数分下記処理を実施する。
-        // 取得した期限切れの書類のステータスを「期限切れ」に変更する。
-        // ※更新内容は、データ更新を参照。
-
+        // 取得したトークンとトークンから取得した書類を更新
+        // 書類は「期限切れ」
+        // トークンは「削除更新」
         foreach($expiryTokenData as $data) {
 
             switch ($data->category_id) {
