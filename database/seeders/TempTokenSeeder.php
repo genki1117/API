@@ -17,16 +17,16 @@ class TempTokenSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('temp_token')->insert([
-            'token' => 'test-token-1',
-            'type' => '承諾依頼',
-            'data' => json_encode([
-                'document_id' => 1,
-                'category_id' => 0,
-                'company_id' => 1
-            ]),
-            'expiry_date' => '2023-01-20 00:00:00'
-        ]);
+            DB::table('temp_token')->insert([
+                'token' => 'test-token-1',
+                'type' => '承諾依頼',
+                'data' => json_encode([
+                    'document_id' => 1,
+                    'category_id' => 0,
+                    'company_id' => 1
+                ]),
+                'expiry_date' => '2023-01-20 00:00:00'
+            ]);
 
         DB::table('temp_token')->insert([
             'token' => 'test-token-2',

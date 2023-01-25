@@ -17,7 +17,7 @@ class ExpiryDocumentUpdateBatchService
         $this->ExpiryDocumentUpdateRepository = $ExpiryDocumentUpdateRepository;
     }
 
-    public function expiryDcoumentUpdate()
+    public function expiryDocumentUpdate()
     {
         // 各書類の期限切れ状態のデータを取得
         $expiryTokenData = $this->ExpiryDocumentUpdateRepository->getExpiryTokenData();
@@ -30,27 +30,26 @@ class ExpiryDocumentUpdateBatchService
             switch ($data->category_id) {
                 // 契約書類
                 case DocumentConst::DOCUMENT_CONTRACT:
-                    $documentUpdateResult = $this->ExpiryDocumentUpdateRepository->expriyUpdateContract(data: $data);
+                    $this->ExpiryDocumentUpdateRepository->expriyUpdateContract(data: $data);
                     break;
 
                  // 取引書類
                  case DocumentConst::DOCUMENT_DEAL:
-                    $documentUpdateResult = $this->ExpiryDocumentUpdateRepository->expriyUpdateDeal(data: $data);
+                    $this->ExpiryDocumentUpdateRepository->expriyUpdateDeal(data: $data);
                     break;
 
                 // 社内書類
                 case DocumentConst::DOCUMENT_INTERNAL:
-                    $documentUpdateResult = $this->ExpiryDocumentUpdateRepository->expriyUpdateInternal(data: $data);
+                    $this->ExpiryDocumentUpdateRepository->expriyUpdateInternal(data: $data);
                     break;
 
                 // 登録書類
                 case DocumentConst::DOCUMENT_ARCHIVE:
-                    $documentUpdateResult = $this->ExpiryDocumentUpdateRepository->expriyUpdateArchive(data: $data);
+                    $this->ExpiryDocumentUpdateRepository->expriyUpdateArchive(data: $data);
                     break;
-
-                return $documentUpdateResult;
             }
         }
+        return true;
     }
 }
 

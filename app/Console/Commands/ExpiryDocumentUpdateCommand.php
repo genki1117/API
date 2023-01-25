@@ -14,14 +14,14 @@ class ExpiryDocumentUpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:expiryDcoumentUpdate';
+    protected $signature = 'command:expiryDocumentUpdate';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command expiryDcoumentUpdate';
+    protected $description = 'Command expiryDocumentUpdate';
 
 
     public function __construct(ExpiryDocumentUpdateBatchService $batchService)
@@ -37,6 +37,6 @@ class ExpiryDocumentUpdateCommand extends Command
      */
     public function handle()
     {
-        $this->batchService->expiryDcoumentUpdate();
+        $this->batchService->expiryDocumentUpdate();
     }
 }
