@@ -12,7 +12,7 @@ class QueueUtility
     /**
      * Azure Queue storageのキューへメッセージを追加する
      * @param string $queName
-     * @param array $param
+     * @param string $param
      * @return int
      */
     public function createMessage(string $queName, string $param): int
@@ -25,11 +25,12 @@ class QueueUtility
 
         try {
             // Create Message.
-            $queueClient->createMessage($queName, $param);
+            $param64 = base64_encode($param);
+            $queueClient->createMessage($queName, $param64);
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());
-            $ret = -1;
+            throw $e;
         }
 
         return $ret;
@@ -62,7 +63,7 @@ class QueueUtility
         } catch(ServiceException $e) {
             // Handle exception based on error codes and messages.
             Log::error($e->getMessage());
-            $ret = -1;
+            throw $e;
         }
 
         return $ret;
