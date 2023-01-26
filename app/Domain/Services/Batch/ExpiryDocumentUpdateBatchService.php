@@ -9,12 +9,20 @@ use App\Domain\Repositories\Interface\Batch\ExpiryDocumentUpdateInterface;
 class ExpiryDocumentUpdateBatchService
 {
 
-    /** @var $ExpiryDocumentUpdateRepository */
+    /** @var ExpiryDocumentUpdateInterface $ExpiryDocumentUpdateRepository */
     private $ExpiryDocumentUpdateRepository;
 
-    public function __construct(ExpiryDocumentUpdateInterface $ExpiryDocumentUpdateRepository)
+    /** @var DocumentConst $docConst */
+    private $docConst;
+
+    public function __construct(
+        ExpiryDocumentUpdateInterface $ExpiryDocumentUpdateRepository,
+        DocumentConst $docConst
+        )
     {
         $this->ExpiryDocumentUpdateRepository = $ExpiryDocumentUpdateRepository;
+        $this->docConst = $docConst;
+
     }
 
     public function expiryDocumentUpdate()
@@ -26,25 +34,25 @@ class ExpiryDocumentUpdateBatchService
         // 書類は「期限切れ」
         // トークンは「削除更新」
         foreach($expiryTokenData as $data) {
-
+            
             switch ($data->category_id) {
                 // 契約書類
-                case DocumentConst::DOCUMENT_CONTRACT:
+                case $this->docConst::DOCUMENT_CONTRACT:
                     $this->ExpiryDocumentUpdateRepository->expriyUpdateContract(data: $data);
                     break;
 
                  // 取引書類
-                 case DocumentConst::DOCUMENT_DEAL:
+                 case $this->docConst::DOCUMENT_DEAL:
                     $this->ExpiryDocumentUpdateRepository->expriyUpdateDeal(data: $data);
                     break;
 
                 // 社内書類
-                case DocumentConst::DOCUMENT_INTERNAL:
+                case $this->docConst::DOCUMENT_INTERNAL:
                     $this->ExpiryDocumentUpdateRepository->expriyUpdateInternal(data: $data);
                     break;
 
                 // 登録書類
-                case DocumentConst::DOCUMENT_ARCHIVE:
+                case $this->docConst::DOCUMENT_ARCHIVE:
                     $this->ExpiryDocumentUpdateRepository->expriyUpdateArchive(data: $data);
                     break;
             }

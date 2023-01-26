@@ -13,7 +13,7 @@ interface ExpiryDocumentUpdateInterface
      *
      * @return collection
      */
-    public function getExpiryTokenData(): collection;
+    public function getExpiryTokenData(): array;
 
     /**
      * 契約書類期限切れ更新

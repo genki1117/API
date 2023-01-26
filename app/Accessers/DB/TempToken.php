@@ -37,7 +37,7 @@ class TempToken extends FluentDatabase
      *
      * @return Collection
      */
-    public function getExpiryToken(): Collection
+    public function getExpiryToken(): array
     {
         return $this->builder($this->table)
                     ->select(DB::raw(
@@ -49,7 +49,8 @@ class TempToken extends FluentDatabase
                     ->whereNull('delete_datetime')
                     ->where('expiry_date', '<', CarbonImmutable::now())
                     ->where('type', '=', '承諾依頼')
-                    ->get();
+                    ->get()
+                    ->all();
     }
 
     /**

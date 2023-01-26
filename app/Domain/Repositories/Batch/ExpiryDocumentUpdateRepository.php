@@ -50,7 +50,7 @@ class ExpiryDocumentUpdateRepository implements ExpiryDocumentUpdateInterface
      *
      * @return collection
      */
-    public function getExpiryTokenData(): collection
+    public function getExpiryTokenData(): array
     {
         return  $this->tempToken->getExpiryToken();        
     }
