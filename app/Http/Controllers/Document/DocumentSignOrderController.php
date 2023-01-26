@@ -13,7 +13,7 @@ use Exception;
 class DocumentSignOrderController extends Controller
 {
     /** @var DocumentSignOrderService  */
-    private DocumentSignOrderService $documentService;
+    private DocumentSignOrderService $documentSignOrderService;
 
     public function __construct(DocumentSignOrderService $documentService)
     {
@@ -21,10 +21,10 @@ class DocumentSignOrderController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return void
+     * @param DocumentSignOrderRequest $request
+     * @return JsonResponse
      */
-    public function documentSignOrder(DocumentSignOrderRequest $request)
+    public function documentSignOrder(DocumentSignOrderRequest $request):JsonResponse
     {
         try {
             $mUserId        = $request->m_user['user_id'];
@@ -34,8 +34,18 @@ class DocumentSignOrderController extends Controller
             $docTypeId      = $request->doc_type_id;
             $categoryId     = $request->category_id;
             $updateDatetime = $request->update_datetime;
+            $systemUrl      = url('');
             
-            $documentSignOrderResult = $this->documentSignOrderService->signOrder($mUserId, $mUserCompanyId, $mUserTypeId, $documentId, $docTypeId, $categoryId, $updateDatetime);
+            $documentSignOrderResult = $this->documentSignOrderService->signOrder(
+                mUserId: $mUserId,
+                mUserCompanyId: $mUserCompanyId,
+                mUserTypeId: $mUserTypeId,
+                documentId: $documentId,
+                docTypeId: $docTypeId,
+                categoryId: $categoryId,
+                updateDatetime: $updateDatetime,
+                systemUrl: $systemUrl
+            );
             
             if ($documentSignOrderResult === false) {
                 throw new Exception("common.message.permission");

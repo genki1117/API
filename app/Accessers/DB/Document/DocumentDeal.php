@@ -569,7 +569,7 @@ class DocumentDeal extends FluentDatabase
      * @param int $categoryId
      * @return void
      */
-    public function getSignDocument(int $documentId, int $categoryId)
+    public function getSignDocument(int $documentId, int $categoryId): ?\stdClass
     {
         return $this->builder()
             ->select([

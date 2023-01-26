@@ -4,16 +4,6 @@ namespace App\Domain\Repositories\Interface\Document;
 
 interface DocumentSignOrderRepositoryInterface
 {
-    /**
-     * ログインユーザワークフロー取得
-     *
-     * @param integer $mUserId
-     * @param integer $mUserCompanyId
-     * @param integer $mUsertypeId
-     * @return stdClass|null
-     */
-    public function getLoginUserWorkflow(int $mUserId, int $mUserCompanyId);
-
 
     /**
      * 署名する契約書類、次の署名者、起票者の取得

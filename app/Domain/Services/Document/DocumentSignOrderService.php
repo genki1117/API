@@ -12,29 +12,9 @@ use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterf
 
 class DocumentSignOrderService
 {
-    /** @var DocumentSignOrder */
-    private $contractIsseuAndNextSignUser;
-
-    /** @var DocumentSignOrder */
-    private $dealIsseuAndNextSignUser;
-
-    /** @var DocumentSignOrder */
-    private $internalIsseuAndNextSignUser;
-
-    /** @var DocumentSignOrder */
-    private $archiveIsseuAndNextSignUser;
-
-    /** @var string */
-    private $emailAddress;
-    
-    /** @var string */
-    private $emailTitle;
-
-    /** @var string */
-    private $emailContent;
 
     /** @var QueueUtility */
-    private QueueUtility $queueUtility;
+    public QueueUtility $queueUtility;
 
     /** @var UserTypeConst */
     private UserTypeConst $userTypeConst;
@@ -59,15 +39,11 @@ class DocumentSignOrderService
     }
     
 
-    public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId)
+    public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId, string $updateDatetime, string $systemUrl)
     {
         try {
             // 書類詳細エンドポイント作成
             $documentDetailendPoint = '/document/detail/';
-
-            // システムURL取得
-            $systemUrl = 'test';
-            //$systemUrl = url('');
 
             switch($categoryId) {
                 // 契約書類
@@ -79,9 +55,15 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserId: $mUserId
                                                         );
+                    // var_export($contractIsseuAndNextSignUser);
+
+                    if (empty($contractIsseuAndNextSignUser->getSignDoc()) || empty($contractIsseuAndNextSignUser->getNextSignUser()) || empty($contractIsseuAndNextSignUser->getIssueUser())) {
+                        throw new Exception('common.message.permission');
+                    }
+
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
-                        throw new Exception("common.message.permission1");
+                        throw new Exception("common.message.permission");
                         exit;
                     }
                     
@@ -140,6 +122,10 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserId: $mUserId
                                                         );
+
+                    if (empty($dealIsseuAndNextSignUser->getSignDoc()) || empty($dealIsseuAndNextSignUser->getNextSignUser()) || empty($dealIsseuAndNextSignUser->getIssueUser())) {
+                        throw new Exception('common.message.permission');
+                    }
 
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($dealIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
@@ -200,7 +186,11 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserCompanyId: $mUserCompanyId
                                                         );
-                                                        //var_export($internalIsseuAndNextSignUser);
+
+                    if (empty($internalIsseuAndNextSignUser->getSignDoc()) || empty($internalIsseuAndNextSignUser->getNextSignUser()) || empty($internalIsseuAndNextSignUser->getIssueUser())) {
+                        throw new Exception('common.message.permission');
+                    }
+
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 false
                     if ($internalIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
@@ -209,10 +199,12 @@ class DocumentSignOrderService
 
                     foreach ($internalIsseuAndNextSignUser->getNextSignUser() as $signUser) {
                         
-                        // 次の署名者のメールアドレス取得
+                        // URL作成
                         $emailUrl = $systemUrl . $documentDetailendPoint . $internalIsseuAndNextSignUser->getSignDoc()->document_id;
 
+                        // 次の署名者のメールアドレス取得
                         $emailAddress = $signUser->email;
+
                         // メールタイトル作成
                         $emailTitle = "[KOT電子契約]「{$internalIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
 
@@ -222,8 +214,11 @@ class DocumentSignOrderService
                             $emailUrl
                         );
 
+                        if (empty($emailAddress) || empty($emailTitle) || empty($emailContent)) {
+                            throw new Exception('common.message.permission');
+                        }
+
                         $paramdata = [];
-            
                         $paramdata['company_id']          = $mUserCompanyId;
                         $paramdata['user_id']             = $mUserId;
                         $paramdata['email']['address']    = $emailAddress;
@@ -251,7 +246,12 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserCompanyId: $mUserCompanyId
                                                         );
-                    // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
+
+                    if (empty($archiveIsseuAndNextSignUser->getSignDoc()) || empty($archiveIsseuAndNextSignUser->getNextSignUser()) || empty($archiveIsseuAndNextSignUser->getIssueUser())) {
+                        throw new Exception('common.message.permission');
+                    }
+
+                    // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 false
                     if ($archiveIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
                         exit;
@@ -274,10 +274,6 @@ class DocumentSignOrderService
                     );
 
                     break;
-            }
-
-            if (empty($emailAddress) || empty($emailTitle) || empty($emailContent)) {
-                throw new Exception('common.message.permission');
             }
 
             // キューの設定

@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Repository\Document;
 
+use App\Domain\Entities\Document\DocumentSignOrder;
 use Exception;
 use App\Domain\Repositories\Document\DocumentSignOrderRepository;
-use App\Accessers\DB\Log\System\LogDocOperation;
 use App\Accessers\DB\Document\DocumentArchive;
 use App\Accessers\DB\Document\DocumentContract;
 use App\Accessers\DB\Document\DocumentDeal;
@@ -12,22 +12,30 @@ use App\Accessers\DB\Document\DocumentInternal;
 use App\Accessers\DB\Document\DocumentWorkFlow;
 use App\Accessers\DB\Master\MUser;
 use App\Accessers\DB\TempToken;
-use App\Domain\Consts\DocumentConst;
-use App\Domain\Entities\Common\TempToken as TempTokenEn;
-use Mockery\LegacyMockInterface;
-use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class DocumentSignOrderRepositoryTest extends TestCase
 {
+    /** @var MUser $mUserMock */
+    private $mUserMock;
 
-    private MockInterface $mUserMock;
-    private MockInterface $tempTokenMock;
-    private MockInterface $docArchiveMock;
-    private MockInterface $docContractMock;
-    private MockInterface $docDealMock;
-    private MockInterface $docInternalMock;
-    private MockInterface $documentWorkFlowMock;
+    /** @var TempToken $tempTokenMock */
+    private $tempTokenMock;
+
+    /** @var DocumentArchive $docArchiveMock */
+    private $docArchiveMock;
+
+    /** @var DocumentContract $docContractMock */
+    private $docContractMock;
+
+    /** @var DocumentDeal $docDealMock */
+    private $docDealMock;
+
+    /** @var DocumentInternal $docInternalMock */
+    private $docInternalMock;
+
+    /** @var DocumentWorkFlow $DocumentWorkFlow */
+    private $documentWorkFlowMock;
 
     public function setUp(): void
     {
@@ -45,28 +53,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
     {
         parent::tearDown();
         \Mockery::close();
-    }
-
-    /**
-     * @test
-     * ワークフローの取得のテスト
-     * @return void
-     */
-    public function getLoginUserWorkflow_test()
-    {
-        $workflData = (object)[
-            'wf_sort' => 1,
-            'full_nama' => 'test test'
-        ];
-        
-        $result = $this->mUserMock->shouldReceive('getLoginUserWorkflow')
-        ->once()
-        ->andReturn($workflData);
-
-        $result = $this->getObject()->getLoginUserWorkflow(mUserId: 1, mUserCompanyId: 1);
-
-        $this->assertEquals($result->wf_sort, 1);
-        $this->assertEquals($result->full_nama, 'test test');
     }
 
     /**
@@ -107,10 +93,10 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->assertEquals($result->getIssueUser()->category_id, 0);
     }
 
+
     /**
      * @test
      * 契約書類異常テスト
-     * 書類取得不可
      * @return void
      */
     public function getContractIsseuAndNextSignUserInfo_test_2 ()
@@ -119,51 +105,19 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->once()
         ->andReturn(null);
 
-        $this->expectException(Exception::class);
-        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
-    }
-    /**
-     * @test
-     * 契約書類異常テスト
-     * 署名者取得不可
-     * @return void
-     */
-    public function getContractIsseuAndNextSignUserInfo_test_3 ()
-    {
-        $this->docContractMock->shouldReceive('getSignDocument')
-        ->once()
-        ->andReturn($this->getSignDocContract());
-
         $this->documentWorkFlowMock->shouldReceive('getContractNextSignUser')
         ->once()
         ->andReturn(null);
-
-        $this->expectException(Exception::class);
-        $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
-    }
-    /**
-     * @test
-     * 契約書類異常テスト
-     * 起票者取得不可
-     * @return void
-     */
-    public function getContractIsseuAndNextSignUserInfo_test_4 ()
-    {
-        $this->docContractMock->shouldReceive('getSignDocument')
-        ->once()
-        ->andReturn($this->getSignDocContract());
-
-        $this->documentWorkFlowMock->shouldReceive('getContractNextSignUser')
-        ->once()
-        ->andReturn($this->getSignUserContract());
 
         $this->documentWorkFlowMock->shouldReceive('getContractIsseuUser')
         ->once()
         ->andReturn(null);
 
-        $this->expectException(Exception::class);
         $result = $this->getObject()->getContractIsseuAndNextSignUserInfo(documentId: 1, categoryId: 0, mUserId: 1);
+        $this->assertInstanceOf(DocumentSignOrder::class, $result);
     }
+
+    
 
      /**
      * @test
@@ -206,7 +160,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 取引書類異常テスト
-     * 書類取得不可
      * @return void
      */
     public function getDealIsseuAndNextSignUserInfo_test_2 ()
@@ -215,54 +168,18 @@ class DocumentSignOrderRepositoryTest extends TestCase
         ->once()
         ->andReturn(null);
 
-        $this->expectException(Exception::class);
-        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
-        
-    }
-    /**
-     * @test
-     * 取引書類異常テスト
-     * 署名者取得不可
-     * @return void
-     */
-    public function getDealIsseuAndNextSignUserInfo_test_3 ()
-    {
-        $this->docDealMock->shouldReceive('getSignDocument')
-        ->once()
-        ->andReturn($this->getSignDocDeal());
-
         $this->documentWorkFlowMock->shouldReceive('getDealNextSignUser')
         ->once()
         ->andReturn(null);
-
-        $this->expectException(Exception::class);
-        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
-        
-    }
-    /**
-     * @test
-     * 取引書類異常テスト
-     * 起票者取得不可
-     * @return void
-     */
-    public function getDealIsseuAndNextSignUserInfo_test_4 ()
-    {
-        $this->docDealMock->shouldReceive('getSignDocument')
-        ->once()
-        ->andReturn($this->getSignDocDeal());
-
-        $this->documentWorkFlowMock->shouldReceive('getDealNextSignUser')
-        ->once()
-        ->andReturn($this->getSignUserDeal());
 
         $this->documentWorkFlowMock->shouldReceive('getDealIsseuUser')
         ->once()
         ->andReturn(null);
 
-        $this->expectException(Exception::class);
-        $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
-        
+        $result = $this->getObject()->getDealIsseuAndNextSignUserInfo(documentId: 1, categoryId: 1, mUserId: 1);
+        $this->assertInstanceOf(DocumentSignOrder::class, $result);
     }
+
 
     /**
      * @test
@@ -306,11 +223,10 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->assertEquals($result->getIssueUser()->wf_sort, 0);
         $this->assertEquals($result->getIssueUser()->category_id, 2);
     }
-    
-     /**
+
+    /**
      * @test
      * 社内書類異常テスト
-     * 書類取得不可
      * @return void
      */
     public function getInternalIsseuAndNextSignUserInfo_test_2 ()
@@ -318,53 +234,20 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->docInternalMock->shouldReceive('getSignDocument')
         ->once()
         ->andReturn(null);
-        
-        $this->expectException(Exception::class);
-        $result = $this->getObject()->getInternalSignUserListInfo(documentId: 1, categoryId: 2, mUserCompanyId: 0);
-    }
-
-    /**
-     * @test
-     * 社内書類異常テスト
-     * 署名者取得不可
-     * @return void
-     */
-    public function getInternalIsseuAndNextSignUserInfo_test_3 ()
-    {
-        $this->docInternalMock->shouldReceive('getSignDocument')
-        ->once()
-        ->andReturn($this->getSignDocInternal());
 
         $this->documentWorkFlowMock->shouldReceive('getInternalSignUserList')
         ->once()
         ->andReturn(null);
-        
-        $this->expectException(Exception::class);
-        $result = $this->getObject()->getInternalSignUserListInfo(documentId: 1, categoryId: 2, mUserCompanyId: 0);
-    }
-    /**
-     * @test
-     * 社内書類異常テスト
-     * 起票者取得不可
-     * @return void
-     */
-    public function getInternalIsseuAndNextSignUserInfo_test_4 ()
-    {
-        $this->docInternalMock->shouldReceive('getSignDocument')
-        ->once()
-        ->andReturn($this->getSignDocInternal());
-
-        $this->documentWorkFlowMock->shouldReceive('getInternalSignUserList')
-        ->once()
-        ->andReturn($this->getSignUserInternal());
 
         $this->documentWorkFlowMock->shouldReceive('getInternalIsseuUser')
         ->once()
         ->andReturn(null);
         
-        $this->expectException(Exception::class);
         $result = $this->getObject()->getInternalSignUserListInfo(documentId: 1, categoryId: 2, mUserCompanyId: 0);
+        $this->assertInstanceOf(DocumentSignOrder::class, $result);
     }
+    
+     
 
     /**
      * @test
@@ -407,7 +290,6 @@ class DocumentSignOrderRepositoryTest extends TestCase
     /**
      * @test
      * 登録書類異常テスト
-     * 書類取得不可
      * @return void
      */
     public function getArchiveIsseuAndNextSignUserInfo_test_2 ()
@@ -415,54 +297,35 @@ class DocumentSignOrderRepositoryTest extends TestCase
         $this->docArchiveMock->shouldReceive('getSignDocument')
         ->once()
         ->andReturn(null);
-        
-        $this->expectException(Exception::class);
-        $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);
-    }
-
-    /**
-     * @test
-     * 登録書類異常テスト
-     * 署名者取得不可
-     * @return void
-     */
-    public function getArchiveIsseuAndNextSignUserInfo_test_3 ()
-    {
-        $this->docArchiveMock->shouldReceive('getSignDocument')
-        ->once()
-        ->andReturn($this->getSignDogArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveNextSignUser')
         ->once()
         ->andReturn(null);
-        
-        $this->expectException(Exception::class);
-        $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);
-    }
-
-    /**
-     * @test
-     * 登録書類異常テスト
-     * 起票者取得不可
-     * @return void
-     */
-    public function getArchiveIsseuAndNextSignUserInfo_test_4 ()
-    {
-        $this->docArchiveMock->shouldReceive('getSignDocument')
-        ->once()
-        ->andReturn($this->getSignDogArchive());
-
-        $this->documentWorkFlowMock->shouldReceive('getArchiveNextSignUser')
-        ->once()
-        ->andReturn($this->getSignUserArchive());
 
         $this->documentWorkFlowMock->shouldReceive('getArchiveIsseuUser')
         ->once()
         ->andReturn(null);
         
-        $this->expectException(Exception::class);
+
         $result = $this->getObject()->getArchiveIsseuAndNextSignUserInfo(documentId: 1, categoryId: 3, mUserCompanyId: 0);
+        $this->assertInstanceOf(DocumentSignOrder::class, $result);
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function tokenInsertTest()
+    {
+        $this->tempTokenMock->shouldReceive('insertToken')
+        ->once()
+        ->andReturn(1);
+        $result = $this->getObject()->insertToken('test-token', ['company_id' => 1, 'category_id' => 1, 'document_id' => 1, 'user_id' => 1]);
+        $this->assertTrue($result);
+    }
+
+
 
     public function getObject()
     {

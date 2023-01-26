@@ -17,7 +17,18 @@ use PHPUnit\Framework\TestCase;
 
 class DocumentSignOrderServiceTest extends TestCase
 {
+    /** @var MockInterface|LegacyMockInterface $documentRepositoryMock */
     private MockInterface|LegacyMockInterface $documentRepositoryMock;
+
+    /** QueueUtility $queueUtilityMock */
+    private QueueUtility $queueUtilityMock;
+
+    /** @var UserTypeConst $userConst */
+    private UserTypeConst $userConst;
+
+    /** @var DocumentConst $docConst */
+    private DocumentConst $docConst;
+    
 
     public function setUp(): void
     {
@@ -36,6 +47,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
+     * 
      * 契約書類
      *  file_prot_pw_flgがtrueだった場合エラー
      * @return void
@@ -47,7 +59,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($this->getTestDataDocFlg_0());
         
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -63,7 +75,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($this->getTestDataDocFlg_0());
         
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -79,7 +91,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($this->getTestDataDocFlg_0());
         
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -95,7 +107,79 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($this->getTestDataDocFlg_0());
         
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+    }
+
+    /**
+     * @test
+     * 契約書類
+     * 書類取得不可
+     * @return void
+     */
+    public function signOrderContractNextSignUserGuestTest1()
+    {
+        $docEntiry = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->expectException(Exception::class);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+    }
+
+    /**
+     * @test
+     * 取引書類
+     * 書類取得不可
+     * @return void
+     */
+    public function signOrderDealNextSignUserGuestTest1()
+    {
+        $docEntiry = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->expectException(Exception::class);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+    }
+
+    /**
+     * @test
+     * 社内書類
+     * 書類取得不可
+     * @return void
+     */
+    public function signOrderInternalNextSignUserGuestTest1()
+    {
+        $docEntiry = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->expectException(Exception::class);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+    }
+
+    /**
+     * @test
+     * 登録書類
+     * 書類取得不可
+     * @return void
+     */
+    public function signOrderArchiveNextSignUserGuestTest1()
+    {
+        $docEntiry = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->expectException(Exception::class);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -116,10 +200,9 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 1, documentId: 1, docTypeId: 1, categoryId: 0);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         
-        $this->assertTrue($result);
-        
+        $this->assertTrue($result);  
     }
 
     /**
@@ -142,8 +225,9 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 1, documentId: 1, docTypeId: 1, categoryId: 0);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
+
 
     /**
      * @test
@@ -155,7 +239,7 @@ class DocumentSignOrderServiceTest extends TestCase
     {
         $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $result111 = $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
         ->once()
         ->andReturn($docEntiry);
 
@@ -163,7 +247,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         
         $this->assertTrue($result); 
     }
@@ -179,7 +263,7 @@ class DocumentSignOrderServiceTest extends TestCase
     {
         $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $result111 = $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
         ->once()
         ->andReturn($docEntiry);
 
@@ -188,7 +272,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -201,7 +285,7 @@ class DocumentSignOrderServiceTest extends TestCase
     {
         $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $result111 = $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
         ->once()
         ->andReturn($docEntiry);
 
@@ -209,7 +293,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 1, documentId: 1, docTypeId: 1, categoryId: 1);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         $this->assertTrue($result);
     }
 
@@ -233,7 +317,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 1, documentId: 1, docTypeId: 1, categoryId: 1);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -254,7 +338,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         
         $this->assertTrue($result);
     }
@@ -279,7 +363,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
 
@@ -323,7 +407,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->twice()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         $this->assertTrue($result);
     }
 
@@ -368,7 +452,51 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+    }
+
+    /**
+     * @test
+     * 社内書類
+     * キュー登録失敗
+     * @return void
+     */
+    public function signOrderInternalNextSignUserGuestFaildTest2()
+    {
+        $dataSign =
+            (object) [
+                '0' =>
+                (object) array(
+                    'full_name' => '加藤　三郎',
+                    'family_name' => '加藤',
+                    'first_name' => '三郎',
+                    'email' => 'testkatou@test.jp',
+                    'wf_sort' => 1,
+                    'category_id' => 2,
+                ),
+                '1' =>
+                (object) array(
+                    'full_name' => '木村　史郎',
+                    'family_name' => '木村',
+                    'first_name' => '史郎',
+                    'email' => 'testkimura@test.jp',
+                    'wf_sort' => 2,
+                    'category_id' => 2,
+                ),
+            ];
+
+        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $dataSign, $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->queueUtilityMock->shouldReceive('createMessage')
+        ->once()
+        ->andReturn(-1);
+
+        $this->expectException(Exception::class);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -388,7 +516,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         $this->assertTrue($result);
     }
 
@@ -411,7 +539,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -427,21 +555,17 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn($docEntiry);
 
-        $this->queueUtilityMock->shouldReceive('createMessage')
-        ->once()
-        ->andReturn(0);
-
         $this->expectException(Exception::class);
         
-        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
-        $reflectionClass = new ReflectionClass($resutl);
+        $reflectionClass = new ReflectionClass($result);
 
         $property = $reflectionClass->getProperty('emailAddress');
 
         $property->setAccessible(true);
 
-        $propety->setValue($result, '');
+        $property->setValue($result, '');
     }
 
     /**
@@ -463,15 +587,15 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
-        $reflectionClass = new ReflectionClass($resutl);
+        $reflectionClass = new ReflectionClass($result);
 
         $property = $reflectionClass->getProperty('emailTitle');
 
         $property->setAccessible(true);
 
-        $propety->setValue($result, '');
+        $property->setValue($result, '');
     }
 
     /**
@@ -493,15 +617,15 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
-        $reflectionClass = new ReflectionClass($resutl);
+        $reflectionClass = new ReflectionClass($result);
 
         $property = $reflectionClass->getProperty('emailContent');
 
         $property->setAccessible(true);
 
-        $propety->setValue($result, '');
+        $property->setValue($result, '');
     }
 
     /**
@@ -523,9 +647,9 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
-        $reflectionClass = new ReflectionClass($resutl);
+        $reflectionClass = new ReflectionClass($result);
 
         $this->assertInstanceOf($resutl->contractIsseuAndNextSignUser, $docEntiry);
 
@@ -533,7 +657,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $property->setAccessible(true);
 
-        $propety->setValue($result, null);
+        $property->setValue($result, null);
 
     }
 
@@ -556,9 +680,9 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
-        $reflectionClass = new ReflectionClass($resutl);
+        $reflectionClass = new ReflectionClass($result);
 
         $this->assertInstanceOf($resutl->dealIsseuAndNextSignUser, $docEntiry);
 
@@ -566,7 +690,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $property->setAccessible(true);
 
-        $propety->setValue($result, null);
+        $property->setValue($result, null);
     }
 
     /**
@@ -588,17 +712,17 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
-        $reflectionClass = new ReflectionClass($resutl);
+        $reflectionClass = new ReflectionClass($result);
 
-        $this->assertInstanceOf($resutl->internalIsseuAndNextSignUser, $docEntiry);
+        $this->assertInstanceOf($result->internalIsseuAndNextSignUser, $docEntiry);
 
         $property = $reflectionClass->getProperty('internalIsseuAndNextSignUser');
 
         $property->setAccessible(true);
 
-        $propety->setValue($result, null);
+        $property->setValue($result, null);
 
     }
 
@@ -621,19 +745,51 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $resutl = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3);
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
-        $reflectionClass = new ReflectionClass($resutl);
+        $reflectionClass = new ReflectionClass($result);
 
-        $this->assertInstanceOf($resutl->archiveIsseuAndNextSignUser, $docEntiry);
+        $this->assertInstanceOf($result->archiveIsseuAndNextSignUser, $docEntiry);
 
         $property = $reflectionClass->getProperty('archiveIsseuAndNextSignUser');
 
         $property->setAccessible(true);
 
-        $propety->setValue($result, null);
+        $property->setValue($result, null);
 
     }
+
+    /**
+     * @test
+     *　メールアドレス取得不可
+     * @return void
+     */
+    public function emailAddressEmptytest_1()
+    {
+        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserEmailEmpty(), $this->getTestDataIssueUser());
+        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->expectException(Exception::class);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+    }
+
+    // /**
+    //  * @test
+    //  *　メールアドレス取得不可
+    //  * @return void
+    //  */
+    // public function emailAddressEmptytest_２()
+    // {
+    //     $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserEmailEmpty(), $this->getTestDataIssueUser());
+    //     $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+    //     ->once()
+    //     ->andReturn($docEntiry);
+
+    //     $this->expectException(Exception::class);
+    //     $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+    // }
 
     
 
@@ -669,6 +825,22 @@ class DocumentSignOrderServiceTest extends TestCase
             'user_id' => 2,
             'full_name' => '佐藤　次郎',
             'email' => 'testsato@test.jp',
+            'user_type_id' => 0,
+            'wf_sort' => 2,
+            'category_id' => 0,
+            'counter_party_id' => NULL,
+            'counter_party_name' => NULL,
+        ];
+        return $dataSign;
+    }
+
+    public function getTestDataSignUserEmailEmpty()
+    {
+        $dataSign =
+        (object) [
+            'user_id' => 2,
+            'full_name' => '佐藤　次郎',
+            'email' => null,
             'user_type_id' => 0,
             'wf_sort' => 2,
             'category_id' => 0,
