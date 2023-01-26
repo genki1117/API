@@ -136,6 +136,9 @@ class DocumentConst
     /** @var string */
     const DOCUMENT_STATUS_APPROVED_NAME = '承認済';
 
+    /** @var string */
+    const DOCUMENT_DETAIL_ENDPOINT = '/document/detail/';
+
 
     const DOCUMENT_STATUS_LIST = [
         self::DOCUMENT_STATUS_DRAFT => self::DOCUMENT_STATUS_DRAFT_NAME,

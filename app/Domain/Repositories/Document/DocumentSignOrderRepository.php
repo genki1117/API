@@ -86,7 +86,7 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $loginUserWorkFlowSort
-     * @return DocumentSignOrder|null
+     * @return DocumentSignOrder
      */
     public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId): DocumentSignOrder
     {
@@ -110,9 +110,9 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return DocumentSignOrder|null
+     * @return DocumentSignOrder
      */
-    public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId): ?DocumentSignOrder
+    public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId): DocumentSignOrder
     {
             $signDocInternal      = $this->documentInternal->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
             
@@ -134,9 +134,9 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return DocumentSignOrder|null
+     * @return DocumentSignOrder
      */
-    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId): ?DocumentSignOrder
+    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId): DocumentSignOrder
     {
 
         $signDocArchive      = $this->documentArchive->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);

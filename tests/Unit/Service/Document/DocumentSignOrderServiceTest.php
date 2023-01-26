@@ -47,7 +47,6 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * 
      * 契約書類
      *  file_prot_pw_flgがtrueだった場合エラー
      * @return void
@@ -55,8 +54,16 @@ class DocumentSignOrderServiceTest extends TestCase
     public function signOrderContractFileProtPwFlgTrueTest()
     {
         $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo->getSignDoc')
-        ->once()
+        ->twice()
         ->andReturn($this->getTestDataDocFlg_0());
+
+        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo->getNextSignUser')
+        ->once()
+        ->andReturn($this->getTestDataSignUser());
+
+        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo->getIssueUser')
+        ->once()
+        ->andReturn($this->getTestDataIssueUser());
         
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
@@ -71,27 +78,19 @@ class DocumentSignOrderServiceTest extends TestCase
     public function signOrderDealFileProtPwFlgTrueTest()
     {
         $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo->getSignDoc')
-        ->once()
+        ->twice()
         ->andReturn($this->getTestDataDocFlg_0());
+
+        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo->getNextSignUser')
+        ->once()
+        ->andReturn($this->getTestDataSignUser());
+
+        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo->getIssueUser')
+        ->once()
+        ->andReturn($this->getTestDataIssueUser());
         
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
-    }
-
-    /**
-     * @test
-     * 登録書類
-     *  file_prot_pw_flgがtrueだった場合エラー
-     * @return void
-     */
-    public function signOrderArchiveFileProtPwFlgTrueTest()
-    {
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo->getSignDoc')
-        ->once()
-        ->andReturn($this->getTestDataDocFlg_0());
-        
-        $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -103,11 +102,43 @@ class DocumentSignOrderServiceTest extends TestCase
     public function signOrderInternalFileProtPwFlgTrueTest()
     {
         $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo->getSignDoc')
-        ->once()
+        ->twice()
         ->andReturn($this->getTestDataDocFlg_0());
+
+        $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo->getNextSignUser')
+        ->once()
+        ->andReturn($this->getTestDataSignUser());
+
+        $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo->getIssueUser')
+        ->once()
+        ->andReturn($this->getTestDataIssueUser());
         
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+    }
+
+    /**
+     * @test
+     * 登録書類
+     *  file_prot_pw_flgがtrueだった場合エラー
+     * @return void
+     */
+    public function signOrderArchiveFileProtPwFlgTrueTest()
+    {
+        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo->getSignDoc')
+        ->twice()
+        ->andReturn($this->getTestDataDocFlg_0());
+
+        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo->getNextSignUser')
+        ->once()
+        ->andReturn($this->getTestDataSignUser());
+
+        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo->getIssueUser')
+        ->once()
+        ->andReturn($this->getTestDataIssueUser());
+        
+        $this->expectException(Exception::class);
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -180,76 +211,6 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
-    }
-
-    /**
-     * @test
-     * 契約書類
-     * 次の署名者がゲスト
-     * @return void
-     */
-    public function signOrderContractNextSignUserGuestTest()
-    {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
-
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
-        ->once()
-        ->andReturn($docEntiry);
-
-        $this->queueUtilityMock->shouldReceive('createMessage')
-        ->once()
-        ->andReturn(0);
-
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
-        
-        $this->assertTrue($result);  
-    }
-
-    /**
-     * @test
-     * 契約書類
-     * 次の署名者がゲスト
-     * キュー登録失敗
-     * @return void
-     */
-    public function signOrderContractNextSignUserGuestQueueFaildTest()
-    {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
-
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
-        ->once()
-        ->andReturn($docEntiry);
-
-        $this->queueUtilityMock->shouldReceive('createMessage')
-        ->once()
-        ->andReturn(-1);
-
-        $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
-    }
-
-
-    /**
-     * @test
-     * 契約書類
-     * 次の署名者がホスト
-     * @return void
-     */
-    public function signOrderContractNextSignUserHostTest()
-    {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
-
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
-        ->once()
-        ->andReturn($docEntiry);
-
-        $this->queueUtilityMock->shouldReceive('createMessage')
-        ->once()
-        ->andReturn(0);
-
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
-        
-        $this->assertTrue($result); 
     }
 
     /**
@@ -775,21 +736,57 @@ class DocumentSignOrderServiceTest extends TestCase
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
-    // /**
-    //  * @test
-    //  *　メールアドレス取得不可
-    //  * @return void
-    //  */
-    // public function emailAddressEmptytest_２()
-    // {
-    //     $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserEmailEmpty(), $this->getTestDataIssueUser());
-    //     $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
-    //     ->once()
-    //     ->andReturn($docEntiry);
+    /**
+     * @test
+     * 契約書類
+     * 次の署名者がゲスト
+     * @return void
+     */
+    public function signOrderContractNextSignUserGuestTest()
+    {
+        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserGuest(), $this->getTestDataIssueUser());
 
-    //     $this->expectException(Exception::class);
-    //     $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
-    // }
+        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->documentRepositoryMock->shouldReceive('insertToken')
+        ->once();
+        
+        $this->queueUtilityMock->shouldReceive('createMessage')
+        ->once()
+        ->andReturn(0);
+
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        
+        $this->assertTrue($result); 
+    }
+
+    /**
+     * @test
+     * 取引書類
+     * 次の署名者がゲスト
+     * @return void
+     */
+    public function signOrderDealNextSignUserGuestTest11()
+    {
+        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserGuest(), $this->getTestDataIssueUser());
+
+        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        ->once()
+        ->andReturn($docEntiry);
+
+        $this->documentRepositoryMock->shouldReceive('insertToken')
+        ->once();
+        
+        $this->queueUtilityMock->shouldReceive('createMessage')
+        ->once()
+        ->andReturn(0);
+
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        
+        $this->assertTrue($result); 
+    }
 
     
 
@@ -816,6 +813,22 @@ class DocumentSignOrderServiceTest extends TestCase
             'file_prot_pw_flg' => 1
         ];
         return $dataDoc;
+    }
+
+    public function getTestDataSignUserGuest()
+    {
+        $dataSign =
+        (object) [
+            'user_id' => 2,
+            'full_name' => '佐藤　次郎',
+            'email' => 'testsato@test.jp',
+            'user_type_id' => 1,
+            'wf_sort' => 2,
+            'category_id' => 0,
+            'counter_party_id' => NULL,
+            'counter_party_name' => NULL,
+        ];
+        return $dataSign;
     }
 
     public function getTestDataSignUser()

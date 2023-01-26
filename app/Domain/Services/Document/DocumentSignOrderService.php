@@ -42,9 +42,6 @@ class DocumentSignOrderService
     public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId, string $updateDatetime, string $systemUrl)
     {
         try {
-            // 書類詳細エンドポイント作成
-            $documentDetailendPoint = '/document/detail/';
-
             switch($categoryId) {
                 // 契約書類
                 case $this->docConst::DOCUMENT_CONTRACT:
@@ -55,7 +52,6 @@ class DocumentSignOrderService
                                                             categoryId: $categoryId,
                                                             mUserId: $mUserId
                                                         );
-                    // var_export($contractIsseuAndNextSignUser);
 
                     if (empty($contractIsseuAndNextSignUser->getSignDoc()) || empty($contractIsseuAndNextSignUser->getNextSignUser()) || empty($contractIsseuAndNextSignUser->getIssueUser())) {
                         throw new Exception('common.message.permission');
@@ -64,19 +60,19 @@ class DocumentSignOrderService
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
                     if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
-                        exit;
                     }
                     
                     // 次の署名者のメールアドレス取得
                     $emailAddress = $contractIsseuAndNextSignUser->getNextSignUser()->email;
-
+                    
                     // メールタイトル作成
-                    $emailTitle = "[KOT電子契約]「{$contractIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
+                    $emailTitle = $this->getMailTitle($contractIsseuAndNextSignUser->getSignDoc()->title);
 
                     // 次の署名者がゲストの場合 user_type_idが1の場合
                     if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) {
+
                         // メールアドレスからハッシュ作成
-                        $token = hash("sha256", $contractIsseuAndNextSignUser->getNextSignUser()->email);
+                        $token = $this->getToken($contractIsseuAndNextSignUser->getNextSignUser()->email);
 
                         // トークン情報を取得
                         $dataContent['company_id']  = $contractIsseuAndNextSignUser->getNextSignUser()->counter_party_id;
@@ -88,7 +84,7 @@ class DocumentSignOrderService
                         $this->documentSignOrderRepositoryInterface->insertToken($token, $dataContent);
                         
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $documentDetailendPoint . $contractIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $contractIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
                         
                         // メール本文作成
                         $emailContent = $this->getContractMailContent(
@@ -100,8 +96,9 @@ class DocumentSignOrderService
 
                     } elseif ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
                         // 次の署名者がホストの場合 user_type_idが1の場合
+                        
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $documentDetailendPoint . $contractIsseuAndNextSignUser->getSignDoc()->document_id;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $contractIsseuAndNextSignUser->getSignDoc()->document_id;
 
                         // メール本文作成
                         $emailContent = $this->getContractMailContent(
@@ -137,11 +134,12 @@ class DocumentSignOrderService
                     $emailAddress = $dealIsseuAndNextSignUser->getNextSignUser()->email;
 
                     // メールタイトル作成
-                    $emailTitle = "[KOT電子契約]「{$dealIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
+                    $emailTitle = $this->getMailTitle($dealIsseuAndNextSignUser->getSignDoc()->title);
                     
                     if ($dealIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) { // ゲストの場合 user_type_idが1の場合
+                        
                         // メールアドレスからハッシュ作成
-                        $token = hash("sha256", $dealIsseuAndNextSignUser->getNextSignUser()->email);
+                        $token = $this->getToken($dealIsseuAndNextSignUser->getNextSignUser()->email);
 
                         // トークン情報を取得
                         $dataContent['company_id']  = $dealIsseuAndNextSignUser->getNextSignUser()->counter_party_id;
@@ -153,7 +151,7 @@ class DocumentSignOrderService
                         $this->documentSignOrderRepositoryInterface->insertToken($token, $dataContent);
                         
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $documentDetailendPoint . $dealIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $dealIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
 
                         // メール本文作成
                         $emailContent = $this->getDealMailContent(
@@ -165,7 +163,7 @@ class DocumentSignOrderService
 
                     } elseif ($dealIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) { // ホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $documentDetailendPoint . $dealIsseuAndNextSignUser->getSignDoc()->document_id;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $dealIsseuAndNextSignUser->getSignDoc()->document_id;
 
                         // メール本文作成
                         $emailContent = $this->getDealMailContent(
@@ -200,13 +198,13 @@ class DocumentSignOrderService
                     foreach ($internalIsseuAndNextSignUser->getNextSignUser() as $signUser) {
                         
                         // URL作成
-                        $emailUrl = $systemUrl . $documentDetailendPoint . $internalIsseuAndNextSignUser->getSignDoc()->document_id;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $internalIsseuAndNextSignUser->getSignDoc()->document_id;
 
                         // 次の署名者のメールアドレス取得
                         $emailAddress = $signUser->email;
 
                         // メールタイトル作成
-                        $emailTitle = "[KOT電子契約]「{$internalIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
+                        $emailTitle = $this->getMailTitle($internalIsseuAndNextSignUser->getSignDoc()->title);
 
                         $emailContent = $this->getInternalMailContent(
                             $signUser->full_name,
@@ -214,13 +212,7 @@ class DocumentSignOrderService
                             $emailUrl
                         );
 
-                        if (empty($emailAddress) || empty($emailTitle) || empty($emailContent)) {
-                            throw new Exception('common.message.permission');
-                        }
-
                         $paramdata = [];
-                        $paramdata['company_id']          = $mUserCompanyId;
-                        $paramdata['user_id']             = $mUserId;
                         $paramdata['email']['address']    = $emailAddress;
                         $paramdata['email']['title']      = $emailTitle;
                         $paramdata['email']['content']    = $emailContent;
@@ -261,10 +253,10 @@ class DocumentSignOrderService
                     $emailAddress = $archiveIsseuAndNextSignUser->getNextSignUser()->email;
 
                     // メールタイトル作成
-                    $emailTitle = "[KOT電子契約]「{$archiveIsseuAndNextSignUser->getSignDoc()->title}」の署名依頼";
+                    $emailTitle = $this->getMailTitle($archiveIsseuAndNextSignUser->getSignDoc()->title);
                     
                     // ユーザに送付するURL作成
-                    $emailUrl = $systemUrl . $documentDetailendPoint . $archiveIsseuAndNextSignUser->getSignDoc()->document_id;
+                    $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $archiveIsseuAndNextSignUser->getSignDoc()->document_id;
 
                     // メール本文作成
                     $emailContent = $this->getArchiveMailContent(
@@ -276,23 +268,21 @@ class DocumentSignOrderService
                     break;
             }
 
-            // キューの設定
-            $paramdata = []; 
-            $paramdata['company_id']          = $mUserCompanyId;
-            $paramdata['user_id']             = $mUserId;
-            $paramdata['email']['address']    = $emailAddress;
-            $paramdata['email']['title']      = $emailTitle;
-            $paramdata['email']['content']    = $emailContent;
+            // // キューの設定
+            // $paramdata = []; 
+            // $paramdata['email']['address']    = $emailAddress;
+            // $paramdata['email']['title']      = $emailTitle;
+            // $paramdata['email']['content']    = $emailContent;
 
 
-            // キューをJSON形式に返却
-            $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+            // // キューをJSON形式に返却
+            // $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
             
-            // キューへ登録
-            $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
-            if ($ret === -1) {
-                throw new Exception('common.message.permission');
-            }
+            // // キューへ登録
+            // $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
+            // if ($ret === -1) {
+            //     throw new Exception('common.message.permission');
+            // }
 
             return true;
         } catch (Exception $e) {
@@ -300,6 +290,22 @@ class DocumentSignOrderService
             Log::error($e);
             return false;
         }
+    }
+
+
+    public function getToken($email)
+    {
+        return hash("sha256", $email);
+    }
+
+    /**
+     * メールタイトル
+     * @param string $titleName
+     * @return string
+     */
+    public function getMailTitle(string $titleName): string
+    {
+        return "[KOT電子契約]「{$titleName}」の署名依頼";
     }
 
     /**

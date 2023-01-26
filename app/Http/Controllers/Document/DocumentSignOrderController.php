@@ -6,7 +6,6 @@ use App\Http\Requests\Document\DocumentSignOrderRequest;
 use App\Http\Responses\Document\DocumentSignOrderRespons;
 use App\Domain\Services\Document\DocumentSignOrderService;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Exception;
 

@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Domain\Repositories\Interface\Document;
 
+use App\Domain\Entities\Document\DocumentSignOrder;
+
 interface DocumentSignOrderRepositoryInterface
 {
 
@@ -13,7 +15,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $$loginUserWorkFlowSort
      * @return DocumentSignOrder|null
      */
-    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId);
+    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId): DocumentSignOrder;
 
 
     /**
@@ -24,7 +26,7 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $loginUserWorkFlowSort
      * @return DocumentSignOrder|null
      */
-    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId);
+    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId): DocumentSignOrder;
 
 
     /**
@@ -33,9 +35,9 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return DocumentSignOrder|null
+     * @return DocumentSignOrder
      */
-    public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId);
+    public function getInternalSignUserListInfo(int $documentId, int $categoryId, int $mUserCompanyId): DocumentSignOrder;
 
 
     /**
@@ -44,9 +46,9 @@ interface DocumentSignOrderRepositoryInterface
      * @param integer $documentId
      * @param integer $categoryId
      * @param integer $mUserCompanyId
-     * @return DocumentSignOrder|null
+     * @return DocumentSignOrder
      */
-    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId);
+    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId): DocumentSignOrder;
 
 
     /**
@@ -56,5 +58,5 @@ interface DocumentSignOrderRepositoryInterface
      * @param array $dataContent
      * @return void
      */
-    public function insertToken(string $token, array $dataContent);
+    public function insertToken(string $token, array $dataContent): bool;
 }
