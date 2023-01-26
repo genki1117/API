@@ -48,7 +48,7 @@ class ExpiryDocumentUpdateRepository implements ExpiryDocumentUpdateInterface
     /**
      * 期限切れトークン取得
      *
-     * @return collection
+     * @return array
      */
     public function getExpiryTokenData(): array
     {
