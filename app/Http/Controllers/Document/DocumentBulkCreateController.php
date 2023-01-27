@@ -26,14 +26,13 @@ class DocumentBulkCreateController extends Controller
      */
     public function dlTmpCsv(DocumentCsvDownloadRequest $request): JsonResponse
     {
+        
         try {
             $mUserId        = $request->m_user['user_id'] ?? null;
             $mUserCompanyId = $request->m_user['company_id'] ?? null;
             $mUserTypeId    = $request->m_user['user_type'] ?? null;
             $categoryId     = $request->category_id ?? null;
             $fileName       = $request->file_name ?? null;
-
-
 
             $this->documentDownloadCsvService->downloadCsv(
                 mUserId: $mUserId,

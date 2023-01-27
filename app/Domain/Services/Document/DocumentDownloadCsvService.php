@@ -9,6 +9,7 @@ use Exception;
 
 class DocumentDownloadCsvService
 {
+
     /**
      * CSVダウンロード処理
      *
@@ -19,10 +20,9 @@ class DocumentDownloadCsvService
      * @param string  $fileName
      * @return bool
      */
-    public function downloadCsv(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $categoryId, string $fileName): ?bool
+    public function downloadCsv(?int $mUserId, ?int $mUserCompanyId, ?int $mUserTypeId, ?int $categoryId, ?string $fileName): ?bool
     {
         try {
-            
             // ユーザタイプがゲストの場合、エラー
             if ($mUserTypeId === UserConstain::USER_TYPE_GUEST) {
                 throw new Exception('common.message.expired');
@@ -33,7 +33,6 @@ class DocumentDownloadCsvService
                 throw new Exception('common.message.not-found');
             }
 
-            
             $zipArchive    = new ZipArchive();
 
             $zipFileName   = $fileName . CsvDlConst::DOWNLOAD_EXTENSION;
@@ -45,7 +44,7 @@ class DocumentDownloadCsvService
             if ($zipFileResult === false) {
                 throw new Exception('common.message.permission');
             }
-            
+            ob_start();
             $accept_data      = file_get_contents(CsvDlConst::DOWNLOAD_TMP_FILE_PATH . $mUserCompanyId . '/' . $mUserId . '/'. $fileName);
 
             $DownloadFileName = CsvDlConst::DOWNLOAD_FILE_NAME . CsvDlConst::DOWNLOAD_CSV_EXTENSION;
@@ -53,22 +52,23 @@ class DocumentDownloadCsvService
             $zipArchive->addFromString($DownloadFileName, $accept_data);
 
             $zipArchive->close();
-
+            
+            
             header('Content-Type: application/zip; name="' . $zipFileName . '"');
             header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
             header('Content-Length: '.filesize($zipFilePath.$zipFileName));
             ob_end_clean();
-            
             // zipファイルをダウンロード
             
             readfile($zipFilePath.$zipFileName);
-
+            
             // 一時フォルダのファイルを削除
             unlink($zipFilePath.$zipFileName);
             
+            return true;
             
         } catch (Exception $e) {
-            throw new Exception('common.message.not-found');
+            throw $e;
             return false;
         }
     }
