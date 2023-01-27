@@ -14,25 +14,14 @@ use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
 
 class DocumentDownloadCsvService
 {
-    /** @var string */
-    private $csvStoragePath;
-
     private const DOWNLOAD_EXTENSION = '.zip';
 
-    private const DOWNLOAD_TMP_FILE_PATH = ''; // TODO:本番環境のパスを設定する。
-
-    private const DOWNLOAD_TMP_FILE_PATH_TEST = '/var/www/html/testCsv/';
+    // テスト用パス '/var/www/html/testCsv/'
+    private const DOWNLOAD_TMP_FILE_PATH = '/var/www/html/storage/uploadCsvFile/';
 
     private const DOWNLOAD_FILE_NAME = 'testCsvFilename'; // zipファイルに格納するcsvファイルの名称（上書き）
 
     private const DOWNLOAD_CSV_EXTENSION = '.csv';
-
-
-    public function __construct()
-    {
-        $this->csvStoragePath = '/var/www/html/testCsv/';
-        // $this->csvStoragePath = 'Storage/UploadCsvFile/';
-    }
 
     /**
      * CSVダウンロード処理
@@ -63,19 +52,19 @@ class DocumentDownloadCsvService
 
             $zipFileName   = $fileName . Self::DOWNLOAD_EXTENSION;
 
-            $zipFilePath   = Self::DOWNLOAD_TMP_FILE_PATH_TEST;
+            $zipFilePath   = Self::DOWNLOAD_TMP_FILE_PATH;
 
             $zipFileResult = $zipArchive->open($zipFilePath.$zipFileName, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 
             if ($zipFileResult === false) {
                 throw new Exception('common.message.permission');
             }
+            
+            $accept_data      = file_get_contents(Self::DOWNLOAD_TMP_FILE_PATH . $mUserCompanyId . '/' . $mUserId . '/'. $fileName);
 
-            $accept_data   = file_get_contents(Self::DOWNLOAD_TMP_FILE_PATH_TEST . $mUserCompanyId . '/' . $mUserId . '/'. $fileName);
+            $DownloadFileName = Self::DOWNLOAD_FILE_NAME . Self::DOWNLOAD_CSV_EXTENSION;
 
-            $filename      = Self::DOWNLOAD_FILE_NAME . Self::DOWNLOAD_CSV_EXTENSION;
-
-            $zipArchive->addFromString($filename , $accept_data);
+            $zipArchive->addFromString($DownloadFileName, $accept_data);
 
             $zipArchive->close();
 
