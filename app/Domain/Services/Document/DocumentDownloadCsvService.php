@@ -2,27 +2,13 @@
 declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
+use App\Domain\Consts\CsvDlConst;
 use App\Domain\Consts\UserConst as UserConstain;
 use ZipArchive;
 use Exception;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\JsonResponse;
-use App\Domain\Entities\Document\DocumentDetail;
-use App\Domain\Entities\Document\DocumentDelete;
-use App\Domain\Repositories\Interface\Document\DocumentListRepositoryInterface;
 
 class DocumentDownloadCsvService
 {
-    private const DOWNLOAD_EXTENSION = '.zip';
-
-    // テスト用パス '/var/www/html/testCsv/'
-    private const DOWNLOAD_TMP_FILE_PATH = '/var/www/html/storage/uploadCsvFile/';
-
-    private const DOWNLOAD_FILE_NAME = 'testCsvFilename'; // zipファイルに格納するcsvファイルの名称（上書き）
-
-    private const DOWNLOAD_CSV_EXTENSION = '.csv';
-
     /**
      * CSVダウンロード処理
      *
@@ -50,9 +36,9 @@ class DocumentDownloadCsvService
             
             $zipArchive    = new ZipArchive();
 
-            $zipFileName   = $fileName . Self::DOWNLOAD_EXTENSION;
+            $zipFileName   = $fileName . CsvDlConst::DOWNLOAD_EXTENSION;
 
-            $zipFilePath   = Self::DOWNLOAD_TMP_FILE_PATH;
+            $zipFilePath   = CsvDlConst::DOWNLOAD_TMP_FILE_PATH;
 
             $zipFileResult = $zipArchive->open($zipFilePath.$zipFileName, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
 
@@ -60,9 +46,9 @@ class DocumentDownloadCsvService
                 throw new Exception('common.message.permission');
             }
             
-            $accept_data      = file_get_contents(Self::DOWNLOAD_TMP_FILE_PATH . $mUserCompanyId . '/' . $mUserId . '/'. $fileName);
+            $accept_data      = file_get_contents(CsvDlConst::DOWNLOAD_TMP_FILE_PATH . $mUserCompanyId . '/' . $mUserId . '/'. $fileName);
 
-            $DownloadFileName = Self::DOWNLOAD_FILE_NAME . Self::DOWNLOAD_CSV_EXTENSION;
+            $DownloadFileName = CsvDlConst::DOWNLOAD_FILE_NAME . CsvDlConst::DOWNLOAD_CSV_EXTENSION;
 
             $zipArchive->addFromString($DownloadFileName, $accept_data);
 
