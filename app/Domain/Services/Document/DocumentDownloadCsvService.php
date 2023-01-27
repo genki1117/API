@@ -35,35 +35,31 @@ class DocumentDownloadCsvService
 
             $zipArchive    = new ZipArchive();
 
-            $zipFileName   = $fileName . CsvDlConst::DOWNLOAD_EXTENSION;
+            // ダウンロードされるzipファイルの名称
+            $zipFileName   = $fileName . CsvDlConst::DOWNLOAD_EXTENSION; //"test.csv.zip"
 
-            $zipFilePath   = CsvDlConst::DOWNLOAD_TMP_FILE_PATH;
-
-            $zipFileResult = $zipArchive->open($zipFilePath.$zipFileName, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+            $zipFileResult = $zipArchive->open(CsvDlConst::DOWNLOAD_FILE_PATH.$zipFileName, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE); // "/var/www/html/storage/uploadCsvFile/"
 
             if ($zipFileResult === false) {
                 throw new Exception('common.message.permission');
             }
-            ob_start();
-            $accept_data      = file_get_contents(CsvDlConst::DOWNLOAD_TMP_FILE_PATH . $mUserCompanyId . '/' . $mUserId . '/'. $fileName);
 
-            $DownloadFileName = CsvDlConst::DOWNLOAD_FILE_NAME . CsvDlConst::DOWNLOAD_CSV_EXTENSION;
-
-            $zipArchive->addFromString($DownloadFileName, $accept_data);
+            $zipArchive->addFile(CsvDlConst::DOWNLOAD_FILE_PATH . $mUserCompanyId . '/' . $mUserId . '/'. $fileName, $fileName);
 
             $zipArchive->close();
             
             
             header('Content-Type: application/zip; name="' . $zipFileName . '"');
             header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
-            header('Content-Length: '.filesize($zipFilePath.$zipFileName));
+            header('Content-Length: '.filesize(CsvDlConst::DOWNLOAD_FILE_PATH.$zipFileName));
+
             ob_end_clean();
             // zipファイルをダウンロード
             
-            readfile($zipFilePath.$zipFileName);
+            readfile(CsvDlConst::DOWNLOAD_FILE_PATH.$zipFileName);
             
             // 一時フォルダのファイルを削除
-            unlink($zipFilePath.$zipFileName);
+            unlink(CsvDlConst::DOWNLOAD_FILE_PATH.$zipFileName);
             
             return true;
             

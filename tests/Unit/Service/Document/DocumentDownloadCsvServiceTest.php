@@ -2,9 +2,7 @@
 
 namespace Tests\Unit\Service\Document;
 
-use ZipArchive;
 use Exception;
-use ReflectionClass;
 use App\Domain\Services\Document\DocumentDownloadCsvService;
 use PHPUnit\Framework\TestCase;
 
@@ -28,9 +26,8 @@ class DocumentDownloadCsvServiceTest extends TestCase
      */
     public function downloadCsv()
     {
-        //ob_start();
+        ob_start();
         $result = $this->getObject()->downloadCsv(1, 1, 0, 1, 'test.csv');
-        //ob_end_clean();
         $this->assertTrue($result);
     }
 
