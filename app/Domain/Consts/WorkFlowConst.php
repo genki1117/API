@@ -39,13 +39,19 @@ class WorkFlowConst
     const WORKFLOW_STATUS_RESEND_NAME = '要再送';
 
     /** @var int */
-    const WORKFLOW_STATUS_COMPLETED = 5;
+    const WORKFLOW_STATUS_REQUESTED = 5;
+
+    /** @var string */
+    const WORKFLOW_STATUS_REQUESTED_NAME = '依頼済';
+
+    /** @var int */
+    const WORKFLOW_STATUS_COMPLETED = 6;
 
     /** @var string */
     const WORKFLOW_STATUS_COMPLETED_NAME = '完了';
 
     /** @var int */
-    const WORKFLOW_STATUS_NOTALLOWED = 6;
+    const WORKFLOW_STATUS_NOTALLOWED = 7;
 
     /** @var string */
     const WORKFLOW_STATUS_NOTALLOWED_NAME = '署名不可';
@@ -57,6 +63,7 @@ class WorkFlowConst
         self::WORKFLOW_STATUS_FORWARDED => self::WORKFLOW_STATUS_FORWARDED_NAME,
         self::WORKFLOW_STATUS_RETURNED => self::WORKFLOW_STATUS_RETURNED_NAME,
         self::WORKFLOW_STATUS_RESEND => self::WORKFLOW_STATUS_RESEND_NAME,
+        self::WORKFLOW_STATUS_REQUESTED => self::WORKFLOW_STATUS_REQUESTED_NAME,
         self::WORKFLOW_STATUS_COMPLETED => self::WORKFLOW_STATUS_COMPLETED_NAME,
         self::WORKFLOW_STATUS_NOTALLOWED => self::WORKFLOW_STATUS_NOTALLOWED_NAME
     ];
