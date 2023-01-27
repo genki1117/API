@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Document;
 
-use App\Domain\Consts\UserConst as UserConstain;
 use App\Http\Responses\Document\DocumentDownloadCsvResponse;
 use App\Domain\Services\Document\DocumentDownloadCsvService;
 use App\Http\Requests\Document\DocumentCsvDownloadRequest;
@@ -34,18 +33,14 @@ class DocumentBulkCreateController extends Controller
             $categoryId     = $request->category_id ?? null;
             $fileName       = $request->file_name ?? null;
 
-            // ユーザタイプがゲストの場合、エラー
-            if ($mUserTypeId === UserConstain::USER_TYPE_GUEST) {
-                throw new Exception('common.message.expired');
-            }
 
-            // ユーザID、ユーザタイプID、書類カテゴリIDが取得出来ない場合は、エラー
-            if ($mUserId === null || $mUserCompanyId === null || $mUserTypeId === null || $categoryId === null || $fileName === null) {
-                throw new Exception('common.message.not-found');
-            }
 
-                $this->documentDownloadCsvService->downloadCsv(
-                mUserId: $mUserId, mUserCompanyId: $mUserCompanyId, mUserTypeId: $mUserTypeId, categoryId: $categoryId, fileName: $fileName
+            $this->documentDownloadCsvService->downloadCsv(
+                mUserId: $mUserId,
+                mUserCompanyId: $mUserCompanyId,
+                mUserTypeId: $mUserTypeId,
+                categoryId: $categoryId,
+                fileName: $fileName
             );
             
             return (new DocumentDownloadCsvResponse)->successDownloadCsv();
