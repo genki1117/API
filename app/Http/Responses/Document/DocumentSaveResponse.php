@@ -24,11 +24,11 @@ class DocumentSaveResponse
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
-    public function faildSave(string $exceptionMessage)
+    public function failedSave(string $exceptionMessage)
     {
         return new JsonResponse([
             "status" => "400",
-            "messaage" => $exceptionMessage,
+            "message" => $exceptionMessage,
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 }

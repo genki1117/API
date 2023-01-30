@@ -219,7 +219,7 @@ class DocumentSaveController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             Log::error($e);
-            return (new DocumentSaveResponse)->faildSave($e->getMessage());
+            return (new DocumentSaveResponse)->failedSave($e->getMessage());
         }
     }
 }

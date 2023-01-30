@@ -41,7 +41,7 @@ class DocumentSaveService
                     if (!$requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->contractInsert(requestContent: $requestContent);
                         if (!$documentSaveResult) {
-                            throw new Exception('common.messate.permission');
+                            throw new Exception('common.message.permission');
                         }
                     }
                     // 更新登録
@@ -52,7 +52,7 @@ class DocumentSaveService
                         // 契約書類更新
                         $documentSaveResult = $this->documentRepository->contractUpdate(requestContent: $requestContent);
                         if (!$documentSaveResult) {
-                            throw new Exception('common.messate.permission');
+                            throw new Exception('common.message.permission');
                         }
 
                         // 更新後の情報を取得する
@@ -73,7 +73,7 @@ class DocumentSaveService
                     if (!$requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->dealInsert(requestContent: $requestContent);
                         if (!$documentSaveResult) {
-                            throw new Exception('common.messate.permission');
+                            throw new Exception('common.message.permission');
                         }
                     }
                     // 更新登録
@@ -84,7 +84,7 @@ class DocumentSaveService
                         // 取引書類更新
                        $documentSaveResult = $this->documentRepository->dealUpdate(requestContent: $requestContent);
                        if (!$documentSaveResult) {
-                        throw new Exception('common.messate.permission');
+                        throw new Exception('common.message.permission');
                     }
 
                         // 更新後の情報を取得する
@@ -105,7 +105,7 @@ class DocumentSaveService
                     if (!$requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->internalInsert(requestContent: $requestContent);
                         if (!$documentSaveResult) {
-                            throw new Exception('common.messate.permission');
+                            throw new Exception('common.message.permission');
                         }
                     }
                     // 更新登録
@@ -116,7 +116,7 @@ class DocumentSaveService
                         // 社内書類更新
                         $documentSaveResult = $this->documentRepository->internalUpdate(requestContent: $requestContent);
                         if (!$documentSaveResult) {
-                            throw new Exception('common.messate.permission');
+                            throw new Exception('common.message.permission');
                         }
 
                         // 更新後の情報を取得する
@@ -137,7 +137,7 @@ class DocumentSaveService
                     if (!$requestContent['document_id']) {
                         $documentSaveResult = $this->documentRepository->archiveInsert(requestContent: $requestContent);
                         if (!$documentSaveResult) {
-                            throw new Exception('common.messate.permission');
+                            throw new Exception('common.message.permission');
                         }
                     }
                     // 更新登録
@@ -148,7 +148,7 @@ class DocumentSaveService
                         // 登録書類更新
                         $documentSaveResult = $this->documentRepository->archiveUpdate(requestContent: $requestContent);
                         if (!$documentSaveResult) {
-                            throw new Exception('common.messate.permission');
+                            throw new Exception('common.message.permission');
                         }
 
                         // 更新後の情報を取得する
