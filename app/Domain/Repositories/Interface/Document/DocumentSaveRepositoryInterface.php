@@ -77,7 +77,7 @@ interface DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return DocumentUpdateEntity
      */
-    public function getBeforOrAfterUpdateContract(array $requestContent): DocumentUpdateEntity;
+    public function getBeforeOrAfterUpdateContract(array $requestContent): DocumentUpdateEntity;
 
     /**
      * 取引書類ログ取得
@@ -85,7 +85,7 @@ interface DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return DocumentUpdateEntity
      */
-    public function getBeforOrAfterUpdateDeal(array $requestContent): DocumentUpdateEntity;
+    public function getBeforeOrAfterUpdateDeal(array $requestContent): DocumentUpdateEntity;
 
     /**
      * 社内書類のログ取得
@@ -93,7 +93,7 @@ interface DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return DocumentUpdateEntity
      */
-    public function getBeforOrAfterUpdateInternal(array $requestContent): DocumentUpdateEntity;
+    public function getBeforeOrAfterUpdateInternal(array $requestContent): DocumentUpdateEntity;
 
     /**
      * 登録書類ログ取得
@@ -101,7 +101,7 @@ interface DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return DocumentUpdateEntity
      */
-    public function getBeforOrAfterUpdateArchive(array $requestContent): DocumentUpdateEntity;
+    public function getBeforeOrAfterUpdateArchive(array $requestContent): DocumentUpdateEntity;
 
     /**
      * 契約書類ログ登録

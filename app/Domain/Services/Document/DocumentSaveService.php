@@ -3,11 +3,7 @@ declare(strict_types=1);
 namespace App\Domain\Services\Document;
 
 use App\Domain\Consts\DocumentConst;
-use App\Accessers\DB\Log\System\LogDocAccess;
-use App\Accessers\DB\Log\System\LogDocOperation;
-use Illuminate\Support\Facades\Log;
 use Exception;
-use App\Domain\Entities\Document\DocumentDetail;
 use App\Domain\Repositories\Interface\Document\DocumentSaveRepositoryInterface;
 
 class DocumentSaveService
@@ -32,8 +28,6 @@ class DocumentSaveService
     }
 
     /**
-     * Undocumented function
-     *
      * @param array $requestContent
      * @return boolean
      */

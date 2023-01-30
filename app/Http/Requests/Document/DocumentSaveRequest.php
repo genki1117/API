@@ -55,6 +55,7 @@ class DocumentSaveRequest extends FormRequest
             'data.currency_id'       => 'required | numeric',
             'data.counter_party_id'  => 'numeric',
             'data.sign_level'        => 'numeric',
+            'data.remarks'           => 'String', 
 
             // 契約書類
             'data.cont_start_date'   => 'date',
@@ -67,7 +68,7 @@ class DocumentSaveRequest extends FormRequest
             // 取引書類
             'data.issue_date'        => 'date',
             'data.payment_date'      => 'date',
-            'data.transaction_date'  => 'date',
+            'data.transaction_date'  => 'date',     
             'data.download_date'     => 'date',
 
             // 社内書類
@@ -188,10 +189,10 @@ class DocumentSaveRequest extends FormRequest
             ],
             'category_id' => [
                 "Required" =>  [
-                    ["type" => "label", "content" => "common.label.item.company.id"],
+                    ["type" => "label", "content" => "common.label.item.category.id"],
                 ],
                 "Numeric" =>  [
-                    ["type" => "label", "content" => "common.label.item.company.id"],
+                    ["type" => "label", "content" => "common.label.item.category.id"],
                 ]
             ],
             'template_id' => [
@@ -239,7 +240,7 @@ class DocumentSaveRequest extends FormRequest
                 ],
                 "Max" =>  [
                     ["type" => "label", "content" => "document.label.item.title"],
-                    ["type" => "text", "content" => "20"],
+                    ["type" => "text", "content" => "255"],
                 ],
             ],
             'amount' => [
@@ -335,6 +336,11 @@ class DocumentSaveRequest extends FormRequest
             'content' => [
                 "Date" =>  [
                     ["type" => "label", "content" => "document.label.item.add-info.content"],
+                ]
+            ],
+            'remarks' => [
+                "Date" =>  [
+                    ["type" => "label", "content" => "document.label.item.remarks"],
                 ]
             ],
             'scan_doc_flg' => [

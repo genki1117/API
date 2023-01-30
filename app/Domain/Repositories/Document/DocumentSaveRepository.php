@@ -624,7 +624,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return
      */
-    public function getBeforOrAfterUpdateContract(array $requestContent): DocumentUpdateEntity
+    public function getBeforeOrAfterUpdateContract(array $requestContent): DocumentUpdateEntity
     {
         $contract    = $this->docContract->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         $perContract = $this->docPermissionContract->getBeforeOrAfterUpdateData(requestContent: $requestContent);
@@ -643,12 +643,12 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return
      */
-    public function getBeforOrAfterUpdateDeal(array $requestContent): DocumentUpdateEntity
+    public function getBeforeOrAfterUpdateDeal(array $requestContent): DocumentUpdateEntity
     {
         $deal    = $this->docDeal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         $perDeal = $this->docDeal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         $stoDeal = $this->docDeal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
-        if (empty($dela) && empty($perDeal) && empty($stoDeal)) {
+        if (empty($deal) && empty($perDeal) && empty($stoDeal)) {
             return new DocumentUpdateEntity();
         }
         return new DocumentUpdateEntity($deal, $perDeal, $stoDeal);
@@ -662,7 +662,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return
      */
-    public function getBeforOrAfterUpdateInternal(array $requestContent): DocumentUpdateEntity
+    public function getBeforeOrAfterUpdateInternal(array $requestContent): DocumentUpdateEntity
     {
         $internal    = $this->docInternal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         $perInternal = $this->docInternal->getBeforeOrAfterUpdateData(requestContent: $requestContent);
@@ -681,7 +681,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * @param array $requestContent
      * @return
      */
-    public function getBeforOrAfterUpdateArchive(array $requestContent): DocumentUpdateEntity
+    public function getBeforeOrAfterUpdateArchive(array $requestContent): DocumentUpdateEntity
     {
         $archive    = $this->docArchive->getBeforeOrAfterUpdateData(requestContent: $requestContent);
         $perArchive = $this->docArchive->getBeforeOrAfterUpdateData(requestContent: $requestContent);
@@ -713,7 +713,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $ipAddress     = $requestContent['ip_address'];
             $accessContent = $requestContent['access_content'];
 
-            $beforeContentArray = $this->beforeContetArrayContract($beforeContent, $afterContent);
+            $beforeContentArray = $this->beforeContentArrayContract($beforeContent, $afterContent);
 
             $afterContentArray = $this->afterContentArrayContract($beforeContent, $afterContent);
 
@@ -729,7 +729,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             );
 
 
-            $operationLogResutl = $this->logDocOperation->insert(
+            $operationLogResult = $this->logDocOperation->insert(
                 companyId: $companyId,
                 categoryId: $categoryId,
                 documentId: $documentId,
@@ -740,7 +740,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             );
 
 
-            if (!$accessLogResult || !$operationLogResutl) {
+            if (!$accessLogResult || !$operationLogResult) {
                 throw new Exception('common.message.permission');
             }
             return true;
@@ -758,7 +758,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      *
      * @param array $requestContent
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return boolean
      */
     public function getUpdateLogDeal(array $requestContent, object $beforeContent, object $afterContent): ?bool
@@ -772,7 +772,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $ipAddress     = $requestContent['ip_address'];
             $accessContent = $requestContent['access_content'];
 
-            $beforeContentArray = $this->beforeContetArrayDeal($beforeContent, $afterContent);
+            $beforeContentArray = $this->beforeContentArrayDeal($beforeContent, $afterContent);
 
             $afterContentArray = $this->afterContentArrayDeal($beforeContent, $afterContent);
 
@@ -789,7 +789,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             );
 
             // 操作ログ出力
-            $operationLogResutl = $this->logDocOperation->insert(
+            $operationLogResult = $this->logDocOperation->insert(
                 companyId: $companyId,
                 categoryId: $categoryId,
                 documentId: $documentId,
@@ -799,7 +799,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 ipAddress: $ipAddress
             );
 
-            if (!$accessLogResult || !$operationLogResutl) {
+            if (!$accessLogResult || !$operationLogResult) {
                 throw new Exception('common.message.permission');
             }
             return true;
@@ -817,7 +817,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      *
      * @param array $requestContent
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return boolean
      */
     public function getUpdateLogInternal(array $requestContent, object $beforeContent, object $afterContent): ?bool
@@ -832,7 +832,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             $accessContent = $requestContent['access_content'];
 
             // beforeContent取得
-            $beforeContentArray = $this->beforeContetArrayInternal($beforeContent, $afterContent);
+            $beforeContentArray = $this->beforeContentArrayInternal($beforeContent, $afterContent);
 
             // afterContent取得
             $afterContentArray = $this->afterContentArrayInternal($beforeContent, $afterContent);
@@ -849,7 +849,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             );
 
             // 操作ログ出力
-            $operationLogResutl = $this->logDocOperation->insert(
+            $operationLogResult = $this->logDocOperation->insert(
                 companyId: $companyId,
                 categoryId: $categoryId,
                 documentId: $documentId,
@@ -859,7 +859,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 ipAddress: $ipAddress
             );
 
-            if (!$accessLogResult || !$operationLogResutl) {
+            if (!$accessLogResult || !$operationLogResult) {
                 throw new Exception('common.message.permission');
             }
             return true;
@@ -906,7 +906,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             );
 
             // 操作ログ出力
-            $operationLogResutl = $this->logDocOperation->insert(
+            $operationLogResult = $this->logDocOperation->insert(
                 companyId: $companyId,
                 categoryId: $categoryId,
                 documentId: $documentId,
@@ -916,7 +916,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                 ipAddress: $ipAddress
             );
 
-            if (!$accessLogResult || !$operationLogResutl) {
+            if (!$accessLogResult || !$operationLogResult) {
                 throw new Exception('common.message.permission');
             }
             return true;
@@ -931,13 +931,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * 登録書類更新beforeContent取得
      *
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return array
      */
-    public function beforeContentArrayArchive(object $beforeContent, object $afterContet): array
+    public function beforeContentArrayArchive(object $beforeContent, object $afterContent): array
     {
         $beforeContentArray = json_decode(json_encode($beforeContent), true);
-        $afterContentArray   = json_decode(json_encode($afterContet), true);
+        $afterContentArray   = json_decode(json_encode($afterContent), true);
 
         $returnBeforeArchiveArray['operation'] = [];
 
@@ -1053,13 +1053,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * 登録書類更新afterContent取得
      *
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return array
      */
-    public function afterContentArrayArchive(object $beforeContent, object $afterContet): array
+    public function afterContentArrayArchive(object $beforeContent, object $afterContent): array
     {
         $beforeContentArray = json_decode(json_encode($beforeContent), true);
-        $afterContentArray   = json_decode(json_encode($afterContet), true);
+        $afterContentArray   = json_decode(json_encode($afterContent), true);
 
         $returnAfterArchiveArray['operation'] = [];
 
@@ -1175,13 +1175,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * 取引書類更新beforeContent取得
      *
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return array
      */
-    public function beforeContetArrayInternal(object $beforeContent, object $afterContet): array
+    public function beforeContentArrayInternal(object $beforeContent, object $afterContent): array
     {
         $beforeContentArray = json_decode(json_encode($beforeContent), true);
-        $afterContentArray   = json_decode(json_encode($afterContet), true);
+        $afterContentArray   = json_decode(json_encode($afterContent), true);
         // var_export($beforeContentArray['product_name']);
         // exit();
         $returnBeforeInternalArray['operation'] = [];
@@ -1300,13 +1300,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * 社内書類更新afterContent取得
      *
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return array
      */
-    public function afterContentArrayInternal(object $beforeContent, object $afterContet): array
+    public function afterContentArrayInternal(object $beforeContent, object $afterContent): array
     {
         $beforeContentArray = json_decode(json_encode($beforeContent), true);
-        $afterContentArray   = json_decode(json_encode($afterContet), true);
+        $afterContentArray   = json_decode(json_encode($afterContent), true);
 
         $returnAfterInternalArray['operation'] = [];
 
@@ -1424,13 +1424,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * 取引書類更新beforeContent取得
      *
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return array
      */
-    public function beforeContetArrayDeal(object $beforeContent, object $afterContet): array
+    public function beforeContentArrayDeal(object $beforeContent, object $afterContent): array
     {
             $beforeContentArray = json_decode(json_encode($beforeContent), true);
-            $afterContentArray   = json_decode(json_encode($afterContet), true);
+            $afterContentArray   = json_decode(json_encode($afterContent), true);
 
             $returnBeforeDealArray['operation'] = [];
 
@@ -1563,13 +1563,13 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * 取引書類更新afterContent取得
      *
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return array
      */
-    public function afterContentArrayDeal(object $beforeContent, object $afterContet): array
+    public function afterContentArrayDeal(object $beforeContent, object $afterContent): array
     {
             $beforeContentArray = json_decode(json_encode($beforeContent), true);
-            $afterContentArray   = json_decode(json_encode($afterContet), true);
+            $afterContentArray   = json_decode(json_encode($afterContent), true);
 
             $returnAfterDealArray['operation'] = [];
 
@@ -1702,18 +1702,18 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
      * 契約書類更新beforeContent
      *
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return array
      */
-    public function beforeContetArrayContract(object $beforeContent, object $afterContet): array
+    public function beforeContentArrayContract(object $beforeContent, object $afterContent): array
     {
             $beforeContentArray = json_decode(json_encode($beforeContent), true);
-            $afterContentArray   = json_decode(json_encode($afterContet), true);
+            $afterContentArray   = json_decode(json_encode($afterContent), true);
 
-            $returnBeforeContetArray['operation'] = [];
+            $returnBeforeContentArray['operation'] = [];
 
             if ($beforeContentArray['template_id'] !== $afterContentArray['template_id']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.template',
                     'target_param_content' => $beforeContentArray['template_id']
@@ -1721,139 +1721,139 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
             }
             if ($beforeContentArray['doc_type_id'] !== $afterContentArray['doc_type_id']) {
                 
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.document-type',
                     'target_param_content' => $beforeContentArray['doc_type_id']
                 ]);    
             }
             if ($beforeContentArray['cont_start_date'] !== $afterContentArray['cont_start_date']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.contract-date.start',
                     'target_param_content' => $beforeContentArray['cont_start_date']
                 ]);    
             }
             if ($beforeContentArray['cont_end_date'] !== $afterContentArray['cont_end_date']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.contract-date.end',
                     'target_param_content' => $beforeContentArray['cont_end_date']
                 ]);    
             }
             if ($beforeContentArray['conc_date'] !== $afterContentArray['conc_date']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.conclusion-date',
                     'target_param_content' => $beforeContentArray['conc_date']
                 ]);    
             }
             if ($beforeContentArray['effective_date'] !== $afterContentArray['effective_date']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.effective-date',
                     'target_param_content' => $beforeContentArray['effective_date']
                 ]);    
             }
             if ($beforeContentArray['cancel_date'] !== $afterContentArray['cancel_date']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.cancel-date',
                     'target_param_content' => $beforeContentArray['cancel_date']
                 ]);    
             }
             if ($beforeContentArray['expiry_date'] !== $afterContentArray['expiry_date']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.expiry-date',
                     'target_param_content' => $beforeContentArray['expiry_date']
                 ]);    
             }
             if ($beforeContentArray['doc_no'] !== $afterContentArray['doc_no']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.document.no',
                     'target_param_content' => $beforeContentArray['doc_no']
                 ]);    
             }
             if ($beforeContentArray['ref_doc_no'] !== $afterContentArray['ref_doc_no']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.ref-document.no',
                     'target_param_content' => $beforeContentArray['ref_doc_no']
                 ]);    
             }
             if ($beforeContentArray['product_name'] !== $afterContentArray['product_name']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.product-name',
                     'target_param_content' => $beforeContentArray['product_name']
                 ]);    
             }
             if ($beforeContentArray['title'] !== $afterContentArray['title']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.title',
                     'target_param_content' => $beforeContentArray['title']
                 ]);    
             }
             if ($beforeContentArray['amount'] !== $afterContentArray['amount']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.amount',
                     'target_param_content' => $beforeContentArray['amount']
                 ]);    
             }
             if ($beforeContentArray['currency_id'] !== $afterContentArray['currency_id']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.currency',
                     'target_param_content' => $beforeContentArray['currency_id']
                 ]);    
             }
             if ($beforeContentArray['counter_party_id'] !== $afterContentArray['counter_party_id']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.counter-party.id',
                     'target_param_content' => $beforeContentArray['counter_party_id']
                 ]);    
             }
             if ($beforeContentArray['remarks'] !== $afterContentArray['remarks']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.remarks',
                     'target_param_content' => $beforeContentArray['remarks']
                 ]);    
             }
             if ($beforeContentArray['doc_info'] !== $afterContentArray['doc_info']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.description',
                     'target_param_content' => $beforeContentArray['doc_info']
                 ]);    
             }
             if ($beforeContentArray['sign_level'] !== $afterContentArray['sign_level']) {
-                array_push($returnBeforeContetArray['operation'], [
+                array_push($returnBeforeContentArray['operation'], [
                     'message_key' => 'common.message.document.operation-history',
                     'operation_label' => 'document.label.item.sign-level',
                     'target_param_content' => $beforeContentArray['sign_level']
                 ]);    
             }
 
-            return $returnBeforeContetArray;
+            return $returnBeforeContentArray;
     }
 
     /**
      * 契約書類更新aftercontent
      *
      * @param object $beforeContent
-     * @param object $afterContet
+     * @param object $afterContent
      * @return array
      */    
-    public function afterContentArrayContract(object $beforeContent, object $afterContet): array
+    public function afterContentArrayContract(object $beforeContent, object $afterContent): array
     {
             $beforeContentArray = json_decode(json_encode($beforeContent), true);
-            $afterContentArray   = json_decode(json_encode($afterContet), true);
+            $afterContentArray   = json_decode(json_encode($afterContent), true);
 
             $returnAfterContentArray['operation'] = [];
 
