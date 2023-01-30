@@ -65,11 +65,11 @@ class LogDocAccess extends FluentDatabase
             "document_id" => $documentId,
             "access_user" => $userId,
             "user_type" => $userType,
-            // "access_datetime" => CarbonImmutable::now(),
+            "access_datetime" => CarbonImmutable::now(),
             "ip_address" => $ipAddress,
             "access_content" => $accessContent,
             "create_user" => $userId,
-            // "create_datetime" => CarbonImmutable::now()
+            "create_datetime" => CarbonImmutable::now()
         ];
         return $this->builder()->insert($data);
     }

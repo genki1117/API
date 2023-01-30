@@ -42,42 +42,42 @@ class DocumentSaveRequest extends FormRequest
     {
         return [
             // 共通
-            'document_id'       => 'numeric',
-            'company_id'        => 'required | numeric',
-            'category_id'       => 'required | numeric',
-            'template_id'       => 'numeric',
-            'doc_type_id'       => 'required | numeric',
-            'status_id'         => 'numeric',
-            'doc_no'            => 'string | max:20',
-            'product_name'      => 'string | max:255',
-            'title'             => 'required | string | max:100',
-            'amount'            => 'required | numeric',
-            'currency_id'       => 'required | numeric',
-            'counter_party_id'  => 'numeric',
-            'sign_level'        => 'numeric',
+            'data.document_id'       => 'numeric',
+            'data.company_id'        => 'required | numeric',
+            'data.category_id'       => 'required | numeric',
+            'data.template_id'       => 'numeric',
+            'data.doc_type_id'       => 'required | numeric',
+            'data.status_id'         => 'numeric',
+            'data.doc_no'            => 'string | max:20',
+            'data.product_name'      => 'string | max:255',
+            'data.title'             => 'required | string | max:100',
+            'data.amount'            => 'required | numeric',
+            'data.currency_id'       => 'required | numeric',
+            'data.counter_party_id'  => 'numeric',
+            'data.sign_level'        => 'numeric',
 
             // 契約書類
-            'cont_start_date'   => 'date',
-            'cont_end_date'     => 'date',
-            'conc_date'         => 'date',
-            'effective_date'    => 'date',
-            'cancel_date'       => 'date',
-            'expiry_date'       => 'date',
+            'data.cont_start_date'   => 'date',
+            'data.cont_end_date'     => 'date',
+            'data.conc_date'         => 'date',
+            'data.effective_date'    => 'date',
+            'data.cancel_date'       => 'date',
+            'data.expiry_date'       => 'date',
             
             // 取引書類
-            'issue_date'        => 'date',
-            'payment_date'      => 'date',
-            'transaction_date'  => 'date',
-            'download_date'     => 'date',
+            'data.issue_date'        => 'date',
+            'data.payment_date'      => 'date',
+            'data.transaction_date'  => 'date',
+            'data.download_date'     => 'date',
 
             // 社内書類
-            'doc_create_date'   => 'date',
-            'sign_finish_date'  => 'date',
-            'content'           => 'string',
+            'data.doc_create_date'   => 'date',
+            'data.sign_finish_date'  => 'date',
+            'data.content'           => 'string',
 
             // 登録書類
-            'scan_doc_flg'      => 'numeric',
-            'timestamp_user'    => 'numeric',
+            'data.scan_doc_flg'      => 'numeric',
+            'data.timestamp_user'    => 'numeric',
         ];
     }
     public function messages()

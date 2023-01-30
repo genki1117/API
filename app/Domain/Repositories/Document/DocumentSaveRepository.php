@@ -173,7 +173,7 @@ class DocumentSaveRepository implements DocumentSaveRepositoryInterface
                         createDate: $createDate
                     );
 
-                    //　ワークフロー登録不可
+                    // ワークフロー登録不可
                     if (!$documentWorkFlowResult) {
                         throw new Exception('common.message.permission');
                     }
