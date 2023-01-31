@@ -21,7 +21,7 @@ return new class extends Migration
                 ,document_id bigint  not null comment 'Document ID'
                 ,operation_user_id bigint  not null comment 'Operation User ID'
                 ,before_content json   comment 'Before Content'
-                ,after_contet json   comment 'After Content'
+                ,after_content json   comment 'After Content'
                 ,ip_address varchar(15)   comment 'IP Address'
                 ,create_user bigint   comment 'Create User'
                 ,create_datetime timestamp   NULL DEFAULT CURRENT_TIMESTAMP comment 'Create Date'

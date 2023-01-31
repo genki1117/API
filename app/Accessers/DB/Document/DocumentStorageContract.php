@@ -97,8 +97,7 @@ class DocumentStorageContract extends FluentDatabase
                 'delete_datetime'       => null
                 ]);
         } else {
-            throw new Exception('契約書類テーブルおよび契約書類閲覧権限および契約書類容量を更新出来ません。');
-            exit;
+            return false;
         }
     }
     
@@ -110,7 +109,7 @@ class DocumentStorageContract extends FluentDatabase
      * @param int $documentId
      * @return bool
      */
-    public function getDelete(int $userId, int $companyId, int $documentId): bool
+    public function getDelete(int $userId, int $companyId, int $documentId)
     {
         return $this->builder()
             ->whereNull("delete_datetime")

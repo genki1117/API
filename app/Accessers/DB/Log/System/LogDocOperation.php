@@ -56,19 +56,19 @@ class LogDocOperation extends FluentDatabase
      * @param int $documentId
      * @param int $userId
      * @param array|null $beforeContent
-     * @param array|null $afterContet
+     * @param array|null $afterContent
      * @param string|null @ipAddress
      * @return bool
      */
-    public function insert(int $companyId, int $categoryId, int $documentId, int $userId, array $beforeContentArray, array $afterContentArray, ?string $ipAddress)
+    public function insert(int $companyId, int $categoryId, int $documentId, int $userId, ?JsonResponse $beforeContentJson, ?JsonResponse $afterContentJson, ?string $ipAddress)
     {
         $data = [
             "company_id"        => $companyId,
             "category_id"       => $categoryId,
             "document_id"       => $documentId,
             "operation_user_id" => $userId,
-            "before_content"    => json_encode($beforeContentArray, JSON_UNESCAPED_UNICODE),
-            "after_contet"      => json_encode($afterContentArray, JSON_UNESCAPED_UNICODE),
+            "before_content"    => json_encode($beforeContentJson, JSON_UNESCAPED_UNICODE),
+            "after_content"      => json_encode($afterContentJson, JSON_UNESCAPED_UNICODE),
             "ip_address"        => $ipAddress,
             "create_user"       => $userId,
             "create_datetime"   => CarbonImmutable::now()

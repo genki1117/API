@@ -174,7 +174,7 @@ class DocumentDeal extends FluentDatabase
         ];
 
         return $this->builder($this->table)
-        ->where('update_datetime', '=', $requestContent['update_datetime'])
+        //->where('update_datetime', '=', $requestContent['update_datetime'])
         ->where('document_id', $requestContent['document_id'])
         ->where('company_id', $requestContent['company_id'])
         ->where('category_id', $requestContent['category_id'])
