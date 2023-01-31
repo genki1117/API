@@ -212,18 +212,18 @@ class DocumentSignOrderService
                             $emailUrl
                         );
 
-                        // $paramdata = [];
-                        // $paramdata['email']['address']    = $emailAddress;
-                        // $paramdata['email']['title']      = $emailTitle;
-                        // $paramdata['email']['content']    = $emailContent;
+                        $paramdata = [];
+                        $paramdata['email']['address']    = $emailAddress;
+                        $paramdata['email']['title']      = $emailTitle;
+                        $paramdata['email']['content']    = $emailContent;
 
-                        // // キューをJSON形式に返却
-                        // $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-                        // // キューへ登録
-                        // $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
-                        // if ($ret === -1) {
-                        //     throw new Exception('common.message.permission');
-                        // }
+                        // キューをJSON形式に返却
+                        $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+                        // キューへ登録
+                        $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
+                        if ($ret === -1) {
+                            throw new Exception('common.message.permission');
+                        }
                     }
                     return true;
                     exit;
@@ -268,21 +268,21 @@ class DocumentSignOrderService
                     break;
             }
 
-            // // キューの設定
-            // $paramdata = []; 
-            // $paramdata['email']['address']    = $emailAddress;
-            // $paramdata['email']['title']      = $emailTitle;
-            // $paramdata['email']['content']    = $emailContent;
+            // キューの設定
+            $paramdata = []; 
+            $paramdata['email']['address']    = $emailAddress;
+            $paramdata['email']['title']      = $emailTitle;
+            $paramdata['email']['content']    = $emailContent;
 
 
-            // // キューをJSON形式に返却
-            // $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+            // キューをJSON形式に返却
+            $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
             
-            // // キューへ登録
-            // $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
-            // if ($ret === -1) {
-            //     throw new Exception('common.message.permission');
-            // }
+            // キューへ登録
+            $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
+            if ($ret === -1) {
+                throw new Exception('common.message.permission');
+            }
 
             return true;
         } catch (Exception $e) {

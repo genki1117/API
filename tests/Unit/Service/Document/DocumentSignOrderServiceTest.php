@@ -53,15 +53,15 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderContractFileProtPwFlgTrueTest()
     {
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo->getSignDoc')
+        $this->documentRepositoryMock->shouldReceive('getContractIssueAndNextSignUserInfo->getSignDoc')
         ->twice()
         ->andReturn($this->getTestDataDocFlg_0());
 
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo->getNextSignUser')
+        $this->documentRepositoryMock->shouldReceive('getContractIssueAndNextSignUserInfo->getNextSignUser')
         ->once()
         ->andReturn($this->getTestDataSignUser());
 
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo->getIssueUser')
+        $this->documentRepositoryMock->shouldReceive('getContractIssueAndNextSignUserInfo->getIssueUser')
         ->once()
         ->andReturn($this->getTestDataIssueUser());
         
@@ -77,15 +77,15 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderDealFileProtPwFlgTrueTest()
     {
-        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo->getSignDoc')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo->getSignDoc')
         ->twice()
         ->andReturn($this->getTestDataDocFlg_0());
 
-        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo->getNextSignUser')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo->getNextSignUser')
         ->once()
         ->andReturn($this->getTestDataSignUser());
 
-        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo->getIssueUser')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo->getIssueUser')
         ->once()
         ->andReturn($this->getTestDataIssueUser());
         
@@ -125,15 +125,15 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderArchiveFileProtPwFlgTrueTest()
     {
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo->getSignDoc')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo->getSignDoc')
         ->twice()
         ->andReturn($this->getTestDataDocFlg_0());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo->getNextSignUser')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo->getNextSignUser')
         ->once()
         ->andReturn($this->getTestDataSignUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo->getIssueUser')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo->getIssueUser')
         ->once()
         ->andReturn($this->getTestDataIssueUser());
         
@@ -149,11 +149,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderContractNextSignUserGuestTest1()
     {
-        $docEntiry = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getContractIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
@@ -167,11 +167,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderDealNextSignUserGuestTest1()
     {
-        $docEntiry = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
@@ -185,11 +185,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderInternalNextSignUserGuestTest1()
     {
-        $docEntiry = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
         $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
@@ -203,11 +203,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderArchiveNextSignUserGuestTest1()
     {
-        $docEntiry = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder(null, $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
@@ -220,13 +220,13 @@ class DocumentSignOrderServiceTest extends TestCase
      * キュー登録失敗
      * @return void
      */
-    public function signOrderContractNextSignUserHostQueueFaildTest()
+    public function signOrderContractNextSignUserHostQueueFailedTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getContractIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -244,11 +244,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderDealNextSignUserGuestTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -265,13 +265,13 @@ class DocumentSignOrderServiceTest extends TestCase
      * キュー登録失敗
      * @return void
      */
-    public function signOrderDealNextSignUserGuestFaildTest()
+    public function signOrderDealNextSignUserGuestFailedTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $result111 = $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -289,11 +289,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderDealNextSignUserHostTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -311,13 +311,13 @@ class DocumentSignOrderServiceTest extends TestCase
      * キュー登録失敗
      * @return void
      */
-    public function signOrderDealNextSignUserHostFaildTest()
+    public function signOrderDealNextSignUserHostFailedTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -357,12 +357,12 @@ class DocumentSignOrderServiceTest extends TestCase
                 ),
             ];
 
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $dataSign, $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $dataSign, $this->getTestDataIssueUser());
         
 
         $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->twice()
@@ -378,7 +378,7 @@ class DocumentSignOrderServiceTest extends TestCase
      * キュー登録失敗
      * @return void
      */
-    public function signOrderInternalNextSignUserGuestFaildTest()
+    public function signOrderInternalNextSignUserGuestFailedTest()
     {
         $dataSign =
             (object) [
@@ -402,11 +402,11 @@ class DocumentSignOrderServiceTest extends TestCase
                 ),
             ];
 
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $dataSign, $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $dataSign, $this->getTestDataIssueUser());
 
         $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -422,7 +422,7 @@ class DocumentSignOrderServiceTest extends TestCase
      * キュー登録失敗
      * @return void
      */
-    public function signOrderInternalNextSignUserGuestFaildTest2()
+    public function signOrderInternalNextSignUserGuestFailedTest2()
     {
         $dataSign =
             (object) [
@@ -446,11 +446,11 @@ class DocumentSignOrderServiceTest extends TestCase
                 ),
             ];
 
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $dataSign, $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $dataSign, $this->getTestDataIssueUser());
 
         $this->documentRepositoryMock->shouldReceive('getInternalSignUserListInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -467,11 +467,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderArchiveNextSignUserGuestTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -487,13 +487,13 @@ class DocumentSignOrderServiceTest extends TestCase
      * キュー登録失敗
      * @return void
      */
-    public function signOrderArchiveNextSignUserGuestQueueFaildTest()
+    public function signOrderArchiveNextSignUserGuestQueueFailedTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -508,13 +508,13 @@ class DocumentSignOrderServiceTest extends TestCase
      * $emailAddressが空だったらException 
      * @return void
      */
-    public function emailAddressPropatymptyTest()
+    public function emailAddressPropertyEmptyTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
         
@@ -534,13 +534,13 @@ class DocumentSignOrderServiceTest extends TestCase
      * $emailTitleが空だったらException 
      * @return void
      */
-    public function emailTitlePropatymptyTest()
+    public function emailTitlePropertyEmptyTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -564,13 +564,13 @@ class DocumentSignOrderServiceTest extends TestCase
      * $emailContentが空だったらException 
      * @return void
      */
-    public function emailContentPropatymptyTest()
+    public function emailContentPropertyEmptyTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -591,16 +591,16 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * $contractIsseuAndNextSignUserが空だったらException 
+     * $contractIssueAndNextSignUserが空だったらException 
      * @return void
      */
-    public function contractIsseuAndNextSignUserTest()
+    public function contractIssueAndNextSignUserTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -612,9 +612,9 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $reflectionClass = new ReflectionClass($result);
 
-        $this->assertInstanceOf($resutl->contractIsseuAndNextSignUser, $docEntiry);
+        $this->assertInstanceOf($result->contractIssueAndNextSignUser, $docEntity);
 
-        $property = $reflectionClass->getProperty('contractIsseuAndNextSignUser');
+        $property = $reflectionClass->getProperty('contractIssueAndNextSignUser');
 
         $property->setAccessible(true);
 
@@ -624,16 +624,16 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * $dealIsseuAndNextSignUserが空だったらException 
+     * $dealIssueAndNextSignUserが空だったらException 
      * @return void
      */
-    public function dealIsseuAndNextSignUserTest()
+    public function dealIssueAndNextSignUserTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -645,9 +645,9 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $reflectionClass = new ReflectionClass($result);
 
-        $this->assertInstanceOf($resutl->dealIsseuAndNextSignUser, $docEntiry);
+        $this->assertInstanceOf($result->dealIssueAndNextSignUser, $docEntity);
 
-        $property = $reflectionClass->getProperty('dealIsseuAndNextSignUser');
+        $property = $reflectionClass->getProperty('dealIssueAndNextSignUser');
 
         $property->setAccessible(true);
 
@@ -656,16 +656,16 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * $internalIsseuAndNextSignUserが空だったらException 
+     * $internalIssueAndNextSignUserが空だったらException 
      * @return void
      */
-    public function internalIsseuAndNextSignUserTest()
+    public function internalIssueAndNextSignUserTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -677,9 +677,9 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $reflectionClass = new ReflectionClass($result);
 
-        $this->assertInstanceOf($result->internalIsseuAndNextSignUser, $docEntiry);
+        $this->assertInstanceOf($result->internalIssueAndNextSignUser, $docEntity);
 
-        $property = $reflectionClass->getProperty('internalIsseuAndNextSignUser');
+        $property = $reflectionClass->getProperty('internalIssueAndNextSignUser');
 
         $property->setAccessible(true);
 
@@ -689,16 +689,16 @@ class DocumentSignOrderServiceTest extends TestCase
 
     /**
      * @test
-     * $archiveIsseuAndNextSignUserが空だったらException 
+     * $archiveIssueAndNextSignUserが空だったらException 
      * @return void
      */
-    public function archiveIsseuAndNextSignUserTest()
+    public function archiveIssueAndNextSignUserTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUser(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getArchiveIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getArchiveIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->queueUtilityMock->shouldReceive('createMessage')
         ->once()
@@ -710,9 +710,9 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $reflectionClass = new ReflectionClass($result);
 
-        $this->assertInstanceOf($result->archiveIsseuAndNextSignUser, $docEntiry);
+        $this->assertInstanceOf($result->archiveIssueAndNextSignUser, $docEntity);
 
-        $property = $reflectionClass->getProperty('archiveIsseuAndNextSignUser');
+        $property = $reflectionClass->getProperty('archiveIssueAndNextSignUser');
 
         $property->setAccessible(true);
 
@@ -725,12 +725,12 @@ class DocumentSignOrderServiceTest extends TestCase
      *　メールアドレス取得不可
      * @return void
      */
-    public function emailAddressEmptytest_1()
+    public function emailAddressEmptyTest_1()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserEmailEmpty(), $this->getTestDataIssueUser());
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserEmailEmpty(), $this->getTestDataIssueUser());
+        $this->documentRepositoryMock->shouldReceive('getContractIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
         $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
@@ -744,11 +744,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderContractNextSignUserGuestTest()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserGuest(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserGuest(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getContractIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getContractIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->documentRepositoryMock->shouldReceive('insertToken')
         ->once();
@@ -770,11 +770,11 @@ class DocumentSignOrderServiceTest extends TestCase
      */
     public function signOrderDealNextSignUserGuestTest11()
     {
-        $docEntiry = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserGuest(), $this->getTestDataIssueUser());
+        $docEntity = new DocumentSignOrder($this->getTestDataDoc(), $this->getTestDataSignUserGuest(), $this->getTestDataIssueUser());
 
-        $this->documentRepositoryMock->shouldReceive('getDealIsseuAndNextSignUserInfo')
+        $this->documentRepositoryMock->shouldReceive('getDealIssueAndNextSignUserInfo')
         ->once()
-        ->andReturn($docEntiry);
+        ->andReturn($docEntity);
 
         $this->documentRepositoryMock->shouldReceive('insertToken')
         ->once();
