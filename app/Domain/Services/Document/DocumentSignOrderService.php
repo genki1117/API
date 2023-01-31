@@ -69,10 +69,10 @@ class DocumentSignOrderService
                     $emailTitle = $this->getMailTitle($contractIssueAndNextSignUser->getSignDoc()->title);
 
                     // 次の署名者がゲストの場合 user_type_idが1の場合
-                    if ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) {
+                    if ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
 
                         // メールアドレスからハッシュ作成
-                        $token = $this->getToken($contractIssueAndNextSignUser->getNextSignUser()->email);
+                        $token = $this->getHash($contractIssueAndNextSignUser->getNextSignUser()->email, $mUserCompanyId, $categoryId, $documentId);
 
                         // トークン情報を取得
                         $dataContent['company_id']  = $contractIssueAndNextSignUser->getNextSignUser()->counter_party_id;
@@ -84,8 +84,14 @@ class DocumentSignOrderService
                         $this->documentSignOrderRepositoryInterface->insertToken($token, $dataContent);
                         
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $contractIssueAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
-                        
+                        $emailUrl = $this->getUrlGuest(
+                            $systemUrl,
+                            $this->docConst::DOCUMENT_DETAIL_ENDPOINT,
+                            $categoryId,
+                            $documentId,
+                            $token
+                        );   
+
                         // メール本文作成
                         $emailContent = $this->getContractMailContent(
                             $contractIssueAndNextSignUser->getNextSignUser()->counter_party_name,
@@ -94,11 +100,11 @@ class DocumentSignOrderService
                             $emailUrl
                         );
 
-                    } elseif ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
+                    } elseif ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) {
                         // 次の署名者がホストの場合 user_type_idが1の場合
                         
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $contractIssueAndNextSignUser->getSignDoc()->document_id;
+                        $emailUrl = $this->getUrlHost($systemUrl, $this->docConst::DOCUMENT_DETAIL_ENDPOINT, $categoryId, $documentId);
 
                         // メール本文作成
                         $emailContent = $this->getContractMailContent(
@@ -136,10 +142,11 @@ class DocumentSignOrderService
                     // メールタイトル作成
                     $emailTitle = $this->getMailTitle($dealIssueAndNextSignUser->getSignDoc()->title);
                     
+                    // 次の署名者がゲストの場合 user_type_idが1の場合
                     if ($dealIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) { // ゲストの場合 user_type_idが1の場合
                         
                         // メールアドレスからハッシュ作成
-                        $token = $this->getToken($dealIssueAndNextSignUser->getNextSignUser()->email);
+                        $token = $this->getHash($dealIssueAndNextSignUser->getNextSignUser()->email, $mUserCompanyId, $categoryId, $documentId);
 
                         // トークン情報を取得
                         $dataContent['company_id']  = $dealIssueAndNextSignUser->getNextSignUser()->counter_party_id;
@@ -151,7 +158,13 @@ class DocumentSignOrderService
                         $this->documentSignOrderRepositoryInterface->insertToken($token, $dataContent);
                         
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $dealIssueAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
+                        $emailUrl = $this->getUrlGuest(
+                            $systemUrl,
+                            $this->docConst::DOCUMENT_DETAIL_ENDPOINT,
+                            $categoryId,
+                            $documentId,
+                            $token
+                        );
 
                         // メール本文作成
                         $emailContent = $this->getDealMailContent(
@@ -163,7 +176,7 @@ class DocumentSignOrderService
 
                     } elseif ($dealIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) { // ホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $dealIssueAndNextSignUser->getSignDoc()->document_id;
+                        $emailUrl = $this->getUrlHost($systemUrl, $this->docConst::DOCUMENT_DETAIL_ENDPOINT, $categoryId, $documentId);
 
                         // メール本文作成
                         $emailContent = $this->getDealMailContent(
@@ -197,8 +210,8 @@ class DocumentSignOrderService
 
                     foreach ($internalIssueAndNextSignUser->getNextSignUser() as $signUser) {
                         
-                        // URL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $internalIssueAndNextSignUser->getSignDoc()->document_id;
+                        // ユーザに送付するURL作成
+                        $emailUrl = $this->getUrlHost($systemUrl, $this->docConst::DOCUMENT_DETAIL_ENDPOINT, $categoryId, $documentId);
 
                         // 次の署名者のメールアドレス取得
                         $emailAddress = $signUser->email;
@@ -256,7 +269,7 @@ class DocumentSignOrderService
                     $emailTitle = $this->getMailTitle($archiveIssueAndNextSignUser->getSignDoc()->title);
                     
                     // ユーザに送付するURL作成
-                    $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $archiveIssueAndNextSignUser->getSignDoc()->document_id;
+                    $emailUrl = $this->getUrlHost($systemUrl, $this->docConst::DOCUMENT_DETAIL_ENDPOINT, $categoryId, $documentId);
 
                     // メール本文作成
                     $emailContent = $this->getArchiveMailContent(
@@ -292,10 +305,47 @@ class DocumentSignOrderService
         }
     }
 
-
-    public function getToken($email)
+    /**
+     * ホストURL作成
+     *
+     * @param string $systemUrl
+     * @param string $endPoint
+     * @param integer $categoryId
+     * @param integer $documentId
+     * @return string
+     */
+    public function getUrlHost(string $systemUrl, string $endPoint, int $categoryId, int $documentId): string
     {
-        return hash("sha256", $email);
+        return $systemUrl . $endPoint . $categoryId . "/" . $documentId;
+    }
+
+    /**
+     * ゲストURL作成
+     *
+     * @param string $systemUrl
+     * @param string $endPoint
+     * @param integer $categoryId
+     * @param integer $documentId
+     * @param string $token
+     * @return string
+     */
+    public function getUrlGuest (string $systemUrl, string $endPoint, int $categoryId, int $documentId, string $token): string
+    {
+        return $systemUrl . $endPoint . $categoryId . "/" . $documentId . "/&hash=" . $token;
+    }
+
+    /**
+     * ハッシュ作成
+     *
+     * @param string $email
+     * @param integer $mUserCompanyId
+     * @param integer $categoryId
+     * @param integer $documentId
+     * @return string
+     */
+    public function getHash(string $email, int $mUserCompanyId, int $categoryId, int $documentId): string
+    {
+        return hash("sha256", $email . '@' . $mUserCompanyId . '@' . $categoryId . '@' . $documentId);
     }
 
     /**
