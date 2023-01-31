@@ -13,7 +13,7 @@ class DocumentSignOrder
     /**
      * @param \stdClass|null $signDocument
      * @param \stdClass|null $nextSignUser
-     * @param \stdClass|null $isseuUser
+     * @param \stdClass|null $issueUser
      */
     public function __construct(
         ?\stdClass $signDocument = null,

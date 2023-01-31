@@ -90,7 +90,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @param integer $categoryId
      * @return \stdClass|null
      */
-    public function getContractIsseuUser(int $documentId, int $categoryId): ?\stdClass
+    public function getContractIssueUser(int $documentId, int $categoryId): ?\stdClass
     {
         return $this->builder($this->table)
             ->select([
@@ -161,7 +161,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @param integer $categoryId
      * @return \stdClass|null
      */
-    public function getDealIsseuUser(int $documentId, int $categoryId): ?\stdClass
+    public function getDealIssueUser(int $documentId, int $categoryId): ?\stdClass
     {
         return $this->builder($this->table)
             ->select([
@@ -227,7 +227,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @param integer $mUserCompanyId
      * @return \stdClass|null
      */
-    public function getInternalIsseuUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
+    public function getInternalIssueUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
     {
         return $this->builder($this->table)
             ->select([
@@ -294,7 +294,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @param integer $mUserCompanyId
      * @return \stdClass|null
      */
-    public function getArchiveIsseuUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
+    public function getArchiveIssueUser(int $documentId, int $categoryId, int $mUserCompanyId): ?\stdClass
     {
         return $this->builder($this->table)
             ->select([

@@ -46,65 +46,65 @@ class DocumentSignOrderService
                 // 契約書類
                 case $this->docConst::DOCUMENT_CONTRACT:
                     // 次の署名書類と送信者取得と起票者を取得
-                    $contractIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
-                                                        ->getContractIsseuAndNextSignUserInfo(
+                    $contractIssueAndNextSignUser = $this->documentSignOrderRepositoryInterface
+                                                        ->getContractIssueAndNextSignUserInfo(
                                                             documentId: $documentId,
                                                             categoryId: $categoryId,
                                                             mUserId: $mUserId
                                                         );
 
-                    if (empty($contractIsseuAndNextSignUser->getSignDoc()) || empty($contractIsseuAndNextSignUser->getNextSignUser()) || empty($contractIsseuAndNextSignUser->getIssueUser())) {
+                    if (empty($contractIssueAndNextSignUser->getSignDoc()) || empty($contractIssueAndNextSignUser->getNextSignUser()) || empty($contractIssueAndNextSignUser->getIssueUser())) {
                         throw new Exception('common.message.permission');
                     }
 
-                    // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
-                    if ($contractIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
+                    // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 false
+                    if ($contractIssueAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
                     }
                     
                     // 次の署名者のメールアドレス取得
-                    $emailAddress = $contractIsseuAndNextSignUser->getNextSignUser()->email;
+                    $emailAddress = $contractIssueAndNextSignUser->getNextSignUser()->email;
                     
                     // メールタイトル作成
-                    $emailTitle = $this->getMailTitle($contractIsseuAndNextSignUser->getSignDoc()->title);
+                    $emailTitle = $this->getMailTitle($contractIssueAndNextSignUser->getSignDoc()->title);
 
                     // 次の署名者がゲストの場合 user_type_idが1の場合
-                    if ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) {
+                    if ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) {
 
                         // メールアドレスからハッシュ作成
-                        $token = $this->getToken($contractIsseuAndNextSignUser->getNextSignUser()->email);
+                        $token = $this->getToken($contractIssueAndNextSignUser->getNextSignUser()->email);
 
                         // トークン情報を取得
-                        $dataContent['company_id']  = $contractIsseuAndNextSignUser->getNextSignUser()->counter_party_id;
-                        $dataContent['category_id'] = $contractIsseuAndNextSignUser->getNextSignUser()->category_id;
-                        $dataContent['document_id'] = $contractIsseuAndNextSignUser->getSignDoc()->document_id;
-                        $dataContent['user_id']     = $contractIsseuAndNextSignUser->getNextSignUser()->user_id;
+                        $dataContent['company_id']  = $contractIssueAndNextSignUser->getNextSignUser()->counter_party_id;
+                        $dataContent['category_id'] = $contractIssueAndNextSignUser->getNextSignUser()->category_id;
+                        $dataContent['document_id'] = $contractIssueAndNextSignUser->getSignDoc()->document_id;
+                        $dataContent['user_id']     = $contractIssueAndNextSignUser->getNextSignUser()->user_id;
 
                         // トークン新規登録
                         $this->documentSignOrderRepositoryInterface->insertToken($token, $dataContent);
                         
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $contractIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $contractIssueAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
                         
                         // メール本文作成
                         $emailContent = $this->getContractMailContent(
-                            $contractIsseuAndNextSignUser->getNextSignUser()->counter_party_name,
-                            $contractIsseuAndNextSignUser->getNextSignUser()->full_name,
-                            $contractIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $contractIssueAndNextSignUser->getNextSignUser()->counter_party_name,
+                            $contractIssueAndNextSignUser->getNextSignUser()->full_name,
+                            $contractIssueAndNextSignUser->getIssueUser()->full_name,
                             $emailUrl
                         );
 
-                    } elseif ($contractIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
+                    } elseif ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
                         // 次の署名者がホストの場合 user_type_idが1の場合
                         
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $contractIsseuAndNextSignUser->getSignDoc()->document_id;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $contractIssueAndNextSignUser->getSignDoc()->document_id;
 
                         // メール本文作成
                         $emailContent = $this->getContractMailContent(
-                            $contractIsseuAndNextSignUser->getNextSignUser()->counter_party_name,
-                            $contractIsseuAndNextSignUser->getNextSignUser()->full_name,
-                            $contractIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $contractIssueAndNextSignUser->getNextSignUser()->counter_party_name,
+                            $contractIssueAndNextSignUser->getNextSignUser()->full_name,
+                            $contractIssueAndNextSignUser->getIssueUser()->full_name,
                             $emailUrl
                         );
                     }
@@ -113,63 +113,63 @@ class DocumentSignOrderService
                     // 取引書類
                 case $this->docConst::DOCUMENT_DEAL:
                     // 次の送信者取得と起票者を取得
-                    $dealIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
-                                                        ->getDealIsseuAndNextSignUserInfo(
+                    $dealIssueAndNextSignUser = $this->documentSignOrderRepositoryInterface
+                                                        ->getDealIssueAndNextSignUserInfo(
                                                             documentId: $documentId,
                                                             categoryId: $categoryId,
                                                             mUserId: $mUserId
                                                         );
 
-                    if (empty($dealIsseuAndNextSignUser->getSignDoc()) || empty($dealIsseuAndNextSignUser->getNextSignUser()) || empty($dealIsseuAndNextSignUser->getIssueUser())) {
+                    if (empty($dealIssueAndNextSignUser->getSignDoc()) || empty($dealIssueAndNextSignUser->getNextSignUser()) || empty($dealIssueAndNextSignUser->getIssueUser())) {
                         throw new Exception('common.message.permission');
                     }
 
-                    // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 fals
-                    if ($dealIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
+                    // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 false
+                    if ($dealIssueAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
                         exit;
                     }
                     
                     // 次の署名者のメールアドレス取得
-                    $emailAddress = $dealIsseuAndNextSignUser->getNextSignUser()->email;
+                    $emailAddress = $dealIssueAndNextSignUser->getNextSignUser()->email;
 
                     // メールタイトル作成
-                    $emailTitle = $this->getMailTitle($dealIsseuAndNextSignUser->getSignDoc()->title);
+                    $emailTitle = $this->getMailTitle($dealIssueAndNextSignUser->getSignDoc()->title);
                     
-                    if ($dealIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) { // ゲストの場合 user_type_idが1の場合
+                    if ($dealIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) { // ゲストの場合 user_type_idが1の場合
                         
                         // メールアドレスからハッシュ作成
-                        $token = $this->getToken($dealIsseuAndNextSignUser->getNextSignUser()->email);
+                        $token = $this->getToken($dealIssueAndNextSignUser->getNextSignUser()->email);
 
                         // トークン情報を取得
-                        $dataContent['company_id']  = $dealIsseuAndNextSignUser->getNextSignUser()->counter_party_id;
-                        $dataContent['category_id'] = $dealIsseuAndNextSignUser->getNextSignUser()->category_id;
-                        $dataContent['document_id'] = $dealIsseuAndNextSignUser->getSignDoc()->document_id;
-                        $dataContent['user_id']     = $dealIsseuAndNextSignUser->getNextSignUser()->user_id;
+                        $dataContent['company_id']  = $dealIssueAndNextSignUser->getNextSignUser()->counter_party_id;
+                        $dataContent['category_id'] = $dealIssueAndNextSignUser->getNextSignUser()->category_id;
+                        $dataContent['document_id'] = $dealIssueAndNextSignUser->getSignDoc()->document_id;
+                        $dataContent['user_id']     = $dealIssueAndNextSignUser->getNextSignUser()->user_id;
 
                         // トークン新規登録
                         $this->documentSignOrderRepositoryInterface->insertToken($token, $dataContent);
                         
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $dealIsseuAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $dealIssueAndNextSignUser->getSignDoc()->document_id . "/&token=" . $token;
 
                         // メール本文作成
                         $emailContent = $this->getDealMailContent(
-                            $dealIsseuAndNextSignUser->getNextSignUser()->counter_party_name,
-                            $dealIsseuAndNextSignUser->getNextSignUser()->full_name,
-                            $dealIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $dealIssueAndNextSignUser->getNextSignUser()->counter_party_name,
+                            $dealIssueAndNextSignUser->getNextSignUser()->full_name,
+                            $dealIssueAndNextSignUser->getIssueUser()->full_name,
                             $emailUrl
                         );
 
-                    } elseif ($dealIsseuAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) { // ホストの場合 user_type_idが1の場合
+                    } elseif ($dealIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) { // ホストの場合 user_type_idが1の場合
                         // ユーザに送付するURL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $dealIsseuAndNextSignUser->getSignDoc()->document_id;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $dealIssueAndNextSignUser->getSignDoc()->document_id;
 
                         // メール本文作成
                         $emailContent = $this->getDealMailContent(
-                            $dealIsseuAndNextSignUser->getNextSignUser()->counter_party_name,
-                            $dealIsseuAndNextSignUser->getNextSignUser()->full_name,
-                            $dealIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $dealIssueAndNextSignUser->getNextSignUser()->counter_party_name,
+                            $dealIssueAndNextSignUser->getNextSignUser()->full_name,
+                            $dealIssueAndNextSignUser->getIssueUser()->full_name,
                             $emailUrl
                         );
                     }
@@ -178,52 +178,52 @@ class DocumentSignOrderService
                     // 社内書類
                 case $this->docConst::DOCUMENT_INTERNAL:
                     // 次の署名書類と送信者取得と起票者を取得
-                    $internalIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
+                    $internalIssueAndNextSignUser = $this->documentSignOrderRepositoryInterface
                                                         ->getInternalSignUserListInfo(
                                                             documentId: $documentId,
                                                             categoryId: $categoryId,
                                                             mUserCompanyId: $mUserCompanyId
                                                         );
 
-                    if (empty($internalIsseuAndNextSignUser->getSignDoc()) || empty($internalIsseuAndNextSignUser->getNextSignUser()) || empty($internalIsseuAndNextSignUser->getIssueUser())) {
+                    if (empty($internalIssueAndNextSignUser->getSignDoc()) || empty($internalIssueAndNextSignUser->getNextSignUser()) || empty($internalIssueAndNextSignUser->getIssueUser())) {
                         throw new Exception('common.message.permission');
                     }
 
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 false
-                    if ($internalIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
+                    if ($internalIssueAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
                         exit;
                     }
 
-                    foreach ($internalIsseuAndNextSignUser->getNextSignUser() as $signUser) {
+                    foreach ($internalIssueAndNextSignUser->getNextSignUser() as $signUser) {
                         
                         // URL作成
-                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $internalIsseuAndNextSignUser->getSignDoc()->document_id;
+                        $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $internalIssueAndNextSignUser->getSignDoc()->document_id;
 
                         // 次の署名者のメールアドレス取得
                         $emailAddress = $signUser->email;
 
                         // メールタイトル作成
-                        $emailTitle = $this->getMailTitle($internalIsseuAndNextSignUser->getSignDoc()->title);
+                        $emailTitle = $this->getMailTitle($internalIssueAndNextSignUser->getSignDoc()->title);
 
                         $emailContent = $this->getInternalMailContent(
                             $signUser->full_name,
-                            $internalIsseuAndNextSignUser->getIssueUser()->full_name,
+                            $internalIssueAndNextSignUser->getIssueUser()->full_name,
                             $emailUrl
                         );
 
-                        $paramdata = [];
-                        $paramdata['email']['address']    = $emailAddress;
-                        $paramdata['email']['title']      = $emailTitle;
-                        $paramdata['email']['content']    = $emailContent;
+                        // $paramdata = [];
+                        // $paramdata['email']['address']    = $emailAddress;
+                        // $paramdata['email']['title']      = $emailTitle;
+                        // $paramdata['email']['content']    = $emailContent;
 
-                        // キューをJSON形式に返却
-                        $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
-                        // キューへ登録
-                        $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
-                        if ($ret === -1) {
-                            throw new Exception('common.message.permission');
-                        }
+                        // // キューをJSON形式に返却
+                        // $param =json_encode($paramdata, JSON_UNESCAPED_UNICODE);
+                        // // キューへ登録
+                        // $ret = $this->queueUtility->createMessage(QueueConstant::QUEUE_NAME_SENDMAIL, $param);
+                        // if ($ret === -1) {
+                        //     throw new Exception('common.message.permission');
+                        // }
                     }
                     return true;
                     exit;
@@ -232,36 +232,36 @@ class DocumentSignOrderService
                     // 登録書類
                 case $this->docConst::DOCUMENT_ARCHIVE:
                     // 次の署名書類と送信者取得と起票者を取得
-                    $archiveIsseuAndNextSignUser = $this->documentSignOrderRepositoryInterface
-                                                        ->getArchiveIsseuAndNextSignUserInfo(
+                    $archiveIssueAndNextSignUser = $this->documentSignOrderRepositoryInterface
+                                                        ->getArchiveIssueAndNextSignUserInfo(
                                                             documentId: $documentId,
                                                             categoryId: $categoryId,
                                                             mUserCompanyId: $mUserCompanyId
                                                         );
 
-                    if (empty($archiveIsseuAndNextSignUser->getSignDoc()) || empty($archiveIsseuAndNextSignUser->getNextSignUser()) || empty($archiveIsseuAndNextSignUser->getIssueUser())) {
+                    if (empty($archiveIssueAndNextSignUser->getSignDoc()) || empty($archiveIssueAndNextSignUser->getNextSignUser()) || empty($archiveIssueAndNextSignUser->getIssueUser())) {
                         throw new Exception('common.message.permission');
                     }
 
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 false
-                    if ($archiveIsseuAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
+                    if ($archiveIssueAndNextSignUser->getSignDoc()->file_prot_pw_flg === 0) {
                         throw new Exception("common.message.permission");
                         exit;
                     }
                     
                     // 次の署名者のメールアドレス取得
-                    $emailAddress = $archiveIsseuAndNextSignUser->getNextSignUser()->email;
+                    $emailAddress = $archiveIssueAndNextSignUser->getNextSignUser()->email;
 
                     // メールタイトル作成
-                    $emailTitle = $this->getMailTitle($archiveIsseuAndNextSignUser->getSignDoc()->title);
+                    $emailTitle = $this->getMailTitle($archiveIssueAndNextSignUser->getSignDoc()->title);
                     
                     // ユーザに送付するURL作成
-                    $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $archiveIsseuAndNextSignUser->getSignDoc()->document_id;
+                    $emailUrl = $systemUrl . $this->docConst::DOCUMENT_DETAIL_ENDPOINT . $archiveIssueAndNextSignUser->getSignDoc()->document_id;
 
                     // メール本文作成
                     $emailContent = $this->getArchiveMailContent(
-                        $archiveIsseuAndNextSignUser->getNextSignUser()->full_name,
-                        $archiveIsseuAndNextSignUser->getIssueUser()->full_name,
+                        $archiveIssueAndNextSignUser->getNextSignUser()->full_name,
+                        $archiveIssueAndNextSignUser->getIssueUser()->full_name,
                         $emailUrl
                     );
 

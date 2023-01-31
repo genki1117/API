@@ -598,7 +598,7 @@ class DocumentContract extends FluentDatabase
      *
      * @param int $documentId
      * @param int $categoryId
-     * @return void
+     * @return \stdClass|null
      */
     public function getSignDocument(int $documentId, int $categoryId): ?\stdClass
     {

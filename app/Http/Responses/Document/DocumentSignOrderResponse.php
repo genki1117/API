@@ -4,7 +4,7 @@ namespace App\Http\Responses\Document;
 
 use Illuminate\Http\JsonResponse;
 
-class DocumentSignOrderRespons
+class DocumentSignOrderResponse
 {
     public function successSignOrder()
     {
@@ -14,7 +14,7 @@ class DocumentSignOrderRespons
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
-    public function faildSignOrder(string $exceptionMessage)
+    public function failedSignOrder(string $exceptionMessage)
     {
         return new JsonResponse([
             "status" => "400",

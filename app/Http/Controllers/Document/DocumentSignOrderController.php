@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Document;
 
 use App\Http\Requests\Document\DocumentSignOrderRequest;
-use App\Http\Responses\Document\DocumentSignOrderRespons;
+use App\Http\Responses\Document\DocumentSignOrderResponse;
 use App\Domain\Services\Document\DocumentSignOrderService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -50,9 +50,9 @@ class DocumentSignOrderController extends Controller
                 throw new Exception("common.message.permission");
             }
 
-            return (new DocumentSignOrderRespons)->successSignOrder();
+            return (new DocumentSignOrderResponse)->successSignOrder();
         } catch (Exception $e) {
-            return (new DocumentSignOrderRespons)->faildSignOrder($e->getMessage());
+            return (new DocumentSignOrderResponse)->failedSignOrder($e->getMessage());
         }
     }
 }

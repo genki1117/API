@@ -63,20 +63,20 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $loginUserWorkFlowSort
      * @return DocumentSignOrder
      */
-    public function getContractIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId): DocumentSignOrder
+    public function getContractIssueAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId): DocumentSignOrder
     {
     
         $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
 
         $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
 
-        $contractIsseuUser    = $this->documentWorkFlow->getContractIsseuUser(documentId: $documentId, categoryId: $categoryId);
+        $contractIssueUser    = $this->documentWorkFlow->getContractIssueUser(documentId: $documentId, categoryId: $categoryId);
 
-        if (empty($signDocContract) && empty($contractNextSignUser) && empty($contractIsseuUser)) {
+        if (empty($signDocContract) && empty($contractNextSignUser) && empty($contractIssueUser)) {
             return new DocumentSignOrder();
         }
 
-        return new DocumentSignOrder($signDocContract, $contractNextSignUser, $contractIsseuUser);
+        return new DocumentSignOrder($signDocContract, $contractNextSignUser, $contractIssueUser);
     }
 
 
@@ -88,19 +88,19 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $loginUserWorkFlowSort
      * @return DocumentSignOrder
      */
-    public function getDealIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId): DocumentSignOrder
+    public function getDealIssueAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserId): DocumentSignOrder
     {
         
             $signDocDeal      = $this->documentDeal->getSignDocument(documentId: $documentId, categoryId: $categoryId);
 
             $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
 
-            $dealIsseuUser    = $this->documentWorkFlow->getDealIsseuUser(documentId: $documentId, categoryId: $categoryId);
+            $dealIssueUser    = $this->documentWorkFlow->getDealIssueUser(documentId: $documentId, categoryId: $categoryId);
 
-            if (empty($signDocDeal) && empty($dealNextSignUser) && empty($dealIsseuUser)) {
+            if (empty($signDocDeal) && empty($dealNextSignUser) && empty($dealIssueUser)) {
                 return new DocumentSignOrder();
             }
-            return new DocumentSignOrder($signDocDeal, $dealNextSignUser, $dealIsseuUser);
+            return new DocumentSignOrder($signDocDeal, $dealNextSignUser, $dealIssueUser);
     }
 
 
@@ -118,13 +118,13 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
             
             $internalSignUserList = (object)$this->documentWorkFlow->getInternalSignUserList(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
 
-            $internalIsseuUser    = $this->documentWorkFlow->getInternalIsseuUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
+            $internalIssueUser    = $this->documentWorkFlow->getInternalIssueUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
            
-            if (empty($signDocInternal) && count(get_object_vars($internalSignUserList)) === 0 && empty($internalIsseuUser)) {
+            if (empty($signDocInternal) && count(get_object_vars($internalSignUserList)) === 0 && empty($internalIssueUser)) {
                 return new DocumentSignOrder();
             }
 
-            return new DocumentSignOrder($signDocInternal, $internalSignUserList, $internalIsseuUser);
+            return new DocumentSignOrder($signDocInternal, $internalSignUserList, $internalIssueUser);
     }
 
 
@@ -136,20 +136,20 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
      * @param integer $mUserCompanyId
      * @return DocumentSignOrder
      */
-    public function getArchiveIsseuAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId): DocumentSignOrder
+    public function getArchiveIssueAndNextSignUserInfo(int $documentId, int $categoryId, int $mUserCompanyId): DocumentSignOrder
     {
 
         $signDocArchive      = $this->documentArchive->getSignDocument(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
 
         $archiveNextSignUser = $this->documentWorkFlow->getArchiveNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
 
-        $archiveIsseuUser    = $this->documentWorkFlow->getArchiveIsseuUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
+        $archiveIssueUser    = $this->documentWorkFlow->getArchiveIssueUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
 
-        if (empty($signDocArchive) && empty($archiveNextSignUser) && empty($archiveIsseuUser)) {
+        if (empty($signDocArchive) && empty($archiveNextSignUser) && empty($archiveIssueUser)) {
             return new DocumentSignOrder();
         }
             
-        return new DocumentSignOrder($signDocArchive, $archiveNextSignUser, $archiveIsseuUser);
+        return new DocumentSignOrder($signDocArchive, $archiveNextSignUser, $archiveIssueUser);
     }
 
     /**
