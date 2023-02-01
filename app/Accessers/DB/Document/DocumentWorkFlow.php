@@ -44,7 +44,7 @@ class DocumentWorkFlow extends FluentDatabase
 
     /**
      * ------------------------------------
-     * 次の署名者を取得（契約書類）
+     * 次の署名者を取得
      * ------------------------------------
      *
      * @param integer $documentId
@@ -52,7 +52,7 @@ class DocumentWorkFlow extends FluentDatabase
      * @param integer $loginUserWorkFlowSort
      * @return \stdClass|null
      */
-    public function getContractNextSignUser(int $documentId, int $categoryId, int $mUserId): ?\stdClass
+    public function getNextSignUser(int $documentId, int $categoryId, int $mUserId): ?\stdClass
     {
         return $this->builder($this->table)
             ->select([
@@ -67,12 +67,12 @@ class DocumentWorkFlow extends FluentDatabase
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
-                             ->on("m_user.company_id", "t_document_workflow.company_id")
-                             ->where("m_user.delete_datetime", null);
+                            ->on("m_user.company_id", "t_document_workflow.company_id")
+                            ->where("m_user.delete_datetime", null);
             })
             ->leftjoin("m_company_counter_party", function ($query) {
                 return $query->on("m_company_counter_party.company_id", "t_document_workflow.company_id")
-                             ->whereNull("m_company_counter_party.delete_datetime");
+                            ->whereNull("m_company_counter_party.delete_datetime");
             })
             ->where("t_document_workflow.app_user_id", ">", $mUserId)
             ->where("t_document_workflow.document_id", "=", $documentId)
@@ -83,14 +83,14 @@ class DocumentWorkFlow extends FluentDatabase
 
     /**
      * ------------------------------------
-     * 起票者の取得（契約書類）
+     * 起票者の取得
      * ------------------------------------
      *
      * @param integer $documentId
      * @param integer $categoryId
      * @return \stdClass|null
      */
-    public function getContractIssueUser(int $documentId, int $categoryId): ?\stdClass
+    public function getIssueUser(int $documentId, int $categoryId): ?\stdClass
     {
         return $this->builder($this->table)
             ->select([
@@ -102,7 +102,7 @@ class DocumentWorkFlow extends FluentDatabase
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
-                             ->where("m_user.delete_datetime", null);
+                            ->where("m_user.delete_datetime", null);
             })
             ->where("t_document_workflow.wf_sort", "=", 0)
             ->where("t_document_workflow.document_id", "=", $documentId)
@@ -110,78 +110,6 @@ class DocumentWorkFlow extends FluentDatabase
             ->orderBy("t_document_workflow.wf_sort", "ASC")
             ->first();
     }
-
-
-    /**
-     * ------------------------------------
-     * 次の署名者を取得（取引書類）
-     * ------------------------------------
-     *
-     * @param integer $documentId
-     * @param integer $categoryId
-     * @param integer $loginUserWorkFlowSort
-     * @return \stdClass|null
-     */
-    public function getDealNextSignUser(int $documentId, int $categoryId, int $mUserId): ?\stdClass
-    {
-        return $this->builder($this->table)
-            ->select([
-                "m_user.user_id",
-                "m_user.full_name",
-                "m_user.email",
-                "m_user.user_type_id",
-                "t_document_workflow.wf_sort",
-                "t_document_workflow.category_id",
-                "m_company_counter_party.counter_party_id",
-                "m_company_counter_party.counter_party_name"
-            ])
-            ->join("m_user", function ($query) {
-                return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
-                             ->on("m_user.company_id", "t_document_workflow.company_id")
-                             ->where("m_user.delete_datetime", null);
-            })
-            ->leftjoin("m_company_counter_party", function ($query) {
-                return $query->on("m_company_counter_party.company_id", "t_document_workflow.company_id")
-                             ->whereNull("m_company_counter_party.delete_datetime");
-            })
-            ->where("t_document_workflow.app_user_id", ">", $mUserId)
-            ->where("t_document_workflow.document_id", "=", $documentId)
-            ->where("t_document_workflow.category_id", "=", $categoryId)
-            ->orderBy("t_document_workflow.wf_sort", "ASC")
-            ->first();
-    }
-
-     /**
-      * ------------------------------------
-     * 起票者の取得（取引書類）
-    　* ------------------------------------
-     *
-     *
-     * @param integer $documentId
-     * @param integer $categoryId
-     * @return \stdClass|null
-     */
-    public function getDealIssueUser(int $documentId, int $categoryId): ?\stdClass
-    {
-        return $this->builder($this->table)
-            ->select([
-                "m_user.full_name",
-                "m_user.family_name",
-                "m_user.first_name",
-                "t_document_workflow.wf_sort",
-                "t_document_workflow.category_id",
-            ])
-            ->join("m_user", function ($query) {
-                return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
-                             ->where("m_user.delete_datetime", null);
-            })
-            ->where("t_document_workflow.wf_sort", "=", 0)
-            ->where("t_document_workflow.document_id", "=", $documentId)
-            ->where("t_document_workflow.category_id", "=", $categoryId)
-            ->orderBy("t_document_workflow.wf_sort", "ASC")
-            ->first();
-    }
-
 
     /**
      * ------------------------------------
@@ -197,6 +125,7 @@ class DocumentWorkFlow extends FluentDatabase
     {
         return $this->builder($this->table)
             ->select([
+                "m_user.user_id",
                 "m_user.full_name",
                 "m_user.family_name",
                 "m_user.first_name",
@@ -206,7 +135,7 @@ class DocumentWorkFlow extends FluentDatabase
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
-                             ->where("m_user.delete_datetime", null);
+                            ->where("m_user.delete_datetime", null);
             })
             ->where("t_document_workflow.wf_sort", "<>", 0)
             ->where("t_document_workflow.document_id", "=", $documentId)
@@ -239,7 +168,7 @@ class DocumentWorkFlow extends FluentDatabase
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
-                             ->where("m_user.delete_datetime", null);
+                            ->where("m_user.delete_datetime", null);
             })
             ->where("t_document_workflow.wf_sort", "=", 0)
             ->where("t_document_workflow.document_id", "=", $documentId)
@@ -264,6 +193,7 @@ class DocumentWorkFlow extends FluentDatabase
     {
         return $this->builder($this->table)
             ->select([
+                "m_user.user_id",
                 "m_user.full_name",
                 "m_user.family_name",
                 "m_user.first_name",
@@ -273,7 +203,7 @@ class DocumentWorkFlow extends FluentDatabase
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
-                             ->where("m_user.delete_datetime", null);
+                            ->where("m_user.delete_datetime", null);
             })
             ->where("t_document_workflow.wf_sort", "<>", 0)
             ->where("t_document_workflow.document_id", "=", $documentId)
@@ -306,7 +236,7 @@ class DocumentWorkFlow extends FluentDatabase
             ])
             ->join("m_user", function ($query) {
                 return $query->on("m_user.user_id", "t_document_workflow.app_user_id")
-                             ->where("m_user.delete_datetime", null);
+                            ->where("m_user.delete_datetime", null);
             })
             ->where("t_document_workflow.wf_sort", "=", 0)
             ->where("t_document_workflow.document_id", "=", $documentId)

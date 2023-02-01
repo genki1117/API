@@ -2,6 +2,8 @@
 declare(strict_types=1);
 namespace App\Domain\Repositories\Document;
 
+use Illuminate\Http\JsonResponse;
+use App\Accessers\DB\Log\System\LogDocOperation;
 use App\Accessers\DB\TempToken;
 use App\Accessers\DB\Master\MUser;
 use App\Accessers\DB\Document\DocumentContract;
@@ -15,6 +17,9 @@ use App\Domain\Repositories\Interface\Document\DocumentSignOrderRepositoryInterf
 
 class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterface
 {
+    /** @var LogDocOperation $logDocOperation */
+    private $operationLog;
+
     /** @var TempToken $tempToken */
     private $token;
 
@@ -37,6 +42,7 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
     private $documentWorkFlow;
 
     public function __construct(
+        LogDocOperation $logDocOperation,
         TempToken $tempToken,
         MUser $mUser,
         DocumentContract $documentContract,
@@ -45,6 +51,7 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         DocumentArchive $documentArchive,
         DocumentWorkFlow $documentWorkFlow,
     ) {
+        $this->operationLog     = $logDocOperation;
         $this->token            = $tempToken;
         $this->mUser            = $mUser;
         $this->documentContract = $documentContract;
@@ -68,9 +75,9 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
     
         $signDocContract      = $this->documentContract->getSignDocument(documentId: $documentId, categoryId: $categoryId);
 
-        $contractNextSignUser = $this->documentWorkFlow->getContractNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
+        $contractNextSignUser = $this->documentWorkFlow->getNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
 
-        $contractIssueUser    = $this->documentWorkFlow->getContractIssueUser(documentId: $documentId, categoryId: $categoryId);
+        $contractIssueUser    = $this->documentWorkFlow->getIssueUser(documentId: $documentId, categoryId: $categoryId);
 
         if (empty($signDocContract) && empty($contractNextSignUser) && empty($contractIssueUser)) {
             return new DocumentSignOrder();
@@ -93,9 +100,9 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
         
             $signDocDeal      = $this->documentDeal->getSignDocument(documentId: $documentId, categoryId: $categoryId);
 
-            $dealNextSignUser = $this->documentWorkFlow->getDealNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
+            $dealNextSignUser = $this->documentWorkFlow->getNextSignUser(documentId: $documentId, categoryId: $categoryId, mUserId: $mUserId);
 
-            $dealIssueUser    = $this->documentWorkFlow->getDealIssueUser(documentId: $documentId, categoryId: $categoryId);
+            $dealIssueUser    = $this->documentWorkFlow->getIssueUser(documentId: $documentId, categoryId: $categoryId);
 
             if (empty($signDocDeal) && empty($dealNextSignUser) && empty($dealIssueUser)) {
                 return new DocumentSignOrder();
@@ -119,7 +126,7 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
             $internalSignUserList = (object)$this->documentWorkFlow->getInternalSignUserList(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
 
             $internalIssueUser    = $this->documentWorkFlow->getInternalIssueUser(documentId: $documentId, categoryId: $categoryId, mUserCompanyId: $mUserCompanyId);
-           
+
             if (empty($signDocInternal) && count(get_object_vars($internalSignUserList)) === 0 && empty($internalIssueUser)) {
                 return new DocumentSignOrder();
             }
@@ -162,5 +169,28 @@ class DocumentSignOrderRepository implements DocumentSignOrderRepositoryInterfac
     public function insertToken(string $token, array $dataContent): bool
     {
         return $this->token->insertToken(token: $token, dataContent: $dataContent);
+    }
+
+
+    // TODO: 動作テスト
+    public function insertOperationLog(int $mUserCompanyId, int $categoryId, int $documentId, int $mUserId, int $nextSignUserId, string $nextSignUserName, string $ipAddress)
+    {
+        $beforeContent = null;
+        $afterContent = $this->getAfterContentJson(nextSignUserId: $nextSignUserId, nextSignUserName: $nextSignUserName);
+        
+        $this->operationLog->insert($mUserCompanyId, $categoryId, $documentId, $mUserId, $beforeContent, $afterContent, $ipAddress);
+
+    }
+
+    public function getAfterContentJson($nextSignUserId, $nextSignUserName)
+    {
+        $afterContent['operation'] = [];
+        array_push($afterContent['operation'], [
+            "message_key" => "common.message.document.target-user-operation-history",
+            "target_user_id" => $nextSignUserId,
+            "target_user_name" => $nextSignUserName,
+            "operation_label" => "common.label.status.sign.wait"
+        ]);
+        return new JsonResponse($afterContent);
     }
 }

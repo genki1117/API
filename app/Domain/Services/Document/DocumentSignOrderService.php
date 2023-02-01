@@ -39,7 +39,7 @@ class DocumentSignOrderService
     }
     
 
-    public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, int $documentId, int $docTypeId, int $categoryId, string $updateDatetime, string $systemUrl)
+    public function signOrder(int $mUserId, int $mUserCompanyId, int $mUserTypeId, string $ipAddress, int $documentId, int $docTypeId, int $categoryId, string $updateDatetime, string $systemUrl)
     {
         try {
             switch($categoryId) {
@@ -54,7 +54,7 @@ class DocumentSignOrderService
                                                         );
 
                     if (empty($contractIssueAndNextSignUser->getSignDoc()) || empty($contractIssueAndNextSignUser->getNextSignUser()) || empty($contractIssueAndNextSignUser->getIssueUser())) {
-                        throw new Exception('common.message.permission');
+                    throw new Exception('common.message.permission');
                     }
 
                     // file_prot_pw_flgがtrueの場合、メール送信しない旨のエラーを返却し処理を終了する。0 true 1 false
@@ -64,7 +64,13 @@ class DocumentSignOrderService
                     
                     // 次の署名者のメールアドレス取得
                     $emailAddress = $contractIssueAndNextSignUser->getNextSignUser()->email;
-                    
+
+                    // 次の署名者のIDを取得
+                    $nextSignUserId = $contractIssueAndNextSignUser->getNextSignUser()->user_id;
+
+                    // 次の署名者の名前を取得
+                    $nextSignUserName = $contractIssueAndNextSignUser->getNextSignUser()->full_name;
+
                     // メールタイトル作成
                     $emailTitle = $this->getMailTitle($contractIssueAndNextSignUser->getSignDoc()->title);
 
@@ -138,6 +144,12 @@ class DocumentSignOrderService
                     
                     // 次の署名者のメールアドレス取得
                     $emailAddress = $dealIssueAndNextSignUser->getNextSignUser()->email;
+
+                    // 次の署名者のIDを取得
+                    $nextSignUserId = $dealIssueAndNextSignUser->getNextSignUser()->user_id;
+
+                    // 次の署名者の名前を取得
+                    $nextSignUserName = $dealIssueAndNextSignUser->getNextSignUser()->full_name;
 
                     // メールタイトル作成
                     $emailTitle = $this->getMailTitle($dealIssueAndNextSignUser->getSignDoc()->title);
@@ -213,6 +225,12 @@ class DocumentSignOrderService
                         // ユーザに送付するURL作成
                         $emailUrl = $this->getUrlHost($systemUrl, $this->docConst::DOCUMENT_DETAIL_ENDPOINT, $categoryId, $documentId);
 
+                         // 次の署名者のIDを取得
+                        $nextSignUserId = $signUser->user_id;
+
+                        // 次の署名者の名前を取得
+                        $nextSignUserName = $signUser->full_name;
+
                         // 次の署名者のメールアドレス取得
                         $emailAddress = $signUser->email;
 
@@ -265,6 +283,12 @@ class DocumentSignOrderService
                     // 次の署名者のメールアドレス取得
                     $emailAddress = $archiveIssueAndNextSignUser->getNextSignUser()->email;
 
+                    // 次の署名者のIDを取得
+                    $nextSignUserId = $archiveIssueAndNextSignUser->getNextSignUser()->user_id;
+
+                    // 次の署名者の名前を取得
+                    $nextSignUserName = $archiveIssueAndNextSignUser->getNextSignUser()->full_name;
+
                     // メールタイトル作成
                     $emailTitle = $this->getMailTitle($archiveIssueAndNextSignUser->getSignDoc()->title);
                     
@@ -297,6 +321,9 @@ class DocumentSignOrderService
                 throw new Exception('common.message.permission');
             }
 
+            // 操作ログ登録
+            $this->documentSignOrderRepositoryInterface->insertOperationLog(mUserCompanyId: $mUserCompanyId, categoryId: $categoryId, documentId: $documentId, mUserId: $mUserId, nextSignUserId: $nextSignUserId, nextSignUserName:$nextSignUserName, ipAddress:$ipAddress);
+            
             return true;
         } catch (Exception $e) {
             throw $e;

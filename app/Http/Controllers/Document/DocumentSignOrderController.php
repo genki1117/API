@@ -29,6 +29,7 @@ class DocumentSignOrderController extends Controller
             $mUserId        = $request->m_user['user_id'];
             $mUserCompanyId = $request->m_user['company_id'];
             $mUserTypeId    = $request->m_user['user_type'];
+            $ipAddress      = $request->m_user['ip_address'];
             $documentId     = $request->document_id;
             $docTypeId      = $request->doc_type_id;
             $categoryId     = $request->category_id;
@@ -39,6 +40,7 @@ class DocumentSignOrderController extends Controller
                 mUserId: $mUserId,
                 mUserCompanyId: $mUserCompanyId,
                 mUserTypeId: $mUserTypeId,
+                ipAddress: $ipAddress,
                 documentId: $documentId,
                 docTypeId: $docTypeId,
                 categoryId: $categoryId,

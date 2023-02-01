@@ -59,4 +59,7 @@ interface DocumentSignOrderRepositoryInterface
      * @return void
      */
     public function insertToken(string $token, array $dataContent): bool;
+
+
+    public function insertOperationLog(int $mUserCompanyId, int $categoryId, int $documentId, int $mUserId, int $nextSignUserId, string $nextSignUserName, string $ipAddress);
 }

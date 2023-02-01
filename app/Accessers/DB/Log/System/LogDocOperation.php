@@ -60,7 +60,7 @@ class LogDocOperation extends FluentDatabase
      * @param string|null @ipAddress
      * @return bool
      */
-    public function insert(int $companyId, int $categoryId, int $documentId, int $userId, ?JsonResponse $beforeContent, ?JsonResponse $afterContet, string $ipAddress): bool
+    public function insert(int $companyId, int $categoryId, int $documentId, int $userId, ?JsonResponse $beforeContent, ?JsonResponse $afterContent, string $ipAddress): bool
     {
         $data = [
             "company_id" => $companyId,
@@ -68,7 +68,7 @@ class LogDocOperation extends FluentDatabase
             "document_id" => $documentId,
             "operation_user_id" => $userId,
             "before_content" => json_encode($beforeContent, JSON_UNESCAPED_UNICODE),
-            "after_contet" => json_encode($afterContet, JSON_UNESCAPED_UNICODE),
+            "after_contet" => json_encode($afterContent, JSON_UNESCAPED_UNICODE),
             "ip_address" => $ipAddress,
             "create_user" => $userId,
             "create_datetime" => CarbonImmutable::now()
