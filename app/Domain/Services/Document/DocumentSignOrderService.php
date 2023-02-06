@@ -75,7 +75,7 @@ class DocumentSignOrderService
                     $emailTitle = $this->getMailTitle($contractIssueAndNextSignUser->getSignDoc()->title);
 
                     // 次の署名者がゲストの場合 user_type_idが1の場合
-                    if ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
+                    if ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) {
 
                         // メールアドレスからハッシュ作成
                         $token = $this->getHash($contractIssueAndNextSignUser->getNextSignUser()->email, $mUserCompanyId, $categoryId, $documentId);
@@ -106,7 +106,7 @@ class DocumentSignOrderService
                             $emailUrl
                         );
 
-                    } elseif ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_GUEST_NO) {
+                    } elseif ($contractIssueAndNextSignUser->getNextSignUser()->user_type_id === $this->userTypeConst::USER_TYPE_HOST_NO) {
                         // 次の署名者がホストの場合 user_type_idが1の場合
                         
                         // ユーザに送付するURL作成

@@ -66,7 +66,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($this->getTestDataIssueUser());
         
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -90,7 +90,8 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($this->getTestDataIssueUser());
         
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        
     }
 
     /**
@@ -114,7 +115,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($this->getTestDataIssueUser());
         
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -138,7 +139,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($this->getTestDataIssueUser());
         
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -156,7 +157,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -174,7 +175,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -192,7 +193,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -210,7 +211,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -233,7 +234,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -254,7 +255,11 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->documentRepositoryMock->shouldReceive('insertOperationLog')
+        ->once()
+        ->andReturn(1);
+
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         $this->assertTrue($result);
     }
 
@@ -278,7 +283,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -299,7 +304,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         
         $this->assertTrue($result);
     }
@@ -324,7 +329,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
 
@@ -368,7 +373,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->twice()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         $this->assertTrue($result);
     }
 
@@ -413,7 +418,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -457,7 +462,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 2, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -477,7 +482,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         $this->assertTrue($result);
     }
 
@@ -500,7 +505,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn(-1);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -518,7 +523,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
         $reflectionClass = new ReflectionClass($result);
 
@@ -548,7 +553,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
         $reflectionClass = new ReflectionClass($result);
 
@@ -578,7 +583,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
         $reflectionClass = new ReflectionClass($result);
 
@@ -608,7 +613,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
         $reflectionClass = new ReflectionClass($result);
 
@@ -641,7 +646,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
         $reflectionClass = new ReflectionClass($result);
 
@@ -673,7 +678,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
         $reflectionClass = new ReflectionClass($result);
 
@@ -706,7 +711,7 @@ class DocumentSignOrderServiceTest extends TestCase
 
         $this->expectException(Exception::class);
         
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 3, updateDatetime: '2022-10-10', systemUrl: '/test/test');
 
         $reflectionClass = new ReflectionClass($result);
 
@@ -733,7 +738,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->andReturn($docEntity);
 
         $this->expectException(Exception::class);
-        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
     }
 
     /**
@@ -757,7 +762,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 0, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         
         $this->assertTrue($result); 
     }
@@ -783,7 +788,7 @@ class DocumentSignOrderServiceTest extends TestCase
         ->once()
         ->andReturn(0);
 
-        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
+        $result = $this->getObject()->signOrder(mUserId: 1, mUserCompanyId: 1, mUserTypeId: 0, ipAddress: "12121212121212", documentId: 1, docTypeId: 1, categoryId: 1, updateDatetime: '2022-10-10', systemUrl: '/test/test');
         
         $this->assertTrue($result); 
     }
